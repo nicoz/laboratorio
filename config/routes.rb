@@ -6,6 +6,8 @@ Laboratorio::Application.routes.draw do
   get "paginas/acerca"
   
   get "paginas/ayuda"
+  
+  root :to => 'paginas#inicio'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
