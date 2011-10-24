@@ -1,4 +1,10 @@
 Laboratorio::Application.routes.draw do
+  get "paginas/inicio"
+
+  get "paginas/contacto"
+
+  get "paginas/acerca"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
