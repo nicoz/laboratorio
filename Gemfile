@@ -46,6 +46,8 @@ group :test do
   gem 'spork'
   gem 'factory_girl_rails'
   gem 'spork'
+  gem 'autotest'
+  gem 'autotest-rails-pure'
   gem 'turn', :require => false
 end
 

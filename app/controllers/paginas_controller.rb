@@ -10,5 +10,9 @@ class PaginasController < ApplicationController
   def acerca
   	@title = "Acerca de"
   end
+  
+  def ayuda
+  	@title = "Ayuda"
+  end
 
 end
