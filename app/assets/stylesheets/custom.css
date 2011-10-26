@@ -40,10 +40,6 @@ header h1 {
 	left:30px;
 }
 
-.maincontent {
-	margin-top:90px;
-}
-
 input:focus {
     border-color: #99f;
     outline: none;
@@ -215,7 +211,7 @@ nav ul li a:visited {
 
 nav ul li a:hover {
   text-decoration: underline;
-  color: #fcd3a5;
+  color: white;
 }
 
 a.signin_button {
@@ -230,6 +226,16 @@ a.signin_button {
 }
 
 a.signin_button:hover {
-	color: #fcd3a5;
+	color: white;
+}
+
+.main-content {
+
+
+}
+
+footer {
+	position:absolute;
+	bottom:10px;
 }
 

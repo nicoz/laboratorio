@@ -1,11 +1,8 @@
 Laboratorio::Application.routes.draw do
-  get "paginas/inicio"
 
-  get "paginas/contacto"
-
-  get "paginas/acerca"
-  
-  get "paginas/ayuda"
+	match '/contacto', :to => 'paginas#contacto'
+	match '/ayuda', :to => 'paginas#ayuda'
+	match '/acerca', :to => 'paginas#acerca'
   
   root :to => 'paginas#inicio'
 
