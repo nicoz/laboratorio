@@ -1,10 +1,13 @@
 Laboratorio::Application.routes.draw do
 
+	get "usuarios/new"
+
+	match '/crearusuario', :to => 'usuarios#new'
 	match '/contacto', :to => 'paginas#contacto'
 	match '/ayuda', :to => 'paginas#ayuda'
 	match '/acerca', :to => 'paginas#acerca'
   
-  root :to => 'paginas#inicio'
+	root :to => 'paginas#inicio'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

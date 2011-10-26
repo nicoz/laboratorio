@@ -16,4 +16,10 @@ describe "LayoutLinks" do
 		get '/ayuda'
 		response.should have_selector('title', :content => "Ayuda")
 	end
+	
+	it "Deberia tener una pagina de creacion de usuarios en '/crearusuario'" do
+		get '/crearusuario'
+		response.should have_selector("title", 
+				:content => "Crear Usuario")
+	end
 end

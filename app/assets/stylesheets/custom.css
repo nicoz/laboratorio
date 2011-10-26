@@ -4,7 +4,7 @@ a {
 
 header {
 	margin-top:0;
-	height:160px;
+	height:120px;
 	position:relative;
 	top:0;
 	border-color: #99f; 
@@ -33,10 +33,10 @@ header img {
 }
 
 header h1 {
-	color:white !important;
-	text-shadow: 0 2px 1px rgba(230,255,255,.7);
+	color:#FFFFFF ;
+	text-shadow:0 0 20px lightgrey;
 	position:absolute;
-	top:100px;
+	top:65px;
 	left:30px;
 }
 
