@@ -22,7 +22,7 @@ end
 
 group :development do
   gem 'rspec-rails'
-  gem 'annotate'
+  gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
   gem 'faker'
 end
 

@@ -1,6 +1,5 @@
 Laboratorio::Application.routes.draw do
-
-	get "usuarios/new"
+	resources :usuarios
 
 	match '/crearusuario', :to => 'usuarios#new'
 	match '/contacto', :to => 'paginas#contacto'
