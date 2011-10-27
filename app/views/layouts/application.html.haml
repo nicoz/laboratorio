@@ -1,0 +1,12 @@
+!!!5
+%html
+	%head
+		%title = title
+		= csrf_meta_tag
+		= render :partial =>'layouts/stylesheets'
+	%body
+		.container
+			= render :partial => 'layouts/header'
+			%section.main-content.round
+				= yield
+			= render :partial => 'layouts/footer'

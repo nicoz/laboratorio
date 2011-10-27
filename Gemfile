@@ -8,6 +8,7 @@ gem 'will_paginate'
 gem 'therubyracer'
 gem 'execjs'
 gem 'jquery-rails'
+gem 'haml'
 
 
 
