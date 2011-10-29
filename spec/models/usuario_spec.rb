@@ -14,9 +14,80 @@ require 'spec_helper'
 describe Usuario do
 
 	before(:each) do
-		@attr = { :nombre => "Usuario Ejemplo", :email => "usuario@example.com" }
+		@attr = { 
+			:nombre => "Usuario Ejemplo",
+			:email => "usuario@example.com",
+			:password => "foobar",
+			:password_confirmation => "foobar" }
 	end
 	
+	describe "validaciones de clave" do
+		it "deberia requerir una clave" do
+			Usuario.new(@attr.merge(:password => "", :password_confirmation => "")).
+				should_not be_valid
+		end
+	
+		it "deberia requerir que las claves fueran iguales" do
+			Usuario.new(@attr.merge(:password_confirmation => "invalid")).
+				should_not be_valid
+		end
+	
+		it "deberia rechazar claves cortas" do
+			corta = "a" * 5
+			hash = @attr.merge(:password => corta, :password_confirmation => corta)
+			Usuario.new(hash).should_not be_valid
+		end
+		
+		it "deberia rechazar claves largas" do
+			larga = "a" * 41
+			hash = @attr.merge(:password => larga, :password_confirmation => larga)
+			Usuario.new(hash).should_not be_valid
+		end
+	end
+	
+	describe "encriptacion de clave" do
+	
+		before(:each) do
+			@usuario = Usuario.create!(@attr)
+		end
+		
+		it "deberia tener un atributo para la clave encriptada" do
+			@usuario.should respond_to(:encrypted_password)
+		end
+		
+		it "deberia cargar la clave encriptada" do
+			@usuario.encrypted_password.should_not be_blank
+		end
+		
+		describe "metodo tiene_clave?" do
+			
+			it "deberia ser verdadero si las claves son iguales" do
+				@usuario.tiene_clave?(@attr[:password]).should be_true
+			end
+			
+			it "deberia ser falso si las claves no son iguales" do
+				@usuario.tiene_clave?("invalida").should be_false
+			end
+		end
+		
+		describe "metodo autenticar" do
+		
+			it "debeira retornar nil cuando sea incorrecto el mail o la clave" do
+				usuario_con_clave_incorrecta = Usuario.autenticar(@attr[:email], "maldato")
+				usuario_con_clave_incorrecta.should be_nil
+			end
+			
+			it "deberia retornar nil para una direccion de correo que no tenga usuario" do
+				usuario_inexistente = Usuario.autenticar("bar@foo.com", @attr[:password])
+				usuario_inexistente.should be_nil
+			end
+			
+			it "deberia retornar el usuario correcto cuando sean correctos el email y la clave" do
+				usuario_correcto = Usuario.autenticar(@attr[:email], @attr[:password])
+				usuario_correcto == @usuario
+			end
+		end
+	end
 	it "deberia crear un nuevo usuario para atributos correctos" do
 		Usuario.create!(@attr)
 	end
