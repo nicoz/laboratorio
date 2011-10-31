@@ -5,11 +5,10 @@ gem 'rails', '3.1.1'
 
 gem 'sqlite3'
 gem 'will_paginate'
-gem 'therubyracer'
 gem 'execjs'
 gem 'jquery-rails'
 gem 'haml'
-
+gem 'therubyracer'
 
 
 group :assets do

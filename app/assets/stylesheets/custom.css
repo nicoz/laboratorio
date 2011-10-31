@@ -152,6 +152,12 @@ textarea:-moz-placeholder {
 	top: 1px;
 }
 
+.field_with_errors input, .field_with_errors textarea,
+.field_with_errors select { 
+	border-color: red; 
+	-webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
+}
+
 .orange {
 	color: #fef4e9;
 	border: solid 1px #da7c0c;
@@ -235,7 +241,16 @@ a.signin_button:hover {
 }
 
 footer {
-	position:absolute;
-	bottom:10px;
+	position:relative;
+	margin-top:10px;
+	bottom:0px;
+}
+
+.blanco {
+	background:white !important;
+}
+
+.flash {
+	margin-top:15px;
 }
 
