@@ -2,7 +2,6 @@
 = render 'shared/error_messages'
 %div.formulario.prepend-4
 	= form_for(@usuario) do |f|
-		
 		%div.field
 			= f.label :nombre
 			%br
@@ -12,11 +11,11 @@
 			%br
 			= f.text_field :email
 		%div.field
-			= f.label :password, :Clave
+			= f.label :password
 			%br
 			= f.password_field :password
 		%div.field
-			= f.label :password_confirmation, :Confirmacion
+			= f.label :password_confirmation
 			%br
 			= f.password_field :password_confirmation
 		

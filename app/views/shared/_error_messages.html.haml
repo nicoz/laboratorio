@@ -1,6 +1,6 @@
 - if @usuario.errors.any?
 	%div#explicacion_errores.error
-		%h2.prepend-4= "#{pluralize(@usuario.errors.count, "error")} impidieron que se guardara este usuario"
+		%h2.prepend-4= "#{t(:error, :count => @usuario.errors.count)} que se guardara este usuario"
 		%p.prepend-4 Hay errores con los siguientes campos:
 		%ul.prepend-5
 			- @usuario.errors.full_messages.each do |msg|

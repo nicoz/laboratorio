@@ -8,3 +8,23 @@ REQUESTING PAGE: POST /usuarios with {"utf8"=>"✓", "usuario"=>{"nombre"=>"", "
 REQUESTING PAGE: GET /crearusuario with {} and HTTP headers {}
 REQUESTING PAGE: POST /usuarios with {"utf8"=>"✓", "usuario"=>{"nombre"=>"Example User", "email"=>"user@example.com", "password"=>"foobar", "password_confirmation"=>"foobar"}, "commit"=>"Crear"} and HTTP headers {"HTTP_REFERER"=>"/crearusuario"}
 REQUESTING PAGE: GET http://www.example.com/usuarios/1 with {} and HTTP headers {"HTTP_REFERER"=>"/usuarios"}
+REQUESTING PAGE: GET /crearusuario with {} and HTTP headers {}
+REQUESTING PAGE: GET /crearusuario with {} and HTTP headers {}
+REQUESTING PAGE: GET /crearusuario with {} and HTTP headers {}
+REQUESTING PAGE: GET /crearusuario with {} and HTTP headers {}
+REQUESTING PAGE: GET /crearusuario with {} and HTTP headers {}
+REQUESTING PAGE: GET /crearusuario with {} and HTTP headers {}
+REQUESTING PAGE: GET /crearusuario with {} and HTTP headers {}
+REQUESTING PAGE: GET /crearusuario with {} and HTTP headers {}
+REQUESTING PAGE: GET /crearusuario with {} and HTTP headers {}
+REQUESTING PAGE: GET /crearusuario with {} and HTTP headers {}
+REQUESTING PAGE: GET /crearusuario with {} and HTTP headers {}
+REQUESTING PAGE: POST /usuarios with {"utf8"=>"✓", "usuario"=>{"nombre"=>"", "email"=>"", "password"=>"", "password_confirmation"=>""}, "commit"=>"Crear"} and HTTP headers {"HTTP_REFERER"=>"/crearusuario"}
+REQUESTING PAGE: GET /crearusuario with {} and HTTP headers {}
+REQUESTING PAGE: POST /usuarios with {"utf8"=>"✓", "usuario"=>{"nombre"=>"Example User", "email"=>"user@example.com", "password"=>"foobar", "password_confirmation"=>"foobar"}, "commit"=>"Crear"} and HTTP headers {"HTTP_REFERER"=>"/crearusuario"}
+REQUESTING PAGE: GET http://www.example.com/usuarios/1 with {} and HTTP headers {"HTTP_REFERER"=>"/usuarios"}
+REQUESTING PAGE: GET /crearusuario with {} and HTTP headers {}
+REQUESTING PAGE: POST /usuarios with {"utf8"=>"✓", "usuario"=>{"nombre"=>"", "email"=>"", "password"=>"", "password_confirmation"=>""}, "commit"=>"Crear"} and HTTP headers {"HTTP_REFERER"=>"/crearusuario"}
+REQUESTING PAGE: GET /crearusuario with {} and HTTP headers {}
+REQUESTING PAGE: POST /usuarios with {"utf8"=>"✓", "usuario"=>{"nombre"=>"Example User", "email"=>"user@example.com", "password"=>"foobar", "password_confirmation"=>"foobar"}, "commit"=>"Crear"} and HTTP headers {"HTTP_REFERER"=>"/crearusuario"}
+REQUESTING PAGE: GET http://www.example.com/usuarios/1 with {} and HTTP headers {"HTTP_REFERER"=>"/usuarios"}
