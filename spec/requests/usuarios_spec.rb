@@ -37,4 +37,32 @@ describe "Usuarios" do
       end
     end
   end
+  
+  describe "Ingresar y salir" do
+  
+  	describe "fallar" do
+  	
+  		it "no deberia ingresar el usuario" do
+  			visit ingresar_path
+  			fill_in :email,		:with => ""
+			fill_in :password,	:with => ""
+			click_button
+			response.should have_selector("div.flash.error", :content => "invalida")
+  		end
+  	end
+  	
+  	describe "Exito" do
+  	
+  		it "deberia ingresar un usuario y luego salir correctamente" do
+  			usuario = Factory(:usuario)
+  			visit ingresar_path
+  			fill_in :email,		:with => usuario.email
+			fill_in :password,	:with => usuario.password
+			click_button
+			controller.should be_ingresado
+			click_link "Salir"
+			controller.should_not be_ingresado
+  		end
+  	end
+  end
 end

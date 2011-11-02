@@ -4,5 +4,9 @@
 		%ul
 			%li= link_to "Inicio", root_path
 			%li= link_to "Ayuda", ayuda_path
-			%li= link_to "Ingresar", '#'
+			- if ingresado?
+				%li= link_to "Cuenta", usuario_actual
+				%li= link_to "Salir", salir_path, :method => :delete
+			- else
+				%li= link_to "Ingresar", ingresar_path
 

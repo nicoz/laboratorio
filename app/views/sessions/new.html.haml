@@ -1,0 +1,14 @@
+%br
+%div.formulario.prepend-4
+	= form_for(:session, :url => sessions_path) do |f|
+		%div.field
+			= f.label :email
+			%br
+			= f.text_field :email
+		%div.field
+			= f.label :password
+			%br
+			= f.password_field :password
+		%div.actions
+			%br
+			= f.submit "Ingresar"

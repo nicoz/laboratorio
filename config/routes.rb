@@ -1,12 +1,20 @@
 Laboratorio::Application.routes.draw do
-	resources :usuarios
+  get "escritorio/show"
 
-	match '/crearusuario', :to => 'usuarios#new'
-	match '/contacto', :to => 'paginas#contacto'
-	match '/ayuda', :to => 'paginas#ayuda'
-	match '/acerca', :to => 'paginas#acerca'
+  get "sessions/new"
+
+	resources :usuarios
+	resources :sessions, :only => [:new, :create, :destroy]
+
+	match '/ingresar',	:to => 'sessions#new'
+	match '/salir',		:to => 'sessions#destroy'
+	match '/crearusuario',	:to => 'usuarios#new'
+	match '/contacto', 	:to => 'paginas#contacto'
+	match '/ayuda', 	:to => 'paginas#ayuda'
+	match '/acerca', 	:to => 'paginas#acerca'
+	match '/escritorio',	:to => 'escritorio#show'
   
-	root :to => 'paginas#inicio'
+	root 			:to => 'paginas#inicio'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

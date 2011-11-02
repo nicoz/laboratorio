@@ -40,6 +40,17 @@ class Usuario < ActiveRecord::Base
 		return usuario if usuario.tiene_clave?(clave_enviada)
 	end
 	
+	def self.authenticate(email, clave_enviada)
+		usuario = find_by_email(email)
+		return nil if usuario.nil?
+		return usuario if usuario.tiene_clave?(clave_enviada)
+	end
+	
+	def self.authenticate_with_salt(id, cookie_salt)
+		usuario = find_by_id(id)
+		(usuario && usuario.salt == cookie_salt) ? usuario : nil
+	end
+	
 	private
 	
 		def encrypt_password
