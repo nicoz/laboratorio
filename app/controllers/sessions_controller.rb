@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
   		render 'new'
   	else
   		ingresar usuario
-  		redirect_to escritorio_path(usuario)
+  		redirect_back_or escritorio_path(usuario)
   	end
   end
   

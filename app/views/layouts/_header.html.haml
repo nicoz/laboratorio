@@ -6,6 +6,7 @@
 			%li= link_to "Ayuda", ayuda_path
 			- if ingresado?
 				%li= link_to "Cuenta", usuario_actual
+				%li= link_to "Perfil", edit_usuario_path(usuario_actual)
 				%li= link_to "Salir", salir_path, :method => :delete
 			- else
 				%li= link_to "Ingresar", ingresar_path

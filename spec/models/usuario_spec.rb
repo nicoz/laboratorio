@@ -136,4 +136,24 @@ describe Usuario do
 		usuario_con_email_duplicado = Usuario.new(@attr)
 		usuario_con_email_duplicado.should_not be_valid
 	end
+	
+	describe "atributo de administrador" do
+	
+		before(:each) do
+			@usuario = Usuario.create!(@attr)
+		end
+		
+		it "deberia responder a admin" do
+			@usuario.should respond_to(:admin)
+		end
+		
+		it "deberia no ser admin por defecto" do
+			@usuario.should_not be_admin
+		end
+		
+		it "deberia ser convertible en admin" do
+			@usuario.toggle!(:admin)
+			@usuario.should be_admin
+		end
+	end
 end

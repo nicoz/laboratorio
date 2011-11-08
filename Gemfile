@@ -9,6 +9,7 @@ gem 'execjs'
 gem 'jquery-rails'
 gem 'haml'
 gem 'therubyracer'
+gem 'will_paginate'
 
 
 group :assets do

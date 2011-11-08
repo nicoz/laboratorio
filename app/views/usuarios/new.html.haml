@@ -1,6 +1,6 @@
-= render 'shared/error_messages'
-%div.formulario.prepend-4
-	= form_for(@usuario) do |f|
+= form_for(@usuario) do |f|
+	= render 'shared/error_messages', :object => f.object
+	%div.formulario.prepend-4
 		%div.field
 			= f.label :nombre
 			%br

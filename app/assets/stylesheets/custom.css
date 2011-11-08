@@ -254,3 +254,11 @@ footer {
 	margin-top:15px;
 }
 
+ul.usuarios {
+	margin-top: 1em;
+}
+
+.usuarios li {
+	list-style: none;
+}
+

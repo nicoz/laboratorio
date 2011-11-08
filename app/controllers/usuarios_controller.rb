@@ -1,6 +1,14 @@
 class UsuariosController < ApplicationController
-  
-  
+  	before_filter :autenticar, 		:only => [:index, :edit, :update, :destroy]
+  	before_filter :usuario_correcto, 	:only => [:edit, :update]
+  	before_filter :usuario_admin, 		:only => :destroy	
+  	
+  	
+  	def index
+  		@title = "Listado de Usuarios"
+  		@usuarios = Usuario.paginate(:page => params[:page])
+  	end
+  	
 	def new
 		@title = "Crear Usuario"
 		@usuario = Usuario.new
@@ -22,4 +30,40 @@ class UsuariosController < ApplicationController
 			render 'new'
 		end
 	end
+	
+	def edit
+		@usuario = Usuario.find(params[:id])
+		@title = "Editar Usuario"
+	end
+	
+	def update 
+		@usuario = Usuario.find(params[:id])
+		if @usuario.update_attributes(params[:usuario])
+			flash[:success] = "Usuario modificado"
+			redirect_to @usuario		
+		else
+			@title = "Editar Usuario"
+			render 'edit'
+		end
+	end
+	
+	def destroy
+		Usuario.find(params[:id]).destroy
+		flash[:success] = "Usuario destruido."
+		redirect_to usuarios_path
+	end
+	
+	private
+		def autenticar
+			negar_acceso unless ingresado?
+		end
+		
+		def usuario_correcto
+			@usuario = Usuario.find(params[:id])
+			redirect_to(root_path) unless usuario_actual?(@usuario)
+		end
+		
+		def usuario_admin
+			redirect_to(root_path) unless usuario_actual.admin?
+		end
 end

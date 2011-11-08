@@ -1,0 +1,6 @@
+%li
+	= link_to usuario.email, usuario
+	= usuario.nombre
+	- if usuario_actual.admin?
+		| 
+		= link_to "Borrar", usuario, :method => :delete, :confirm => "Estas seguro?", :title => "Borrar #{usuario.nombre}"
