@@ -14,10 +14,21 @@ describe UsuariosController do
 			end
 		end
 		
-		describe "para usuarios que ya ingresaron al sistema" do
-			
+		describe "para usuarios ingresados al sistema que no son administradores" do
 			before(:each) do
 				@usuario = test_ingresar(Factory(:usuario))
+			end
+			
+			it "deberia negar el acceso" do
+				get :index
+				response.should redirect_to(root_path)
+			end
+		end
+		
+		describe "para usuarios administradores que ya ingresaron al sistema" do
+			
+			before(:each) do
+				@usuario = test_ingresar(Factory(:usuario, :admin => true))
 				segundo = Factory(:usuario, :nombre => "Bob", :email => "otro@ejemplo.com")
 				tercero = Factory(:usuario, :nombre => "Ben", :email => "otro@ejemplo.net")
 				@usuarios = [@usuario, segundo, tercero]
@@ -154,21 +165,29 @@ describe UsuariosController do
 	
 	describe "Get 'edit'" do
 	
-		before(:each) do
-			@usuario = Factory(:usuario)
-			test_ingresar(@usuario)
-		end
+		describe "para no administradores" do
+			before(:each) do
+				@usuario = Factory(:usuario)
+				@otroUsuario = Factory(:usuario, :email => Factory.next(:email))
+				test_ingresar(@usuario)
+			end
 		
-		it "deberia ser correcto" do
-			get :edit, :id => @usuario
-			response.should be_success
-		end
+			it "deberia ser correcto" do
+				get :edit, :id => @usuario
+				response.should be_success
+			end
 		
-		it "deberia tener el titulo correcto" do
-			get :edit, :id => @usuario
-			response.should have_selector("title", :content => "Editar Usuario")
-		end
+			it "deberia tener el titulo correcto" do
+				get :edit, :id => @usuario
+				response.should have_selector("title", :content => "Editar Usuario")
+			end
 		
+			it "no deberia editar el perfil de otro usuario" do
+				get :edit, :id => @otroUsuario
+				response.should redirect_to(root_path)
+			end
+		end
+	
 	end
 	
 	describe "PUT 'update'" do
@@ -226,6 +245,7 @@ describe UsuariosController do
 	
 		before(:each) do
 			@usuario = Factory(:usuario)
+			@admin = Factory(:usuario, :admin => true, :email => Factory.next(:email))
 		end
 		
 		describe "para usuarios que no han ingresado al sistema" do
@@ -256,6 +276,23 @@ describe UsuariosController do
 			it "deberia requerir usuarios iguales para 'update'" do
 				put :update, :id => @usuario, :usuario => {}
 				response.should redirect_to(root_path)
+			end
+		end
+		
+		describe "para usuarios administradores que han ingresado al sistema" do
+			
+			before(:each) do
+				test_ingresar(@admin)
+			end
+			
+			it "deberia perimitir editar" do
+				get :edit, :id => @usuario
+				response.should render_template('edit')
+			end
+			
+			it "deberia permitir hacer 'update'" do
+				put :update, :id => @usuario, :usuario => {}
+				response.should be_success
 			end
 		end
 		
