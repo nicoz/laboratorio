@@ -52,5 +52,18 @@ describe "LayoutLinks" do
 			response.should have_selector("a", :href => usuario_path(@usuario),
 							   :content => "Cuenta")
 		end
+		
+		describe "cuando sea admin" do
+			
+			before(:each) do
+				@usuario.toggle!(:admin)
+			end
+			
+			it "deberia tener un link para ver la lista de usuarios" do
+				visit root_path
+				response.should have_selector("a", :href => usuarios_path,
+								   :content => "Usuarios")
+			end
+		end
 	end
 end
