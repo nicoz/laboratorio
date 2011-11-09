@@ -1,6 +1,7 @@
 %p
-  Esta es la pagina inicial de esta aplicacion
+	Esta es la pagina inicial de esta aplicacion
 
-= link_to "Ingresar", ingresar_path, :class => "signin_button round boton orange"
+- if !ingresado?
+	= link_to "Ingresar", ingresar_path, :class => "signin_button round boton orange"
 
 

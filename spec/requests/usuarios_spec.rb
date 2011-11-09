@@ -4,6 +4,14 @@ describe "Usuarios" do
 
   describe "crear usuarios" do
 
+	before(:each) do
+			@usuario = Factory(:usuario, :admin => true)
+			visit ingresar_path
+			fill_in :email,		:with => @usuario.email
+			fill_in :password,	:with => @usuario.password
+			click_button
+	end
+	
     describe "fallar" do
 
       it "No deberia crear un nuevo usuario" do

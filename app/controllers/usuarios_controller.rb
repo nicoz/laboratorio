@@ -1,7 +1,7 @@
 class UsuariosController < ApplicationController
-  	before_filter :autenticar, 		:only => [:index, :edit, :update, :destroy]
+  	before_filter :autenticar, 		:only => [:index, :edit, :update, :destroy, :create, :new, :show]
   	before_filter :usuario_correcto, 	:only => [:edit, :update]
-  	before_filter :usuario_admin, 		:only => [:index, :destroy]	
+  	before_filter :usuario_admin, 		:only => [:index, :new, :create, :destroy]	
   	
   	
   	def index

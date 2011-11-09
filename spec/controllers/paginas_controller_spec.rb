@@ -18,6 +18,25 @@ describe PaginasController do
     	response.should have_selector("title",
     			:content => @titulo + "Inicio")
     end
+    
+    describe "si el usuario ya ingreso al sistema" do
+    
+    	before(:each) do
+    		@usuario = Factory(:usuario)
+    		test_ingresar(@usuario)
+    	end
+    
+    	it "no deberia mostrar el boton de ingresar" do
+    		get 'inicio'
+    		response.should_not have_selector("a.boton", :href => ingresar_path,
+    							     :content => "Ingresar")
+    	end
+    	
+    	it "deberia hacer referencia a quien esta logeado en el sistema" do
+    		get 'inicio'
+    		response.should have_selector("span.usuarioActual", :content => @usuario.nombre)
+    	end
+    end
   end
 
   describe "GET 'contacto'" do

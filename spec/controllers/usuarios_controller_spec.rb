@@ -73,17 +73,47 @@ describe UsuariosController do
 	
 	describe "GET 'new'" do
 		
+		describe "para usuarios no ingresados al sistema" do
 		
-		it "should be successful" do
-			get 'new'
-			response.should be_success
+			it "deberia enviar a la pagina de ingreso" do
+				get 'new'
+				response.should redirect_to(ingresar_path)
+			end
 		end
 		
-		it "Deberia tener el titulo correcto" do
-			get 'new'
-			response.should have_selector("title", 
-					:content => "#{@titulo} Crear Usuario")
+		describe "para usaurios ingresados al sistema que no sean administradores" do
+			
+			before(:each) do
+				@usuario = Factory(:usuario)
+				test_ingresar(@usuario)
+			end
+			
+			it "deberia enviar a la pagina de inicio" do
+				get 'new'
+				response.should redirect_to(root_path)
+			end	
 		end
+		
+		describe "para usuarios ingresados al sistema que sean administradores" do
+		
+			before(:each) do
+				@usuario = Factory(:usuario, :admin => true)
+				test_ingresar(@usuario)
+			end
+			
+			it "deberia ser correcto" do
+				get 'new'
+				response.should be_success
+			end
+			
+			it "Deberia tener el titulo correcto" do
+				get 'new'
+				response.should have_selector("title", 
+						:content => "#{@titulo} Crear Usuario")
+			end
+		end
+				
+		
 
 	end
 	
@@ -92,73 +122,139 @@ describe UsuariosController do
 			@usuario = Factory(:usuario)
 		end
 		
-		it "deberia ser correcto" do
-			get :show, :id => @usuario
-			response.should be_success
+		describe "para usuarios no ingresados al sistema" do
+			
+			it "no deberia mostrar el contenido" do
+				get :show, :id => @usuario
+				response.should redirect_to(ingresar_path)
+			end
 		end
 		
-		it "deberia encontrar el usuario correcto" do
-			get :show, :id => @usuario
-			assigns(:usuario).should == @usuario
+		describe "para usuarios ingresados al sistema" do
+		
+			before(:each) do
+				test_ingresar(@usuario)
+			end
+			
+			it "deberia ser correcto" do
+				get :show, :id => @usuario
+				response.should be_success
+			end
+		
+			it "deberia encontrar el usuario correcto" do
+				get :show, :id => @usuario
+				assigns(:usuario).should == @usuario
+			end
+		
+			it "deberia tener el titulo correcto" do
+				get :show, :id => @usuario
+				response.should have_selector("title", :content => @usuario.nombre)
+			end
+		
+			it "deberia incluir el nombre del usuario" do
+				get :show, :id => @usuario
+				response.should have_selector("h1", :content => @usuario.nombre)
+			end
 		end
 		
-		it "deberia tener el titulo correcto" do
-			get :show, :id => @usuario
-			response.should have_selector("title", :content => @usuario.nombre)
-		end
-		
-		it "deberia incluir el nombre del usuario" do
-			get :show, :id => @usuario
-			response.should have_selector("h1", :content => @usuario.nombre)
-		end
 	end
 	
 	describe "POST 'create'" do
-		describe "fallar" do
+	
+		before(:each) do
+			@usuario = Factory(:usuario)
+		end
+		
+		describe "acceso a create" do
 			
-			before(:each) do
-				@attr = { :nombre => "", :email => "", :password => "",
-					:password_confirmation => ""}
-			end
+			describe "para usuarios no ingresados al sistema" do
 			
-			it "no deberia crear un usaurio" do
-				lambda do
+				it "no deberia poder crear un usuario" do
 					post :create, :usuario => @attr
-				end.should_not change(Usuario, :count)
+					response.should redirect_to(ingresar_path)
+				end
 			end
 			
-			it "deberia tener el nombre correcto" do
-				post :create, :usuario => @attr
-				response.should have_selector("title", :content => "Crear Usuario")
+			describe "para usaurios ingresados al sistema" do
+			
+				before(:each) do
+					test_ingresar(@usuario)
+				end
+				
+				it "no deberia poder crear un usuario" do
+					post :create, :usuario => @attr
+					response.should redirect_to(root_path)
+				end
 			end
 			
-			it "deberia renderizar la pagina 'Crear usuario'" do
-				post :create, :usuario => @attr
-				response.should render_template('new')
+			describe "para usuarios ingresados al sistema que sean administradores" do
+			
+				before(:each) do
+					@usuario.toggle!(:admin)
+					test_ingresar(@usuario)
+				end
+				
+				it "deberia guardar correctamente" do
+					post :create, :usuario => @attr
+					response.should be_success
+				end
 			end
 		end
 		
-		describe "guardar bien" do
 		
+		describe "creando usuarios" do
 		
 			before(:each) do
-				@attr = { :nombre => "Nuevo Usuario", :email => "nuevo@usuario.com", :password => "foobar", :password_confirmation => "foobar"}
+				@usuario.toggle!(:admin)
+				test_ingresar(@usuario)
 			end
+		
+			describe "fallar" do
 			
-			it "deberia crear un nuevo usuario" do
-				lambda do
+				before(:each) do
+					@attr = { :nombre => "", :email => "", :password => "",
+						:password_confirmation => ""}
+				end
+			
+				it "no deberia crear un usaurio" do
+					lambda do
+						post :create, :usuario => @attr
+					end.should_not change(Usuario, :count)
+				end
+			
+				it "deberia tener el nombre correcto" do
 					post :create, :usuario => @attr
-				end.should change(Usuario, :count).by(1)
+					response.should have_selector("title", :content => "Crear Usuario")
+				end
+			
+				it "deberia renderizar la pagina 'Crear usuario'" do
+					post :create, :usuario => @attr
+					response.should render_template('new')
+				end
 			end
 			
-			it "deberia redirigir a la pagina 'ver' de ese usuario" do
-				post :create, :usuario => @attr
-				response.should redirect_to(usuario_path(assigns(:usuario)))
-			end
+			describe "guardar bien" do
+		
+		
+				before(:each) do
+					@attr = { :nombre => "Nuevo Usuario", :email => "nuevo@usuario.com", :password => "foobar", :password_confirmation => "foobar"}
+				end
 			
-			it "deberia dar un mensaje de usuario correctamente creado" do
-				post :create, :usuario => @attr
-				flash[:success].should =~ /Usuario correctamente creado/i
+				it "deberia crear un nuevo usuario" do
+					lambda do
+						post :create, :usuario => @attr
+					end.should change(Usuario, :count).by(1)
+				end
+			
+				it "deberia redirigir a la pagina 'ver' de ese usuario" do
+					post :create, :usuario => @attr
+					response.should redirect_to(usuario_path(assigns(:usuario)))
+				end
+			
+				it "deberia dar un mensaje de usuario correctamente creado" do
+					post :create, :usuario => @attr
+					flash[:success].should =~ /Usuario correctamente creado/i
+				end
 			end
 		end
 	end

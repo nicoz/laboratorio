@@ -1,5 +1,7 @@
 %header
 	%h1= titulo
+	- if ingresado? 
+		%span.usuarioActual= "Bienvenido, #{usuario_actual.nombre}"
 	%nav.round.orange
 		%ul
 			%li= link_to "Inicio", root_path

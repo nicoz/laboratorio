@@ -17,11 +17,6 @@ describe "LayoutLinks" do
 		response.should have_selector('title', :content => "Ayuda")
 	end
 	
-	it "Deberia tener una pagina de creacion de usuarios en '/crearusuario'" do
-		get '/crearusuario'
-		response.should have_selector("title", 
-				:content => "Crear Usuario")
-	end
 	
 	describe "cuando no haya ingresado" do
 		it "deberia tener un link para ingresar" do
@@ -63,6 +58,12 @@ describe "LayoutLinks" do
 				visit root_path
 				response.should have_selector("a", :href => usuarios_path,
 								   :content => "Usuarios")
+			end
+			
+			it "Deberia tener una pagina de creacion de usuarios en '/crearusuario'" do
+				get '/crearusuario'
+				response.should have_selector("title", 
+						:content => "Crear Usuario")
 			end
 		end
 	end

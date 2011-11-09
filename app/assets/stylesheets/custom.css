@@ -36,8 +36,16 @@ header h1 {
 	color:#FFFFFF ;
 	text-shadow:0 0 20px lightgrey;
 	position:absolute;
-	top:65px;
+	top:55px;
 	left:30px;
+}
+
+header span.usuarioActual {
+	color:#FFFFFF ;
+	text-shadow:0 0 20px lightgrey;
+	position:absolute;
+	top:90px;
+	left:60px;
 }
 
 input:focus {
