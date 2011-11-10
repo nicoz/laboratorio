@@ -1,0 +1,21 @@
+= render 'shared/error_messages', :object => f.object
+%div.formulario.prepend-4
+	%div.field
+		= f.label :nombre
+		%br
+		= f.text_field :nombre
+	%div.field
+		= f.label :email
+		%br
+		= f.text_field :email
+	%div.field
+		= f.label :password
+		%br
+		= f.password_field :password
+	%div.field
+		= f.label :password_confirmation
+		%br
+		= f.password_field :password_confirmation
+	%div.actions
+		%br
+		= f.submit boton
