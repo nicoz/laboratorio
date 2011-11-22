@@ -1,3 +1,13 @@
+= form_for @search do |f|
+	%p.span-24
+		%span.span-2= f.label :nombre_contains, "Nombre:"
+		= f.text_field :nombre_contains
+		%br
+		%span.span-2= f.label :email_contains, "Email:"
+		= f.text_field :email_contains
+		%br
+		%span.prepend-2= f.submit "Buscar"
+
 = will_paginate
 %ul.usuarios
 	= render @usuarios

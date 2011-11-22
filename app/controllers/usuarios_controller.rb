@@ -6,7 +6,9 @@ class UsuariosController < ApplicationController
   	
   	def index
   		@title = "Listado de Usuarios"
-  		@usuarios = Usuario.paginate(:page => params[:page])
+		@search = Usuario.search(params[:search])
+  		@usuarios = @search.paginate(:page => params[:page])
+		@busqueda = params[:search]
   	end
   	
 	def new

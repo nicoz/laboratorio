@@ -11,6 +11,8 @@ gem 'haml'
 gem 'therubyracer'
 gem 'will_paginate'
 
+gem 'squeel'
+gem 'meta_search'
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.4'
