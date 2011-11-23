@@ -40,6 +40,7 @@ class UsuariosController < ApplicationController
 	
 	def update 
 		@usuario = Usuario.find(params[:id])
+
 		if @usuario.update_attributes(params[:usuario])
 			flash[:success] = "Usuario modificado"
 			redirect_to @usuario		

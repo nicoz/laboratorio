@@ -11,7 +11,7 @@
 require 'digest'
 class Usuario < ActiveRecord::Base
 	attr_accessor :password
-	attr_accessible :nombre, :email, :password, :password_confirmation
+	attr_accessible :nombre, :email, :password, :password_confirmation, :admin
 	
 	email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	
@@ -50,7 +50,7 @@ class Usuario < ActiveRecord::Base
 		usuario = find_by_id(id)
 		(usuario && usuario.salt == cookie_salt) ? usuario : nil
 	end
-	
+
 	private
 	
 		def encrypt_password

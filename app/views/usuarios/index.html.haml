@@ -8,13 +8,16 @@
 		%br
 		%span.prepend-2= f.submit "Buscar"
 %br
+%p.prepend-10
+	= link_to "Crear Usuario", crearusuario_path, :class => "round boton orange"
+
 %div.span-24.last{:style => "padding-top:10px"}
+	%div.prepend-12= will_paginate
+	%br
 	%span.prepend-6= sort_link @search, :email
 	%span.prepend-6= sort_link @search, :nombre
 
-%br
-%div#listaUsuarios.span-24.last{:style => "padding-top:10px"}
-	%div.prepend-12= will_paginate
+%div#listaUsuarios.span-24.last{:style => "padding-top:2px"}
 	%div.prepend-5.span-19.last
 		%ul.usuarios
 			= render @usuarios

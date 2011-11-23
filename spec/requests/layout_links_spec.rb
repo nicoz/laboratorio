@@ -24,6 +24,13 @@ describe "LayoutLinks" do
 			response.should have_selector("a", :href => ingresar_path,
 							   :content => "Ingresar")
 		end
+
+		it "deberia tener un link para ir al inicio" do
+			visit root_path
+			response.should have_selector("a", :href => root_path,
+							:content => "Inicio"
+			)
+		end
 	end
 	
 	describe "cuando haya ingresado" do
@@ -41,7 +48,21 @@ describe "LayoutLinks" do
 			response.should have_selector("a", :href => salir_path,
 							   :content => "Salir")
 		end
+
+		it "deberia tener un link para ir al escritorio de trabajo" do
+			visit root_path
+			response.should have_selector("a", :href => escritorio_path,
+							:content => "Escritorio"
+			)
+		end
 		
+		it "no deberia tener un link para ir al inicio" do
+			visit root_path
+			response.should_not have_selector("a", :href => root_path,
+							:content => "Inicio"
+			)
+		end
+
 		it "deberia tener un link para editar el perfil" do
 			visit root_path
 			response.should have_selector("a", :href => usuario_path(@usuario),
@@ -59,11 +80,32 @@ describe "LayoutLinks" do
 				response.should have_selector("a", :href => usuarios_path,
 								   :content => "Usuarios")
 			end
+
+			it "deberia tener un link para crear usuarios en su escritorio de trabajo" do
+				visit escritorio_path
+				response.should have_selector("a.boton", :href => crearusuario_path,
+								:content => "Crear Usuario"
+				)
+			end
+
+			it "deberia tener un link para trabajar con usuarios en su escritorio de trabajo" do
+				visit escritorio_path
+				response.should have_selector("a.boton", :href => usuarios_path,
+								:content => "Trabajar con Usuarios"
+				)
+			end
 			
 			it "Deberia tener una pagina de creacion de usuarios en '/crearusuario'" do
 				get '/crearusuario'
 				response.should have_selector("title", 
 						:content => "Crear Usuario")
+			end
+
+			it "Deberia tener un link para crear usuarios en la vista index de usuarios" do
+				visit usuarios_path
+				response.should have_selector("a.boton", :href => crearusuario_path,
+								:content => "Crear Usuario"
+				)
 			end
 		end
 	end
