@@ -1,0 +1,4 @@
+- if usuario_actual.admin?
+	=render "escritorio_de_admin"
+- if !usuario_actual.admin?
+	=render "escritorio_de_usuario"

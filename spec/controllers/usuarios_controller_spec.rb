@@ -117,8 +117,13 @@ describe UsuariosController do
 				response.should have_selector("title", 
 						:content => "#{@titulo} Crear Usuario")
 			end
+
+			it "Deberia mostrar el atributo administrador" do
+				get 'new'
+				response.should have_selector("input#usuario_admin")
+			end
 		end
-				
+		
 		
 
 	end
@@ -288,8 +293,30 @@ describe UsuariosController do
 				get :edit, :id => @otroUsuario
 				response.should redirect_to(root_path)
 			end
+
+			it "No deberia mostrar el atributo administrador" do
+				get :edit, :id => @usuario
+				response.should_not have_selector("input#usuario_admin")
+			end
 		end
-	
+
+		describe "para administradores" do
+			before(:each) do
+				@usuario = Factory(:usuario, :admin => true)
+				@otroUsuario = Factory(:usuario, :email => Factory.next(:email))
+				test_ingresar(@usuario)
+			end
+
+			it "deberia mostrar el campo administrador para cualquier usuario que no sea el mismo" do
+				get :edit, :id => @otroUsuario
+				response.should have_selector("input#usuario_admin")
+			end
+
+			it "no deberia mostrar el campo administrador para si mismo" do
+				get :edit, :id => @usuario
+				response.should_not have_selector("input#usuario_admin")
+			end
+		end
 	end
 	
 	describe "PUT 'update'" do

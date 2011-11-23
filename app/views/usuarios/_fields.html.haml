@@ -16,6 +16,10 @@
 		= f.label :password_confirmation
 		%br
 		= f.password_field :password_confirmation
+	- if usuario_actual.admin? and usuario_actual != @usuario
+		%div.field
+		=f.label :admin, "Admistrador?"
+		= f.check_box :admin
 	%div.actions
 		%br
 		= f.submit boton
