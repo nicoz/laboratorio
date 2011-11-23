@@ -54,6 +54,12 @@ describe UsuariosController do
 					response.should have_selector("li", :content => usuario.nombre)
 				end
 			end
+
+			it "deberia tener campos para buscar ususarios por nombre y email" do
+				get :index
+				response.should have_selector("input", :name => "search[nombre_contains]")
+				response.should have_selector("input", :name => "search[email_contains]")
+			end
 			
 			it "deberia paginar usuarios" do
 				get :index

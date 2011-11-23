@@ -1,5 +1,5 @@
 = form_for @search do |f|
-	%p.span-24
+	%div.span-24
 		%span.span-2= f.label :nombre_contains, "Nombre:"
 		= f.text_field :nombre_contains
 		%br
@@ -7,9 +7,16 @@
 		= f.text_field :email_contains
 		%br
 		%span.prepend-2= f.submit "Buscar"
+%br
+%div.span-24.last{:style => "padding-top:10px"}
+	%span.prepend-6= sort_link @search, :email
+	%span.prepend-6= sort_link @search, :nombre
 
-= will_paginate
-%ul.usuarios
-	= render @usuarios
+%br
+%div#listaUsuarios.span-24.last{:style => "padding-top:10px"}
+	%div.prepend-12= will_paginate
+	%div.prepend-5.span-19.last
+		%ul.usuarios
+			= render @usuarios
 		
-= will_paginate
+	%div.prepend-12.span-12.last{:style => "padding-top:10px"}= will_paginate
