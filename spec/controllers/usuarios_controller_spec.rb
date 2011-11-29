@@ -454,10 +454,16 @@ describe UsuariosController do
 		describe "como un usuario administrador" do
 		
 			before(:each) do
-				admin = Factory(:usuario, :email => "admin@ejemplo.com", :admin => true)
-				test_ingresar(admin)
+				@admin = Factory(:usuario, :email => "admin@ejemplo.com", :admin => true)
+				test_ingresar(@admin)
 			end
 			
+			it "no deberia ver el link para borrarse a si mismo desde la busqueda de usuarios" do
+				get :index
+				response.should_not have_selector("a", :href => "/usuarios/#{@admin.id}",
+			   					   :content => "Borrar")
+			end
+
 			it "deberia destruir al usuario" do
 				lambda do
 					delete :destroy, :id => @usuario
@@ -467,6 +473,11 @@ describe UsuariosController do
 			it "deberia redirigir a la pagina de usuarios" do
 				delete :destroy, :id => @usuario
 				response.should redirect_to(usuarios_path)
+			end
+
+			it "no deberia permtir que se elimine a si mismo" do
+				delete :destroy, :id => @admin
+				flash[:error].should =~ /eliminar/
 			end
 		end
 	end

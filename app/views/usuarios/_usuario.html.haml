@@ -1,6 +1,6 @@
 %li
 	%span.span-6= link_to usuario.email, usuario
 	%span.span-6= usuario.nombre
-	- if usuario_actual.admin?
+	- if usuario_actual.admin? and usuario_actual != usuario
 		%span.span-5 
 			= link_to "Borrar", usuario, :method => :delete, :confirm => "Estas seguro?", :title => "Borrar #{usuario.nombre}"
