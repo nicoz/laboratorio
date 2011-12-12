@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.1.1'
 
 
-gem 'sqlite3'
+
 gem 'will_paginate'
 gem 'execjs'
 gem 'jquery-rails'
@@ -24,6 +24,7 @@ end
 
 
 group :development do
+  gem 'sqlite3'
   gem 'rspec-rails'
   gem 'therubyracer'
   gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
@@ -31,6 +32,7 @@ group :development do
 end
 
 group :test do
+  gem 'sqlite3'
   gem 'rspec-rails'
   gem 'webrat'
   gem 'spork'
