@@ -8,7 +8,7 @@ gem 'will_paginate'
 gem 'execjs'
 gem 'jquery-rails'
 gem 'haml'
-gem 'therubyracer'
+
 gem 'will_paginate'
 gem 'client_side_validations'
 
@@ -25,6 +25,7 @@ end
 
 group :development do
   gem 'rspec-rails'
+  gem 'therubyracer'
   gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
   gem 'faker'
 end
