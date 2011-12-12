@@ -1,7 +1,11 @@
 class SessionsController < ApplicationController
   
   def new
-  	@title = "Ingreso"
+  	if usuario_actual.nil?
+  		@title = "Ingreso"
+  	else
+  		redirect_back_or escritorio_path(usuario_actual)
+	end
   end
   
   def create
@@ -23,4 +27,7 @@ class SessionsController < ApplicationController
   	redirect_to root_path
   end
 
+	def nuevo
+	
+	end
 end

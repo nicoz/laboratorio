@@ -10,6 +10,7 @@ gem 'jquery-rails'
 gem 'haml'
 gem 'therubyracer'
 gem 'will_paginate'
+gem 'client_side_validations'
 
 gem 'squeel'
 gem 'meta_search'

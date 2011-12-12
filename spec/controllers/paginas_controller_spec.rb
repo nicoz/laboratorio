@@ -10,13 +10,12 @@ describe PaginasController do
   describe "GET 'inicio'" do
     it "should be successful" do
       get 'inicio'
-      response.should be_success
+      response.should be_redirect
     end
     
-    it "deberia tener el titulo correcto" do
-    	get 'inicio'
-    	response.should have_selector("title",
-    			:content => @titulo + "Inicio")
+    it "si el usuario no esta logeado deberia redirigir al ingreso" do
+	get 'inicio'
+	response.should redirect_to(ingresar_path)
     end
     
     describe "si el usuario ya ingreso al sistema" do
@@ -26,16 +25,11 @@ describe PaginasController do
     		test_ingresar(@usuario)
     	end
     
-    	it "no deberia mostrar el boton de ingresar" do
+    	it "deberia redirigir al escritorio de trabajo" do
     		get 'inicio'
-    		response.should_not have_selector("a.boton", :href => ingresar_path,
-    							     :content => "Ingresar")
+    		response.should redirect_to(escritorio_path(@usuario))
     	end
-    	
-    	it "deberia hacer referencia a quien esta logeado en el sistema" do
-    		get 'inicio'
-    		response.should have_selector("span.usuarioActual", :content => @usuario.nombre)
-    	end
+
     end
   end
 

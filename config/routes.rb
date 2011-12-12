@@ -1,7 +1,8 @@
 Laboratorio::Application.routes.draw do
-  get "escritorio/show"
+	get "escritorio/show"
 
-  get "sessions/new"
+	get "sessions/new"
+	get "sessions/nuevo"
 
 	resources :usuarios
 	resources :sessions, :only => [:new, :create, :destroy]

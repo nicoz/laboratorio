@@ -270,3 +270,23 @@ ul.usuarios {
 	list-style: none;
 }
 
+.enLinea {
+	margin-left: 10px;
+}
+
+.labelForm {
+	margin-bottom: 1px;
+}
+
+input {
+	margin-top: 2px:
+	margin-bottom: 0;
+}
+
+.inputForm{
+	margin-bottom: 0;
+}
+
+.field {
+	margin-bottom: 10px;
+}

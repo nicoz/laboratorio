@@ -1,2 +1,2 @@
-= form_for(@usuario) do |f|
+= form_for @usuario, :validate => true do |f|
 	= render 'fields', :f => f, :boton => "Crear"
