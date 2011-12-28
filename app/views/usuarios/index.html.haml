@@ -1,25 +1,19 @@
-= form_for @search do |f|
-	%div.span-24
-		%span.span-2= f.label :nombre_contains, "Nombre:"
-		= f.text_field :nombre_contains
-		%br
-		%span.span-2= f.label :email_contains, "Email:"
-		= f.text_field :email_contains
-		%br
-		%span.prepend-2= f.submit "Buscar"
-%br
-%p.prepend-10
-	= link_to "Crear Usuario", crearusuario_path, :class => "round boton orange"
-
-%div.span-24.last{:style => "padding-top:10px"}
-	%div.prepend-12= will_paginate
-	%br
-	%span.prepend-6= sort_link @search, :email
-	%span.prepend-6= sort_link @search, :nombre
-
-%div#listaUsuarios.span-24.last{:style => "padding-top:2px"}
-	%div.prepend-5.span-19.last
-		%ul.usuarios
-			= render @usuarios
-		
-	%div.prepend-12.span-12.last{:style => "padding-top:10px"}= will_paginate
+#title_bar
+	#titlebar
+		%span.breadcrumb
+			= link_to 'Escritorio', escritorio_path
+			%span.breadcrumb_sep /
+		%h2#page_title= @title
+		.action_items{:style => "position:absolute; top:18px; right:30px"}
+			%span.action_item
+				= link_to "Crear Usuario", crearusuario_path
+	#titlebar_right
+#active_admin_content.with_sidebar
+	#main_content_wrapper
+		#main_content
+			= render 'index-content-table'
+	#sidebar
+		#filters_sidebar_section.panel.sidebar_section
+			%h3 Filtros
+			#panel_contents
+				= render 'index-filters'

@@ -1,14 +1,21 @@
-%br
-%div.formulario.prepend-4
-	= form_for(:session, :url => sessions_path) do |f|
-		%div.field
-			= f.label :email
-			%br
-			= f.text_field :email
-		%div.field
-			= f.label :password
-			%br
-			= f.password_field :password
-		%div.actions
-			%br
-			= f.submit "Ingresar"
+#wrapper
+	#content_wrapper
+		.flash.flash_alert
+			= notice if flash[:error].nil?
+			= flash[:error]
+		#active_admin_content
+			#login
+				%h2 Ingresar al sistema
+				= form_for(:session, :url => sessions_path) do |f|
+					%fieldset.inputs
+						%ol
+							%li
+								= f.label :email
+								= f.text_field :email
+							%li
+								= f.label :password
+								= f.password_field :password
+					%fieldset.buttons
+						%ol
+							%li
+								= f.submit "Ingresar", :class => 'create'

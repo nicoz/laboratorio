@@ -1,21 +1,24 @@
-= render 'shared/error_messages', :object => f.object
-%div.formulario.prepend-4
-	%div.field.span-20
-		%p.labelForm= f.label :nombre
-		%span.inputForm= f.text_field :nombre
-	%div.field.span-20
-		%p.labelForm= f.label :email
-		%span.inputForm= f.text_field :email
-	%div.field.span-20
-		%p.labelForm= f.label :password
-		%span.inputForm= f.password_field :password
-	%div.field.span-20
-		%p.labelForm= f.label :password_confirmation
-		%span.inputForm= f.password_field :password_confirmation
-	- if usuario_actual.admin? and usuario_actual != @usuario
-		%div.field.span-20
-			%p.labelForm
-				%span=f.label :admin, "Admistrador?"
-				%span.inputForm= f.check_box :admin
-	%div.actions.span-20
-		%p= f.submit boton
+%fieldset.inputs
+	%ol
+		%li
+			= f.label :nombre
+			= f.text_field :nombre
+		%li
+			= f.label :email
+			= f.text_field :email
+		%li
+			= f.label :password
+			= f.password_field :password
+		%li
+			= f.label :password_confirmation
+			= f.password_field :password_confirmation
+		- if usuario_actual.admin? and usuario_actual != @usuario
+			%li
+				=f.label :admin, "Admistrador?"
+				= f.check_box :admin
+%fieldset.buttons
+	%ol
+		%li.commit
+			= f.submit 'Crear'
+		%li.cancel
+			= link_to 'Cancelar', usuarios_path

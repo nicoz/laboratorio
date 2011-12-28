@@ -1,0 +1,10 @@
+= form_for @search do |f|
+	%div.filter_form_field.filter_string
+		= f.label :nombre_contains, "Nombre:"
+		= f.text_field :nombre_contains
+	%div.filter_form_field.filter_string
+		= f.label :email_contains, "Email:"
+		= f.text_field :email_contains
+	.buttons
+		#q_submit= f.submit "Buscar"
+

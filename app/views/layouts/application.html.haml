@@ -3,16 +3,23 @@
 	%head
 		%title= title
 		= csrf_meta_tag
-		= render :partial =>'layouts/stylesheets'
+		= stylesheet_link_tag "application"
 		= javascript_include_tag "application"
-	%body
-		.container
-			= render :partial => 'layouts/header'
-			%br
-			%section.main-content.round
-				- flash.each do |key, value|
-					%div{ :class => "flash #{key}" }= value
-				= yield
-			= render :partial => 'layouts/footer'
-			%div.clear
-			= debug(params) if Rails.env.development?
+	- if ingresado?
+		%body.logged_in
+			#wrapper
+				#header
+					%h1#site_title Laboratorio Azucarlito
+					%ul.tabbed_navigation#tabs
+						= render '/layouts/header'
+					%p#utility_nav
+						%span.current_user
+							= usuario_actual.email
+						= link_to "Salir", salir_path, :method => :delete
+				=yield
+				#footer
+	
+	- else
+		%body.logged_out
+			=yield
+

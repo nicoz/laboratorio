@@ -1,3 +1,7 @@
-= form_for @usuario, :validate => true do |f|
-	= render 'fields', :f => f, :boton => "Actualizar"
-		
+= render 'new_edit_header'
+#active_admin_content.with_sidebar
+	#main_content_wrapper
+		#main_content
+			= form_for @usuario, :validate => true do |f|
+				= render 'fields', :f => f, :boton => "Actualizar"
+

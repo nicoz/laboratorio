@@ -1,20 +1,15 @@
-%header
-	%h1= titulo
-	- if ingresado? 
-		%span.usuarioActual= "Bienvenido, #{usuario_actual.nombre}"
-	%nav.round.orange
-		%ul
-			- if ingresado?
-				%li= link_to "Escritorio", escritorio_path
-			- else
-				%li= link_to "Inicio", root_path
-			%li= link_to "Ayuda", ayuda_path
-			- if ingresado?
-				- if usuario_actual.admin?
-					%li= link_to "Usuarios", usuarios_path
-				%li= link_to "Cuenta", usuario_actual
-				%li= link_to "Perfil", edit_usuario_path(usuario_actual)
-				%li= link_to "Salir", salir_path, :method => :delete
-			- else
-				%li= link_to "Ingresar", ingresar_path
+%li#dashboard{:class => "#{if request.fullpath == escritorio_path then 'current' end}"}
+	= link_to "Escritorio", escritorio_path
+%li{:class => "#{if request.fullpath == ayuda_path then 'current' end}"}
+	= link_to "Ayuda", ayuda_path
+- if ingresado?
+	- if usuario_actual.admin?
+		%li{:class => "#{if request.fullpath == usuarios_path then 'current' end}"}
+			= link_to "Usuarios", usuarios_path
+	%li{:class => "#{if request.fullpath == usuario_path(usuario_actual) then 'current' end}"}
+		= link_to "Cuenta", usuario_actual
+	%li{:class => "#{if request.fullpath == edit_usuario_path(usuario_actual) then 'current' end}"}
+		= link_to "Perfil", edit_usuario_path(usuario_actual)
+- else
+	%li= link_to "Ingresar", ingresar_path
 

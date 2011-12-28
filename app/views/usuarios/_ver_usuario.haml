@@ -1,0 +1,18 @@
+%table{ :class => "perfil", :summary => "Informacion del perfil de usuario" }
+	%tr
+		%td.prepend-4.round.blanco
+			%strong 
+				Nombre
+			= @usuario.nombre
+			%br
+			%strong
+				Email
+			= @usuario.email
+			%br
+			%strong
+				Ver
+			= link_to usuario_path(@usuario), @usuario
+			%br
+			%strong
+				Editar
+			= link_to edit_usuario_path(@usuario), edit_usuario_path(@usuario)
