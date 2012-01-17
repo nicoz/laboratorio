@@ -1,15 +1,14 @@
-%li#dashboard{:class => "#{if request.fullpath == escritorio_path then 'current' end}"}
-	= link_to "Escritorio", escritorio_path
-%li{:class => "#{if request.fullpath == ayuda_path then 'current' end}"}
+
+%li
 	= link_to "Ayuda", ayuda_path
 - if ingresado?
+	%li
+		= link_to "Escritorio", escritorio_path
 	- if usuario_actual.admin?
-		%li{:class => "#{if request.fullpath == usuarios_path then 'current' end}"}
+		%li
 			= link_to "Usuarios", usuarios_path
-	%li{:class => "#{if request.fullpath == usuario_path(usuario_actual) then 'current' end}"}
+	%li
 		= link_to "Cuenta", usuario_actual
-	%li{:class => "#{if request.fullpath == edit_usuario_path(usuario_actual) then 'current' end}"}
+	%li
 		= link_to "Perfil", edit_usuario_path(usuario_actual)
-- else
-	%li= link_to "Ingresar", ingresar_path
 

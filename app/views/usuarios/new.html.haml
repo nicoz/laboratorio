@@ -1,6 +1,6 @@
-= render 'new_edit_header'
-#active_admin_content.with_sidebar
-	#main_content_wrapper
-		#main_content
-			= form_for @usuario, :validate => true, :html => { :class => "customer", :id => "customer_new" } do  |f|
+.content
+	.row
+		.span16
+			= form_for @usuario,:validate => true, :html => { :class => "customer", :id => "customer_new" } do  |f|
 				= render 'fields', :f => f, :boton => "Crear"
+	= render '/layouts/footer'

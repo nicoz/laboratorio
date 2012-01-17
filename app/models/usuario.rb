@@ -10,22 +10,26 @@
 #
 require 'digest'
 class Usuario < ActiveRecord::Base
-	attr_accessor :password
-	attr_accessible :nombre, :email, :password, :password_confirmation, :admin
+	attr_accessor :password, :cambiando
+	attr_accessible :nombre, :email, :password, :password_confirmation, :admin, :cambiando
 	
 	email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	
-	validates :nombre, :presence => true,
-			   :length => { :maximum => 50}
-	validates :email, :presence => true,
-			  :format => { :with => email_regex },
-			  :uniqueness => { :case_sensitive => false }
+	validates :nombre, :presence => {:if => Proc.new { |usuario| usuario.modo < 3 }},
+			   :length => { :maximum => 50, :if => Proc.new { |usuario| usuario.modo < 3 } }
+	validates :email, :presence => {:if => Proc.new { |usuario| usuario.modo < 3 } },
+			  :format => { :with => email_regex, :if => Proc.new { |usuario| usuario.modo < 3  } },
+			  :uniqueness => { :case_sensitive => false, :if => Proc.new { |usuario| usuario.modo < 3 } }
 			  
-	validates :password, :presence		=> true,
-			     :confirmation	=> true,
-			     :length		=> { :within => 6..40 }
-			     
+	validates :password, :presence		=> {:if => Proc.new { |usuario| (usuario.modo == 3 or usuario.modo == 1)  }},
+			     :confirmation	=> {:if => Proc.new { |usuario| (usuario.modo == 3 or usuario.modo == 1)  }},
+			     :length		=> { :within => 6..40, :if => Proc.new { |usuario| (usuario.modo == 3 or 							   usuario.modo == 1) }}
+
 	before_save :encrypt_password
+	
+	def modo
+		return self.cambiando.to_i
+	end
 	
 	#Retorna true si la clave del usuario es igual a la clave enviada
 	def tiene_clave?(clave_enviada)
@@ -54,8 +58,10 @@ class Usuario < ActiveRecord::Base
 	private
 	
 		def encrypt_password
-			self.salt = make_salt unless tiene_clave?(password)
-			self.encrypted_password = encrypt(password)
+			unless password.nil?
+				self.salt = make_salt unless tiene_clave?(password)
+				self.encrypted_password = encrypt(password)
+			end
 		end
 		
 		def encrypt(string)

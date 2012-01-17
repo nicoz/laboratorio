@@ -3,4 +3,6 @@
 %td
 	= link_to 'Ver', usuario_path(usuario)
 	= link_to 'Editar', edit_usuario_path(usuario)
-	= link_to "Borrar", usuario, :method => :delete, :confirm => "Estas seguro?", :title => "Borrar #{usuario.nombre}"
+	- if usuario != usuario_actual
+		= link_to "Borrar", usuario, :method => :delete, :confirm => "Seguro que desea borrarlo?", :title => "Borrar #{usuario.nombre}"
+		= link_to "Reiniciar clave", reiniciarclave_path(usuario), :confirm => "Seguro que desea reiniciar la clave?", :title => "Reiniciar clave"

@@ -1,18 +1,22 @@
-%table{ :class => "perfil", :summary => "Informacion del perfil de usuario" }
-	%tr
-		%td.prepend-4.round.blanco
-			%strong 
-				Nombre
-			= @usuario.nombre
-			%br
-			%strong
-				Email
-			= @usuario.email
-			%br
-			%strong
-				Ver
-			= link_to usuario_path(@usuario), @usuario
-			%br
+.row
+	.span6.offset1
+		%h2= @usuario.nombre
+.row
+	.span6.offset2
+	
+		%strong
+			Email 
+		=@usuario.email
+		%br
+		%strong
+			Ver
+		= link_to usuario_path(@usuario), @usuario
+		%br
 			%strong
 				Editar
 			= link_to edit_usuario_path(@usuario), edit_usuario_path(@usuario)
+%br
+.row
+	.span6.offset2
+		= link_to "Escritorio", escritorio_path, :class => "btn error"
+

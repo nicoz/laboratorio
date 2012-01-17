@@ -1,21 +1,9 @@
-#wrapper
-	#content_wrapper
-		.flash.flash_alert
-			= notice if flash[:error].nil?
-			= flash[:error]
-		#active_admin_content
-			#login
-				%h2 Ingresar al sistema
-				= form_for(:session, :url => sessions_path) do |f|
-					%fieldset.inputs
-						%ol
-							%li
-								= f.label :email
-								= f.text_field :email
-							%li
-								= f.label :password
-								= f.password_field :password
-					%fieldset.buttons
-						%ol
-							%li
-								= f.submit "Ingresar", :class => 'create'
+.content
+	.hero-unit
+		%h2
+			Sistema de Administraci&oacute;n del Laboratorio de Azucarlito
+		%p
+			Este es el sistema de administraci&oacute;n del trabajo diario del laboratorio de Azucarlito.
+			%br
+			En el mismo usted podr&aacute; controlar el trabajo desarrollado por la fabrica.
+	=render '/layouts/footer'

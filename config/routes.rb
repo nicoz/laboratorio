@@ -7,6 +7,7 @@ Laboratorio::Application.routes.draw do
 	resources :usuarios
 	resources :sessions, :only => [:new, :create, :destroy]
 
+	match '/actividad/:id',	:to => 'actividades#show', :as => :actividad
 	match '/ingresar',	:to => 'sessions#new'
 	match '/salir',		:to => 'sessions#destroy'
 	match '/crearusuario',	:to => 'usuarios#new'
@@ -14,7 +15,9 @@ Laboratorio::Application.routes.draw do
 	match '/ayuda', 	:to => 'paginas#ayuda'
 	match '/acerca', 	:to => 'paginas#acerca'
 	match '/escritorio',	:to => 'escritorio#show'
-  
+
+	match '/usuarios/:id/modificarclave',	:to => 'usuarios#edit_password', :as => :modificarclave
+	match 'usuarios/:id/reiniciarclave',	:to => 'usuarios#reset_password', :as => :reiniciarclave
 	root 			:to => 'paginas#inicio'
 
   # The priority is based upon order of creation:

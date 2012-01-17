@@ -1,24 +1,15 @@
-%nav.pagination{:style => "margin-bottom:5px;"}
-	= will_paginate
-#paginated_collection
-	#paginated_collection_contents
-		#index_content
-			#index_as_table
-				%table#index_table.index_table
-					%thead
-						%tr
-							%th= sort_link @search, :email
-							%th= sort_link @search, :nombre
-							%th Acciones
-					%tbody
-						- i = 0
-						- @usuarios.each do |usuario|
-							- i = i + 1
-							- if i % 2 == 0
-								%tr.odd
-									= render 'usuario', :usuario => usuario
-							- else
-								%tr.even
-									= render 'usuario', :usuario => usuario
+.pagination{:style => "margin-bottom:5px;"}
+	= will_paginate(usuarios, :renderer => PaginationListLinkRenderer)
+
+%table#table-usuarios.zebra-striped
+	%thead
+		%tr
+			%th.yellow.header Email
+			%th.green.header Nombre
+			%th Acciones
+	%tbody
+		- @usuarios.each do |usuario|
+			%tr.odd
+				= render 'usuario', :usuario => usuario
 %nav.pagination
-	= will_paginate
+	= will_paginate(usuarios, :renderer => PaginationListLinkRenderer)

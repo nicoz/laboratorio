@@ -1,0 +1,44 @@
+body {
+	padding-top: 80px;
+}
+
+
+.intuitive-navigation {
+	position:fixed;
+	width:100%;
+	z-index:200;
+	left:0;
+	top:40px;
+	height: 30px;
+	background-color: #eee;
+	margin-bottom: 10px;
+}
+
+.breadcrumb {
+	width: 100%;
+	padding-left: 20px;
+}
+
+.hero-unit {
+	padding:5px;
+	margin-bottom:5px;
+}
+
+form {
+	margin-bottom:0;
+}
+
+label {
+	margin-right:4px;
+}
+
+.actions {
+	margin-bottom:0;
+	padding-bottom: 5px;
+}
+
+fieldset {
+	margin-bottom: 0px;
+	padding-top:5px;
+}
+

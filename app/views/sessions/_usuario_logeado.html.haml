@@ -1,0 +1,7 @@
+= form_for(:session, :url => salir_path, :html => { :class => "pull-right" }) do |f|
+	= button_tag "Salir", :type => 'submit', :class => 'btn error'
+%p.pull-right
+	Usuario logeado
+	= link_to usuario_actual.email, usuario_actual
+	&nbsp;
+

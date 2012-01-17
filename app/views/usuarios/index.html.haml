@@ -1,19 +1,14 @@
-#title_bar
-	#titlebar
-		%span.breadcrumb
-			= link_to 'Escritorio', escritorio_path
-			%span.breadcrumb_sep /
-		%h2#page_title= @title
-		.action_items{:style => "position:absolute; top:18px; right:30px"}
-			%span.action_item
-				= link_to "Crear Usuario", crearusuario_path
-	#titlebar_right
-#active_admin_content.with_sidebar
-	#main_content_wrapper
-		#main_content
-			= render 'index-content-table'
-	#sidebar
-		#filters_sidebar_section.panel.sidebar_section
-			%h3 Filtros
-			#panel_contents
-				= render 'index-filters'
+
+.sidebar
+	.well
+		%h1= @title
+		%h5 Acciones
+		= link_to "Crear Usuario", crearusuario_path, :class => "btn large info"
+.content
+	.hero-unit
+		= render 'index-filters'
+	.row
+		.span16
+			= render 'index-content-table', :usuarios => @usuarios
+	=render '/layouts/footer'
+

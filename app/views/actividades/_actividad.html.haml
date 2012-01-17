@@ -1,0 +1,5 @@
+%td= actividad.usuario_email
+%td= actividad.controlador
+%td= actividad.accion
+%td= time_ago_in_words(actividad.created_at)
+%td= link_to "Ver detalle", actividad_path(actividad)

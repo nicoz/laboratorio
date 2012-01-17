@@ -1,0 +1,25 @@
+.row
+	.span6.offset1
+		%h2= @actividad.usuario_email
+.row
+	.span6.offset2
+		%strong
+			Fecha
+		= l @actividad.created_at
+		%br
+		%strong
+			Controlador 
+		=@actividad.controlador
+		%br
+		%strong
+			Accion 
+		=@actividad.accion
+		%br
+		%strong
+			Parametros 
+		=@actividad.parametros
+
+%br
+.row
+	.span6.offset2
+		= link_to "Escritorio", escritorio_path, :class => "btn error"

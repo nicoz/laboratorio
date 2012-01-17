@@ -1,14 +1,21 @@
-#title_bar
-	#titlebar
-		%span.breadcrumb
-			= link_to 'Escritorio', escritorio_path
-			%span.breadcrumb_sep /
-		%h2#page_title= @title
-	#titlebar_right
-
-#active_admin_content.with_sidebar
-	#main_content_wrapper
-		#main_content
-			.action_items
-				%span.action_item= link_to "Crear Usuario", crearusuario_path, :class => "round boton orange"
-				%span.action_item= link_to "Trabajar con Usuarios", usuarios_path, :class => "round boton orange"
+.sidebar
+	.well
+		%h1= @title
+		%h5 Acciones
+		%ul.pills
+			%li
+				= link_to "Crear Usuario", crearusuario_path
+			%li
+				= link_to "Trabajar con Usuarios", usuarios_path
+.content
+	.hero-unit
+		%h2
+			Escritorio de trabajo del administrador
+	.row
+		.span10
+			%h2 Ultimos usuarios
+			= render 'ultimos_usuarios', :usuarios => @ultimosUsuarios
+		.span12
+			%h2 Visor de actividad reciente
+			= render '/actividades/log_actividad', :actividades => @actividades
+	=render 'layouts/footer'

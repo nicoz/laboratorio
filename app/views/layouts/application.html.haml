@@ -5,21 +5,23 @@
 		= csrf_meta_tag
 		= stylesheet_link_tag "application"
 		= javascript_include_tag "application"
-	- if ingresado?
-		%body.logged_in
-			#wrapper
-				#header
-					%h1#site_title Laboratorio Azucarlito
-					%ul.tabbed_navigation#tabs
+	%body
+		.topbar
+			.topbar-inner
+				.container-fluid
+					- if ingresado?
+						= link_to "Laboratorio Azucarlito", escritorio_path, :class => "brand"
+					- else
+						= link_to "Laboratorio Azucarlito", root_path, :class => "brand"
+					%ul.nav
 						= render '/layouts/header'
-					%p#utility_nav
-						%span.current_user
-							= usuario_actual.email
-						= link_to "Salir", salir_path, :method => :delete
-				=yield
-				#footer
-	
-	- else
-		%body.logged_out
-			=yield
+					= render '/sessions/new'
+		.intuitive-navigation
+			= render '/shared/breadcrumbs'
+		.messages.container
+			= render '/layouts/flash', :flash => flash
+		.container-fluid
+			= yield
+
+
 

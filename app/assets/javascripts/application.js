@@ -9,6 +9,7 @@
 //= require underscore-min
 //= require json2
 //= require rails.validations
+//= require tablesorter.min
 
 //= require_tree .
 

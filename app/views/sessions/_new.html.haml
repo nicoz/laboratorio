@@ -1,0 +1,7 @@
+-if ingresado?
+	= render '/sessions/usuario_logeado'
+-else
+	= form_for(:session, :url => sessions_path, :html => { :class => "pull-right" }) do |f|
+		= f.text_field :email, :placeholder => 'Email'
+		= f.password_field :password, :placeholder => 'Clave'
+		= button_tag  "Ingresar", :type => 'submit', :class => 'btn primary'

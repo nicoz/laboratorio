@@ -1,0 +1,10 @@
+%table#table-usuarios.zebra-striped
+	%thead
+		%tr
+			%th.yellow.header Email
+			%th.green.header Nombre
+			%th Acciones
+	%tbody
+		- usuarios.each do |usuario|
+			%tr
+				= render '/usuarios/usuario', :usuario => usuario

@@ -37,4 +37,53 @@ en:
         less_than_or_equal_to: "debe ser menor o igual a %{count}"     
         odd: "debe ser impar"
         even: "debe ser par"
-
+  date:
+    formats:
+      default: "%d/%m/%Y"
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M:%S"
+      short_datetime: "%B %d, %Y"
+      long_datetime:  "%B %d, %Y, at %r"
+      hammer_datetime: "%d/%m/%Y %H:%M:%S"
+  will_paginate:
+    previous_label: "&#8592; Anterior"
+    next_label: "Siguiente &#8594;"
+    page_gap: "&hellip;"
+  datetime:
+    distance_in_words:
+      less_than_x_minutes:
+        one: 'menos de un minuto'
+        other: 'menos de %{count} minutos'
+      x_minutes: 
+        one: 'un minuto'
+        other: '%{count} minutos'
+      less_than_x_seconds:
+         one: 'menos de un segundo'
+         other: 'menos de %{count} segundos'
+      half_a_minute:
+         other: 'menos de 30 segundos'
+      less_than_x_minutes:
+         one: 'menos de un minuto'
+         other: 'menos de %{count} minuto'
+      x_minutes:
+         one: 'un minuto'
+         other: '%{count} minutos'
+      about_x_hours:
+         one: 'una hora'
+         other: '%{count} horas'
+      x_days:
+         one: 'un dia'
+         other: '%{count} dias'
+      about_x_months:
+         one: 'aproximadamente un mes'
+         other: 'aproximadamente %{count} meses'
+      x_months:
+         one: 'un mes'
+         other: '%{count} meses'
+      about_x_years:
+         one: 'aproximadamente un anio'
+         other: '%{count} anios'
+      over_x_years:
+         one: 'mas de un anio'
+         other: 'mas de  %{count} anios'
