@@ -8,6 +8,8 @@ Laboratorio::Application.routes.draw do
 	resources :sessions, :only => [:new, :create, :destroy]
 
 	match '/actividad/:id',	:to => 'actividades#show', :as => :actividad
+	match '/actividades',	:to => 'actividades#index', :as => :actividades
+	match '/actividads',	:to => 'actividades#index'
 	match '/ingresar',	:to => 'sessions#new'
 	match '/salir',		:to => 'sessions#destroy'
 	match '/crearusuario',	:to => 'usuarios#new'

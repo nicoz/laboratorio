@@ -1,7 +1,6 @@
-%td= usuario.email
+%td= link_to usuario.email, usuario_path(usuario)
 %td= usuario.nombre
 %td
-	= link_to 'Ver', usuario_path(usuario)
 	= link_to 'Editar', edit_usuario_path(usuario)
 	- if usuario != usuario_actual
 		= link_to "Borrar", usuario, :method => :delete, :confirm => "Seguro que desea borrarlo?", :title => "Borrar #{usuario.nombre}"

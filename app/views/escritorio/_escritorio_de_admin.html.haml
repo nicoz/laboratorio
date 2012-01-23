@@ -7,12 +7,14 @@
 				= link_to "Crear Usuario", crearusuario_path
 			%li
 				= link_to "Trabajar con Usuarios", usuarios_path
+			%li
+				= link_to "Ver Actividad", actividades_path
 .content
 	.hero-unit
 		%h2
 			Escritorio de trabajo del administrador
 	.row
-		.span10
+		.span9
 			%h2 Ultimos usuarios
 			= render 'ultimos_usuarios', :usuarios => @ultimosUsuarios
 		.span12

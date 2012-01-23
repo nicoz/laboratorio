@@ -1,5 +1,5 @@
-%td= actividad.usuario_email
+%td= link_to actividad.usuario_email, actividad_path(actividad) 
+%td= time_ago_in_words(actividad.created_at)
 %td= actividad.controlador
 %td= actividad.accion
-%td= time_ago_in_words(actividad.created_at)
-%td= link_to "Ver detalle", actividad_path(actividad)
+

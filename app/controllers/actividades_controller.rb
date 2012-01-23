@@ -4,7 +4,11 @@ class ActividadesController < ApplicationController
 	add_breadcrumb 'Escritorio', '/escritorio'
 
 	def index
-	
+		add_breadcrumb 'Actividades', usuarios_path
+		@title = "Visor de Actividades"
+		@search = Actividad.search(params[:search])
+		@actividades = @search.paginate(:page => params[:page], :per_page => 10, :order => 'created_at DESC')
+		@busqueda = params[:search]
 	end
 	
 	def show
