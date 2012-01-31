@@ -1,0 +1,17 @@
+%fieldset
+	%legend=@title
+	.clearfix
+		= f.label :nombre
+		.input
+			= f.text_field :nombre
+	.clearfix
+		= f.label :orden
+		.input
+			= f.text_field :orden
+	.clearfix
+		= f.label :habilitado
+		.input
+			= f.check_box :habilitado
+	.actions
+		= f.submit boton, :class => "btn large primary"
+		= link_to 'Cancelar', turnos_path, :class => "btn large error"

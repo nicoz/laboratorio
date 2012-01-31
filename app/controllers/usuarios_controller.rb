@@ -2,7 +2,7 @@ class UsuariosController < ApplicationController
   	before_filter :autenticar, 		:only => [:index, :edit, :update, :destroy, :create, :new, :show]
   	before_filter :usuario_correcto, 	:only => [:edit, :update]
   	before_filter :permitir_modificar_clave,:only => [:edit_password]
-  	before_filter :usuario_admin, 		:only => [:index, :new, :create, :destroy]	
+  	before_filter :usuario_admin, 		:only => [:index, :new, :create, :destroy]
   	add_breadcrumb 'Escritorio', '/escritorio'
   	
   	def index
@@ -42,14 +42,14 @@ class UsuariosController < ApplicationController
 		@usuario = Usuario.find(params[:id])
 		@title = "Editar Usuario"
 		add_breadcrumb 'Usuarios', usuarios_path
-		add_breadcrumb @usuario.nombre, edit_usuario_path(@ususario)
+		add_breadcrumb @usuario.nombre, edit_usuario_path(@usuario)
 	end
 	
 	def edit_password
 		@usuario = Usuario.find(params[:id])
 		@title = "Modificar Clave"
 		add_breadcrumb 'Usuarios', usuarios_path
-		add_breadcrumb @usuario.nombre, edit_usuario_path(@ususario)
+		add_breadcrumb @usuario.nombre, edit_usuario_path(@usuario)
 	end
 	
 	def reset_password
@@ -86,14 +86,7 @@ class UsuariosController < ApplicationController
 	end
 	
 	private
-		def autenticar
-			negar_acceso unless ingresado?
-		end
-		
-		def usuario_correcto
-			usuario = Usuario.find(params[:id])
-			redirect_to(root_path) unless usuario_actual?(usuario) || usuario_actual.admin?
-		end
+
 		
 		def permitir_modificar_clave
 			usuario = Usuario.find(params[:id])

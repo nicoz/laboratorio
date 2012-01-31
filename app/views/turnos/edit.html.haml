@@ -1,0 +1,6 @@
+.content
+	.row
+		.span16
+			= form_for @turno, :validate => true do |f|
+				= render 'fields', :f => f, :boton => "Actualizar"
+	= render '/layouts/footer'

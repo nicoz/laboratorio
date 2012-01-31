@@ -32,6 +32,15 @@ class ApplicationController < ActionController::Base
 	  	end
   	end
   	
+	def autenticar
+		negar_acceso unless ingresado?
+	end
+
+	def usuario_correcto
+		usuario = Usuario.find(params[:id])
+		redirect_to(root_path) unless usuario_actual?(usuario) || usuario_actual.admin?
+	end
+	
   	def usuario_admin
 			redirect_to(root_path) unless usuario_actual.admin?
 	end

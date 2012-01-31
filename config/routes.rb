@@ -5,14 +5,20 @@ Laboratorio::Application.routes.draw do
 	get "sessions/nuevo"
 
 	resources :usuarios
+	resources :turnos
 	resources :sessions, :only => [:new, :create, :destroy]
 
 	match '/actividad/:id',	:to => 'actividades#show', :as => :actividad
 	match '/actividades',	:to => 'actividades#index', :as => :actividades
 	match '/actividads',	:to => 'actividades#index'
+	
 	match '/ingresar',	:to => 'sessions#new'
 	match '/salir',		:to => 'sessions#destroy'
+	
 	match '/crearusuario',	:to => 'usuarios#new'
+	
+	match 'crearturno',	:to => 'turnos#new'
+	
 	match '/contacto', 	:to => 'paginas#contacto'
 	match '/ayuda', 	:to => 'paginas#ayuda'
 	match '/acerca', 	:to => 'paginas#acerca'

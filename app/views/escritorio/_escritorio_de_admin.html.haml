@@ -8,6 +8,8 @@
 			%li
 				= link_to "Trabajar con Usuarios", usuarios_path
 			%li
+				= link_to "Trabajar con Turnos", turnos_path
+			%li
 				= link_to "Ver Actividad", actividades_path
 .content
 	.hero-unit
@@ -17,7 +19,7 @@
 		.span9
 			%h2 Ultimos usuarios
 			= render 'ultimos_usuarios', :usuarios => @ultimosUsuarios
-		.span12
+		.span10
 			%h2 Visor de actividad reciente
 			= render '/actividades/log_actividad', :actividades => @actividades
 	=render 'layouts/footer'
