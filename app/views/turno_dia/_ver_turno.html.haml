@@ -1,0 +1,20 @@
+.row
+	.span6.offset1
+		%h2= @turno_dia.turno.nombre
+.row
+	.span6.offset2
+		%strong
+			Fecha 
+		= l @turno_dia.dia.fecha
+		%br
+		%strong
+			Estado
+		= @turno_dia.estado
+%br
+.row
+	.span6.offset2
+		- if @turno_dia.estado == "Abierto"
+			= link_to "Cerrar Turno", cerrar_turno_path(@turno_dia), :class => "btn primary big"
+			= link_to "Anular Turno", anular_turno_path(@turno_dia), :class => "btn error big"
+		- if @turno_dia.estado == "Cerrado" or @turno_dia.estado == "Anulado"
+			= link_to "Abrir Turno", abrir_turno_path(@turno_dia), :class => "btn primary big"

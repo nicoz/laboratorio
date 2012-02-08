@@ -1,0 +1,9 @@
+= form_for @search do |f|
+	%fieldset
+		%legend Filtros
+		.clearfix
+			= f.label :nombre_contains, "Nombre: "
+			= f.text_field :nombre_contains, :class => "xlarge"
+		.actions
+			= f.submit "Buscar", :class => "btn large success"
+

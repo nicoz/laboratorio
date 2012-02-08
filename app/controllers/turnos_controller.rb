@@ -19,8 +19,8 @@ class TurnosController < ApplicationController
 	end
 	
 	def new
-		add_breadcrumb 'Turnos', usuarios_path
-		add_breadcrumb 'Crear Turno', usuarios_path
+		add_breadcrumb 'Turnos', turnos_path
+		add_breadcrumb 'Crear Turno', turnos_path
 		@title = "Crear Turno"
 		@turno = Turno.new
 	end

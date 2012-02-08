@@ -1,4 +1,5 @@
 Laboratorio::Application.routes.draw do
+
 	get "escritorio/show"
 
 	get "sessions/new"
@@ -7,6 +8,20 @@ Laboratorio::Application.routes.draw do
 	resources :usuarios
 	resources :turnos
 	resources :sessions, :only => [:new, :create, :destroy]
+	
+	match '/dia/:fecha/turno/:nombre', :to => 'turno_dia#show', :as => :ver_turno_dia
+	
+	match '/dia/turno/:id/cerrar', :to => 'turno_dia#cerrar', :as => :cerrar_turno
+	match '/dia/turno/:id/anular', :to => 'turno_dia#anular', :as => :anular_turno
+	match '/dia/turno/:id/abrir', :to => 'turno_dia#abrir', :as => :abrir_turno
+	
+	resources :dia do
+		resources :turno_dia
+	end
+
+	resources :insumos, :only => [:create, :destroy, :update, :show, :index]
+	
+	match '/dia/turno/:turno/insumos/nuevo', :to => 'insumos#new', :as => :crear_insumo
 
 	match '/actividad/:id',	:to => 'actividades#show', :as => :actividad
 	match '/actividades',	:to => 'actividades#index', :as => :actividades

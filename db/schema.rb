@@ -11,15 +11,43 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120131155954) do
+ActiveRecord::Schema.define(:version => 20120203112041) do
 
   create_table "actividads", :force => true do |t|
     t.string   "controlador"
     t.string   "accion"
-    t.string   "parametros"
+    t.text     "parametros",    :limit => 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "usuario_email"
+  end
+
+  create_table "dia", :force => true do |t|
+    t.date     "fecha"
+    t.boolean  "activo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "insumos", :force => true do |t|
+    t.integer  "crudoProcesado"
+    t.integer  "leniaCaldera"
+    t.integer  "carbonActivado"
+    t.integer  "auxiliarDeFiltracion"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "piedra_de_cal"
+    t.integer  "turnoDia_id"
+    t.integer  "chip"
+    t.integer  "aserrin"
+  end
+
+  create_table "turno_dia", :force => true do |t|
+    t.integer  "dia_id"
+    t.integer  "turno_id"
+    t.string   "estado"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "turnos", :force => true do |t|
