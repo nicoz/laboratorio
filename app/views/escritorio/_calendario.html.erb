@@ -1,0 +1,9 @@
+<%= calendar_for(@dias) do |d| %>
+
+  <%= d.day(:day_method => :fecha) do |day, dias| %>
+    <%= day.day %>
+    <% dias.each do |dia| %>
+      <%= h(dia.fecha) %>
+    <% end %>
+  <% end %>
+<% end %>

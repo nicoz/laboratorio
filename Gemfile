@@ -7,6 +7,7 @@ gem 'sass-rails',   '~> 3.1.4'
 gem 'will_paginate'
 gem 'execjs'
 gem 'jquery-rails'
+gem 'rails-asset-jqueryui'
 gem 'haml'
 
 gem 'will_paginate'

@@ -9,6 +9,8 @@ Laboratorio::Application.routes.draw do
 	resources :turnos
 	resources :sessions, :only => [:new, :create, :destroy]
 	
+	match "dias/dias", :to => 'dia#dias', :as => :lista_dias
+	
 	match '/dia/:fecha/turno/:nombre', :to => 'turno_dia#show', :as => :ver_turno_dia
 	
 	match '/dia/turno/:id/cerrar', :to => 'turno_dia#cerrar', :as => :cerrar_turno

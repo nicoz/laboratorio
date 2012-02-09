@@ -6,10 +6,10 @@
 			= f.text_field :usuario_email_contains, :class => "xlarge"
 		.clearfix
 			= f.label :created_at_gte, "Fecha mayor que:"
-			= f.datetime_select :created_at_gte, :include_blank => true
+			= f.text_field :created_at_gte, :include_blank => true, :class => "fecha"
 		.clearfix
 			= f.label :created_at_lte, "Fecha menor que:"
-			= f.datetime_select :created_at_lte, :include_blank => true
+			= f.text_field :created_at_lte, :include_blank => true, :class => "fecha"
 		.actions
 			= f.submit "Buscar", :class => "btn large success"
 

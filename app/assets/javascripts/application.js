@@ -6,10 +6,12 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jqueryui
 //= require underscore-min
 //= require json2
 //= require rails.validations
 //= require tablesorter.min
+//= require fullcalendar.min
 
 //= require_tree .
 

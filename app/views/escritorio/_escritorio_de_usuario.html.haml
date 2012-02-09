@@ -1,14 +1,17 @@
-#title_bar
-	#titlebar
-		%span.breadcrumb
-			= link_to 'Escritorio', escritorio_path
-			%span.breadcrumb_sep /
-		%h2#page_title= @title
-	#titlebar_right
+.sidebar
+	.well
+		%h1= @title
+		%h5 Acciones
+		%ul.pills
+			%li
+				= link_to "Ir a Dia Actual", crearusuario_path
 
-#active_admin_content.with_sidebar
-	#main_content_wrapper
-		#main_content
-			.action_items
-				%h1
-					usuario_path
+.content
+	.hero-unit
+		%h2
+			Escritorio de trabajo del usuario
+	.row
+		.span18
+			%h2 Calendario de actividad
+			= render 'dias'
+	=render 'layouts/footer'
