@@ -12,15 +12,16 @@ class DiaController < ApplicationController
 			#		:conditions => {:dia => {:fecha => dia},
 			#				:turnos => {:id => turno } })
 			numerador = TurnoDia.count()
-			turnosDias = TurnoDia.joins(:dia).where("fecha >= ? and fecha <= ?", inicio, fin)
+			turnosDias = TurnoDia.joins([:dia, :turno]).where("fecha >= ? and fecha <= ?", inicio, fin).order('orden')
 			turnos = Turno.find(:all, :conditions => {:habilitado => true}, :order => 'orden')
-			
 			inicio.upto(fin) do |dia|
+				segundos = 0
 				turnos.each do |turno|
 					encontrado = false
 					turnosDias.each do |turnoDia|
 						if turnoDia.turno == turno and turnoDia.dia.fecha == dia
 							encontrado = true
+							segundos = segundos + 1
 							fondo = '#006600' if turnoDia.estado == 'Cerrado'
 							fondo = '#330099' if turnoDia.estado == 'Abierto'
 							fondo = '#B80000' if turnoDia.estado =='Anulado'
@@ -29,7 +30,7 @@ class DiaController < ApplicationController
 							elemento = {:id => turnoDia.id, :title => turnoDia.turno.nombre, 
 									:url => ver_turno_dia_path(turnoDia.dia.fecha,
 										turnoDia.turno.nombre),
-									:start => turnoDia.dia.fecha,
+									:start => (turnoDia.dia.fecha.to_time + segundos.seconds),
 									:className => 'evento-activo',
 									:backgroundColor => fondo,
 									:borderColor => fondo,
@@ -40,12 +41,14 @@ class DiaController < ApplicationController
 					end
 				
 					if !encontrado
+						segundos = segundos + 1
+						numerador = numerador + 1
 						fondo = '#CCCCCC'
 						texto = 'white'
 						elemento = {:id => numerador, :title => turno.nombre, 
 								:url => ver_turno_dia_path(dia,
 									turno.nombre),
-								:start => dia,
+								:start => (dia.to_time + segundos.seconds),
 								:className => 'evento-activo',
 								:backgroundColor => fondo,
 								:borderColor => fondo,
@@ -55,7 +58,7 @@ class DiaController < ApplicationController
 					end
 				end
 			end
-		
+			
 			respond_to do |format|
 				format.json { render json: respuesta }
 			end
