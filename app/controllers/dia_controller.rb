@@ -8,33 +8,35 @@ class DiaController < ApplicationController
 		
 			respuesta = []
 			
+			#turnosDias = TurnoDia.find(:all, :joins => [:turno, :dia],
+			#		:conditions => {:dia => {:fecha => dia},
+			#				:turnos => {:id => turno } })
 			numerador = TurnoDia.count()
-			inicio.upto(fin) do |dia|
-				turnos = Turno.find(:all, :conditions => {:habilitado => true}, :order => 'orden')
+			turnosDias = TurnoDia.joins(:dia).where("fecha >= ? and fecha <= ?", inicio, fin)
+			turnos = Turno.find(:all, :conditions => {:habilitado => true}, :order => 'orden')
 			
-				
+			inicio.upto(fin) do |dia|
 				turnos.each do |turno|
 					encontrado = false
-					turnosDias = TurnoDia.find(:all, :joins => [:turno, :dia],
-								:conditions => {:dia => {:fecha => dia},
-										:turnos => {:id => turno } })
 					turnosDias.each do |turnoDia|
-						encontrado = true
-						fondo = '#006600' if turnoDia.estado == 'Cerrado'
-						fondo = '#330099' if turnoDia.estado == 'Abierto'
-						fondo = '#B80000' if turnoDia.estado =='Anulado'
-						texto = 'white' if 
-							['Abierto', 'Cerrado', 'Anulado'].include? turnoDia.estado 
-						elemento = {:id => turnoDia.id, :title => turnoDia.turno.nombre, 
-								:url => ver_turno_dia_path(turnoDia.dia.fecha,
-									turnoDia.turno.nombre),
-								:start => turnoDia.dia.fecha,
-								:className => 'evento-activo',
-								:backgroundColor => fondo,
-								:borderColor => fondo,
-								:textColor => texto
-								}
-						respuesta << elemento
+						if turnoDia.turno == turno and turnoDia.dia.fecha == dia
+							encontrado = true
+							fondo = '#006600' if turnoDia.estado == 'Cerrado'
+							fondo = '#330099' if turnoDia.estado == 'Abierto'
+							fondo = '#B80000' if turnoDia.estado =='Anulado'
+							texto = 'white' if 
+								['Abierto', 'Cerrado', 'Anulado'].include? turnoDia.estado 
+							elemento = {:id => turnoDia.id, :title => turnoDia.turno.nombre, 
+									:url => ver_turno_dia_path(turnoDia.dia.fecha,
+										turnoDia.turno.nombre),
+									:start => turnoDia.dia.fecha,
+									:className => 'evento-activo',
+									:backgroundColor => fondo,
+									:borderColor => fondo,
+									:textColor => texto
+									}
+							respuesta << elemento
+						end
 					end
 				
 					if !encontrado
