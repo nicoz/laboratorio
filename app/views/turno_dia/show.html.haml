@@ -4,10 +4,11 @@
 		%h5 Acciones
 		%ul.pills
 			%li
-				- if @insumo.nil?
-					= link_to "Ingresar Insumos", crear_insumo_path(@turno_dia)
-				- else
-					= link_to "Editar Insumos", crear_insumo_path(@turno_dia)
+				- if @turno_dia.estado == 'Abierto'
+					- if @insumo.nil?
+						= link_to "Ingresar Insumos", crear_insumo_path(@turno_dia)
+					- else
+						= link_to "Editar Insumos", crear_insumo_path(@turno_dia)
 .content
 	= render 'ver_turno'
 	= render '/layouts/footer'

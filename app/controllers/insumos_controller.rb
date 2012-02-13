@@ -1,5 +1,6 @@
 class InsumosController < ApplicationController
 	before_filter :autenticar, 		:only => [:index, :edit, :update, :destroy, :create, :new, :show]
+	before_filter :validar_turno_dia,	:only => [:new, :edit]
 	add_breadcrumb 'Escritorio', '/escritorio'
 	
 	def index
@@ -71,4 +72,13 @@ class InsumosController < ApplicationController
 	def destroy
 		#se destruyen?
 	end
+	
+	private
+		def validar_turno_dia
+			turno = TurnoDia.find(params[:turno])
+			if turno.estado != 'Abierto'
+				flash[:error] = 'No se pueden crear/editar datos de los insumos si el turno no esta Abierto.'
+				redirect_to escritorio_path
+			end
+		end
 end

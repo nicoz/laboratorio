@@ -11,7 +11,36 @@
 		%h2
 			Escritorio de trabajo del usuario
 	.row
-		.span18
+		.span17
 			%h2 Calendario de actividad
 			= render 'dias'
+		.span4
+			%table.span4
+				%thead
+					%tr
+						%th.span1
+							Color
+						%th
+							Significado
+				%tbody
+					%tr
+						%td.abierto.span1
+							&nbsp;
+						%td
+							Turno Abierto
+					%tr
+						%td.cerrado.span1
+							&nbsp;
+						%td
+							Turno Cerrado
+					%tr
+						%td.anulado.span1
+							&nbsp;
+						%td
+							Turno Anulado
+					%tr
+						%td.sinAbrir.span1
+							&nbsp;
+						%td
+							Turno Sin Abrir
 	=render 'layouts/footer'

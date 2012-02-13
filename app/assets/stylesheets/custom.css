@@ -42,3 +42,18 @@ fieldset {
 	padding-top:5px;
 }
 
+.abierto {
+	background: #330099;
+}
+
+.cerrado {
+	background: #006600;
+}
+
+.anulado {
+	background: #B80000;
+}
+
+.sinAbrir{
+	background: #CCCCCC;
+}
