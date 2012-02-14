@@ -55,10 +55,16 @@ class TurnosController < ApplicationController
 	end
 	
 	def destroy
-		if Turno.find(params[:id]).destroy
-			flash[:success] = "Turno destruido."
+		turno = Turno.find(params[:id])
+		@turnos_dia = TurnoDia.find_by_turno_id(turno)
+		if @turnos_dia.nil?
+			if turno.destroy
+				flash[:success] = "Turno destruido."
+			else
+				flash[:error] = "No se pudo eliminar el turno"
+			end
 		else
-			flash[:error] = "No se pudo eliminar el turno"
+			flash[:error] = "No se puede eliminar un turno que haya sido usado en el pasaje de datos. Marquelo como deshabilitado."
 		end
 		redirect_to turnos_path
 	end

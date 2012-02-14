@@ -57,3 +57,11 @@ fieldset {
 .sinAbrir{
 	background: #CCCCCC;
 }
+
+#turnos {
+	padding-left:40px;
+}
+
+#turnos li {
+	margin-right: 10px;
+}

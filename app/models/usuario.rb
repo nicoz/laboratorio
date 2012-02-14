@@ -11,7 +11,8 @@
 require 'digest'
 class Usuario < ActiveRecord::Base
 	attr_accessor :password, :cambiando
-	attr_accessible :nombre, :email, :password, :password_confirmation, :admin, :cambiando
+	attr_accessible :nombre, :email, :password, :password_confirmation, :admin, :cambiando, :habilitado
+
 	
 	email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	
@@ -40,13 +41,13 @@ class Usuario < ActiveRecord::Base
 	
 	def self.autenticar(email, clave_enviada)
 		usuario = find_by_email(email)
-		return nil if usuario.nil?
+		return nil if usuario.nil? or !usuario.habilitado
 		return usuario if usuario.tiene_clave?(clave_enviada)
 	end
 	
 	def self.authenticate(email, clave_enviada)
 		usuario = find_by_email(email)
-		return nil if usuario.nil?
+		return nil if usuario.nil? or !usuario.habilitado
 		return usuario if usuario.tiene_clave?(clave_enviada)
 	end
 	
@@ -56,7 +57,6 @@ class Usuario < ActiveRecord::Base
 	end
 
 	private
-	
 		def encrypt_password
 			unless password.nil?
 				self.salt = make_salt unless tiene_clave?(password)

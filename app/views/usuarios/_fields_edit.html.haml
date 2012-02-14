@@ -9,6 +9,15 @@
 		= f.label :email
 		.input
 			= f.text_field :email
+	- if usuario_actual.admin? and usuario_actual != @usuario
+		.clearfix
+			=f.label :admin, "Admistrador?"
+			.input
+				= f.check_box :admin
+		.clearfix
+			=f.label :habilitado, "Habilitado"
+			.input
+				= f.check_box :habilitado
 	.actions
 		= f.submit boton, :class => "btn large primary"
 		= link_to 'Cancelar', usuarios_path, :class => "btn large error"

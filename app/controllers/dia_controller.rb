@@ -1,4 +1,31 @@
 class DiaController < ApplicationController
+	before_filter :autenticar, 		:only => [:show, :dias]
+	
+	add_breadcrumb 'Escritorio', '/escritorio'
+	
+	def show
+		if params[:fecha].nil?
+			flash[:error] = "Debe ingresar una fecha correcta"
+			redirect_to escritorio_path
+		else
+			fecha = Date.parse(params[:fecha])
+			@dia = Dia.find_or_create_by_fecha(fecha)
+			
+			turnos = Turno.find(:all, :conditions => {:habilitado => true}, :order => 'orden')
+			@turnos_dia = []
+			turnos.each do |turno|
+				td = TurnoDia.find_by_dia_id_and_turno_id(@dia, turno)
+				
+				if td.nil?
+					td = @dia.turnos.build(:estado => "Abierto")
+					td.turno = turno
+				end 
+				@turnos_dia << td
+			end
+		end
+
+		add_breadcrumb "#{l @dia.fecha}", @dia
+	end
 
 	def dias
 		if !params[:fecha].nil?

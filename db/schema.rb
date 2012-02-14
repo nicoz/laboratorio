@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120203112041) do
+ActiveRecord::Schema.define(:version => 20120214192252) do
 
   create_table "actividads", :force => true do |t|
     t.string   "controlador"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20120203112041) do
     t.string   "encrypted_password"
     t.string   "salt"
     t.boolean  "admin"
+    t.boolean  "habilitado",         :default => true
   end
 
   add_index "usuarios", ["email"], :name => "index_usuarios_on_email", :unique => true
