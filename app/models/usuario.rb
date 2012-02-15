@@ -41,13 +41,13 @@ class Usuario < ActiveRecord::Base
 	
 	def self.autenticar(email, clave_enviada)
 		usuario = find_by_email(email)
-		return nil if usuario.nil? or !usuario.habilitado
+		return nil if usuario.nil? or !usuario[:habilitado]
 		return usuario if usuario.tiene_clave?(clave_enviada)
 	end
 	
 	def self.authenticate(email, clave_enviada)
 		usuario = find_by_email(email)
-		return nil if usuario.nil? or !usuario.habilitado
+		return nil if usuario.nil? or !usuario[:habilitado]
 		return usuario if usuario.tiene_clave?(clave_enviada)
 	end
 	

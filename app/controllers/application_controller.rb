@@ -58,6 +58,6 @@ class ApplicationController < ActionController::Base
 		#Este metodo carga en la clase definida en el inicializador User.rb el usuario actual
 		#en la variable de Clase cu. Esto sirve para actualizar los campos
 		#updated_by y created_by de forma automatica para cualquier modelo del sistema.
-		ActiveRecord::Base.cu = usuario_actual.id
+		ActiveRecord::Base.cu = usuario_actual.id if !usuario_actual.nil?
 	end
 end

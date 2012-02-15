@@ -18,29 +18,30 @@ describe Usuario do
 			:nombre => "Usuario Ejemplo",
 			:email => "usuario@example.com",
 			:password => "foobar",
-			:password_confirmation => "foobar" }
+			:password_confirmation => "foobar",
+			:cambiando => 1 }
 	end
 	
 	describe "validaciones de clave" do
 		it "deberia requerir una clave" do
-			Usuario.new(@attr.merge(:password => "", :password_confirmation => "")).
+			Usuario.new(@attr.merge(:password => "", :password_confirmation => "", :cambiando => 3)).
 				should_not be_valid
 		end
 	
 		it "deberia requerir que las claves fueran iguales" do
-			Usuario.new(@attr.merge(:password_confirmation => "invalid")).
+			Usuario.new(@attr.merge(:password_confirmation => "invalid", :cambiando => 3)).
 				should_not be_valid
 		end
 	
 		it "deberia rechazar claves cortas" do
 			corta = "a" * 5
-			hash = @attr.merge(:password => corta, :password_confirmation => corta)
+			hash = @attr.merge(:password => corta, :password_confirmation => corta, :cambiando => 3)
 			Usuario.new(hash).should_not be_valid
 		end
 		
 		it "deberia rechazar claves largas" do
 			larga = "a" * 41
-			hash = @attr.merge(:password => larga, :password_confirmation => larga)
+			hash = @attr.merge(:password => larga, :password_confirmation => larga, :cambiando => 3)
 			Usuario.new(hash).should_not be_valid
 		end
 	end
