@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe TurnoController do
+describe TurnosController do
 
 end

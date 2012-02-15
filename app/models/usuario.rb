@@ -12,7 +12,7 @@ require 'digest'
 class Usuario < ActiveRecord::Base
 	attr_accessor :password, :cambiando
 	attr_accessible :nombre, :email, :password, :password_confirmation, :admin, :cambiando, :habilitado
-
+	before_destroy :se_puede_eliminar?
 	
 	email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	
@@ -74,5 +74,12 @@ class Usuario < ActiveRecord::Base
 		
 		def secure_hash(string)
 			Digest::SHA2.hexdigest(string)
+		end
+		
+		def se_puede_eliminar?
+			actividades = Actividad.find_by_usuario_email(self.email)
+			errors.add(:base, "No se puede eliminar un usuario que haya tenido actividad en el sistema") unless actividades.nil?
+
+			errors.blank? #comprueba si la lista de elementos esta vacia, si lo esta permite borrar
 		end
 end

@@ -79,8 +79,11 @@ class UsuariosController < ApplicationController
 		if usuario == usuario_actual 
 			flash[:error] = "No se puede eliminar a si mismo."
 		else
-			Usuario.find(params[:id]).destroy
-			flash[:success] = "Usuario destruido."
+			if Usuario.find(params[:id]).destroy
+				flash[:success] = "Usuario destruido."
+			else
+				flash[:error] = "No se permite eliminar usuarios que hayan tenido actividad en el sistema. Deshabilitelo."
+			end
 		end 
 		redirect_to usuarios_path
 	end

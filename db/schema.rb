@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120214192252) do
+ActiveRecord::Schema.define(:version => 20120215163518) do
 
   create_table "actividads", :force => true do |t|
     t.string   "controlador"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(:version => 20120214192252) do
     t.boolean  "activo"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "updated_by"
+    t.integer  "created_by"
   end
 
   create_table "insumos", :force => true do |t|
@@ -40,6 +42,8 @@ ActiveRecord::Schema.define(:version => 20120214192252) do
     t.integer  "turnoDia_id"
     t.integer  "chip"
     t.integer  "aserrin"
+    t.integer  "updated_by"
+    t.integer  "created_by"
   end
 
   create_table "turno_dia", :force => true do |t|
@@ -48,6 +52,8 @@ ActiveRecord::Schema.define(:version => 20120214192252) do
     t.string   "estado"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "updated_by"
+    t.integer  "created_by"
   end
 
   create_table "turnos", :force => true do |t|
@@ -56,6 +62,8 @@ ActiveRecord::Schema.define(:version => 20120214192252) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "orden"
+    t.integer  "updated_by"
+    t.integer  "created_by"
   end
 
   create_table "usuarios", :force => true do |t|
@@ -67,6 +75,8 @@ ActiveRecord::Schema.define(:version => 20120214192252) do
     t.string   "salt"
     t.boolean  "admin"
     t.boolean  "habilitado",         :default => true
+    t.integer  "updated_by"
+    t.integer  "created_by"
   end
 
   add_index "usuarios", ["email"], :name => "index_usuarios_on_email", :unique => true

@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   include SessionsHelper
   before_filter :auditar_actividad, :except => [:controller => 'sessions', :action => 'new']
+  before_filter :set_current_user_for_class_logs
   
   protected
   	def add_breadcrumb name, url = ''
@@ -51,5 +52,12 @@ class ApplicationController < ActionController::Base
 		else
 			return true
 		end
+	end
+	
+	def set_current_user_for_class_logs
+		#Este metodo carga en la clase definida en el inicializador User.rb el usuario actual
+		#en la variable de Clase cu. Esto sirve para actualizar los campos
+		#updated_by y created_by de forma automatica para cualquier modelo del sistema.
+		ActiveRecord::Base.cu = usuario_actual.id
 	end
 end
