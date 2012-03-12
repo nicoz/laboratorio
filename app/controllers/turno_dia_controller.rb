@@ -21,6 +21,7 @@ class TurnoDiaController < ApplicationController
       end
     else
       @insumo = Insumo.find_by_turnoDia_id(@turno_dia)
+      @produccion = Produccion.find_by_turnoDia_id(@turno_dia)
       add_breadcrumb "#{l @dia.fecha}", ver_dia_path(@dia.fecha)
       add_breadcrumb "#{@turno_dia.turno.nombre}", @turno_dia.turno.nombre
     end
@@ -29,10 +30,13 @@ class TurnoDiaController < ApplicationController
   
   def cerrar
     turno = TurnoDia.find(params[:id])
-    
-    if validar_contenido(turno)
+    validacion = validar_contenido(turno)
+    validado = validacion[:resultado]
+    mensaje = validacion[:mensaje]
+    if validado
       if turno.estado == "Abierto"
         turno.estado = "Cerrado"
+        
         if turno.save()
           flash[:success] = "Turno del dia correctamente cerrado"
         else
@@ -41,6 +45,8 @@ class TurnoDiaController < ApplicationController
       else
         flash[:error] = "No se puede cerrar un turno que no este abierto"
       end
+    else
+      flash[:error] = mensaje
     end
     redirect_to ver_turno_dia_path(turno.dia.fecha, turno.turno.nombre)
   end
@@ -78,15 +84,32 @@ class TurnoDiaController < ApplicationController
   private
     
     def validar_contenido(turno)
+      
+      validado = true
+      mensaje = ""
+      
       insumo = Insumo.find_by_turnoDia_id(turno)
-      if insumo.nil?
-        flash[:error] = "Aun no se ingresaron datos de los Insumos"
-        return false
+      if insumo.nil? and validado
+        mensaje = "Aun no se ingresaron datos de los Insumos"
+        validado = false
       end
       
-      if !insumo.valid?
-        flash[:error] = "Existen incongruencias en los datos de los Insumos"
-        return false
+      if !insumo.nil? and !insumo.valid? and validado
+        mensaje = "Existen incongruencias en los datos de los Insumos"
+        validado = false
       end
+      
+      produccion = Produccion.find_by_turnoDia_id(turno)
+      if produccion.nil? and validado
+        mensaje = "Aun no se ingresaron datos de la Produccion"
+        validado = false
+      end
+      
+      if !produccion.nil? and !produccion.valid? and validado
+        mensaje = "Existen incongruencias en los datos de la Produccion"
+        validado = false
+      end
+      resultado = {:resultado => validado, :mensaje => mensaje}
+      return resultado
     end
 end

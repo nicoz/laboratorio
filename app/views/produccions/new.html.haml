@@ -1,0 +1,6 @@
+.content
+	.row
+		.span16
+			= form_for @produccion,:validate => true, :html => { :class => "customer", :id => "customer_new" } do  |f|
+				= render 'fields', :f => f, :boton => "Crear"
+	= render '/layouts/footer'

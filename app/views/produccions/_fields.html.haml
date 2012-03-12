@@ -1,0 +1,44 @@
+%h1
+	= "#{@produccion.turnoDia.turno.nombre} #{l @produccion.turnoDia.dia.fecha}"
+%fieldset
+	%legend=@title
+	=f.hidden_field :turnoDia_id, :value => @produccion.turnoDia_id
+	.clearfix
+		= f.label :paquetesPapel, 'Azucar, Paquetes de Papel Kgs.:'
+		.input
+			= f.text_field :paquetesPapel
+	.clearfix
+		= f.label :paquetesPolietileno, 'Azucar, Paquetes de Polietileno Kgs.:'
+		.input
+			= f.text_field :paquetesPolietileno
+	.clearfix
+		= f.label :melaza, 'Melaza Kgs.:'
+		.input
+			= f.text_field :melaza
+	.clearfix
+		= f.label :rubio, 'Azucar Rubio Kgs.:'
+		.input
+			= f.text_field :rubio
+	.clearfix
+		= f.label :industriaBolsas, 'Azucar, Industria Bolsas Kgs.:'
+		.input
+			= f.text_field :industriaBolsas
+	.clearfix
+		= f.label :bolsasAzucarlito, "Azucar, Bolsas de Azucarlito Kgs.:"
+		.input
+			= f.text_field :bolsasAzucarlito
+	.clearfix
+		= f.label :bigBagAzucarlito, 'Azucar, Big Bag Azucarlito Kgs.:'
+		.input
+			= f.text_field :bigBagAzucarlito
+	.clearfix
+		= f.label :bigBagDnd, 'Azucar, Big Bag Kgs.:'
+		.input
+			= f.text_field :bigBagDnd
+	.clearfix
+		= f.label :bigBagClientes, 'Azucar, Big Bag de Clientes Kgs.:'
+		.input
+			= f.text_field :bigBagClientes
+	.actions
+		= f.submit boton, :class => "btn large primary"
+		= link_to 'Cancelar', ver_turno_dia_path(@produccion.turnoDia.dia.fecha, @produccion.turnoDia.turno.nombre), :class => "btn large error"

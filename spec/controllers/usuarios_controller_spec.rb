@@ -45,13 +45,13 @@ describe UsuariosController do
 			
 			it "deberia tener el titulo correcto" do
 				get :index
-				response.should have_selector("title", :content => "Listado de Usuarios")
+				response.should have_selector("title", :content => "Usuarios")
 			end
 			
 			it "deberia tener un elemento por cada usuario" do
 				get :index
 				@usuarios[0..2].each do |usuario|
-					response.should have_selector("li", :content => usuario.nombre)
+					response.should have_selector("td", :content => usuario.nombre)
 				end
 			end
 
@@ -64,11 +64,11 @@ describe UsuariosController do
 			it "deberia paginar usuarios" do
 				get :index
 				response.should have_selector("div.pagination")
-				response.should have_selector("span.disabled", :content => "Previous")
+				response.should have_selector("li.disabled a", :content => "Anterior")
 				response.should have_selector("a", :href => "/usuarios?page=2",
 								   :content => "2")
 			   	response.should have_selector("a", :href => "/usuarios?page=2",
-			   					   :content => "Next")
+			   					   :content => "Siguiente")
 			end
 		end
 	end
@@ -164,7 +164,7 @@ describe UsuariosController do
 		
 			it "deberia incluir el nombre del usuario" do
 				get :show, :id => @usuario
-				response.should have_selector("h1", :content => @usuario.nombre)
+				response.should have_selector("h2", :content => @usuario.nombre)
 			end
 		end
 		
@@ -420,7 +420,10 @@ describe UsuariosController do
 			end
 			
 			it "deberia permitir hacer 'update'" do
-				put :update, :id => @usuario, :usuario => {}
+				attrs = {
+					:cambiando => 2, :nombre => 'Cambiando prueba'
+				}
+				put :update, :id => @usuario, :usuario => attrs
 				response.should be_success
 			end
 		end

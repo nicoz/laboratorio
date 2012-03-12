@@ -9,6 +9,10 @@
 						= link_to "Ingresar Insumos", crear_insumo_path(@turno_dia)
 					- else
 						= link_to "Editar Insumos", crear_insumo_path(@turno_dia)
+					- if @produccion.nil?
+						= link_to "Ingresar Produccion", crear_produccion_path(@turno_dia)
+					- else
+						= link_to "Editar Produccion", crear_produccion_path(@turno_dia)
 .content
 	= render 'ver_turno'
 	= render '/layouts/footer'

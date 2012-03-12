@@ -23,9 +23,13 @@ Laboratorio::Application.routes.draw do
 		resources :turno_dia
 	end
 
-	resources :insumos, :only => [:create, :destroy, :update, :show, :index]
+	resources :insumos, :only => [:create, :destroy, :update, :show]
 	
 	match '/dia/turno/:turno/insumos/nuevo', :to => 'insumos#new', :as => :crear_insumo
+	
+	resources :produccions, :only => [:create, :destroy, :update, :show]
+	match '/dia/turno/:turno/producciones/nuevo', :to => 'produccions#new', :as => :crear_produccion
+
 
 	match '/actividad/:id',	:to => 'actividades#show', :as => :actividad
 	match '/actividades',	:to => 'actividades#index', :as => :actividades

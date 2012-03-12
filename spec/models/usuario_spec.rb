@@ -19,7 +19,8 @@ describe Usuario do
 			:email => "usuario@example.com",
 			:password => "foobar",
 			:password_confirmation => "foobar",
-			:cambiando => 1 }
+			:cambiando => 1,
+			:habilitado => true }
 	end
 	
 	describe "validaciones de clave" do
@@ -50,6 +51,13 @@ describe Usuario do
 	
 		before(:each) do
 			@usuario = Usuario.create!(@attr)
+			@usuario_no_habilitado = Usuario.create!({ 
+			:nombre => "Usuario Sin Habilitar",
+			:email => "usuario-mal@example.com",
+			:password => "foobar",
+			:password_confirmation => "foobar",
+			:cambiando => 1,
+			:habilitado => false })
 		end
 		
 		it "deberia tener un atributo para la clave encriptada" do
@@ -86,6 +94,12 @@ describe Usuario do
 			it "deberia retornar el usuario correcto cuando sean correctos el email y la clave" do
 				usuario_correcto = Usuario.autenticar(@attr[:email], @attr[:password])
 				usuario_correcto == @usuario
+			end
+			
+			it "deberia retornar nil cuando el usuario no este habilitado" do
+				usuario_sin_habilitar = Usuario.autenticar(@usuario_no_habilitado[:email],
+									   @usuario_no_habilitado[:password])
+				usuario_sin_habilitar == @usuario_no_habilitado
 			end
 		end
 	end

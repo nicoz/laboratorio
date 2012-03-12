@@ -1,0 +1,16 @@
+.pagination{:style => "margin-bottom:5px;"}
+	= will_paginate(turnos, :renderer => PaginationListLinkRenderer)
+
+%table#table-turnos.zebra-striped
+	%thead
+		%tr
+			%th.green.header Nombre
+			%th.blue.header Orden
+			%th.yellow.header Habilitado
+			%th Acciones
+	%tbody
+		- @turnos.each do |turno|
+			%tr.odd
+				= render 'turno', :turno => turno
+%nav.pagination
+	= will_paginate(turnos, :renderer => PaginationListLinkRenderer)

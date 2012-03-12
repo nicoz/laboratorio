@@ -14,7 +14,7 @@ class InsumosController < ApplicationController
 	def show
 		@insumo = Insumo.find(params[:id])
 		@title = "#{@insumo.turno_dia.turno.nombre} #{l @insumo.turno_dia.dia.fecha}"
-		add_breadcrumb 'Insimos', turnos_path
+		add_breadcrumb 'Insumos', turnos_path
 		add_breadcrumb @insumo.turno_dia.turno.nombre, @insumo
 	end
 	

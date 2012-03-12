@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120215163518) do
+ActiveRecord::Schema.define(:version => 20120307194300) do
 
   create_table "actividads", :force => true do |t|
     t.string   "controlador"
@@ -44,6 +44,21 @@ ActiveRecord::Schema.define(:version => 20120215163518) do
     t.integer  "aserrin"
     t.integer  "updated_by"
     t.integer  "created_by"
+  end
+
+  create_table "produccions", :force => true do |t|
+    t.decimal  "paquetesPapel"
+    t.decimal  "paquetesPolietileno"
+    t.decimal  "melaza"
+    t.decimal  "rubio"
+    t.decimal  "industriaBolsas"
+    t.decimal  "bolsasAzucarlito"
+    t.decimal  "bigBagAzucarlito"
+    t.decimal  "bigBagDnd"
+    t.decimal  "bigBagClientes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "turnoDia_id"
   end
 
   create_table "turno_dia", :force => true do |t|

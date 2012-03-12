@@ -1,0 +1,29 @@
+.row
+	.span6.offset1
+		%h2= @turno.nombre
+.row
+	.span6.offset2
+	
+		%strong
+			Nombre 
+		=@turno.nombre
+		%br
+		%strong
+			Orden
+		=@turno.orden
+		%strong
+			Habilitado
+		=@turno.habilitado
+		%br
+		%strong
+			Ver
+		= link_to turno_path(@turno), @turno
+		%br
+			%strong
+				Editar
+			= link_to edit_turno_path(@turno), edit_turno_path(@turno)
+%br
+.row
+	.span6.offset2
+		= link_to "Escritorio", escritorio_path, :class => "btn error"
+
