@@ -424,7 +424,7 @@ describe UsuariosController do
 					:cambiando => 2, :nombre => 'Cambiando prueba'
 				}
 				put :update, :id => @usuario, :usuario => attrs
-				response.should be_success
+				response.should be_redirect
 			end
 		end
 		

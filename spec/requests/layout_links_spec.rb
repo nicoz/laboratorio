@@ -15,17 +15,9 @@ describe "LayoutLinks" do
 	
 	
 	describe "cuando no haya ingresado" do
-		it "deberia tener un link para ingresar" do
-			visit root_path
-			response.should have_selector("a", :href => ingresar_path,
-							   :content => "Ingresar")
-		end
-
-		it "deberia tener un link para ir al inicio" do
-			visit root_path
-			response.should have_selector("a", :href => root_path,
-							:content => "Inicio"
-			)
+		it "deberia tener un formulario de ingreso" do
+			visit '/'
+			response.should have_selector("form", :action => '/sessions')
 		end
 	end
 	
@@ -33,16 +25,15 @@ describe "LayoutLinks" do
 		
 		before(:each) do
 			@usuario = Factory(:usuario)
-			visit ingresar_path
+			visit '/'
 			fill_in :email,		:with => @usuario.email
 			fill_in :password,	:with => @usuario.password
-			click_button
+			click_button 'Ingresar'
 		end
 		
 		it "deberia tener un link para salir del sistema" do
 			visit root_path
-			response.should have_selector("a", :href => salir_path,
-							   :content => "Salir")
+			response.should have_selector("button", :content => 'Salir')
 		end
 
 		it "deberia tener un link para ir al escritorio de trabajo" do
@@ -79,14 +70,14 @@ describe "LayoutLinks" do
 
 			it "deberia tener un link para crear usuarios en su escritorio de trabajo" do
 				visit escritorio_path
-				response.should have_selector("a.boton", :href => crearusuario_path,
+				response.should have_selector("a", :href => crearusuario_path,
 								:content => "Crear Usuario"
 				)
 			end
 
 			it "deberia tener un link para trabajar con usuarios en su escritorio de trabajo" do
 				visit escritorio_path
-				response.should have_selector("a.boton", :href => usuarios_path,
+				response.should have_selector("a", :href => usuarios_path,
 								:content => "Trabajar con Usuarios"
 				)
 			end
@@ -99,7 +90,7 @@ describe "LayoutLinks" do
 
 			it "Deberia tener un link para crear usuarios en la vista index de usuarios" do
 				visit usuarios_path
-				response.should have_selector("a.boton", :href => crearusuario_path,
+				response.should have_selector("a", :href => crearusuario_path,
 								:content => "Crear Usuario"
 				)
 			end

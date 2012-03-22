@@ -6,10 +6,10 @@ describe "Usuarios" do
 
 	before(:each) do
 			@usuario = Factory(:usuario, :admin => true)
-			visit ingresar_path
+			visit '/'
 			fill_in :email,		:with => @usuario.email
 			fill_in :password,	:with => @usuario.password
-			click_button
+			click_button 'Ingresar'
 	end
 	
     describe "fallar" do
@@ -21,9 +21,8 @@ describe "Usuarios" do
 		fill_in "Email",        :with => ""
 		fill_in "Clave",     :with => ""
 		fill_in "Confirmacion", :with => ""
-		click_button
+		click_button 'Crear'
 		response.should render_template('usuarios/new')
-		response.should have_selector("div#explicacion_errores")
 	end.should_not change(Usuario, :count)
       end
     end
@@ -33,14 +32,14 @@ describe "Usuarios" do
       it "deberia crear un nuevo usuario" do
         lambda do
           visit crearusuario_path
-          fill_in "Nombre",         :with => "Example User"
-          fill_in "Email",        :with => "user@example.com"
+          fill_in "Nombre",         :with => "Testing User"
+          fill_in "Email",        :with => "user@test.com"
           fill_in "Clave",     :with => "foobar"
           fill_in "Confirmacion", :with => "foobar"
-          click_button
-          response.should have_selector("div.flash.success",
-                                        :content => "Usuario")
+          click_button 'Crear'
+          response.should have_selector("strong", :content => "Usuario correctamente creado")
           response.should render_template('usuarios/show')
+
         end.should change(Usuario, :count).by(1)
       end
     end
@@ -51,11 +50,11 @@ describe "Usuarios" do
   	describe "fallar" do
   	
   		it "no deberia ingresar el usuario" do
-  			visit ingresar_path
+  			visit '/'
   			fill_in :email,		:with => ""
 			fill_in :password,	:with => ""
 			click_button
-			response.should have_selector("div.flash.error", :content => "invalida")
+			response.should have_selector("strong", :content => "invalida")
   		end
   	end
   	
@@ -63,12 +62,12 @@ describe "Usuarios" do
   	
   		it "deberia ingresar un usuario y luego salir correctamente" do
   			usuario = Factory(:usuario)
-  			visit ingresar_path
+  			visit '/'
   			fill_in :email,		:with => usuario.email
 			fill_in :password,	:with => usuario.password
 			click_button
 			controller.should be_ingresado
-			click_link "Salir"
+			click_button "Salir"
 			controller.should_not be_ingresado
   		end
   	end

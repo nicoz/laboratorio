@@ -1,5 +1,5 @@
 require 'spec_helper'
 
 describe Dia do
-  pending "add some examples to (or delete) #{__FILE__}"
+  pending "Recordar que el dia se genera casi de forma automatica. Verificar que no duplique"
 end

@@ -70,3 +70,7 @@ label {
 	width: 230px;
 	text-align: right;
 }
+
+.invicible {
+	display:none;
+}

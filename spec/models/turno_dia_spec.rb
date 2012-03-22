@@ -1,5 +1,5 @@
 require 'spec_helper'
 
 describe TurnoDia do
-  pending "add some examples to (or delete) #{__FILE__}"
+  pending "Se geran de forma semi automatica, hacer verificacion de cambios de estado segun datos internos"
 end

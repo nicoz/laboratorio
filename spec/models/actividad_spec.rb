@@ -1,5 +1,5 @@
 require 'spec_helper'
 
 describe Actividad do
-  pending "add some examples to (or delete) #{__FILE__}"
+  pending "Verificar generacion de actividades en funcion de ingreso de otros datos"
 end

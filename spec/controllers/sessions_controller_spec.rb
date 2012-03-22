@@ -55,7 +55,7 @@ describe SessionsController do
 			
 			it "deberia redirijir a el escritorio de trabajo" do
 				post :create, :session => @attr
-				response.should redirect_to(escritorio_path(@usuario))
+				response.should redirect_to(escritorio_path)
 			end
 		end
 	end
