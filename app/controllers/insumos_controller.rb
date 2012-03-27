@@ -19,32 +19,73 @@ class InsumosController < ApplicationController
 	end
 	
 	def new
-		turno = TurnoDia.find(params[:turno])
-		add_breadcrumb "#{turno.turno.nombre} #{l turno.dia.fecha}", ver_turno_dia_path(turno.dia.fecha, turno.turno.nombre)
+		fecha = Date.parse(params[:fecha])
+		@dia = Dia.find_by_fecha(fecha)
+		if @dia.nil?
+			@dia = Dia.new(:fecha => fecha)
+		end
 		
+		add_breadcrumb "#{l @dia.fecha}", ver_dia_path(@dia.fecha, @dia.fecha)
 		
-		@insumo = Insumo.find_by_turnoDia_id(turno)
-		if @insumo.nil?
-			add_breadcrumb 'Crear Insumo', insumos_path
-			@insumo = Insumo.new
-			@insumo.turnoDia = turno
-			@title = "Crear Insumo"
+		turnos = Turno.find(:all, :conditions => ["habilitado =?", true])
+		
+		#creo los turnos para el dia
+		if @dia.turnos.empty?
+			turnos.each do |turno|
+				td = TurnoDia.new
+				td.turno = turno
+				td.dia = @dia
+				#creo un insumo para cada turno
+				insumo = Insumo.new
+				insumo.crudoProcesado = 0
+				insumo.turnoDia = td
+				td.insumo = insumo
+				@dia.turnos << td
+			end
+			@title = "Crear Insumos"
 		else
-			add_breadcrumb 'Editar Insumo', insumos_path
-			@title = "Editar Insumo"
+			add_breadcrumb 'Editar Insumos', insumos_path
+			@title = "Editar Insumos"
 			render 'edit'
 		end
 	end
 	
 	def create
-		@insumo = Insumo.new(params[:insumo])
-		turno = TurnoDia.find(params[:insumo][:turnoDia_id])
-		@insumo.turnoDia = turno
-		if @insumo.save
-			flash[:success] = "Insumo correctamente creado"
-			redirect_to ver_turno_dia_path(turno.dia.fecha, turno.turno.nombre)
+		@title = 'Crear Insumos'
+		@dia = Dia.find_or_create_by_fecha(params[:dia][:fecha])
+		turnos = Turno.find(:all, :conditions => ["habilitado =?", true])
+		turnos.each do |turno|
+			turnoDia = TurnoDia.find_or_create_by_dia_id_and_turno_id(@dia, turno.id)
+			turnoDia.turno = turno
+			insumo = Insumo.find_or_create_by_turnoDia_id(turnoDia.id)
+			insumo.crudoProcesado = params[:turno][turno.id.to_s]
+			
+			turnoDia.insumo = insumo
+			@dia.turnos << turnoDia
+		end
+		
+		validado = true
+		@dia.turnos.each do |turno|
+			if !turno.save and validado
+				flash[:error] = "Error al procesar el turno #{turno.turno.nombre}"
+				validado = false
+			end
+			
+			if !turno.insumo.save and validado
+				flash[:error] = "Error al procesar el insumo del turno #{turno.turno.nombre}"
+				validado = false
+			end
+		end
+		
+		if !@dia.save and validado
+			flash[:error] = "Error al procesar el dia #{l @dia.fecha}"
+			validado = false
+		end
+		
+		if validado
+			flash[:success] = "Insumos del dia #{l @dia.fecha} correctamente guardados"
+			redirect_to escritorio_path
 		else
-			@title = "Crear Insumo"
 			render 'new'
 		end
 	end
@@ -73,12 +114,29 @@ class InsumosController < ApplicationController
 		#se destruyen?
 	end
 	
+	def validar
+		insumo = Insumo.find(params[:insumo]) unless params[:insumo] == '0'
+		insumo = Insumo.new if insumo.nil?
+		
+		insumo.crudoProcesado = params[:crudoProcesado]
+		insumo.turnoDia_id = params[:turno]
+		if insumo.valid?
+			mensaje = "OK"
+		else
+			mensaje = insumo.errors[:crudoProcesado]
+		end
+		
+		render :json => {:mensaje => mensaje}
+	end
+	
 	private
 		def validar_turno_dia
-			turno = TurnoDia.find(params[:turno])
-			if turno.estado != 'Abierto'
-				flash[:error] = 'No se pueden crear/editar datos de los insumos si el turno no esta Abierto.'
+			dia = Date.parse(params[:fecha])
+			
+			if dia > Time.now.to_date
+				flash[:warning] = "No se puede editar informacion de dias futuros."
 				redirect_to escritorio_path
 			end
+			return true
 		end
 end

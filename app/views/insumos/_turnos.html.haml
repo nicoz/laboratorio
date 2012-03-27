@@ -1,0 +1,11 @@
+.span6
+	%h3= turno.turno.nombre
+	.row
+		.clearfix.span3
+			%label.span3{ :for => "[turno][#{turno.turno.id}]"} 
+				Crudo Procesado kg
+		.input.span3
+			%input.span2{ :type => "text", :value => "#{turno.insumo.crudoProcesado}", :name => "[turno][#{turno.turno.id}]"} 
+			%input{:type => "hidden", :value => "#{turno.id}", :name => "[turnoDia][#{turno.id}]"}
+			%input{:type => "hidden", :value => "#{turno.insumo.id}", :name => "[insumo][#{turno.insumo.id}]"}
+

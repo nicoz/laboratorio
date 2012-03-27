@@ -2,11 +2,7 @@
 	.row.span18
 		%h1 Turnos del dia
 		%ul#turnos.nav
-			- @turnos_dia.each do |turno|
-				%li
-					- tipo = 'btn success' if turno.estado == 'Cerrado'
-					- tipo = 'btn error' if turno.estado == 'Anulado'
-					- tipo = 'btn primary' if turno.estado == 'Abierto'
-					- tipo = 'btn' if turno.id.nil?
-					= link_to turno.turno.nombre, ver_turno_dia_path(turno.dia.fecha, turno.turno.nombre), :class => "#{tipo} large"
+			%li
+				- tipo = 'btn'
+				= link_to "Insumos Por turno", crear_insumo_path(@dia.fecha), :class => "#{tipo} large"
 	= render '/layouts/footer'

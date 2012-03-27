@@ -1,5 +1,5 @@
 class Dia < ActiveRecord::Base
-	attr_accessible :fecha, :activo
+	attr_accessible :fecha, :activo, :turnos_attributes
 	after_initialize :default_values
 	before_destroy :dia_con_turnos?
 	
@@ -8,6 +8,9 @@ class Dia < ActiveRecord::Base
 	validates :fecha, :presence => true,
 			  :uniqueness => true
 			  
+			  
+	accepts_nested_attributes_for :turnos
+	
 	private
 		def default_values
 			self.activo ||= true

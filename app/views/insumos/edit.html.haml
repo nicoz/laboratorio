@@ -1,6 +1,6 @@
 .content
 	.row
-		.span16
-			= form_for @insumo, :validate => true do |f|
-				= render 'fields', :f => f, :boton => "Actualizar"
+		.span18
+			%form{ :action => insumos_path(@dia), :method => 'POST'}
+				= render 'fields'
 	= render '/layouts/footer'

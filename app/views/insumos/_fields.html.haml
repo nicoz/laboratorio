@@ -1,36 +1,10 @@
-%h1
-	= "#{@insumo.turnoDia.turno.nombre} #{l @insumo.turnoDia.dia.fecha}"
 %fieldset
 	%legend=@title
-	=f.hidden_field :turnoDia_id, :value => @insumo.turnoDia_id
-	.clearfix
-		= f.label :aserrin, 'Asserin Kgs.:'
-		.input
-			= f.text_field :aserrin
-	.clearfix
-		= f.label :chip, 'Chip Kgs.:'
-		.input
-			= f.text_field :chip
-	.clearfix
-		= f.label :crudoProcesado, 'Crudo Procesado Kgs.:'
-		.input
-			= f.text_field :crudoProcesado
-	.clearfix
-		= f.label :leniaCaldera, 'Leña Caldera Kgs.:'
-		.input
-			= f.text_field :leniaCaldera
-	.clearfix
-		= f.label :carbonActivado, 'Carbon Activado Kgs.:'
-		.input
-			= f.text_field :carbonActivado
-	.clearfix
-		= f.label :auxiliarDeFiltracion, "Auxiliar de Fitracion Kgs.:"
-		.input
-			= f.text_field :auxiliarDeFiltracion
-	.clearfix
-		= f.label :piedra_de_cal, 'Piedra de Cal Kgs.:'
-		.input
-			= f.text_field :piedra_de_cal
-	.actions
-		= f.submit boton, :class => "btn large primary"
-		= link_to 'Cancelar', ver_turno_dia_path(@insumo.turnoDia.dia.fecha, @insumo.turnoDia.turno.nombre), :class => "btn large error"
+	.row
+		%input{ :type => "hidden", :value => "#{@dia.fecha}", :name => "[dia][fecha]"}
+		%input{ :type => "hidden", :value => "#{form_authenticity_token}", :name => "authenticity_token"}
+		-@dia.turnos.each do |turno|
+			=render 'turnos', :turno => turno
+.actions
+	%input{ :type => 'submit', :class => "btn large primary", :value => 'Confirmar'}
+	= link_to 'Cancelar', escritorio_path(), :class => "btn large error"
