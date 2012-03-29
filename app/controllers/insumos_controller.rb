@@ -37,13 +37,20 @@ class InsumosController < ApplicationController
 				td.dia = @dia
 				#creo un insumo para cada turno
 				insumo = Insumo.new
-				insumo.crudoProcesado = 0
 				insumo.turnoDia = td
 				td.insumo = insumo
 				@dia.turnos << td
 			end
 			@title = "Crear Insumos"
+			add_breadcrumb 'Crear Insumos', insumos_path
 		else
+			@dia.turnos.each do |turno|
+				if turno.insumo.nil?
+					insumo = Insumo.new
+					insumo.turnoDia = turno
+					turno.insumo = insumo
+				end
+			end
 			add_breadcrumb 'Editar Insumos', insumos_path
 			@title = "Editar Insumos"
 			render 'edit'

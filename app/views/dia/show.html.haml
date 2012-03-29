@@ -5,4 +5,7 @@
 			%li
 				- tipo = 'btn'
 				= link_to "Insumos Por turno", crear_insumo_path(@dia.fecha), :class => "#{tipo} large"
+			%li
+				= link_to "Produccion Por turno", crear_produccion_path(@dia.fecha), :class => "#{tipo} large"
+				
 	= render '/layouts/footer'

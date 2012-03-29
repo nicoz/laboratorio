@@ -2,12 +2,14 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $ ->
-	if $('input[name*="[insumo]"]').length > 0
+	if $('input[name*="[produccion]"]').length > 0
+
 		$('input[name*="[turno]"]').blur ->
 			campo = $(this)
 			valor = campo.val()
-			turno = campo.siblings('input[name*="[turnoDia]"]').val()
-			insumo = campo.siblings('input[name*="[insumo]"]').val()
+			nombre = campo.attr("data-name")
+			turno = campo.parents('.span6').find('input[name*="[turnoDia]"]').val()
+			insumo = campo.parents('.span6').find('input[name*="[produccion]"]').val()
 
 			if turno == ''
 				turno = 0
@@ -17,7 +19,7 @@ $ ->
 			
 			
 			$.ajax
-				url: "validar?crudoProcesado=#{valor}&turno=#{turno}&insumo=#{insumo}"
+				url: "validar?valor=#{valor}&nombre=#{nombre}&turno=#{turno}&produccion=#{insumo}"
 				success: (data) ->
 					if data.mensaje != "OK"
 						campo.removeClass("success")

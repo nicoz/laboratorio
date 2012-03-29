@@ -1,0 +1,60 @@
+.span6
+	%h3= turno.turno.nombre
+	%input{:type => "hidden", :value => "#{turno.id}", :name => "[turnoDia][#{turno.id}]"}
+	%input{:type => "hidden", :value => "#{turno.produccion.id}", :name => "[produccion][#{turno.produccion.id}]"}
+
+	.row
+		.clearfix.span3
+			%label.span3{ :for => "[turno][#{turno.turno.id}][paquetesPapel]"} 
+				Paquetes de Papel kg
+		.input.span3
+			%input.span2{ :type => "text", :value => "#{turno.produccion.paquetesPapel}", :name => "[turno][#{turno.turno.id}][paquetesPapel]", "data-name" => 'paquetesPapel'}
+	.row
+		.clearfix.span3
+			%label.span3{ :for => "[turno][#{turno.turno.id}][paquetesPolietileno]"} 
+				Azucar, Paquetes de Polietileno kg
+		.input.span3
+			%input.span2{ :type => "text", :value => "#{turno.produccion.paquetesPolietileno}", :name => "[turno][#{turno.turno.id}][paquetesPolietileno]", "data-name" => 'paquetesPolietileno'}
+	.row
+		.clearfix.span3
+			%label.span3{ :for => "[turno][#{turno.turno.id}][melaza]"} 
+				Melaza kg
+		.input.span3
+			%input.span2{ :type => "text", :value => "#{turno.produccion.melaza}", :name => "[turno][#{turno.turno.id}][melaza]", "data-name" => 'melaza'}
+	.row
+		.clearfix.span3
+			%label.span3{ :for => "[turno][#{turno.turno.id}][rubio]"} 
+				Azucar Rubio kg
+		.input.span3
+			%input.span2{ :type => "text", :value => "#{turno.produccion.rubio}", :name => "[turno][#{turno.turno.id}][rubio]", "data-name" => 'rubio'}
+	.row
+		.clearfix.span3
+			%label.span3{ :for => "[turno][#{turno.turno.id}][industriaBolsas]"} 
+				Azucar, Industria Bolsas kg
+		.input.span3
+			%input.span2{ :type => "text", :value => "#{turno.produccion.industriaBolsas}", :name => "[turno][#{turno.turno.id}][industriaBolsas]", "data-name" => 'industriaBolsas'}
+	.row
+		.clearfix.span3
+			%label.span3{ :for => "[turno][#{turno.turno.id}][bolsasAzucarlito]"} 
+				Azucar, Bolsas de Azucarlito kg
+		.input.span3
+			%input.span2{ :type => "text", :value => "#{turno.produccion.bolsasAzucarlito}", :name => "[turno][#{turno.turno.id}][bolsasAzucarlito]", "data-name" => 'bolsasAzucarlito'}
+	.row
+		.clearfix.span3
+			%label.span3{ :for => "[turno][#{turno.turno.id}][bigBagAzucarlito]"} 
+				Azucar, Big Bag Azucarlito kg
+		.input.span3
+			%input.span2{ :type => "text", :value => "#{turno.produccion.bigBagAzucarlito}", :name => "[turno][#{turno.turno.id}][bigBagAzucarlito]", "data-name" => 'bigBagAzucarlito'}
+	.row
+		.clearfix.span3
+			%label.span3{ :for => "[turno][#{turno.turno.id}][bigBagDnd]"} 
+				Azucar, Big Bag Industria kg
+		.input.span3
+			%input.span2{ :type => "text", :value => "#{turno.produccion.bigBagDnd}", :name => "[turno][#{turno.turno.id}][bigBagDnd]", "data-name" => 'bigBagDnd'}
+	.row
+		.clearfix.span3
+			%label.span3{ :for => "[turno][#{turno.turno.id}][bigBagClientes]"} 
+				Azucar, Big Bag Clientes kg
+		.input.span3
+			%input.span2{ :type => "text", :value => "#{turno.produccion.bigBagClientes}", :name => "[turno][#{turno.turno.id}][bigBagClientes]", "data-name" => 'bigBagClientes'}
+

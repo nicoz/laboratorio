@@ -34,13 +34,6 @@ class DiaController < ApplicationController
 			fin = (fecha.to_time + 45.days).to_date
 		
 			respuesta = []
-			
-			#turnosDias = TurnoDia.find(:all, :joins => [:turno, :dia],
-			#		:conditions => {:dia => {:fecha => dia},
-			#				:turnos => {:id => turno } })
-			#numerador = TurnoDia.count()
-			#turnosDias = TurnoDia.joins([:dia, :turno]).where("fecha >= ? and fecha <= ?", inicio, fin).order('orden')
-			#turnos = Turno.find(:all, :conditions => {:habilitado => true}, :order => 'orden')
 			inicio.upto(fin) do |dia|
 				segundos = 0
 				segundos = segundos + 1
@@ -56,7 +49,17 @@ class DiaController < ApplicationController
 						:borderColor => fondo,
 						:textColor => texto
 						}
+				segundos = segundos + 1
+				producciones = {:id => segundos, :title => 'Produccion por turno', 
+					:url => crear_produccion_path(dia),
+					:start => (dia.to_time + segundos.seconds),
+					:className => 'evento-activo',
+					:backgroundColor => fondo,
+					:borderColor => fondo,
+					:textColor => texto
+					}
 				respuesta << insumos
+				respuesta << producciones
 			end
 			
 			respond_to do |format|
