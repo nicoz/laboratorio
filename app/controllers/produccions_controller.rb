@@ -60,6 +60,7 @@ class ProduccionsController < ApplicationController
 	def create
 		@title = 'Crear Insumos'
 		@dia = Dia.find_or_create_by_fecha(params[:dia][:fecha])
+		valido = true
 		turnos = Turno.find(:all, :conditions => ["habilitado =?", true])
 		turnos.each do |turno|
 			turnoDia = TurnoDia.find_or_create_by_dia_id_and_turno_id(@dia, turno.id)
@@ -75,11 +76,17 @@ class ProduccionsController < ApplicationController
 			produccion.bigBagDnd = params[:turno][turno.id.to_s][:bigBagDnd]
 			produccion.bigBagClientes = params[:turno][turno.id.to_s][:bigBagClientes]
 			
-			turnoDia.produccion = produccion
-			@dia.turnos << turnoDia
+			if produccion.valid?
+				turnoDia.produccion = produccion
+				@dia.turnos << turnoDia
+			else
+				flash[:error] = 'Error al procesar los datos'
+				valido = false
+				break
+			end
 		end
 		
-		validado = true
+		validado = valido
 		@dia.turnos.each do |turno|
 			if !turno.save and validado
 				flash[:error] = "Error al procesar el turno #{turno.turno.nombre}"
@@ -143,15 +150,4 @@ class ProduccionsController < ApplicationController
 		
 		render :json => {:mensaje => mensaje}
 	end
-	
-	private
-		def validar_turno_dia
-			dia = Date.parse(params[:fecha])
-			
-			if dia > Time.now.to_date
-				flash[:warning] = "No se puede editar informacion de dias futuros."
-				redirect_to escritorio_path
-			end
-			return true
-		end
 end

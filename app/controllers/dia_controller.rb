@@ -41,6 +41,15 @@ class DiaController < ApplicationController
 				fondo = '#330099' if dia == Time.now.to_date
 				fondo = '#B80000' if dia > Time.now.to_date
 				texto = 'white' 
+				insumosDiarios = {:id => segundos, :title => 'Insumos Diarios', 
+						:url => crear_insumo_diario_path(dia),
+						:start => (dia.to_time + segundos.seconds),
+						:className => 'evento-activo',
+						:backgroundColor => fondo,
+						:borderColor => fondo,
+						:textColor => texto
+						}
+				segundos = segundos + 1
 				insumos = {:id => segundos, :title => 'Insumos por turno', 
 						:url => crear_insumo_path(dia),
 						:start => (dia.to_time + segundos.seconds),
@@ -58,6 +67,7 @@ class DiaController < ApplicationController
 					:borderColor => fondo,
 					:textColor => texto
 					}
+				respuesta << insumosDiarios
 				respuesta << insumos
 				respuesta << producciones
 			end

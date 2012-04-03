@@ -136,14 +136,4 @@ class InsumosController < ApplicationController
 		render :json => {:mensaje => mensaje}
 	end
 	
-	private
-		def validar_turno_dia
-			dia = Date.parse(params[:fecha])
-			
-			if dia > Time.now.to_date
-				flash[:warning] = "No se puede editar informacion de dias futuros."
-				redirect_to escritorio_path
-			end
-			return true
-		end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120322202453) do
+ActiveRecord::Schema.define(:version => 20120330201701) do
 
   create_table "actividads", :force => true do |t|
     t.string   "controlador"
@@ -29,6 +29,20 @@ ActiveRecord::Schema.define(:version => 20120322202453) do
     t.datetime "updated_at"
     t.integer  "updated_by"
     t.integer  "created_by"
+  end
+
+  create_table "insumo_diarios", :force => true do |t|
+    t.integer  "aserrin"
+    t.integer  "chip"
+    t.integer  "gasoil"
+    t.integer  "lenia_caldera"
+    t.integer  "carbon_activado"
+    t.integer  "auxiliar_filtracion"
+    t.integer  "acido_clorhidrico"
+    t.integer  "cal_viva"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "dia_id"
   end
 
   create_table "insumos", :force => true do |t|

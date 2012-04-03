@@ -1,6 +1,6 @@
 .content
 	.row
 		.span18
-			%form{ :action => produccions_path(@dia), :method => 'POST'}
+			%form{ :id => 'form-produccion',:action => produccions_path(@dia), :method => 'POST'}
 				= render 'fields'
 	= render '/layouts/footer'

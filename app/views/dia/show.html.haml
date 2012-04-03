@@ -2,8 +2,10 @@
 	.row.span18
 		%h1 Turnos del dia
 		%ul#turnos.nav
+			- tipo = 'btn'
 			%li
-				- tipo = 'btn'
+				= link_to "Insumos Diarios", crear_insumo_diario_path(@dia.fecha), :class => "#{tipo} large"
+			%li
 				= link_to "Insumos Por turno", crear_insumo_path(@dia.fecha), :class => "#{tipo} large"
 			%li
 				= link_to "Produccion Por turno", crear_produccion_path(@dia.fecha), :class => "#{tipo} large"

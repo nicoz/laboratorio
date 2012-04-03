@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
 	end
 	
 	def filtrar_actividades(controlador, accion)
-		if ['show', 'index'].include?(accion) or ['paginas'].include?(controlador)
+		if ['show', 'index', 'validar'].include?(accion) or ['paginas'].include?(controlador)
 			return false
 		else
 			return true
@@ -59,5 +59,14 @@ class ApplicationController < ActionController::Base
 		#en la variable de Clase cu. Esto sirve para actualizar los campos
 		#updated_by y created_by de forma automatica para cualquier modelo del sistema.
 		ActiveRecord::Base.cu = usuario_actual.id if !usuario_actual.nil?
+	end
+	
+	def validar_turno_dia
+		dia = Date.parse(params[:fecha])
+		if dia > Time.now.to_date
+			flash[:warning] = "No se puede editar informacion de dias futuros."
+			redirect_to escritorio_path
+		end
+		return true
 	end
 end

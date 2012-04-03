@@ -19,11 +19,17 @@ Laboratorio::Application.routes.draw do
 	match '/dia/turno/:id/anular', :to => 'turno_dia#anular', :as => :anular_turno
 	match '/dia/turno/:id/abrir', :to => 'turno_dia#abrir', :as => :abrir_turno
 	
+	match '/dia/:fecha/insumoDiario/ver', :to => 'insumo_diarios#show', :as => :ver_insumo_diario
+	match '/dia/:fecha/insumoDiario/nuevo', :to => 'insumo_diarios#new', :as => :crear_insumo_diario
+	match '/dia/:fecha/insumoDiario/editar', :to => 'insumo_diarios#edit', :as => :editar_insumo_diario
+	
 	resources :dia do
 		resources :turno_dia
 	end
 
 	resources :insumos, :only => [:create, :destroy, :update, :show]
+	
+	resources :insumo_diarios, :only => [:create, :destroy, :update, :show]
 	
 	match '/dia/:fecha/insumos/nuevo', :to => 'insumos#new', :as => :crear_insumo
 	
