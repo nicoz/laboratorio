@@ -60,6 +60,7 @@ class InsumosController < ApplicationController
 	def create
 		@title = 'Crear Insumos'
 		@dia = Dia.find_or_create_by_fecha(params[:dia][:fecha])
+		valido = true
 		turnos = Turno.find(:all, :conditions => ["habilitado =?", true])
 		turnos.each do |turno|
 			turnoDia = TurnoDia.find_or_create_by_dia_id_and_turno_id(@dia, turno.id)
@@ -67,11 +68,17 @@ class InsumosController < ApplicationController
 			insumo = Insumo.find_or_create_by_turnoDia_id(turnoDia.id)
 			insumo.crudoProcesado = params[:turno][turno.id.to_s]
 			
-			turnoDia.insumo = insumo
-			@dia.turnos << turnoDia
+			if insumo.valid?
+				turnoDia.insumo = insumo
+				@dia.turnos << turnoDia
+			else
+				flash[:error] = 'Error al procesar los datos'
+				valido = false
+				break
+			end
 		end
 		
-		validado = true
+		validado = valido
 		@dia.turnos.each do |turno|
 			if !turno.save and validado
 				flash[:error] = "Error al procesar el turno #{turno.turno.nombre}"
