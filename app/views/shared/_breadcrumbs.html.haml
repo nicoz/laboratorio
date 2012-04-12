@@ -1,13 +1,14 @@
-%ul.breadcrumb
-	- if @breadcrumbs.nil?
-		%li
-			&nbsp;
-	-else
-		- @breadcrumbs[0..-1].each do |txt, path|
-			-if @breadcrumbs[-1][0] == txt
-				%li.active 
-					= txt
-			-else
-				%li
-					= link_to txt, path
-					%span.divider /
+-if ingresado?
+	%ul.breadcrumb
+		- if @breadcrumbs.nil?
+			%li
+				&nbsp;
+		-else
+			- @breadcrumbs[0..-1].each do |txt, path|
+				-if @breadcrumbs[-1][0] == txt
+					%li.active 
+						= txt
+				-else
+					%li
+						= link_to txt, path
+						%span.divider /

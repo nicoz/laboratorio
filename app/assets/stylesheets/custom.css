@@ -1,21 +1,17 @@
 body {
-	padding-top: 80px;
+	padding-top: 60px;
+	padding-bottom: 40px;
 }
 
+#ingresar {
+	margin-top:-7px !important;
+}
 
-.intuitive-navigation {
-	position:fixed;
-	width:100%;
-	z-index:200;
-	left:0;
-	top:40px;
-	height: 30px;
-	background-color: #eee;
-	margin-bottom: 10px;
+.primero {
+	padding-top:10px !important;
 }
 
 .breadcrumb {
-	width: 100%;
 	padding-left: 20px;
 }
 
@@ -25,21 +21,11 @@ body {
 }
 
 form {
-	margin-bottom:0;
+	margin-bottom:0 !important;
 }
 
 label {
 	margin-right:4px;
-}
-
-.actions {
-	margin-bottom:0;
-	padding-bottom: 5px;
-}
-
-fieldset {
-	margin-bottom: 0px;
-	padding-top:5px;
 }
 
 .abierto {
@@ -66,10 +52,6 @@ fieldset {
 	margin-right: 10px;
 }
 
-label {
-	width: 230px;
-	text-align: right;
-}
 
 .invicible {
 	display:none;

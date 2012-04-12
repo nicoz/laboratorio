@@ -1,26 +1,22 @@
 - unless flash.nil?
 	- if flash[:notice] and flash[:error].nil?
-		.alert-message.info{ 'data-alert' => 'alert'}
-			%a.close{ :href => '#'} x
-			%p
-				%strong= flash[:notice]
+		.alert{ 'data-alert' => 'alert'}
+			%a.close{ :href => '#', "data-dismiss" => "alert"} x
+			%strong= flash[:notice]
 	- if flash[:error]
-		.alert-message.error{ 'data-alert' => 'alert'}
-			%a.close{ :href => '#'} x
-			%p
-				%strong
-					= flash[:error]
+		.alert.alert-error{ 'data-alert' => 'alert'}
+			%a.close{ :href => '#', "data-dismiss" => "alert"} x
+			%strong
+				= flash[:error]
 	- if flash[:success] and flash[:error].nil?
-		.alert-message.success{ 'data-alert' => 'alert'}
-			%a.close{ :href => '#'} x
-			%p
-				%strong
-					= flash[:success]
+		.alert.alert-success{ 'data-alert' => 'alert'}
+			%a.close{ :href => '#', "data-dismiss" => "alert"} x
+			%strong
+				= flash[:success]
 	- if flash[:warning] and flash[:error].nil?
-		.alert-message.warning{ 'data-alert' => 'alert'}
-			%a.close{ :href => '#'} x
-			%p
-				%strong
-					= flash[:warning]
+		.alert.alert-warning{ 'data-alert' => 'alert'}
+			%a.close{ :href => '#',"data-dismiss" => "alert"} x
+			%strong
+				= flash[:warning]
 
 

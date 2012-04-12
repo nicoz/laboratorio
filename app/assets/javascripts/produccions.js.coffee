@@ -34,8 +34,8 @@ habilitar = ->
 validar = (campo, sincro) ->
 	valor = campo.val()
 	nombre = campo.attr("data-name")
-	turno = campo.parents('.span6').find('input[name*="[turnoDia]"]').val()
-	produccion = campo.parents('.span6').find('input[name*="[produccion]"]').val()
+	turno = campo.parents('.span4').find('input[name*="[turnoDia]"]').val()
+	produccion = campo.parents('.span4').find('input[name*="[produccion]"]').val()
 
 	if turno == ''
 		turno = 0
@@ -52,7 +52,7 @@ validar = (campo, sincro) ->
 				campo.parent().parent().find('.help-inline').remove()
 				campo.parent().addClass("field_with_errors")
 				campo.addClass("error")
-				campo.parent().parent().append("<span class='help-inline offset3 span3 mensajes'>#{data.mensaje}</span>")
+				campo.parent().parent().append("<span class='help-inline pull-right mensajes'>#{data.mensaje}</span>")
 			else
 				campo.addClass("success")
 				campo.removeClass("error")

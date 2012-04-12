@@ -1,9 +1,9 @@
-= form_for @search do |f|
+= form_for @search, :html => {:class => 'form-horizontal'} do |f|
 	%fieldset
 		%legend Filtros
-		.clearfix
-			= f.label :nombre_contains, "Nombre: "
+		.control-group
+			= f.label :nombre_contains, "Nombre: ", :class => 'control-label'
 			= f.text_field :nombre_contains, :class => "xlarge"
-		.actions
-			= f.submit "Buscar", :class => "btn large success"
+		.form-actions
+			= f.submit "Buscar", :class => "btn btn-large btn-success"
 

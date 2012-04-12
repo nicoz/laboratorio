@@ -1,34 +1,34 @@
 %fieldset
 	%legend=@title
 	= f.hidden_field :dia_id, :value => @dia.id
-	.clearfix
-		= f.label :cal_viva
+	.control-group.primero
+		= f.label :cal_viva, :class => 'control-label'
 		.input
 			= f.text_field :cal_viva
-	.clearfix
-		= f.label :lenia_caldera
+	.control-group
+		= f.label :lenia_caldera, :class => 'control-label'
 		.input
 			= f.text_field :lenia_caldera
-	.clearfix
-		= f.label :auxiliar_filtracion
+	.control-group
+		= f.label :auxiliar_filtracion, :class => 'control-label'
 		.input
 			= f.text_field :auxiliar_filtracion
-	.clearfix
-		= f.label :acido_clorhidrico
+	.control-group
+		= f.label :acido_clorhidrico, :class => 'control-label'
 		.input
 			= f.text_field :acido_clorhidrico
-	.clearfix
-		= f.label :chip
+	.control-group
+		= f.label :chip, :class => 'control-label'
 		.input
 			= f.text_field :chip
-	.clearfix
-		= f.label :aserrin
+	.control-group
+		= f.label :aserrin, :class => 'control-label'
 		.input
 			= f.text_field :aserrin
-	.clearfix
-		= f.label :gasoil
+	.control-group
+		= f.label :gasoil, :class => 'control-label'
 		.input
 			= f.text_field :gasoil
-	.actions
-		= f.submit boton, :class => "btn large primary"
-		= link_to 'Cancelar', turnos_path, :class => "btn large error"
+	.form-actions
+		= f.submit boton, :class => "btn btn-large btn-primary"
+		= link_to 'Cancelar', turnos_path, :class => "btn btn-large btn-danger"

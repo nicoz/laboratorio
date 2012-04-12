@@ -23,6 +23,8 @@ Laboratorio::Application.routes.draw do
 	match '/dia/:fecha/insumoDiario/nuevo', :to => 'insumo_diarios#new', :as => :crear_insumo_diario
 	match '/dia/:fecha/insumoDiario/editar', :to => 'insumo_diarios#edit', :as => :editar_insumo_diario
 	
+	match '/paneldecontrol', :to => 'panel_control#show', :as => :panel_control
+	
 	resources :dia do
 		resources :turno_dia
 	end

@@ -1,12 +1,13 @@
-.sidebar
-	.well
-		%h1= @title
-		%h5 Acciones
-		= link_to "Crear Turno", crearturno_path, :class => "btn large info"
-.content
-	.hero-unit
-		= render 'index-filters'
-	.row
-		.span16
-			= render 'index-content-table', :turnos => @turnos
-	=render '/layouts/footer'
+.row-fluid
+	.span2
+		.well.sidebar-nav
+			%h1= @title
+			%h5 Acciones
+			= link_to "Crear Turno", crearturno_path, :class => "btn btn-large btn-info"
+	.span9
+		.row-fluid
+			= render 'index-filters'
+		.row-fluid
+			.span10
+				= render 'index-content-table', :turnos => @turnos
+=render '/layouts/footer'

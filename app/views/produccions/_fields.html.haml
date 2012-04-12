@@ -1,11 +1,11 @@
 %fieldset
 	%legend=@title
-	.row
+	.primero
 		%input{ :type => "hidden", :value => "#{@dia.fecha}", :name => "[dia][fecha]"}
 		%input{ :type => "hidden", :value => "#{form_authenticity_token}", :name => "authenticity_token"}
 		-@dia.turnos.each do |turno|
 			=render 'turnos', :turno => turno
-.actions
-	%input{ :type => 'submit', :class => "btn large primary", :value => 'Confirmar'}
-	= link_to 'Cancelar', escritorio_path(), :class => "btn large error"
+.form-actions
+	%input{ :type => 'submit', :class => "btn btn-large btn-primary", :value => 'Confirmar'}
+	= link_to 'Cancelar', escritorio_path(), :class => "btn btn-large btn-danger"
 

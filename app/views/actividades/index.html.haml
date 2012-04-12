@@ -1,8 +1,12 @@
-.content
-	.hero-unit
+.row-fluid
+	.span1
+		&nbsp;
+	.span10
 		= render 'index-filters'
-	.row
-		.span16
-			= render 'log_actividad', :actividades => @actividades
-	=render '/layouts/footer'
+.row-fluid
+	.span1
+		&nbsp;
+	.span10
+		= render 'log_actividad', :actividades => @actividades
+=render '/layouts/footer'
 

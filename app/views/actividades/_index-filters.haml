@@ -1,15 +1,15 @@
-= form_for @search do |f|
+= form_for @search, :html => {:class => 'form-horizontal'} do |f|
 	%fieldset
 		%legend Filtros
-		.clearfix
-			= f.label :usuario_email_contains, "Email: "
-			= f.text_field :usuario_email_contains, :class => "xlarge"
-		.clearfix
-			= f.label :created_at_gte, "Fecha mayor que:"
-			= f.text_field :created_at_gte, :include_blank => true, :class => "fecha"
-		.clearfix
-			= f.label :created_at_lte, "Fecha menor que:"
-			= f.text_field :created_at_lte, :include_blank => true, :class => "fecha"
-		.actions
-			= f.submit "Buscar", :class => "btn large success"
+		.control-group
+			= f.label :usuario_email_contains, "Email: ", :class => 'control-label'
+			= f.text_field :usuario_email_contains
+		.control-group
+			= f.label :created_at_gte, "Fecha mayor que:", :class => 'control-label'
+			= f.text_field :created_at_gte, :include_blank => true, :class => 'fecha'
+		.control-group
+			= f.label :created_at_lte, "Fecha menor que:", :class => 'control-label'
+			= f.text_field :created_at_lte, :include_blank => true, :class => 'fecha'
+		.form-actions
+			= f.submit "Buscar", :class => "btn btn-large btn-success"
 

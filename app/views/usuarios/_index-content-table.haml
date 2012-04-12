@@ -1,7 +1,7 @@
 .pagination{:style => "margin-bottom:5px;"}
 	= will_paginate(usuarios, :renderer => PaginationListLinkRenderer)
 
-%table#table-usuarios.zebra-striped
+%table#table-usuarios.table.table-striped
 	%thead
 		%tr
 			%th.yellow.header Email

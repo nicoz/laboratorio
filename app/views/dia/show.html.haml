@@ -1,13 +1,16 @@
-.content
-	.row.span18
+.row-fluid
+	.span2
+		.well
+			%ul.nav.nav-list
+				%li.nav-header
+					Acciones para el dia
+				%li
+					= link_to "Insumos Diarios", crear_insumo_diario_path(@dia.fecha)
+				%li
+					= link_to "Insumos Por turno", crear_insumo_path(@dia.fecha)
+				%li
+					= link_to "Produccion Por turno", crear_produccion_path(@dia.fecha)
+	.span10
 		%h1 Turnos del dia
-		%ul#turnos.nav
-			- tipo = 'btn'
-			%li
-				= link_to "Insumos Diarios", crear_insumo_diario_path(@dia.fecha), :class => "#{tipo} large"
-			%li
-				= link_to "Insumos Por turno", crear_insumo_path(@dia.fecha), :class => "#{tipo} large"
-			%li
-				= link_to "Produccion Por turno", crear_produccion_path(@dia.fecha), :class => "#{tipo} large"
-				
-	= render '/layouts/footer'
+
+= render '/layouts/footer'

@@ -1,41 +1,39 @@
-.sidebar
-	.well
-		%h1= @title
-		%h5 Acciones
-		%ul.pills
-			%li
-				= link_to "Ir a Dia Actual", ver_dia_path(Date.today)
+.row-fluid
+	.span2
+		.well.sidebar-nav
+			%h1= @title
+			%h5 Acciones
+			%ul.nav.nav-pills.nav-stacked
+				%li
+					= link_to "Ir a Dia Actual", ver_dia_path(Date.today)
 
-.content
-	.hero-unit
-		%h2
-			Escritorio de trabajo del usuario
-	.row
-		.span17
-			%h2 Calendario de actividad
-			= render 'dias'
-		.span4
-			%table.span4
-				%thead
-					%tr
-						%th.span1
-							Color
-						%th
-							Significado
-				%tbody
-					%tr
-						%td.abierto.span1
-							&nbsp;
-						%td
-							D&iacute;a Actual
-					%tr
-						%td.cerrado.span1
-							&nbsp;
-						%td
-							D&iacute;a Anterior
-					%tr
-						%td.anulado.span1
-							&nbsp;
-						%td
-							D&iacute;a Futuro
-	=render 'layouts/footer'
+	.span10
+		.row-fluid
+			.span9
+				%h2 Calendario de actividad
+				= render 'dias'
+			.span1
+				%table.table
+					%thead
+						%tr
+							%th
+								Color
+							%th
+								Significado
+					%tbody
+						%tr
+							%td.abierto
+								&nbsp;
+							%td
+								D&iacute;a Actual
+						%tr
+							%td.cerrado
+								&nbsp;
+							%td
+								D&iacute;a Anterior
+						%tr
+							%td.anulado
+								&nbsp;
+							%td
+								D&iacute;a Futuro
+=render 'layouts/footer'

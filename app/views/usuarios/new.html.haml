@@ -1,6 +1,5 @@
-.content
-	.row
-		.span16
-			= form_for @usuario,:validate => true, :html => { :class => "customer", :id => "customer_new" } do  |f|
-				= render 'fields', :f => f, :boton => "Crear"
-	= render '/layouts/footer'
+.row-fluid
+	.span12
+		= form_for @usuario,:validate => true, :html => { :class => 'form-horizontal' } do  |f|
+			= render 'fields', :f => f, :boton => "Crear"
+= render '/layouts/footer'

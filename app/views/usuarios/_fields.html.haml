@@ -1,31 +1,31 @@
 %fieldset
 	%legend=@title
 	=f.hidden_field :cambiando, :value => 1
-	.clearfix
-		= f.label :nombre
+	.control-group.primero
+		= f.label :nombre, :class => 'control-label'
 		.input
 			= f.text_field :nombre
-	.clearfix
-		= f.label :email
+	.control-group
+		= f.label :email, :class => 'control-label'
 		.input
 			= f.text_field :email
-	.clearfix
-		= f.label :password
+	.control-group
+		= f.label :password, :class => 'control-label'
 		.input
 			= f.password_field :password
-	.clearfix
-		= f.label :password_confirmation
+	.control-group
+		= f.label :password_confirmation, :class => 'control-label'
 		.input
 			= f.password_field :password_confirmation
 	- if usuario_actual.admin? and usuario_actual != @usuario
-		.clearfix
-			=f.label :admin, "Admistrador?"
+		.control-group
+			=f.label :admin, "Admistrador?", :class => 'control-label'
 			.input
 				= f.check_box :admin
-		.clearfix
-			=f.label :habilitado, "Habilitado"
+		.control-group
+			=f.label :habilitado, "Habilitado", :class => 'control-label'
 			.input
 				= f.check_box :habilitado
-	.actions
-		= f.submit boton, :class => "btn large primary"
-		= link_to 'Cancelar', usuarios_path, :class => "btn large error"
+	.form-actions
+		= f.submit boton, :class => "btn btn-large btn-primary"
+		= link_to 'Cancelar', usuarios_path, :class => "btn btn-large btn-danger"

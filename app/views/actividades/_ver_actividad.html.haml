@@ -1,8 +1,12 @@
-.row
-	.span6.offset1
+.row-fluid
+	.span1
+		&nbsp;
+	.span6
 		%h2= @actividad.usuario_email
-.row
-	.span6.offset2
+.row-fluid
+	.span2
+		&nbsp;
+	.span6
 		%strong
 			Fecha
 		= l @actividad.created_at
@@ -20,6 +24,8 @@
 		=@actividad.parametros
 
 %br
-.row
-	.span6.offset2
+.row-fluid
+	.span2
+		&nbsp;
+	.span6
 		= link_to "Escritorio", escritorio_path, :class => "btn error"

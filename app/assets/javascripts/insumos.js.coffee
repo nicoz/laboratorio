@@ -51,7 +51,7 @@ validar = (campo, sincro) ->
 				campo.parent().parent().find('.help-inline').remove()
 				campo.parent().addClass("field_with_errors")
 				campo.addClass("error")
-				campo.parent().parent().append("<span class='help-inline offset3 span3 mensajes'>#{data.mensaje}</span>")
+				campo.parent().parent().append("<span class='help-inline pull-right mensajes'>#{data.mensaje}</span>")
 			else
 				campo.addClass("success")
 				campo.removeClass("error")
