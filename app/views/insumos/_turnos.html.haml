@@ -1,11 +1,11 @@
-.span4
+.span3.offset1
 	%h3= turno.turno.nombre
 	.row-fluid
 		.control-group
 			%label.control-label{ :for => "[turno][#{turno.turno.id}]"} 
 				Crudo Procesado kg
 			.controls
-				%input{ :type => "text", :value => "#{turno.insumo.crudoProcesado}", :name => "[turno][#{turno.turno.id}]"} 
+				%input.span2{ :type => "text", :value => "#{turno.insumo.crudoProcesado}", :name => "[turno][#{turno.turno.id}]"} 
 				%input{:type => "hidden", :value => "#{turno.id}", :name => "[turnoDia][#{turno.id}]"}
 				%input{:type => "hidden", :value => "#{turno.insumo.id}", :name => "[insumo][#{turno.insumo.id}]"}
 

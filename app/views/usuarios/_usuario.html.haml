@@ -1,7 +1,11 @@
 %td= link_to usuario.email, usuario_path(usuario)
 %td= usuario.nombre
 %td
-	= link_to 'Editar', edit_usuario_path(usuario)
+	= link_to edit_usuario_path(usuario) do
+		%i.icon.icon-pencil
+	
 	- if usuario != usuario_actual
-		= link_to "Borrar", usuario, :method => :delete, :confirm => "Seguro que desea borrarlo?", :title => "Borrar #{usuario.nombre}"
-		= link_to "Reiniciar clave", reiniciarclave_path(usuario), :confirm => "Seguro que desea reiniciar la clave?", :title => "Reiniciar clave"
+		= link_to usuario, :method => :delete, :confirm => "Seguro que desea borrarlo?", :title => "Borrar #{usuario.nombre}" do
+			%i.icon.icon-trash
+		= link_to reiniciarclave_path(usuario), :confirm => "Seguro que desea reiniciar la clave?", :title => "Reiniciar clave" do
+			%i.icon.icon-random

@@ -4,7 +4,7 @@ class EscritorioController < ApplicationController
   	@title = "Escritorio"
   	if !usuario_actual.nil?
 		if usuario_actual.admin?
-			@actividades = Actividad.order('created_at DESC').paginate(:page => params[:page], :per_page => 10)
+			@actividades = Actividad.find(:all, :order => "created_at desc", :limit => 5)
 			@ultimosUsuarios = Usuario.find(:all, :order => "created_at desc", :limit => 5)
 		end
 	

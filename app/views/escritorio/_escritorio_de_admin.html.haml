@@ -1,7 +1,7 @@
 .row-fluid
-	.span3
+	.span2
 		.well.sidebar-nav
-			%h1= @title
+			%h3= @title
 			%h5 Acciones
 			%ul.nav.nav-pills.nav-stacked
 				%li
@@ -12,12 +12,12 @@
 					= link_to "Trabajar con Turnos", turnos_path
 				%li
 					= link_to "Ver Actividad", actividades_path
-	.span9
+	.span10
 		.row-fluid
-			.span5
+			.span6
 				%h2 Ultimos usuarios
 				= render 'ultimos_usuarios', :usuarios => @ultimosUsuarios
-			.span7
+			.span5.offset1
 				%h2 Visor de actividad reciente
-				= render '/actividades/log_actividad', :actividades => @actividades
+				= render '/actividades/log_actividad_reciente', :actividades => @actividades
 =render 'layouts/footer'
