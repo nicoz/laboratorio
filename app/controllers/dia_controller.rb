@@ -67,9 +67,19 @@ class DiaController < ApplicationController
 					:borderColor => fondo,
 					:textColor => texto
 					}
+				segundos = segundos + 1
+				recepcion = {:id => segundos, :title => 'Recepcion', 
+					:url => crear_recepcion_path(dia),
+					:start => (dia.to_time + segundos.seconds),
+					:className => 'evento-activo',
+					:backgroundColor => fondo,
+					:borderColor => fondo,
+					:textColor => texto
+					}
 				respuesta << insumosDiarios
 				respuesta << insumos
 				respuesta << producciones
+				respuesta << recepcion
 			end
 			
 			respond_to do |format|

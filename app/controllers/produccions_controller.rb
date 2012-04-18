@@ -92,7 +92,7 @@ class ProduccionsController < ApplicationController
 			
 			clientes.each do |cliente|
 				cliente_produccion = ClienteProduccion.find_or_create_by_cliente_id_and_produccion_id(cliente.id, produccion.id)
-				cliente_produccion.azucar_big_bag = params[:turno][turno.id.to_s][:cliente][cliente.id.to_s]
+				cliente_produccion.azucar_big_bag = params[:turno][turno.id.to_s][:cliente][cliente.id.to_s][:azucar_big_bag]
 				if cliente_produccion.valid?
 					produccion.clientes << cliente_produccion
 				else

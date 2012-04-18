@@ -1,0 +1,5 @@
+.row-fluid
+	.span12
+		= form_for @recepcion, :validate => true, :html => { :class => "form-horizontal" } do |f|
+			= render 'fields', :f => f, :boton => "Actualizar"
+= render '/layouts/footer'

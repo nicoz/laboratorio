@@ -1,7 +1,7 @@
 .control-group
 	%input{:type => "hidden", :value => "#{cliente.cliente.id}", :name => "[cliente][#{cliente.cliente.id}]"}
 	%input{:type => "hidden", :value => "#{cliente.produccion.id}", :name => "[produccion][#{cliente.produccion.id}]"}
-	%label.control-label.span1{ :for => "[turno][#{cliente.produccion.turnoDia.turno.id}][cliente][#{cliente.id}]"} 
+	%label.control-label.span1{ :for => "[turno][#{cliente.produccion.turnoDia.turno.id}][cliente][#{cliente.cliente.id}][azucar_big_bag]"} 
 		="Azucar, Big Bag #{cliente.cliente.nombre} kg"
 	.controls
-		%input.span2{ :type => "text", :value => "#{cliente.azucar_big_bag}", :name => "[turno][#{cliente.produccion.turnoDia.turno.id}][cliente][#{cliente.cliente.id}]", "data-name" => 'azucar_big_bag'}
+		%input.span2{ :type => "text", :value => "#{cliente.azucar_big_bag}", :name => "[turno][#{cliente.produccion.turnoDia.turno.id}][cliente][#{cliente.cliente.id}][azucar_big_bag]", "data-name" => 'azucar_big_bag'}

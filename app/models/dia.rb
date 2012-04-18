@@ -6,6 +6,7 @@ class Dia < ActiveRecord::Base
 	has_many :turnos, :class_name => 'TurnoDia'
 	
 	has_one :insumoDiario
+	has_one :recepcion
 	
 	validates :fecha, :presence => true,
 			  :uniqueness => true
