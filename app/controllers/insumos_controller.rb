@@ -27,7 +27,7 @@ class InsumosController < ApplicationController
 		
 		add_breadcrumb "#{l @dia.fecha}", ver_dia_path(@dia.fecha, @dia.fecha)
 		
-		turnos = Turno.find(:all, :conditions => ["habilitado =?", true])
+		turnos = Turno.find(:all, :order => 'orden', :conditions => ["habilitado =?", true])
 		
 		#creo los turnos para el dia
 		if @dia.turnos.empty?
@@ -66,7 +66,8 @@ class InsumosController < ApplicationController
 			turnoDia = TurnoDia.find_or_create_by_dia_id_and_turno_id(@dia, turno.id)
 			turnoDia.turno = turno
 			insumo = Insumo.find_or_create_by_turnoDia_id(turnoDia.id)
-			insumo.crudoProcesado = params[:turno][turno.id.to_s]
+			insumo.crudoProcesado = params[:turno][turno.id.to_s][:crudoProcesado]
+			insumo.tiraje = params[:turno][turno.id.to_s][:tiraje]
 			
 			if insumo.valid?
 				turnoDia.insumo = insumo
@@ -132,12 +133,12 @@ class InsumosController < ApplicationController
 		insumo = Insumo.find(params[:insumo]) unless params[:insumo] == '0'
 		insumo = Insumo.new if insumo.nil?
 		
-		insumo.crudoProcesado = params[:crudoProcesado]
+		insumo[params[:nombre]] = params[:valor]
 		insumo.turnoDia_id = params[:turno]
 		if insumo.valid?
 			mensaje = "OK"
 		else
-			mensaje = insumo.errors[:crudoProcesado]
+			mensaje = insumo.errors[params[:nombre]]
 		end
 		
 		render :json => {:mensaje => mensaje}

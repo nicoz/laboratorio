@@ -1,0 +1,16 @@
+.pagination{:style => "margin-bottom:5px;"}
+	= will_paginate(clientes, :renderer => PaginationListLinkRenderer)
+
+%table#table-clientes.table.table-striped
+	%thead
+		%tr
+			%th.green.header Nombre
+			%th.blue.header Orden
+			%th.yellow.header Habilitado
+			%th Acciones
+	%tbody
+		- @clientes.each do |cliente|
+			%tr.odd
+				= render 'cliente', :cliente => cliente
+%nav.pagination
+	= will_paginate(clientes, :renderer => PaginationListLinkRenderer)

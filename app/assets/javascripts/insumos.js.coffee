@@ -13,7 +13,7 @@ $ ->
 			validar(campo, true)
 		200))
 
-		$('#form-insumos').submit (e) ->
+		$('#form-insumo').submit (e) ->
 			e.preventDefault()
 			formulario = $(this)
 			_.delay( ->
@@ -33,9 +33,10 @@ habilitar = ->
 
 validar = (campo, sincro) ->
 	valor = campo.val()
-	turno = campo.siblings('input[name*="[turnoDia]"]').val()
-	insumo = campo.siblings('input[name*="[insumo]"]').val()
-	
+	nombre = campo.attr("data-name")
+	turno = campo.parents('.span3').find('input[name*="[turnoDia]"]').val()
+	insumo = campo.parents('.span3').find('input[name*="[insumo]"]').val()
+
 	if turno == ''
 		turno = 0
 
@@ -43,7 +44,7 @@ validar = (campo, sincro) ->
 		insumo = 0
 
 	$.ajax
-		url: "validar?crudoProcesado=#{valor}&turno=#{turno}&insumo=#{insumo}"
+		url: "validar?valor=#{valor}&nombre=#{nombre}&turno=#{turno}&insumo=#{insumo}"
 		async: sincro
 		success: (data) ->
 			if data.mensaje != "OK"

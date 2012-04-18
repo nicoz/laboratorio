@@ -1,9 +1,11 @@
 class Produccion < ActiveRecord::Base
 	attr_accessible :turnoDia_id, :paquetesPapel, :paquetesPolietileno , :melaza,
 			:rubio, :industriaBolsas, :bolsasAzucarlito, :bigBagAzucarlito,
-			:bigBagDnd, :bigBagClientes
+			:bigBagDnd
 
 	belongs_to :turnoDia
+	
+	has_many :clientes, :class_name => 'ClienteProduccion' 
 	
 	def initialize(*params)
 		super(*params)
@@ -15,7 +17,6 @@ class Produccion < ActiveRecord::Base
 		self.bolsasAzucarlito = 0
 		self.bigBagAzucarlito = 0
 		self.bigBagDnd = 0
-		self.bigBagClientes = 0
 	end
 	
 	validates :turnoDia_id, :presence => true, :uniqueness => true
@@ -28,5 +29,5 @@ class Produccion < ActiveRecord::Base
 	validates :bolsasAzucarlito, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100000 }
 	validates :bigBagAzucarlito, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100000 }
 	validates :bigBagDnd, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100000 }
-	validates :bigBagClientes, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100000 }
+
 end

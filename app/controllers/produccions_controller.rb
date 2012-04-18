@@ -27,7 +27,9 @@ class ProduccionsController < ApplicationController
 		
 		add_breadcrumb "#{l @dia.fecha}", ver_dia_path(@dia.fecha, @dia.fecha)
 		
-		turnos = Turno.find(:all, :conditions => ["habilitado =?", true])
+		turnos = Turno.find(:all, :order => 'orden', :conditions => ["habilitado =?", true])
+		
+		clientes = Cliente.find(:all, :order => 'orden', :conditions => ["habilitado =?", true])
 		
 		#creo los turnos para el dia
 		if @dia.turnos.empty?
@@ -38,6 +40,12 @@ class ProduccionsController < ApplicationController
 				#creo una produccion para cada turno
 				produccion = Produccion.new
 				produccion.turnoDia = td
+				clientes.each do |cliente|
+					cliente_produccion = ClienteProduccion.new
+					cliente_produccion.produccion = produccion
+					cliente_produccion.cliente = cliente
+					produccion.clientes << cliente_produccion
+				end
 				td.produccion = produccion
 				@dia.turnos << td
 			end
@@ -48,6 +56,12 @@ class ProduccionsController < ApplicationController
 				if turno.produccion.nil?
 					produccion = Produccion.new
 					produccion.turnoDia = turno
+					clientes.each do |cliente|
+						cliente_produccion = ClienteProduccion.new
+						cliente_produccion.produccion = produccion
+						cliente_produccion.cliente = cliente
+						produccion.clientes << cliente_produccion
+					end
 					turno.produccion = produccion
 				end
 			end
@@ -58,10 +72,11 @@ class ProduccionsController < ApplicationController
 	end
 	
 	def create
-		@title = 'Crear Insumos'
+		@title = 'Crear Produccion'
 		@dia = Dia.find_or_create_by_fecha(params[:dia][:fecha])
 		valido = true
 		turnos = Turno.find(:all, :conditions => ["habilitado =?", true])
+		clientes = Cliente.find(:all, :conditions => ["habilitado =?", true])
 		turnos.each do |turno|
 			turnoDia = TurnoDia.find_or_create_by_dia_id_and_turno_id(@dia, turno.id)
 			turnoDia.turno = turno
@@ -74,9 +89,20 @@ class ProduccionsController < ApplicationController
 			produccion.bolsasAzucarlito = params[:turno][turno.id.to_s][:bolsasAzucarlito]
 			produccion.bigBagAzucarlito = params[:turno][turno.id.to_s][:bigBagAzucarlito]
 			produccion.bigBagDnd = params[:turno][turno.id.to_s][:bigBagDnd]
-			produccion.bigBagClientes = params[:turno][turno.id.to_s][:bigBagClientes]
 			
-			if produccion.valid?
+			clientes.each do |cliente|
+				cliente_produccion = ClienteProduccion.find_or_create_by_cliente_id_and_produccion_id(cliente.id, produccion.id)
+				cliente_produccion.azucar_big_bag = params[:turno][turno.id.to_s][:cliente][cliente.id.to_s]
+				if cliente_produccion.valid?
+					produccion.clientes << cliente_produccion
+				else
+					valido = false
+					flash[:error] = 'Error al procesar datos del cliente'
+					break
+				end
+			end
+			
+			if produccion.valid? and valido
 				turnoDia.produccion = produccion
 				@dia.turnos << turnoDia
 			else

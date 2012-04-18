@@ -2,5 +2,7 @@
 %td= turno.orden
 %td= turno.habilitado
 %td
-	= link_to 'Editar', edit_turno_path(turno)
-	= link_to "Borrar", turno, :method => :delete, :confirm => "Seguro que desea borrarlo?", :title => "Borrar #{turno.nombre}"
+	= link_to edit_turno_path(turno) do
+		%i.icon.icon-pencil
+	= link_to turno, :method => :delete, :confirm => "Seguro que desea borrarlo?", :title => "Borrar #{turno.nombre}" do
+		%i.icon.icon-trash

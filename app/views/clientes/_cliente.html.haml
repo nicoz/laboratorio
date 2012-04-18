@@ -1,0 +1,8 @@
+%td= link_to cliente.nombre, cliente_path(cliente)
+%td= cliente.orden
+%td= cliente.habilitado
+%td
+	= link_to edit_cliente_path(cliente) do
+		%i.icon.icon-pencil
+	= link_to cliente, :method => :delete, :confirm => "Seguro que desea borrarlo?", :title => "Borrar #{cliente.nombre}" do
+		%i.icon.icon-trash

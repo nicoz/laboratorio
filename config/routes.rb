@@ -1,5 +1,6 @@
 Laboratorio::Application.routes.draw do
 
+
 	get "escritorio/show"
 
 	get "sessions/new"
@@ -7,6 +8,7 @@ Laboratorio::Application.routes.draw do
 
 	resources :usuarios
 	resources :turnos
+	resources :clientes
 	resources :sessions, :only => [:new, :create, :destroy]
 	
 	match "dias/dias", :to => 'dia#dias', :as => :lista_dias
@@ -42,6 +44,8 @@ Laboratorio::Application.routes.draw do
 	match '/dia/:fecha/producciones/nuevo', :to => 'produccions#new', :as => :crear_produccion
 	
 	match '/dia/:fecha/producciones/validar', :to => 'produccions#validar', :as => :validar_produccion_turno
+	
+	match '/validarcliente', :to => 'cliente_produccions#validar', :as => :validar_produccion_turno
 
 
 	match '/actividad/:id',	:to => 'actividades#show', :as => :actividad
@@ -54,6 +58,8 @@ Laboratorio::Application.routes.draw do
 	match '/crearusuario',	:to => 'usuarios#new'
 	
 	match 'crearturno',	:to => 'turnos#new'
+	
+	match 'crearcliente',	:to => 'clientes#new'
 	
 	match '/contacto', 	:to => 'paginas#contacto'
 	match '/ayuda', 	:to => 'paginas#ayuda'

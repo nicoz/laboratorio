@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120330201701) do
+ActiveRecord::Schema.define(:version => 20120417201631) do
 
   create_table "actividads", :force => true do |t|
     t.string   "controlador"
@@ -20,6 +20,22 @@ ActiveRecord::Schema.define(:version => 20120330201701) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "usuario_email"
+  end
+
+  create_table "cliente_produccions", :force => true do |t|
+    t.integer  "produccion_id"
+    t.integer  "cliente_id"
+    t.integer  "azucar_big_bag"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "clientes", :force => true do |t|
+    t.string   "nombre"
+    t.boolean  "habilitado", :default => true
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "orden"
   end
 
   create_table "dia", :force => true do |t|
@@ -37,7 +53,7 @@ ActiveRecord::Schema.define(:version => 20120330201701) do
     t.integer  "gasoil"
     t.integer  "lenia_caldera"
     t.integer  "carbon_activado"
-    t.integer  "auxiliar_filtracion"
+    t.decimal  "auxiliar_filtracion"
     t.integer  "acido_clorhidrico"
     t.integer  "cal_viva"
     t.datetime "created_at"
@@ -52,6 +68,7 @@ ActiveRecord::Schema.define(:version => 20120330201701) do
     t.integer  "turnoDia_id"
     t.integer  "updated_by"
     t.integer  "created_by"
+    t.integer  "tiraje"
   end
 
   create_table "produccions", :force => true do |t|
