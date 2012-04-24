@@ -27,6 +27,30 @@ class DiaController < ApplicationController
 		add_breadcrumb "#{l @dia.fecha}", @dia
 	end
 
+	def analisis_turno
+		if params[:fecha].nil?
+			flash[:error] = "Debe ingresar una fecha correcta"
+			redirect_to escritorio_path
+		else
+			fecha = Date.parse(params[:fecha])
+			@dia = Dia.find_or_create_by_fecha(fecha)
+			
+			@turnos = Turno.find(:all, :conditions => {:habilitado => true}, :order => 'orden')
+			@turnos_dia = []
+			@turnos.each do |turno|
+				td = TurnoDia.find_by_dia_id_and_turno_id(@dia, turno)
+				
+				if td.nil?
+					td = @dia.turnos.build(:estado => "Abierto")
+					td.turno = turno
+				end 
+				@turnos_dia << td
+			end
+		end
+
+		add_breadcrumb "#{l @dia.fecha}", @dia
+	end
+	
 	def dias
 		if !params[:fecha].nil?
 			fecha = Date.parse(params[:fecha])
@@ -76,10 +100,21 @@ class DiaController < ApplicationController
 					:borderColor => fondo,
 					:textColor => texto
 					}
+					#ver_analisis_turno
+				segundos = segundos + 1
+				analisis = {:id => segundos, :title => 'Analisis por turno', 
+					:url => ver_analisis_turno_path(dia),
+					:start => (dia.to_time + segundos.seconds),
+					:className => 'evento-activo',
+					:backgroundColor => fondo,
+					:borderColor => fondo,
+					:textColor => texto
+					}
 				respuesta << insumosDiarios
 				respuesta << insumos
 				respuesta << producciones
 				respuesta << recepcion
+				respuesta << analisis
 			end
 			
 			respond_to do |format|
