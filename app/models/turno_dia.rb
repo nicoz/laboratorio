@@ -5,6 +5,7 @@ class TurnoDia < ActiveRecord::Base
 	belongs_to :turno
 	has_one :insumo, :foreign_key => 'turnoDia_id'
 	has_one :produccion, :foreign_key => 'turnoDia_id'
+	has_one :analisis, :foreign_key => 'turnoDia_id'
 	
 	accepts_nested_attributes_for :insumo
 	

@@ -1,0 +1,2 @@
+module AnalisesHelper
+end

@@ -11,9 +11,9 @@ class DiaController < ApplicationController
 			fecha = Date.parse(params[:fecha])
 			@dia = Dia.find_or_create_by_fecha(fecha)
 			
-			turnos = Turno.find(:all, :conditions => {:habilitado => true}, :order => 'orden')
+			@turnos = Turno.find(:all, :conditions => {:habilitado => true}, :order => 'orden')
 			@turnos_dia = []
-			turnos.each do |turno|
+			@turnos.each do |turno|
 				td = TurnoDia.find_by_dia_id_and_turno_id(@dia, turno)
 				
 				if td.nil?

@@ -30,6 +30,8 @@ Laboratorio::Application.routes.draw do
 	match '/dia/:fecha/recepcion/nuevo', :to => 'recepcions#new', :as => :crear_recepcion
 	match '/dia/:fecha/recepcion/editar', :to => 'recepcions#edit', :as => :editar_recepcion
 	
+	match '/dia/:fecha/analisis/:id', :to => 'analises#new', :as => :crear_analisis
+	
 	match '/paneldecontrol', :to => 'panel_control#show', :as => :panel_control
 	
 	resources :dia do
@@ -41,6 +43,8 @@ Laboratorio::Application.routes.draw do
 	resources :insumo_diarios, :only => [:create, :destroy, :update, :show]
 	
 	resources :recepcions, :only => [:create, :destroy, :update, :show]
+	
+	resources :analises, :only => [:create, :destroy, :update, :show]
 	
 	match '/dia/:fecha/insumos/nuevo', :to => 'insumos#new', :as => :crear_insumo
 	

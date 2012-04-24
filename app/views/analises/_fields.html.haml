@@ -1,0 +1,50 @@
+%fieldset
+	%legend=@title
+	.primero
+		%table.table.table-bordered.table-condensed
+			%thead
+				%tr
+					%th.green.header Campo
+					%th.blue.header BE
+					%th.blue.header BRIX
+					%th.blue.header POL
+					%th.blue.header PZA
+					%th.blue.header pH
+					%th.blue.header COLOR
+					%th.blue.header CENIZA
+					%th.blue.header INVERT
+					%th.blue.header ALCAL
+					%th.blue.header %HUM
+			%tbody
+				=f.hidden_field :turnoDia_id
+				=render 'azucar_crudo', :analisis => @analisis, :f => f
+				=render 'miel_de_afinacion', :analisis => @analisis, :f => f
+				=render 'azucar_afinada', :analisis => @analisis, :f => f
+				=render 'refundicion', :analisis => @analisis, :f => f
+				=render 'encalado', :analisis => @analisis, :f => f
+				=render 'jugo_carbonatado', :analisis => @analisis, :f => f
+				=render 'primera_filtracion', :analisis => @analisis, :f => f
+				=render 'jarabe', :analisis => @analisis, :f => f
+				=render 'masa_cocida_a', :analisis => @analisis, :f => f
+				=render 'masa_cocida_b', :analisis => @analisis, :f => f
+				=render 'masa_cocida_c', :analisis => @analisis, :f => f
+				=render 'masa_cocida_d', :analisis => @analisis, :f => f
+				=render 'masa_cocida_e', :analisis => @analisis, :f => f
+				=render 'masa_afinada_1', :analisis => @analisis, :f => f
+				=render 'masa_afinada_2', :analisis => @analisis, :f => f
+				=render 'miel_a', :analisis => @analisis, :f => f
+				=render 'miel_b', :analisis => @analisis, :f => f
+				=render 'miel_c', :analisis => @analisis, :f => f
+				=render 'miel_d', :analisis => @analisis, :f => f
+				=render 'miel_e', :analisis => @analisis, :f => f
+				=render 'miel_afinada_1', :analisis => @analisis, :f => f
+				=render 'miel_afinada_2', :analisis => @analisis, :f => f
+				=render 'agua_madre', :analisis => @analisis, :f => f
+				=render 'melaza', :analisis => @analisis, :f => f
+				=render 'azucar_a', :analisis => @analisis, :f => f
+				=render 'azucar_b', :analisis => @analisis, :f => f
+				=render 'azucar_c', :analisis => @analisis, :f => f
+				=render 'azucar_d', :analisis => @analisis, :f => f
+.form-actions
+	%input{ :type => 'submit', :class => "btn btn-large btn-primary", :value => 'Confirmar'}
+	= link_to 'Cancelar', ver_dia_path(@analisis.turnoDia.dia.fecha), :class => "btn btn-large btn-danger"
