@@ -1,20 +1,20 @@
 %fieldset
 	%legend=@title
 	.primero
-		%table.table.table-bordered.table-condensed
+		%table#tabla-analisis
 			%thead
-				%tr
-					%th.green.header Campo
-					%th.blue.header BE
-					%th.blue.header BRIX
-					%th.blue.header POL
-					%th.blue.header PZA
-					%th.blue.header pH
-					%th.blue.header COLOR
-					%th.blue.header CENIZA
-					%th.blue.header INVERT
-					%th.blue.header ALCAL
-					%th.blue.header %HUM
+				%tr#follow
+					%th.first-header CAMPO
+					%th BE
+					%th BRIX
+					%th POL
+					%th PZA
+					%th pH
+					%th COLOR
+					%th CENIZA
+					%th INVERT
+					%th ALCAL
+					%th %HUM
 			%tbody
 				=f.hidden_field :turnoDia_id
 				=render 'azucar_crudo', :analisis => @analisis, :f => f

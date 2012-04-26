@@ -1,7 +1,41 @@
+
+
 body {
 	padding-top: 60px;
 	padding-bottom: 40px;
 }
+
+#tabla-analisis th {
+	background-color: #2C2C2C;
+	background-image: -webkit-linear-gradient(top, #333, #222);
+	background-repeat: repeat-x;
+	color:white;
+	height:25px;
+}
+
+#tabla-analisis {
+	position:relative;
+	top:40px;
+	margin-bottom:50px;
+}
+
+
+#tabla-analisis td, #tabla-analisis th {
+	width:120px !important;
+	padding-left:10px !important;
+	padding-right:0 !important;
+}
+
+#tabla-analisis input {
+	margin-top:5px;
+	width:75px !important;
+	margin-left:10px !important;
+}
+
+#tabla-analisis tr {
+	border-bottom:solid 1px lightgrey;
+}
+
 
 #ingresar {
 	margin-top:-7px !important;
