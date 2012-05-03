@@ -52,6 +52,8 @@ Laboratorio::Application.routes.draw do
 	
 	match '/dia/:fecha/insumos/validar', :to => 'insumos#validar', :as => :validar_insumo_turno
 	
+	match '/dia/:fecha/analisis/formulario/validar', :to => 'analises#validar', :as => :validar_analisis
+	
 	resources :produccions, :only => [:create, :destroy, :update, :show]
 	
 	match '/dia/:fecha/producciones/nuevo', :to => 'produccions#new', :as => :crear_produccion

@@ -43,4 +43,115 @@ class Analisis < ActiveRecord::Base
                    belongs_to :turnoDia
                    
                    validates :turnoDia_id, :presence => true, :uniqueness => true
+                   
+                   # VALIDACIONES DE BRIX #####################################################################################
+                   #validates :azucar_crudo_brix,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :azucar_crudo_brix,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :miel_de_afinacion_brix,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :azucar_afinada_brix,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :refundicion_brix,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :primera_filtracion_brix,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :jarabe_brix,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :masa_cocida_a_brix,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :masa_cocida_b_brix,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :masa_cocida_c_brix,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :masa_cocida_d_brix,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :masa_cocida_e_brix,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :masa_afinada_1_brix,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :masa_afinada_2_brix,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :miel_a_brix,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :miel_b_brix,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :miel_c_brix,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :miel_d_brix,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :miel_e_brix,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :miel_afinada_1_brix,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :miel_afinada_2_brix,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :agua_madre_brix,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :melaza_brix,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   
+                   # VALIDACIONES DE POL ##############################################################################################
+                   validates :azucar_crudo_pol,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :miel_de_afinacion_pol,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :azucar_afinada_pol,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :refundicion_pol,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :primera_filtracion_pol,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :jarabe_pol,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :masa_cocida_a_pol,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :masa_cocida_b_pol,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :masa_cocida_c_pol,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :masa_cocida_d_pol,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :masa_cocida_e_pol,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :masa_afinada_1_pol,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :masa_afinada_2_pol,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :miel_a_pol,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :miel_b_pol,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :miel_c_pol,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :miel_d_pol,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :miel_e_pol,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :miel_afinada_1_pol,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :miel_afinada_2_pol,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :agua_madre_pol,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :melaza_pol,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   
+                   # VALIDACIONES DE PH ##############################################################################################
+                   validates :azucar_crudo_ph,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20 }
+                   validates :miel_de_afinacion_ph,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20 }
+                   validates :azucar_afinada_ph,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20 }
+                   validates :refundicion_ph,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20 }
+                   validates :encalado_ph,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20 }
+                   validates :jugo_carbonatado_ph,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20 }
+                   validates :primera_filtracion_ph,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20 }
+                   validates :jarabe_ph,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20 }
+                   validates :masa_cocida_a_ph,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20 }
+                   validates :masa_cocida_b_ph,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20 }
+                   validates :masa_cocida_c_ph,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20 }
+                   validates :masa_cocida_d_ph,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20 }
+                   validates :masa_cocida_e_ph,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20 }
+                   validates :masa_afinada_1_ph,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20 }
+                   validates :masa_afinada_2_ph,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20 }
+                   validates :miel_a_ph,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20 }
+                   validates :miel_b_ph,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20 }
+                   validates :miel_c_ph,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20 }
+                   validates :miel_d_ph,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20 }
+                   validates :miel_e_ph,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20 }
+                   validates :miel_afinada_1_ph,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20 }
+                   validates :miel_afinada_2_ph,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20 }
+                   validates :agua_madre_ph,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20 }
+                   validates :melaza_ph,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20 }
+
+                   # VALIDACIONES COLOR #######################################################################################
+                   validates :azucar_crudo_color,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 9999 }
+                   validates :azucar_afinada_color,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 9999 }
+                   validates :refundicion_color,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 9999 }
+                   validates :primera_filtracion_color,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 9999 }
+                   validates :jarabe_color,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 9999 }
+                   validates :miel_a_color,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 9999 }
+                   validates :azucar_a_color,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 9999 }
+                   validates :azucar_b_color,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 9999 }
+                   validates :azucar_c_color,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 9999 }
+                   validates :azucar_d_color,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 9999 }
+                   
+                   # VALIDACIONES DE CENIZA ####################################################################################
+                   validates :azucar_crudo_ceniza,  :allow_nil => true, :numericality => { :greater_than => 0 }
+                   validates :miel_de_afinacion_ceniza,  :allow_nil => true, :numericality => { :greater_than => 0 }
+                   validates :azucar_afinada_ceniza,  :allow_nil => true, :numericality => { :greater_than => 0 }
+                   validates :melaza_ceniza,  :allow_nil => true, :numericality => { :greater_than => 0 }
+                   
+                   # VALIDACIONES DE INVERT #####################################################################################
+                   validates :azucar_crudo_invert,  :allow_nil => true, :numericality => { :greater_than => 0 }
+                   validates :miel_de_afinacion_invert,  :allow_nil => true, :numericality => { :greater_than => 0 }
+                   validates :azucar_afinada_invert,  :allow_nil => true, :numericality => { :greater_than => 0 }
+                   validates :melaza_invert,  :allow_nil => true, :numericality => { :greater_than => 0 }
+                   
+                   # VALIDACIONES DE ALCAL ######################################################################################
+                   validates :encalado_alcal, :allow_nil => true, :numericality => { :greater_than => 0 }
+                   
+                   # VALIDACIONES DE HUM ########################################################################################
+                   validates :azucar_crudo_humedad, :allow_nil => true, :numericality => { :greater_than => 0 }
+                   validates :azucar_afinada_humedad, :allow_nil => true, :numericality => { :greater_than => 0 }
+                   validates :azucar_a_humedad, :allow_nil => true, :numericality => { :greater_than => 0 }
+                   validates :azucar_b_humedad, :allow_nil => true, :numericality => { :greater_than => 0 }
+                   validates :azucar_c_humedad, :allow_nil => true, :numericality => { :greater_than => 0 }
+                   validates :azucar_d_humedad, :allow_nil => true, :numericality => { :greater_than => 0 }
+                   validates :azucar_a_humedad, :allow_nil => true, :numericality => { :greater_than => 0 }
 end

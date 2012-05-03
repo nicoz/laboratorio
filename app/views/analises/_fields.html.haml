@@ -16,7 +16,7 @@
 					%th ALCAL
 					%th %HUM
 			%tbody
-				=f.hidden_field :turnoDia_id
+				=f.hidden_field :turnoDia_id, :id => 'turnoDia_id'
 				=render 'azucar_crudo', :analisis => @analisis, :f => f
 				=render 'miel_de_afinacion', :analisis => @analisis, :f => f
 				=render 'azucar_afinada', :analisis => @analisis, :f => f

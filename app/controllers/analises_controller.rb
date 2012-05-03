@@ -76,15 +76,18 @@ class AnalisesController < ApplicationController
 	end
 	
 	def validar
-		insumo = Insumo.find(params[:insumo]) unless params[:insumo] == '0'
-		insumo = Insumo.new if insumo.nil?
+		turnoDia = TurnoDia.find(params[:turno])
+		analisis = turnoDia.analisis
 		
-		insumo[params[:nombre]] = params[:valor]
-		insumo.turnoDia_id = params[:turno]
-		if insumo.valid?
+		analisis = Analisis.new if analisis.nil?
+		
+		analisis[params[:nombre]] = params[:valor]
+		analisis.turnoDia = turnoDia
+
+		if analisis.valid?
 			mensaje = "OK"
 		else
-			mensaje = insumo.errors[params[:nombre]]
+			mensaje = analisis.errors[params[:nombre]]
 		end
 		
 		render :json => {:mensaje => mensaje}
