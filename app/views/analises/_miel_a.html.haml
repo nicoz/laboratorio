@@ -12,7 +12,9 @@
 	%td
 		.control-group
 			.input
-				= f.text_field :miel_a_pza, :class => 'input-small', "data-name" => 'miel_a_pza'
+				= f.hidden_field :miel_a_pza, :class => 'input-small', "data-name" => 'miel_a_pza'
+				%span#miel_a_pza.pza
+					=@analisis.miel_a_pza
 	%td
 		.control-group
 			.input

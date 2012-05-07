@@ -12,7 +12,9 @@
 	%td
 		.control-group
 			.input
-				= f.text_field :masa_cocida_e_pza, :class => 'input-small', "data-name" => 'masa_cocida_e_pza'
+				= f.hidden_field :masa_cocida_e_pza, :class => 'input-small', "data-name" => 'masa_cocida_e_pza'
+				%span#masa_cocida_e_pza.pza
+					=@analisis.masa_cocida_e_pza
 	%td
 		.control-group
 			.input

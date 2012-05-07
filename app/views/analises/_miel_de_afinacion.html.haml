@@ -12,7 +12,9 @@
 	%td
 		.control-group
 			.input
-				= f.text_field :miel_de_afinacion_pza, :class => 'input-small', "data-name" => 'miel_de_afinacion_pza'
+				= f.hidden_field :miel_de_afinacion_pza, :class => 'input-small', "data-name" => 'miel_de_afinacion_pza'
+				%span#miel_de_afinacion_pza.pza
+					=@analisis.miel_de_afinacion_pza
 	%td
 		.control-group
 			.input

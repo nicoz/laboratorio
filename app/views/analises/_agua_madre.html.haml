@@ -12,7 +12,9 @@
 	%td
 		.control-group
 			.input
-				= f.text_field :agua_madre_pza, :class => 'input-small', "data-name" => 'agua_madre_pza'
+				= f.hidden_field :agua_madre_pza, :class => 'input-small', "data-name" => 'agua_madre_pza'
+				%span#agua_madre_pza.pza
+					= @analisis.agua_madre_pza
 	%td
 		.control-group
 			.input

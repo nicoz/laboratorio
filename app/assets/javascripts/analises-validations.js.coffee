@@ -19,6 +19,14 @@ $ ->
 					formulario.unbind('submit').submit()
 			, 1000)
 
+		$('input[name*=brix]').blur ->
+			campo = $(this)
+			calcular_pza(campo)
+
+		$('input[name*=pol]').blur ->
+			campo = $(this)
+			calcular_pza(campo)
+
 
 habilitar = ->
 	if $('input.error').length > 0
@@ -58,4 +66,20 @@ validar = (campo, sincro) ->
 			habilitar()
 		error: ->
 			#alert "Ocurrio un error al validar los datos, comuniquese con el administrador del sistema"
+
+calcular_pza = (campo) ->
+	
+	brix = campo.parent().parent().parent().parent().find('input[name*=brix]').val()
+	pol = campo.parent().parent().parent().parent().find('input[name*=pol]').val()
+	
+
+	
+	if brix >= 0 and brix != '' and pol >= 0 and pol != ''
+		pza = parseFloat((pol / brix)*100).toFixed(2)
+	else
+		pza = ''
+	
+	campo.parent().parent().parent().parent().find('span[id*=pza]').text(pza)
+	campo.parent().parent().parent().parent().find('input[name*=pza]').val(pza)
+
 

@@ -12,7 +12,9 @@
 	%td
 		.control-group
 			.input
-				= f.text_field :jarabe_pza, :class => 'input-small', "data-name" => 'jarabe_pza'
+				= f.hidden_field :jarabe_pza, :class => 'input-small', "data-name" => 'jarabe_pza'
+				%span#jarabe_pza.pza
+					=@analisis.jarabe_pza
 	%td
 		.control-group
 			.input

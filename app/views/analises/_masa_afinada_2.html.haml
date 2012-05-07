@@ -12,7 +12,9 @@
 	%td
 		.control-group
 			.input
-				= f.text_field :masa_afinada_2_pza, :class => 'input-small', "data-name" => 'masa_afinada_2_pza'
+				= f.hidden_field :masa_afinada_2_pza, :class => 'input-small', "data-name" => 'masa_afinada_2_pza'
+				%span#masa_afinada_2_pza.pza
+					=@analisis.masa_afinada_2_pza
 	%td
 		.control-group
 			.input

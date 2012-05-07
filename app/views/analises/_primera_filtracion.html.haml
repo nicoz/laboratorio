@@ -12,7 +12,9 @@
 	%td
 		.control-group
 			.input
-				= f.text_field :primera_filtracion_pza, :class => 'input-small', "data-name" => 'primera_filtracion_pza'
+				= f.hidden_field :primera_filtracion_pza, :class => 'input-small', "data-name" => 'primera_filtracion_pza'
+				%span#primera_filtracion_pza.pza
+					=@analisis.primera_filtracion_pza
 	%td
 		.control-group
 			.input

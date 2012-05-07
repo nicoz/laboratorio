@@ -12,7 +12,9 @@
 	%td
 		.control-group
 			.input
-				= f.text_field :miel_afinada_2_pza, :class => 'input-small', "data-name" => 'miel_afinada_2_pza'
+				= f.hidden_field :miel_afinada_2_pza, :class => 'input-small', "data-name" => 'miel_afinada_2_pza'
+				%span#miel_afinada_2_pza.pza
+					=@analisis.miel_afinada_2_pza
 	%td
 		.control-group
 			.input

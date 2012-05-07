@@ -12,7 +12,9 @@
 	%td
 		.control-group
 			.input
-				= f.text_field :refundicion_pza, :class => 'input-small', "data-name" => 'refundicion_pza'
+				= f.hidden_field :refundicion_pza, :class => 'input-small', "data-name" => 'refundicion_pza'
+				%span#refundicion_pza.pza
+					=@analisis.refundicion_pza
 	%td
 		.control-group
 			.input

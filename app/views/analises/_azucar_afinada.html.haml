@@ -12,7 +12,9 @@
 	%td
 		.control-group
 			.input
-				= f.text_field :azucar_afinada_pza, :class => 'input-small', "data-name" => 'azucar_afinada_pza'
+				= f.hidden_field :azucar_afinada_pza, :class => 'input-small', "data-name" => 'azucar_afinada_pza'
+				%span#azucar_afinada_pza.pza
+					= @analisis.azucar_afinada_pza
 	%td
 		.control-group
 			.input
