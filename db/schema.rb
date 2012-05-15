@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(:version => 20120419231257) do
     t.string   "controlador"
     t.string   "accion"
     t.text     "parametros",    :limit => 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.string   "usuario_email"
   end
 
@@ -163,8 +163,8 @@ ActiveRecord::Schema.define(:version => 20120419231257) do
   create_table "dia", :force => true do |t|
     t.date     "fecha"
     t.boolean  "activo"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "updated_by"
     t.integer  "created_by"
   end
@@ -178,15 +178,15 @@ ActiveRecord::Schema.define(:version => 20120419231257) do
     t.decimal  "auxiliar_filtracion"
     t.integer  "acido_clorhidrico"
     t.integer  "cal_viva"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.integer  "dia_id"
   end
 
   create_table "insumos", :force => true do |t|
     t.integer  "crudoProcesado"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.integer  "turnoDia_id"
     t.integer  "updated_by"
     t.integer  "created_by"
@@ -203,8 +203,8 @@ ActiveRecord::Schema.define(:version => 20120419231257) do
     t.decimal  "bigBagAzucarlito"
     t.decimal  "bigBagDnd"
     t.decimal  "bigBagClientes"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.integer  "turnoDia_id"
   end
 
@@ -222,8 +222,8 @@ ActiveRecord::Schema.define(:version => 20120419231257) do
     t.integer  "dia_id"
     t.integer  "turno_id"
     t.string   "estado"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "updated_by"
     t.integer  "created_by"
   end
@@ -231,8 +231,8 @@ ActiveRecord::Schema.define(:version => 20120419231257) do
   create_table "turnos", :force => true do |t|
     t.string   "nombre"
     t.boolean  "habilitado"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "orden"
     t.integer  "updated_by"
     t.integer  "created_by"
@@ -241,8 +241,8 @@ ActiveRecord::Schema.define(:version => 20120419231257) do
   create_table "usuarios", :force => true do |t|
     t.string   "nombre"
     t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.string   "encrypted_password"
     t.string   "salt"
     t.boolean  "admin"

@@ -89,6 +89,7 @@ class ProduccionsController < ApplicationController
 			produccion.bolsasAzucarlito = params[:turno][turno.id.to_s][:bolsasAzucarlito]
 			produccion.bigBagAzucarlito = params[:turno][turno.id.to_s][:bigBagAzucarlito]
 			produccion.bigBagDnd = params[:turno][turno.id.to_s][:bigBagDnd]
+			produccion.turnoDia = turnoDia
 			
 			clientes.each do |cliente|
 				cliente_produccion = ClienteProduccion.find_or_create_by_cliente_id_and_produccion_id(cliente.id, produccion.id)
@@ -98,43 +99,24 @@ class ProduccionsController < ApplicationController
 				else
 					valido = false
 					flash[:error] = 'Error al procesar datos del cliente'
-					break
 				end
 			end
 			
-			if produccion.valid? and valido
+			if produccion.save
 				turnoDia.produccion = produccion
 				@dia.turnos << turnoDia
 			else
 				flash[:error] = 'Error al procesar los datos'
 				valido = false
-				break
 			end
 		end
 		
-		validado = valido
-		@dia.turnos.each do |turno|
-			if !turno.save and validado
-				flash[:error] = "Error al procesar el turno #{turno.turno.nombre}"
-				validado = false
-			end
-			
-			if !turno.produccion.save and validado
-				flash[:error] = "Error al procesar la produccion del turno #{turno.turno.nombre}"
-				validado = false
-			end
-		end
-		
-		if !@dia.save and validado
-			flash[:error] = "Error al procesar el dia #{l @dia.fecha}"
-			validado = false
-		end
-		
-		if validado
-			flash[:success] = "Producciones del dia #{l @dia.fecha} correctamente guardadas"
-			redirect_to escritorio_path
+		if valido
+		        flash[:success] = 'Producciones guardadas'
+		        redirect_to ver_dia_path(@dia.fecha)
 		else
-			render 'new'
+		        flash[:error] = 'Errores al guardar la produccion'
+		        render 'new'
 		end
 	end
 	

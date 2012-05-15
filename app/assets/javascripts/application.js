@@ -13,6 +13,27 @@
 //= require tablesorter.min
 //= require fullcalendar.min
 
-//= require_tree .
+//= require bootstrap.min
+//= require excanvas.min
+//= require jquery.jqplot.min
+//= require json2
+
+//= require actividades
+//= require analises
+//= require analises-validations
+//= require cliente_produccions
+//= require clientes
+//= require dia
+//= require escritorio
+//= require insumo_diarios
+//= require insumos
+//= require paginas
+//= require panel_control
+//= require produccions
+//= require recepcions
+//= require sessions
+//= require turno_dia
+//= require turnos
+//= require usuarios
 
 

@@ -68,40 +68,26 @@ class InsumosController < ApplicationController
 			insumo = Insumo.find_or_create_by_turnoDia_id(turnoDia.id)
 			insumo.crudoProcesado = params[:turno][turno.id.to_s][:crudoProcesado]
 			insumo.tiraje = params[:turno][turno.id.to_s][:tiraje]
+			insumo.turnoDia = turnoDia
 			
-			if insumo.valid?
+			if insumo.save
 				turnoDia.insumo = insumo
 				@dia.turnos << turnoDia
 			else
-				flash[:error] = 'Error al procesar los datos'
-				valido = false
-				break
+			        valido = false
+				
+				turnoDia.insumo = insumo
+				@dia.turnos << turnoDia
+				
 			end
 		end
 		
-		validado = valido
-		@dia.turnos.each do |turno|
-			if !turno.save and validado
-				flash[:error] = "Error al procesar el turno #{turno.turno.nombre}"
-				validado = false
-			end
-			
-			if !turno.insumo.save and validado
-				flash[:error] = "Error al procesar el insumo del turno #{turno.turno.nombre}"
-				validado = false
-			end
-		end
-		
-		if !@dia.save and validado
-			flash[:error] = "Error al procesar el dia #{l @dia.fecha}"
-			validado = false
-		end
-		
-		if validado
-			flash[:success] = "Insumos del dia #{l @dia.fecha} correctamente guardados"
-			redirect_to escritorio_path
+		if valido
+		        flash[:success] = 'Insumos guardados'
+		        redirect_to ver_dia_path(@dia.fecha)
 		else
-			render 'new'
+		        flash[:error] = 'Errores al guardar el insumo'
+		        render 'new'
 		end
 	end
 	
@@ -118,7 +104,7 @@ class InsumosController < ApplicationController
 		turno = TurnoDia.find(params[:insumo][:turnoDia_id])
 		if @insumo.update_attributes(params[:insumo])
 			flash[:success] = "Insumo modificado"
-			redirect_to ver_turno_dia_path(turno.dia.fecha, turno.turno.nombre)
+			redirect_to ver_dia_path(insumo.turnoDia.dia.fecha)
 		else
 			@title = "Editar Insumo"
 			render 'edit'
