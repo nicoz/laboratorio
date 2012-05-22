@@ -53,6 +53,7 @@ class ProduccionsController < ApplicationController
 			add_breadcrumb 'Crear Produccion', produccions_path
 		else
 			@dia.turnos.each do |turno|
+			        turnos.delete(turno.turno)		                
 				if turno.produccion.nil?
 					produccion = Produccion.new
 					produccion.turnoDia = turno
@@ -65,6 +66,24 @@ class ProduccionsController < ApplicationController
 					turno.produccion = produccion
 				end
 			end
+			
+			turnos.each do |turno|
+				td = TurnoDia.new
+				td.turno = turno
+				td.dia = @dia
+				#creo una produccion para cada turno
+				produccion = Produccion.new
+				produccion.turnoDia = td
+				clientes.each do |cliente|
+					cliente_produccion = ClienteProduccion.new
+					cliente_produccion.produccion = produccion
+					cliente_produccion.cliente = cliente
+					produccion.clientes << cliente_produccion
+				end
+				td.produccion = produccion
+				@dia.turnos << td
+			end
+			@dia.turnos.sort! { |a,b| a.turno.orden <=> b.turno.orden }
 			add_breadcrumb 'Editar Produccion', produccions_path
 			@title = "Editar Produccion"
 			render 'edit'

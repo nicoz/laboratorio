@@ -44,15 +44,29 @@ class InsumosController < ApplicationController
 			@title = "Crear Insumos"
 			add_breadcrumb 'Crear Insumos', insumos_path
 		else
-			@dia.turnos.each do |turno|
-				if turno.insumo.nil?
-					insumo = Insumo.new
-					insumo.turnoDia = turno
-					turno.insumo = insumo
-				end
+		        @title = "Editar Insumos"
+		        @dia.turnos.each do |turnoDia|
+		                turnos.delete(turnoDia.turno)		                
+			        if turnoDia.insumo.nil?
+				        insumo = Insumo.new
+				        insumo.turnoDia = turnoDia
+				        turnoDia.insumo = insumo				        
+			        end
+		        end
+                        
+                        turnos.each do |turno|
+				td = TurnoDia.new
+				td.turno = turno
+				td.dia = @dia
+				#creo un insumo para cada turno
+				insumo = Insumo.new
+				insumo.turnoDia = td
+				td.insumo = insumo
+				@dia.turnos << td
 			end
+                        @dia.turnos.sort! { |a,b| a.turno.orden <=> b.turno.orden }
 			add_breadcrumb 'Editar Insumos', insumos_path
-			@title = "Editar Insumos"
+			
 			render 'edit'
 		end
 	end
