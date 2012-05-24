@@ -35,5 +35,4 @@
 //= require turno_dia
 //= require turnos
 //= require usuarios
-
-
+//= require produccion_masas

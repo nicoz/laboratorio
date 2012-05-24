@@ -70,4 +70,20 @@ class ProduccionMasasController < ApplicationController
 			render 'edit'
 		end
 	end
+
+	def validar
+	        produccionMasa = ProduccionMasa.find(params[:id])
+		produccionMasa = ProduccionMasa.new if produccionMasa.nil?
+                dia = Dia.find(params[:dia])
+		produccionMasa[params[:nombre]] = params[:valor]
+		produccionMasa.dia = dia
+		if produccionMasa.valid?
+			mensaje = "OK"
+		else
+			mensaje = produccionMasa.errors[params[:nombre]]
+		end
+
+		render :json => {:mensaje => mensaje}
+	end
+
 end
