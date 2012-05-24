@@ -10,72 +10,79 @@ Laboratorio::Application.routes.draw do
 	resources :turnos
 	resources :clientes
 	resources :sessions, :only => [:new, :create, :destroy]
-	
+
 	match "dias/dias", :to => 'dia#dias', :as => :lista_dias
-	
+
 	match '/dia/:fecha/turno/:nombre', :to => 'turno_dia#show', :as => :ver_turno_dia
-	
+
 	match '/dia/:fecha', :to => 'dia#show', :as => :ver_dia
-	
+
 	match '/analisisporturno/:fecha', :to => 'dia#analisis_turno', :as => :ver_analisis_turno
-	
+
 	match '/dia/turno/:id/cerrar', :to => 'turno_dia#cerrar', :as => :cerrar_turno
 	match '/dia/turno/:id/anular', :to => 'turno_dia#anular', :as => :anular_turno
 	match '/dia/turno/:id/abrir', :to => 'turno_dia#abrir', :as => :abrir_turno
-	
+
 	match '/dia/:fecha/insumoDiario/ver', :to => 'insumo_diarios#show', :as => :ver_insumo_diario
 	match '/dia/:fecha/insumoDiario/nuevo', :to => 'insumo_diarios#new', :as => :crear_insumo_diario
 	match '/dia/:fecha/insumoDiario/editar', :to => 'insumo_diarios#edit', :as => :editar_insumo_diario
-	
-	
+
+	match '/dia/:fecha/produccionMasa/ver', :to => 'produccion_masas#show', :as => :ver_produccion_masa
+	match '/dia/:fecha/produccionMasa/nuevo', :to => 'produccion_masas#new', :as => :crear_produccion_masa
+	match '/dia/:fecha/produccionMasa/editar', :to => 'produccion_masas#edit', :as => :editar_produccion_masa
+
 	match '/dia/:fecha/recepcion/ver', :to => 'recepcions#show', :as => :ver_recepcion
 	match '/dia/:fecha/recepcion/nuevo', :to => 'recepcions#new', :as => :crear_recepcion
 	match '/dia/:fecha/recepcion/editar', :to => 'recepcions#edit', :as => :editar_recepcion
-	
+
 	match '/dia/:fecha/analisis/:id', :to => 'analises#new', :as => :crear_analisis
-	
+
 	match '/paneldecontrol', :to => 'panel_control#show', :as => :panel_control
-	
+
 	resources :dia do
 		resources :turno_dia
 	end
 
 	resources :insumos, :only => [:create, :destroy, :update, :show]
-	
+
 	resources :insumo_diarios, :only => [:create, :destroy, :update, :show]
-	
+
+	resources :produccion_masas, :only => [:create, :destroy, :update, :show]
+
 	resources :recepcions, :only => [:create, :destroy, :update, :show]
-	
+
 	resources :analises, :only => [:create, :destroy, :update, :show]
-	
+
 	match '/dia/:fecha/insumos/nuevo', :to => 'insumos#new', :as => :crear_insumo
-	
+
 	match '/dia/:fecha/insumos/validar', :to => 'insumos#validar', :as => :validar_insumo_turno
-	
+
+	match '/dia/:fecha/recepcion/validar', :to => 'recepcions#validar', :as => :validar_recepcion
+
 	match '/dia/:fecha/analisis/formulario/validar', :to => 'analises#validar', :as => :validar_analisis
-	
+
 	resources :produccions, :only => [:create, :destroy, :update, :show]
-	
+
 	match '/dia/:fecha/producciones/nuevo', :to => 'produccions#new', :as => :crear_produccion
-	
+
 	match '/dia/:fecha/producciones/validar', :to => 'produccions#validar', :as => :validar_produccion_turno
-	
+
 	match '/validarcliente', :to => 'cliente_produccions#validar', :as => :validar_produccion_turno
 
 
 	match '/actividad/:id',	:to => 'actividades#show', :as => :actividad
 	match '/actividades',	:to => 'actividades#index', :as => :actividades
 	match '/actividads',	:to => 'actividades#index'
-	
+
 	match '/ingresar',	:to => 'sessions#new'
 	match '/salir',		:to => 'sessions#destroy'
-	
+
 	match '/crearusuario',	:to => 'usuarios#new'
-	
+
 	match 'crearturno',	:to => 'turnos#new'
-	
+
 	match 'crearcliente',	:to => 'clientes#new'
-	
+
 	match '/contacto', 	:to => 'paginas#contacto'
 	match '/ayuda', 	:to => 'paginas#ayuda'
 	match '/acerca', 	:to => 'paginas#acerca'

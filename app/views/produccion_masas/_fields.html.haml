@@ -1,0 +1,22 @@
+%fieldset
+	%legend=@title
+	= f.hidden_field :dia_id, :value => @dia.id
+	.control-group.primero
+		= f.label :numero_masas_a, :class => 'control-label'
+		.input
+			= f.text_field :numero_masas_a
+	.control-group
+		= f.label :numero_masas_b, :class => 'control-label'
+		.input
+			= f.text_field :numero_masas_b
+	.control-group
+		= f.label :numero_masas_c, :class => 'control-label'
+		.input
+			= f.text_field :numero_masas_c
+	.control-group
+		= f.label :numero_masas_d, :class => 'control-label'
+		.input
+			= f.text_field :numero_masas_d
+	.form-actions
+		= f.submit boton, :class => "btn btn-large btn-primary"
+		= link_to 'Cancelar', turnos_path, :class => "btn btn-large btn-danger"

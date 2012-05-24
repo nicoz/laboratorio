@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120419231257) do
+ActiveRecord::Schema.define(:version => 20120524202300) do
 
   create_table "actividads", :force => true do |t|
     t.string   "controlador"
@@ -191,6 +191,16 @@ ActiveRecord::Schema.define(:version => 20120419231257) do
     t.integer  "updated_by"
     t.integer  "created_by"
     t.integer  "tiraje"
+  end
+
+  create_table "produccion_masas", :force => true do |t|
+    t.integer  "numero_masas_a"
+    t.integer  "numero_masas_b"
+    t.integer  "numero_masas_c"
+    t.integer  "numero_masas_d"
+    t.integer  "dia_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "produccions", :force => true do |t|

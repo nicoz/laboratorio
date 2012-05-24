@@ -7,6 +7,9 @@
 				%li
 					= link_to "Insumos Diarios", crear_insumo_diario_path(@dia.fecha)
 				%li
+					= link_to "Produccion Masas Cocidas", crear_produccion_masa_path(@dia.fecha)
+
+				%li
 					= link_to "Insumos Por turno", crear_insumo_path(@dia.fecha)
 				%li
 					= link_to "Produccion Por turno", crear_produccion_path(@dia.fecha)
@@ -15,7 +18,7 @@
 				- @turnos.each do |turno|
 					%li
 						= link_to "Analisis de #{turno.nombre}", crear_analisis_path(@dia.fecha, turno.id)
-				
+
 	.span10
 		.row-fluid
 			%h1 Analisis del dia
