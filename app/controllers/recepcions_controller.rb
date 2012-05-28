@@ -78,6 +78,7 @@ class RecepcionsController < ApplicationController
 	        recepcion = Recepcion.find(params[:id]) if params[:id] != '0'
 		recepcion = Recepcion.new if recepcion.nil?
                 dia = Dia.find(params[:dia])
+                recepcion.default
 		recepcion[params[:nombre]] = params[:valor]
 		recepcion.dia = dia
 		if recepcion.valid?
