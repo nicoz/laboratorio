@@ -72,7 +72,7 @@ class ProduccionMasasController < ApplicationController
 	end
 
 	def validar
-	        produccionMasa = ProduccionMasa.find(params[:id])
+	        produccionMasa = ProduccionMasa.find(params[:id]) if params[:id] != '0'
 		produccionMasa = ProduccionMasa.new if produccionMasa.nil?
                 dia = Dia.find(params[:dia])
 		produccionMasa[params[:nombre]] = params[:valor]

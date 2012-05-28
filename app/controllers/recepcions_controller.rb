@@ -75,7 +75,7 @@ class RecepcionsController < ApplicationController
 	end
 
 	def validar
-	        recepcion = Recepcion.find(params[:id])
+	        recepcion = Recepcion.find(params[:id]) if params[:id] != '0'
 		recepcion = Recepcion.new if recepcion.nil?
                 dia = Dia.find(params[:dia])
 		recepcion[params[:nombre]] = params[:valor]
