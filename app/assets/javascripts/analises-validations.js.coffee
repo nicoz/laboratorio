@@ -1,6 +1,10 @@
 $ ->
   if $('input[name*="analisis["]').length > 0
 
+    #pre-segundaValidacion
+    $('input[name*="analisis["]').each ->
+      segunda_validacion($(this))
+
     $('input[name*="analisis["]').blur ->
       campo = $(this)
       validar(campo, true)
@@ -15,8 +19,14 @@ $ ->
       formulario = $(this)
       _.delay( ->
         correcto = habilitar()
+        bienCorrecto = segundoHabilitar()
         if correcto
-          formulario.unbind('submit').submit()
+          if bienCorrecto
+            formulario.unbind('submit').submit()
+          else
+            confirmado = confirm('Existen valores fuera del rango optimo. Desea guardar igualmente?')
+            if confirmado
+              formulario.unbind('submit').submit()
       , 1000)
 
     $('input[name*=brix]').blur ->
@@ -34,6 +44,12 @@ habilitar = ->
     false
   else
     $('input[type="submit"]').removeAttr "disabled"
+    true
+
+segundoHabilitar = ->
+  if $('.warning').length > 0
+    false
+  else
     true
 
 validar = (campo, sincro) ->
@@ -235,8 +251,6 @@ segunda_validacion = (campo) ->
   if nombre == 'azucar_crudo_brix' or nombre == 'azucar_afinada_brix' or nombre == 'azucar_crudo_pol' or nombre == 'azucar_afinada_pol'
     if valor < 90 and valor >= 0 and valor != ''
       mensaje = 'Deberia estar entre 90 y 100'
-
-
 
   if mensaje != ''
     campo.parent().parent().removeClass("success")
