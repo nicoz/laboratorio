@@ -44,6 +44,7 @@ class Analisis < ActiveRecord::Base
 
                    validates :turnoDia_id, :presence => true, :uniqueness => true
 
+                   validates :encalado_be, :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 50}
                    # VALIDACIONES DE BRIX #####################################################################################
                    #validates :azucar_crudo_brix,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
                    validates :azucar_crudo_brix,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
