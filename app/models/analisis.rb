@@ -121,38 +121,38 @@ class Analisis < ActiveRecord::Base
                    validates :melaza_ph,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 14 }
 
                    # VALIDACIONES COLOR #######################################################################################
-                   validates :azucar_crudo_color,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 10000 }
-                   validates :azucar_afinada_color,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 10000 }
-                   validates :refundicion_color,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 10000 }
-                   validates :primera_filtracion_color,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 10000 }
-                   validates :jarabe_color,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 10000 }
-                   validates :miel_a_color,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 10000 }
-                   validates :azucar_a_color,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 500 }
-                   validates :azucar_b_color,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 500 }
-                   validates :azucar_c_color,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 500 }
-                   validates :azucar_d_color,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 500 }
+                   validates :azucar_crudo_color,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 10000 }
+                   validates :azucar_afinada_color,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 10000 }
+                   validates :refundicion_color,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 10000 }
+                   validates :primera_filtracion_color,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 10000 }
+                   validates :jarabe_color,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 10000 }
+                   validates :miel_a_color,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 10000 }
+                   validates :azucar_a_color,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 500 }
+                   validates :azucar_b_color,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 500 }
+                   validates :azucar_c_color,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 500 }
+                   validates :azucar_d_color,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 500 }
 
                    # VALIDACIONES DE CENIZA ####################################################################################
-                   validates :azucar_crudo_ceniza,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 100 }
-                   validates :miel_de_afinacion_ceniza,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 100 }
-                   validates :azucar_afinada_ceniza,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 100 }
-                   validates :melaza_ceniza,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 100 }
+                   validates :azucar_crudo_ceniza,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :miel_de_afinacion_ceniza,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :azucar_afinada_ceniza,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :melaza_ceniza,  :allow_nil => true, :numericality => { :greater_tha_or_equal_to => 0, :less_than_or_equal_to => 100 }
 
                    # VALIDACIONES DE INVERT #####################################################################################
-                   validates :azucar_crudo_invert,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 100 }
-                   validates :miel_de_afinacion_invert,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 100 }
-                   validates :azucar_afinada_invert,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 100 }
-                   validates :melaza_invert,  :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 100 }
+                   validates :azucar_crudo_invert,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :miel_de_afinacion_invert,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :azucar_afinada_invert,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :melaza_invert,  :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
 
                    # VALIDACIONES DE ALCAL ######################################################################################
-                   validates :encalado_alcal, :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 20 }
+                   validates :encalado_alcal, :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 20 }
 
                    # VALIDACIONES DE HUM ########################################################################################
-                   validates :azucar_crudo_humedad, :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 100 }
-                   validates :azucar_afinada_humedad, :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 100 }
-                   validates :azucar_a_humedad, :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 100 }
-                   validates :azucar_b_humedad, :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 100 }
-                   validates :azucar_c_humedad, :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 100 }
-                   validates :azucar_d_humedad, :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 100 }
-                   validates :azucar_a_humedad, :allow_nil => true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 100 }
+                   validates :azucar_crudo_humedad, :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :azucar_afinada_humedad, :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :azucar_a_humedad, :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :azucar_b_humedad, :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :azucar_c_humedad, :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+                   validates :azucar_d_humedad, :allow_nil => true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+
 end

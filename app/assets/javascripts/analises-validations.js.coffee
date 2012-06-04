@@ -109,8 +109,8 @@ segunda_validacion = (campo) ->
       mensaje = 'Deberia estar entre 0 y 0.1'
 
   if nombre == 'azucar_b_humedad' or nombre == 'azucar_c_humedad' or nombre == 'azucar_d_humedad'
-    if (valor > 0.6 or valor < 0) and valor != ''
-      mensaje = 'Deberia estar entre 0 y 0.6'
+    if (valor > 0.06 or valor < 0) and valor != ''
+      mensaje = 'Deberia estar entre 0 y 0.06'
 
   if nombre == 'azucar_crudo_ceniza' or nombre == 'azucar_afinada_ceniza'
     if (valor > 1 or valor < 0) and valor != ''
@@ -262,3 +262,7 @@ segunda_validacion = (campo) ->
     campo.parent().addClass("field_with_warnings")
     campo.parent().parent().addClass("warning")
     campo.parent().parent().append("<span class='label label-warning'>#{mensaje}</span>")
+  else
+    campo.parent().parent().find('.label-warning').remove()
+    campo.parent().removeClass("field_with_warnings")
+    campo.parent().parent().removeClass("warning")
