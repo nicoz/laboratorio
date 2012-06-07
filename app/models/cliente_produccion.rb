@@ -3,11 +3,11 @@ class ClienteProduccion < ActiveRecord::Base
 
 	belongs_to :produccion
 	belongs_to :cliente
-	
+
 	def initialize(*params)
 		super(*params)
 		self.azucar_big_bag = 0
 	end
-	
-	validates :azucar_big_bag, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100000 }
+
+	validates :azucar_big_bag, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 200000 }
 end

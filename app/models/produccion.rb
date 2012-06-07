@@ -4,9 +4,9 @@ class Produccion < ActiveRecord::Base
 			:bigBagDnd
 
 	belongs_to :turnoDia
-	
-	has_many :clientes, :class_name => 'ClienteProduccion' 
-	
+
+	has_many :clientes, :class_name => 'ClienteProduccion'
+
 	def initialize(*params)
 		super(*params)
 		self.paquetesPapel = 0
@@ -18,16 +18,16 @@ class Produccion < ActiveRecord::Base
 		self.bigBagAzucarlito = 0
 		self.bigBagDnd = 0
 	end
-	
+
 	validates :turnoDia_id, :presence => true, :uniqueness => true
-	
-	validates :paquetesPapel, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 33000 }
+
+	validates :paquetesPapel, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 40000 }
 	validates :paquetesPolietileno, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 150000 }
-	validates :melaza, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 25000 }
-	validates :rubio, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 15000 }
-	validates :industriaBolsas, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100000 }
-	validates :bolsasAzucarlito, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100000 }
-	validates :bigBagAzucarlito, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100000 }
-	validates :bigBagDnd, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100000 }
+	validates :melaza, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 80000 }
+	validates :rubio, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 30000 }
+	validates :industriaBolsas, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 150000 }
+	validates :bolsasAzucarlito, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 150000 }
+	validates :bigBagAzucarlito, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 200000 }
+	validates :bigBagDnd, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 150000 }
 
 end

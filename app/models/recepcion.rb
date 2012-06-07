@@ -8,10 +8,10 @@ class Recepcion < ActiveRecord::Base
 		self.perdida_en_azucar = 0
 	end
 
-	validates :azucar_crudo, :numericality => {:greater_than_or_equal_to => 0, :less_than_or_equal_to => 600000}
-	validates :polarizacion, :allow_nil => true, :numericality => {:greater_than_or_equal_to => 90, :less_than_or_equal_to => 99.99}
-	validates :perdida_en_azucar, :numericality => {:greater_than_or_equal_to => 0, :less_than_or_equal_to => 9.9}
-	validates :azucar_en_melaza,:allow_nil => true, :numericality => {:greater_than_or_equal_to => 0, :less_than_or_equal_to => 9.9}
+	validates :azucar_crudo, :numericality => {:greater_than_or_equal_to => 0, :less_than_or_equal_to => 200000000}
+	validates :polarizacion, :allow_nil => true, :numericality => {:greater_than => 90, :less_than => 100}
+	validates :perdida_en_azucar, :numericality => {:greater_than_or_equal_to => 0, :less_than_or_equal_to => 10}
+	validates :azucar_en_melaza,:allow_nil => true, :numericality => {:greater_than_or_equal_to => 0, :less_than_or_equal_to => 10}
 
 	validates :dia_id, :presence => true, :uniqueness => true
 end
