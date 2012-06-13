@@ -39,6 +39,9 @@ Laboratorio::Application.routes.draw do
 
 	match '/paneldecontrol', :to => 'panel_control#show', :as => :panel_control
 
+        match '/dia/:fecha/editar', :to =>'dia#edit', :as => :editar_dia
+        match '/dia/:id/actualizar', :to => 'dia#update', :as => :actualizar_dia
+
 	resources :dia do
 		resources :turno_dia
 	end

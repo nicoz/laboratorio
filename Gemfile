@@ -21,7 +21,8 @@ gem 'client_side_validations'
 gem 'squeel'
 gem 'meta_search'
 
-
+gem 'tinymce-rails'
+gem 'tinymce-rails-langs'
 
 
 group :development do
@@ -46,4 +47,3 @@ end
 group :production do
 	gem 'pg'
 end
-

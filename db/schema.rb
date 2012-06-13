@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120524202300) do
+ActiveRecord::Schema.define(:version => 20120612201450) do
 
   create_table "actividads", :force => true do |t|
     t.string   "controlador"
@@ -163,10 +163,11 @@ ActiveRecord::Schema.define(:version => 20120524202300) do
   create_table "dia", :force => true do |t|
     t.date     "fecha"
     t.boolean  "activo"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.integer  "updated_by"
     t.integer  "created_by"
+    t.string   "observaciones"
   end
 
   create_table "insumo_diarios", :force => true do |t|

@@ -20,4 +20,4 @@
 			= f.text_field :numero_masas_d, "data-name" => 'numero_masas_d', :class => 'campo'
 	.form-actions
 		= f.submit boton, :class => "btn btn-large btn-primary"
-		= link_to 'Cancelar', turnos_path, :class => "btn btn-large btn-danger"
+		= link_to 'Cancelar', ver_dia_path(@dia.fecha), :class => "btn btn-large btn-danger"

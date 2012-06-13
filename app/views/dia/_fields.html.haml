@@ -1,0 +1,22 @@
+%fieldset
+  %legend=@title
+  %input{ :type => "hidden", :value => "#{@dia.fecha}", :name => "[dia][fecha]"}
+  %input{ :type => "hidden", :value => "#{@dia.id}", :name => "[dia][id]"}
+  %input{ :type => "hidden", :value => "#{form_authenticity_token}", :name => "authenticity_token"}
+  .control-group.primero
+    %label.control-label.span1{ :for => "[dia][observaciones]"}
+      Observaciones
+    .input
+      %textarea.span8{ :name => "[dia][observaciones]", "data-name" => 'observaciones', :cols => '70', :rows => '10', :class => "tinymce"}
+        = raw "#{@dia.observaciones}"
+
+      :javascript
+        tinyMCE.init({
+          language : "es", // change language here
+          mode : "textareas",
+          theme : "advanced"
+        });
+
+.form-actions
+  %input{ :type => 'submit', :class => "btn btn-large btn-primary", :value => 'Confirmar'}
+  = link_to 'Cancelar', ver_dia_path(@dia.fecha), :class => "btn btn-large btn-danger"

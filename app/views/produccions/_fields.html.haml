@@ -7,5 +7,4 @@
 			=render 'turnos', :turno => turno
 .form-actions
 	%input{ :type => 'submit', :class => "btn btn-large btn-primary", :value => 'Confirmar'}
-	= link_to 'Cancelar', escritorio_path(), :class => "btn btn-large btn-danger"
-
+	= link_to 'Cancelar', ver_dia_path(@dia.fecha), :class => "btn btn-large btn-danger"

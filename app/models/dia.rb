@@ -1,5 +1,5 @@
 class Dia < ActiveRecord::Base
-	attr_accessible :fecha, :activo, :turnos_attributes
+	attr_accessible :fecha, :activo, :turnos_attributes, :id, :observaciones
 	after_initialize :default_values
 	before_destroy :dia_con_turnos?
 
