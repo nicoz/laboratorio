@@ -1,0 +1,2 @@
+module ZafrasHelper
+end

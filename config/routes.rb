@@ -1,6 +1,5 @@
 Laboratorio::Application.routes.draw do
 
-
 	get "escritorio/show"
 
 	get "sessions/new"
@@ -10,6 +9,10 @@ Laboratorio::Application.routes.draw do
 	resources :turnos
 	resources :clientes
 	resources :sessions, :only => [:new, :create, :destroy]
+	resources :zafras
+
+	match 'dia/:fecha/zafra/nueva', :to => 'zafras#new_ajax', :as => :nueva_zafra
+	match 'dia/:fecha/zafra/fin/:fecha_fin', :to => 'zafras#update_ajax', :as => :fin_zafra
 
 	match "dias/dias", :to => 'dia#dias', :as => :lista_dias
 

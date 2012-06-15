@@ -11,6 +11,7 @@ class DiaController < ApplicationController
       fecha = Date.parse(params[:fecha])
       @dia = Dia.find_or_create_by_fecha(fecha)
 
+      @zafra = Zafra.where('dia_inicio <= ? and (dia_fin >= ? or dia_fin is null)', @dia.fecha, @dia.fecha).first
       @turnos = Turno.find(:all, :conditions => {:habilitado => true}, :order => 'orden')
       @turnos_dia = []
       @turnos.each do |turno|
