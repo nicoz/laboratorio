@@ -78,12 +78,23 @@ class DiaController < ApplicationController
       inicio = (fecha.to_time - 45.days).to_date
       fin = (fecha.to_time + 45.days).to_date
 
+      zafras = Zafra.where('dia_inicio >= ? and dia_inicio <= ?', inicio, Time.now.to_date)
+
       respuesta = []
       inicio.upto(fin) do |dia|
         segundos = 0
         segundos = segundos + 1
         fondo = '#006600' if dia < Time.now.to_date
         fondo = '#330099' if dia == Time.now.to_date
+
+        zafras.each do |zafra|
+          if !zafra.dia_fin.nil?
+            fondo = '#888888' if dia >= zafra.dia_inicio and dia <= zafra.dia_fin
+          else
+            fondo = '#FF9933' if dia >= zafra.dia_inicio and dia <= Time.now.to_date
+          end
+        end
+
         fondo = '#B80000' if dia > Time.now.to_date
         texto = 'white'
         insumosDiarios = {:id => segundos, :title => 'Insumos Diarios',
