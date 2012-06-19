@@ -1,22 +1,22 @@
 %li
-	= link_to ayuda_path do
-		%i.icon-white.icon-book
-		Ayuda
+  = link_to ayuda_path do
+    %i.icon-white.icon-book
+    Ayuda
 - if ingresado?
-	%li
-		= link_to escritorio_path do
-			%i.icon-white.icon-home
-			Escritorio
-	- if usuario_actual.admin?
-		%li
-			= link_to "Usuarios", usuarios_path
-		%li
-			= link_to "Turnos", turnos_path
-	%li
-		= link_to usuario_actual do
-			%i.icon-white.icon-user
-			Cuenta
-	%li
-		= link_to edit_usuario_path(usuario_actual) do
-			%i.icon-white.icon-cog
-			Perfil
+  %li
+    = link_to escritorio_path do
+      %i.icon-white.icon-home
+      Escritorio
+  - if usuario_actual.admin?
+    %li
+      = link_to "Usuarios", usuarios_path
+    %li
+      = link_to "Turnos", turnos_path
+  %li
+    = link_to usuario_actual do
+      %i.icon-white.icon-user
+      Cuenta
+  %li
+    = link_to edit_usuario_path(usuario_actual) do
+      %i.icon-white.icon-cog
+      Perfil

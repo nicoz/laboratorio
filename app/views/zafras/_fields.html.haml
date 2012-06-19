@@ -1,0 +1,14 @@
+%fieldset
+  %legend=@title
+  = f.hidden_field :id, :id => 'zafra'
+  .control-group.primero
+    = f.label :dia_inicio, :class => 'control-label'
+    .input
+      = f.text_field :dia_inicio, :value => "#{l @zafra.dia_inicio if @zafra.dia_inicio}", :class => 'fecha', :data => {:name => 'dia_inicio'}
+  .control-group
+    = f.label :dia_fin, :class => 'control-label'
+    .input
+      = f.text_field :dia_fin, :value => "#{l @zafra.dia_fin if @zafra.dia_fin}", :class => 'fecha', :data => {:name => 'dia_fin'}
+  .form-actions
+    = f.submit boton, :class => "btn btn-large btn-primary"
+    = link_to 'Cancelar', zafras_path, :class => "btn btn-large btn-danger"

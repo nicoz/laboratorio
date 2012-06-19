@@ -1,0 +1,11 @@
+= form_for @search, :html => {:class => 'form-horizontal'} do |f|
+  %fieldset
+    %legend Filtros
+    .control-group
+      = f.label :dia_inicio_greater_than_or_equal_to, "Fecha mayor que:", :class => 'control-label'
+      = f.date_select :dia_inicio_greater_than_or_equal_to, :use_month_numbers => true, :order => [:day, :month, :year], :include_blank => true
+    .control-group
+      = f.label :dia_inicio_less_than_or_equal_to, "Fecha menor que:", :class => 'control-label'
+      = f.date_select :dia_inicio_less_than_or_equal_to, :use_month_numbers => true, :order => [:day, :month, :year], :include_blank => true
+    .form-actions
+      = f.submit "Buscar", :class => "btn btn-large btn-success"

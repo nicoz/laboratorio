@@ -1,34 +1,38 @@
 %fieldset
-	%legend=@title
-	= f.hidden_field :dia_id, :value => @dia.id
-	.control-group.primero
-		= f.label :cal_viva, :class => 'control-label'
-		.input
-			= f.text_field :cal_viva
-	.control-group
-		= f.label :lenia_caldera, :class => 'control-label'
-		.input
-			= f.text_field :lenia_caldera
-	.control-group
-		= f.label :auxiliar_filtracion, :class => 'control-label'
-		.input
-			= f.text_field :auxiliar_filtracion
-	.control-group
-		= f.label :acido_clorhidrico, :class => 'control-label'
-		.input
-			= f.text_field :acido_clorhidrico
-	.control-group
-		= f.label :chip, :class => 'control-label'
-		.input
-			= f.text_field :chip
-	.control-group
-		= f.label :aserrin, :class => 'control-label'
-		.input
-			= f.text_field :aserrin
-	.control-group
-		= f.label :gasoil, :class => 'control-label'
-		.input
-			= f.text_field :gasoil
-	.form-actions
-		= f.submit boton, :class => "btn btn-large btn-primary"
-		= link_to 'Cancelar', ver_dia_path(@dia.fecha), :class => "btn btn-large btn-danger"
+  %legend=@title
+  = f.hidden_field :dia_id, :value => @dia.id
+  .control-group.primero
+    = f.label :cal_viva, :class => 'control-label'
+    .input
+      = f.text_field :cal_viva
+  .control-group
+    = f.label :carbon_activado, :class => 'control-label'
+    .input
+      = f.text_field :carbon_activado
+  .control-group
+    = f.label :auxiliar_filtracion, :class => 'control-label'
+    .input
+      = f.text_field :auxiliar_filtracion
+  .control-group
+    = f.label :acido_clorhidrico, :class => 'control-label'
+    .input
+      = f.text_field :acido_clorhidrico
+  .control-group
+    = f.label 'Leña caldera', :class => 'control-label'
+    .input
+      = f.text_field :lenia_caldera
+  .control-group
+    = f.label :chip, :class => 'control-label'
+    .input
+      = f.text_field :chip
+  .control-group
+    = f.label :aserrin, :class => 'control-label'
+    .input
+      = f.text_field :aserrin
+  .control-group
+    = f.label :gasoil, :class => 'control-label'
+    .input
+      = f.text_field :gasoil
+  .form-actions
+    = f.submit boton, :class => "btn btn-large btn-primary"
+    = link_to 'Cancelar', ver_dia_path(@dia.fecha), :class => "btn btn-large btn-danger"

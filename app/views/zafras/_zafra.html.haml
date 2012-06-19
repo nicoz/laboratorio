@@ -1,0 +1,10 @@
+%td= link_to "#{l zafra.dia_inicio}", zafra_path(zafra)
+- if zafra.dia_fin.nil?
+  %td= ''
+- else
+  %td= "#{l zafra.dia_fin}"
+%td
+  = link_to edit_zafra_path(zafra) do
+    %i.icon.icon-pencil
+  = link_to zafra, :method => :delete, :confirm => "Seguro que desea borrarla?", :title => "Borrar Zafra: #{zafra.dia_inicio}" do
+    %i.icon.icon-trash

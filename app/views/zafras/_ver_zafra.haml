@@ -1,0 +1,23 @@
+.row
+  .span6.offset1
+    %h2= "Zafra #{l @zafra.dia_inicio}"
+.row
+  .span6.offset2
+
+    %strong
+      Inicio
+    ="#{l @zafra.dia_inicio}"
+    %br
+    %strong
+      Fin
+    ="#{l @zafra.dia_fin if @zafra.dia_fin}"
+    %br
+    %strong
+      = link_to 'Ver', zafra_path(@zafra)
+    |
+    %strong
+      = link_to 'Editar', edit_zafra_path(@zafra)
+%br
+.row
+  .span6.offset2
+    = link_to "Escritorio", escritorio_path, :class => "btn btn-danger"

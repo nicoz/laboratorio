@@ -1,25 +1,27 @@
 .row-fluid
-	.span2
-		.well.sidebar-nav
-			%h3= @title
-			%h5 Acciones
-			%ul.nav.nav-pills.nav-stacked
-				%li
-					= link_to "Crear Usuario", crearusuario_path
-				%li
-					= link_to "Trabajar con Usuarios", usuarios_path
-				%li
-					= link_to "Trabajar con Turnos", turnos_path
-				%li
-					= link_to 'Trabajar con Clientes', clientes_path
-				%li
-					= link_to "Ver Actividad", actividades_path
-	.span10
-		.row-fluid
-			.span6
-				%h2 Ultimos usuarios
-				= render 'ultimos_usuarios', :usuarios => @ultimosUsuarios
-			.span5.offset1
-				%h2 Visor de actividad reciente
-				= render '/actividades/log_actividad_reciente', :actividades => @actividades
+  .span2
+    .well.sidebar-nav
+      %h3= @title
+      %h5 Acciones
+      %ul.nav.nav-pills.nav-stacked
+        %li
+          = link_to "Crear Usuario", crearusuario_path
+        %li
+          = link_to "Trabajar con Usuarios", usuarios_path
+        %li
+          = link_to "Trabajar con Turnos", turnos_path
+        %li
+          = link_to 'Trabajar con Clientes', clientes_path
+        %li
+          = link_to "Ver Actividad", actividades_path
+        %li
+          = link_to 'Zafras', zafras_path
+  .span10
+    .row-fluid
+      .span6
+        %h2 Ultimos usuarios
+        = render 'ultimos_usuarios', :usuarios => @ultimosUsuarios
+      .span5.offset1
+        %h2 Visor de actividad reciente
+        = render '/actividades/log_actividad_reciente', :actividades => @actividades
 =render 'layouts/footer'

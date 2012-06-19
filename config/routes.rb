@@ -63,6 +63,8 @@ Laboratorio::Application.routes.draw do
 
 	match '/dia/:fecha/insumos/validar', :to => 'insumos#validar', :as => :validar_insumo_turno
 
+	match '/validar-zafras', :to => 'zafras#validar', :as => :validar_zafra
+
 	match '/dia/:fecha/recepcion/validar', :to => 'recepcions#validar', :as => :validar_recepcion
 
 	match '/dia/:fecha/produccionMasa/validar', :to => 'produccion_masas#validar', :as => :validar_produccion_masas

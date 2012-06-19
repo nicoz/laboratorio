@@ -1,14 +1,16 @@
 $(window).scroll(function () {
-    if (! isScrolledIntoView($('thead')))
-    {
+  if ($('#form-analisis').length > 0 ) {
+      if (! isScrolledIntoView($('thead')))
+      {
         // anchor div isn't visible in view so apply new style to follow div to follow on scroll
         $('#follow').css({ position: 'fixed', top: '40px', margin:0 });
         $('th').css({ width:'120px !important', 'padding-left':'10px !important', 'padding-right':'0 !important'});
-    }
-    else
-    {
+      }
+      else
+      {
         // anchor div is visible in view so apply default style back to follow div to place in default position
         $('#follow').css({ position: 'relative', top: '0px' });
+      }
     }
 });
 

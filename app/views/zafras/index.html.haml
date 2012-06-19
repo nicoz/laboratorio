@@ -1,0 +1,14 @@
+.row-fluid
+  .span2
+    .well.sidebar-nav
+      %h3= @title
+      %h5 Acciones
+      = link_to "Crear Zafra", new_zafra_path, :class => "btn btn-large btn-info"
+  .span9
+    .row-fluid
+      = render 'index-filters'
+    .row-fluid
+      .span10
+        = render 'index-content-table', :zafras => @zafras
+
+=render '/layouts/footer'

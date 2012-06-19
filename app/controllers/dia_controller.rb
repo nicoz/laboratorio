@@ -1,5 +1,6 @@
 class DiaController < ApplicationController
   before_filter :autenticar,     :only => [:show, :dias]
+  before_filter :validar_turno_dia,	:only => [:show]
 
   add_breadcrumb 'Escritorio', '/escritorio'
 
@@ -76,7 +77,7 @@ class DiaController < ApplicationController
     if !params[:fecha].nil?
       fecha = Date.parse(params[:fecha])
       inicio = (fecha.to_time - 45.days).to_date
-      fin = (fecha.to_time + 45.days).to_date
+      fin = Time.now.to_date
 
       zafras = Zafra.where('dia_inicio >= ? and dia_inicio <= ?', inicio, Time.now.to_date)
 
@@ -89,20 +90,23 @@ class DiaController < ApplicationController
 
         zafras.each do |zafra|
           if !zafra.dia_fin.nil?
-            fondo = '#888888' if dia >= zafra.dia_inicio and dia <= zafra.dia_fin
+            fondo = '#B80000' if dia >= zafra.dia_inicio and dia <= zafra.dia_fin
           else
             fondo = '#FF9933' if dia >= zafra.dia_inicio and dia <= Time.now.to_date
           end
         end
 
-        fondo = '#B80000' if dia > Time.now.to_date
+        fondo = '#FFFFFF' if dia > Time.now.to_date
         texto = 'white'
+        texto = '#888888' if dia > Time.now.to_date
+        borde = fondo
+        borde = texto if dia > Time.now.to_date
         insumosDiarios = {:id => segundos, :title => 'Insumos Diarios',
             :url => crear_insumo_diario_path(dia),
             :start => (dia.to_time + segundos.seconds),
             :className => 'evento-activo',
             :backgroundColor => fondo,
-            :borderColor => fondo,
+            :borderColor => borde,
             :textColor => texto
             }
         segundos = segundos + 1
@@ -111,7 +115,7 @@ class DiaController < ApplicationController
             :start => (dia.to_time + segundos.seconds),
             :className => 'evento-activo',
             :backgroundColor => fondo,
-            :borderColor => fondo,
+            :borderColor => borde,
             :textColor => texto
             }
         segundos = segundos + 1
@@ -120,7 +124,7 @@ class DiaController < ApplicationController
             :start => (dia.to_time + segundos.seconds),
             :className => 'evento-activo',
             :backgroundColor => fondo,
-            :borderColor => fondo,
+            :borderColor => borde,
             :textColor => texto
             }
         segundos = segundos + 1
@@ -129,7 +133,7 @@ class DiaController < ApplicationController
           :start => (dia.to_time + segundos.seconds),
           :className => 'evento-activo',
           :backgroundColor => fondo,
-          :borderColor => fondo,
+          :borderColor => borde,
           :textColor => texto
           }
         segundos = segundos + 1
@@ -138,7 +142,7 @@ class DiaController < ApplicationController
           :start => (dia.to_time + segundos.seconds),
           :className => 'evento-activo',
           :backgroundColor => fondo,
-          :borderColor => fondo,
+          :borderColor => borde,
           :textColor => texto
           }
           #ver_analisis_turno
@@ -148,7 +152,7 @@ class DiaController < ApplicationController
           :start => (dia.to_time + segundos.seconds),
           :className => 'evento-activo',
           :backgroundColor => fondo,
-          :borderColor => fondo,
+          :borderColor => borde,
           :textColor => texto
           }
         segundos = segundos + 1
@@ -157,7 +161,7 @@ class DiaController < ApplicationController
           :start => (dia.to_time + segundos.seconds),
           :className => 'evento-activo',
           :backgroundColor => fondo,
-          :borderColor => fondo,
+          :borderColor => borde,
           :textColor => texto
           }
         respuesta << insumosDiarios

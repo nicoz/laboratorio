@@ -1,0 +1,15 @@
+.pagination{:style => "margin-bottom:5px;"}
+	= will_paginate(zafras, :renderer => PaginationListLinkRenderer)
+
+%table#table-zafras.table.table-striped
+	%thead
+		%tr
+			%th.green.header Dia Inicio
+			%th.blue.header Dia fin
+			%th Acciones
+	%tbody
+		- @zafras.each do |zafra|
+			%tr.odd
+				= render 'zafra', :zafra => zafra
+%nav.pagination
+	= will_paginate(zafras, :renderer => PaginationListLinkRenderer)
