@@ -38,7 +38,7 @@ class InformesController < ApplicationController
       end
     end
 
-    render :layout => false
+    render :layout => 'informes'
 
   end
 end
