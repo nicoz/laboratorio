@@ -1,0 +1,8 @@
+%head
+  %link{"rel" => "stylesheet", "href" => "/assets/bootstrap.min.css", "type" => "text/css"}
+.container
+  .well
+    %h1 Producci&oacute;n por turno
+  .row
+    .span12
+      =render 'produccion_turno_turnos', :turnos => @dia.turnos, :total => @totales, :clientes => @clientes

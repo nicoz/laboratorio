@@ -44,6 +44,8 @@ group :test do
   gem 'turn', :require => false
 end
 
+gem 'pdfkit'
+
 group :production do
 	gem 'pg'
 end
