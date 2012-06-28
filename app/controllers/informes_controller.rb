@@ -41,7 +41,7 @@ class InformesController < ApplicationController
         @totales[:bigBagDnd] += turno.produccion.bigBagDnd
 
         @granTotal[turno.turno.nombre] = turno.produccion.paquetesPapel +
-          turno.produccion.paquetesPolietileno + turno.produccion.rubio +
+          turno.produccion.paquetesPolietileno +
           turno.produccion.industriaBolsas + turno.produccion.bolsasAzucarlito +
           turno.produccion.bigBagAzucarlito + turno.produccion.bigBagDnd
 
@@ -55,7 +55,7 @@ class InformesController < ApplicationController
       end
 
       @granTotal[:totales] += @totales[:paquetesPapel] + @totales[:paquetesPolietileno] +
-        @totales[:rubio] + @totales[:industriaBolsas] + @totales[:bolsasAzucarlito] +
+        @totales[:industriaBolsas] + @totales[:bolsasAzucarlito] +
         @totales[:bigBagAzucarlito] + @totales[:bigBagDnd]
 
       render :layout => 'informes'
