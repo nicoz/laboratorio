@@ -1,0 +1,8 @@
+
+@media print {
+
+  .pdf_link {
+    display:none;
+  }
+
+}
