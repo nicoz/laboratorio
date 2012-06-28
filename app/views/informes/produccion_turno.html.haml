@@ -8,7 +8,7 @@
         = link_to 'Volver', ver_dia_path(@dia.fecha), :class => 'btn btn-error btn-big'
   .row
     .span12
-      =render 'produccion_turno_turnos', :turnos => @dia.turnos, :total => @totales, :clientes => @clientes
+      =render 'produccion_turno_turnos', :turnos => @turnos, :total => @totales, :clientes => @clientes
   .row
     .span12
       %p.no_print

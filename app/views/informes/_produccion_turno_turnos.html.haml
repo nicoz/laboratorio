@@ -62,3 +62,8 @@
             -if unCliente.cliente.nombre == cliente
               %td= unCliente.azucar_big_bag
         %td= total[cliente]
+    %tr
+      %td Totales Kg
+      - turnos.each do |turno|
+        %td= @granTotal[turno.turno.nombre]
+      %td= @granTotal[:totales]

@@ -17,6 +17,7 @@ class InformesController < ApplicationController
       }
 
       @clientes = []
+      @granTotal = {:totales => 0}
 
       turno1 = @dia.turnos.first
       turno1.produccion.clientes.each do |cliente|
@@ -24,7 +25,12 @@ class InformesController < ApplicationController
         @clientes << cliente.cliente.nombre
 
       end
-      @dia.turnos.each do |turno|
+      @turnos = @dia.turnos.sort_by {|obj| obj.turno.orden}
+
+
+      @turnos.each do |turno|
+        @granTotal[turno.turno.nombre] = 0
+
         @totales[:paquetesPapel] += turno.produccion.paquetesPapel
         @totales[:paquetesPolietileno] += turno.produccion.paquetesPolietileno
         @totales[:melaza] += turno.produccion.melaza
@@ -34,11 +40,23 @@ class InformesController < ApplicationController
         @totales[:bigBagAzucarlito] += turno.produccion.bigBagAzucarlito
         @totales[:bigBagDnd] += turno.produccion.bigBagDnd
 
+        @granTotal[turno.turno.nombre] = turno.produccion.paquetesPapel +
+          turno.produccion.paquetesPolietileno + turno.produccion.rubio +
+          turno.produccion.industriaBolsas + turno.produccion.bolsasAzucarlito +
+          turno.produccion.bigBagAzucarlito + turno.produccion.bigBagDnd
 
         turno.produccion.clientes.each do |cliente|
           @totales[cliente.cliente.nombre] += cliente.azucar_big_bag
+          @granTotal[turno.turno.nombre] += cliente.azucar_big_bag
+          @granTotal[:totales] += cliente.azucar_big_bag
         end
+
+
       end
+
+      @granTotal[:totales] += @totales[:paquetesPapel] + @totales[:paquetesPolietileno] +
+        @totales[:rubio] + @totales[:industriaBolsas] + @totales[:bolsasAzucarlito] +
+        @totales[:bigBagAzucarlito] + @totales[:bigBagDnd]
 
       render :layout => 'informes'
     else
