@@ -104,7 +104,7 @@ Laboratorio::Application.routes.draw do
 
 
   #INFORMES
-  match '/informes/:fecha/produccion_por_turno', :to => 'informes#produccion_turno', :as => :produccion_turno
+  match '/informes/:fecha/produccion_por_turno', :to => 'informes#produccion_turno', :as => :informe_produccion_turno
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

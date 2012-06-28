@@ -21,54 +21,66 @@
   .span10
     .row-fluid
       .span7
-        %h1= "Observaciones #{l @dia.fecha}"
-        - if @dia.observaciones.blank?
-          = link_to "Ingresar observaciones", editar_dia_path(@dia.fecha), :class => 'btn btn-success'
-        - else
-          %p=raw @dia.observaciones
-          %p= link_to "Editar observaciones", editar_dia_path(@dia.fecha), :class => 'btn btn-info'
+        .row-fluid
+          %h1= "Observaciones #{l @dia.fecha}"
+          - if @dia.observaciones.blank?
+            = link_to "Ingresar observaciones", editar_dia_path(@dia.fecha), :class => 'btn btn-success'
+          - else
+            %p=raw @dia.observaciones
+            %p= link_to "Editar observaciones", editar_dia_path(@dia.fecha), :class => 'btn btn-info'
+        .row-fluid.primero
+          .span7
+            %h2 Recepcion
+            %ul.nav.nav-pills
+              %li
+                = link_to "Recepcion de crudo y balance", crear_recepcion_path(@dia.fecha)
+
+        .row-fluid
+          .span7
+            %h2 Produccion
+            %ul.nav.nav-pills
+              %li
+                = link_to "Produccion Masas Cocidas", crear_produccion_masa_path(@dia.fecha)
+              %li
+                = link_to "Produccion Por turno", crear_produccion_path(@dia.fecha)
+
+        .row-fluid
+          .span7
+            %h2 Insumos
+            %ul.nav.nav-pills
+              %li
+                = link_to "Insumos Diarios", crear_insumo_diario_path(@dia.fecha)
+              %li
+                = link_to "Insumos Por turno", crear_insumo_path(@dia.fecha)
+
+        .row-fluid
+          .span7
+            %h2 Analisis
+            %ul.nav.nav-pills
+              - @turnos.each do |turno|
+                %li
+                  = link_to "Analisis de #{turno.nombre}", crear_analisis_path(@dia.fecha, turno.id)
       .span5
-        - if @zafra.nil?
-          %h2 Zafra
-          %p No hay zafra activa
-          %p= link_to 'Iniciar Zafra', nueva_zafra_path(@dia.fecha), :class => 'btn btn-success link_zafra', :id => 'crear_zafra'
-        - else
-          %h2= "Zafra #{l @zafra.dia_inicio}"
-          %p= "Dia numero: #{time_diff(@zafra.dia_inicio, @dia.fecha)[2] + 1}"
-          - if @zafra.dia_fin.nil?
-            %p= link_to 'Finalizar Zafra', fin_zafra_path(@dia.fecha, @zafra.dia_inicio), :class => 'btn btn-danger link_zafra', :id => 'fin_zafra'
-    .row-fluid
-      .span7
-        %h2 Recepcion
-        %ul.nav.nav-pills
-          %li
-            = link_to "Recepcion de crudo y balance", crear_recepcion_path(@dia.fecha)
+        .row-fluid
+          .span12
+            - if @zafra.nil?
+              %h2 Zafra
+              %p No hay zafra activa
+              %p= link_to 'Iniciar Zafra', nueva_zafra_path(@dia.fecha), :class => 'btn btn-success link_zafra', :id => 'crear_zafra'
+            - else
+              %h2= "Zafra #{l @zafra.dia_inicio}"
+              %p= "Dia numero: #{time_diff(@zafra.dia_inicio, @dia.fecha)[2] + 1}"
+              - if @zafra.dia_fin.nil?
+                %p= link_to 'Finalizar Zafra', fin_zafra_path(@dia.fecha, @zafra.dia_inicio), :class => 'btn btn-danger link_zafra', :id => 'fin_zafra'
+        .row-fluid
+          .span12
+            %h2 Informes del d&iacute;a
+            %h3 Producci&oacute;n
+            %ul.nav.nav-pills
+              - if tieneProduccion(@dia.fecha)
+                %li
+                  = link_to "Produccion por turno", informe_produccion_turno_path(@dia.fecha)
 
-    .row-fluid
-      .span7
-        %h2 Produccion
-        %ul.nav.nav-pills
-          %li
-            = link_to "Produccion Masas Cocidas", crear_produccion_masa_path(@dia.fecha)
-          %li
-            = link_to "Produccion Por turno", crear_produccion_path(@dia.fecha)
-
-    .row-fluid
-      .span7
-        %h2 Insumos
-        %ul.nav.nav-pills
-          %li
-            = link_to "Insumos Diarios", crear_insumo_diario_path(@dia.fecha)
-          %li
-            = link_to "Insumos Por turno", crear_insumo_path(@dia.fecha)
-
-    .row-fluid
-      .span7
-        %h2 Analisis
-        %ul.nav.nav-pills
-          - @turnos.each do |turno|
-            %li
-              = link_to "Analisis de #{turno.nombre}", crear_analisis_path(@dia.fecha, turno.id)
 
 
 

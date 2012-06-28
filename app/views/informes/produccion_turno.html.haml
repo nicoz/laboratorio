@@ -3,4 +3,14 @@
     %h1 Producci&oacute;n por turno
   .row
     .span12
+      %p.pdf_link
+        = link_to 'Imprimir', informe_produccion_turno_path(@dia.fecha, :format => 'pdf'), :class => 'btn btn-success btn-big'
+        = link_to 'Volver', ver_dia_path(@dia.fecha), :class => 'btn btn-error btn-big'
+  .row
+    .span12
       =render 'produccion_turno_turnos', :turnos => @dia.turnos, :total => @totales, :clientes => @clientes
+  .row
+    .span12
+      %p.pdf_link
+        = link_to 'Imprimir', informe_produccion_turno_path(@dia.fecha, :format => 'pdf'), :class => 'btn btn-success btn-big'
+        = link_to 'Volver', ver_dia_path(@dia.fecha), :class => 'btn btn-error btn-big'
