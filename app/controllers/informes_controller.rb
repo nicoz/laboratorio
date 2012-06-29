@@ -2,12 +2,15 @@ class InformesController < ApplicationController
   before_filter :autenticar
 
   def produccion_turno
+
     fecha = Date.parse(params[:fecha])
     @dia = Dia.find_by_fecha(fecha)
 
-    tieneDatos = true
+    @title = "Produccion por turno #{l @dia.fecha}"
+
+    tieneDatos = false
     @dia.turnos.each do |turno|
-        resultado = true if !turno.produccion.nil?
+        tieneDatos = true if !turno.produccion.nil?
     end
 
     if tieneDatos
