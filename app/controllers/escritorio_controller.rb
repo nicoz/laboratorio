@@ -7,15 +7,16 @@ class EscritorioController < ApplicationController
 			@actividades = Actividad.find(:all, :order => "created_at desc", :limit => 5)
 			@ultimosUsuarios = Usuario.find(:all, :order => "created_at desc", :limit => 5)
 		end
-	
+
 		if !usuario_actual.admin?
 			mes = Date.today.month
-			@date = Date.today
+			@date = Date.parse(params[:dia]) if !params[:dia].nil?
+			@date = Date.today if @date.nil?
 			if !params[:mes].nil?
 				mes = params[:mes]
 			end
 			@dias = Dia.all
-			#where("fecha.month = mes")
+
 		end
 	else
 		redirect_to ingresar_path(usuario_actual)

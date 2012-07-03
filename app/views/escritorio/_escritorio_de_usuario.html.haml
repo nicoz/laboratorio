@@ -12,6 +12,7 @@
     .row-fluid
       .span9
         %h2 Calendario de actividad
+        %input{:type => 'hidden', :name => 'dia', :id => 'dia', :value => "#{@date}"}
         = render 'dias'
       .span1
         %table.table

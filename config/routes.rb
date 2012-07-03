@@ -97,6 +97,7 @@ Laboratorio::Application.routes.draw do
   match '/ayuda',   :to => 'paginas#ayuda'
   match '/acerca',   :to => 'paginas#acerca'
   match '/escritorio',  :to => 'escritorio#show'
+  match '/escritorio/:dia',  :to => 'escritorio#show', :as => 'escritorio_dia'
 
   match '/usuarios/:id/modificarclave',  :to => 'usuarios#edit_password', :as => :modificarclave
   match 'usuarios/:id/reiniciarclave',  :to => 'usuarios#reset_password', :as => :reiniciarclave
