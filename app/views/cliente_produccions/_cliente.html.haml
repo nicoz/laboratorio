@@ -1,0 +1,4 @@
+%td= cliente.cliente.nombre
+%td
+  = link_to cliente_produccion_destroy_path(@dia.fecha, cliente.id), :method => :delete, :confirm => "Seguro que desea borrar el cliente: #{cliente.cliente.nombre}?", :title => "Borrar #{cliente.cliente.nombre}" do
+    %i.icon.icon-trash

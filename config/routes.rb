@@ -59,6 +59,8 @@ Laboratorio::Application.routes.draw do
 
   resources :analises, :only => [:create, :destroy, :update, :show]
 
+  resources :cliente_produccions, :only => [:new, :create, :destroy]
+
   match '/dia/:fecha/insumos/nuevo', :to => 'insumos#new', :as => :crear_insumo
 
   match '/dia/:fecha/insumos/validar', :to => 'insumos#validar', :as => :validar_insumo_turno
@@ -79,6 +81,9 @@ Laboratorio::Application.routes.draw do
 
   match '/validarcliente', :to => 'cliente_produccions#validar', :as => :validar_produccion_turno
 
+  match '/dia/:fecha/clientes', :to => 'cliente_produccions#index', :as => :cliente_produccion
+
+  match '/dia/:fecha/clientes/:id', :to => 'cliente_produccions#destroy', :via => 'delete', :as => :cliente_produccion_destroy
 
   match '/actividad/:id',  :to => 'actividades#show', :as => :actividad
   match '/actividades',  :to => 'actividades#index', :as => :actividades

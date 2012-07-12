@@ -17,6 +17,8 @@
         - @turnos.each do |turno|
           %li
             = link_to "Analisis de #{turno.nombre}", crear_analisis_path(@dia.fecha, turno.id)
+        %li
+          = link_to "Clientes del dia", cliente_produccion_path(@dia.fecha)
 
   .span10
     .row-fluid

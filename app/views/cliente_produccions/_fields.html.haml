@@ -1,0 +1,10 @@
+%fieldset
+  %legend=@title
+  = f.hidden_field :dia_id, :value => @dia.id
+  .control-group.primero
+    = f.label :cliente, :class => 'control-label'
+    .input
+      = f.select :cliente_id, @activos.collect { |c| [c.nombre, c.id] }
+  .form-actions
+    = f.submit boton, :class => "btn btn-large btn-primary"
+    = link_to 'Cancelar', cliente_produccion_path(@dia.fecha), :class => "btn btn-large btn-danger"
