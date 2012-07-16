@@ -74,14 +74,7 @@
               %p= "Dia numero: #{time_diff(@zafra.dia_inicio, @dia.fecha)[2] + 1}"
               - if @zafra.dia_fin.nil?
                 %p= link_to 'Finalizar Zafra', fin_zafra_path(@dia.fecha, @zafra.dia_inicio), :class => 'btn btn-danger link_zafra', :id => 'fin_zafra'
-        .row-fluid
-          .span12
-            %h2 Informes del d&iacute;a
-            %h3 Producci&oacute;n
-            %ul.nav.nav-pills
-              - if tieneProduccion(@dia.fecha)
-                %li
-                  = link_to "Produccion por turno", informe_produccion_turno_path(@dia.fecha)
+        =render 'informes_dia'
 
 
 

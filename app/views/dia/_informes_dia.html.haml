@@ -1,0 +1,21 @@
+.row-fluid
+  .span12
+    %h2 Informes del d&iacute;a
+    %h3 Recepci&oacute;n
+    %ul.nav.nav-pills
+      -if tiene_recepcion(@dia.fecha)
+        %li
+          = link_to "Recepcion de crudo y balance", informe_recepcion_path(@dia.fecha)
+    %h3 Producci&oacute;n
+    %ul.nav.nav-pills
+      - if tieneProduccion(@dia.fecha)
+        %li
+          = link_to "Produccion por turno", informe_produccion_turno_path(@dia.fecha)
+      - if tiene_produccion_masas(@dia.fecha)
+        %li
+          = link_to "Produccion Masas Cocidas", informe_produccion_masas_cocidas_path(@dia.fecha)
+    %h3 Insumos
+    %ul.nav.nav-pills
+      -if tiene_insumos_diarios(@dia.fecha)
+        %li
+          = link_to "Insumos Diarios", informe_insumos_diarios_path(@dia.fecha) 

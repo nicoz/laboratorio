@@ -1,0 +1,17 @@
+.container
+  .well
+    %h1
+      = @title
+  .row
+    .span12
+      %p.no_print
+        = link_to 'Imprimir', informe_produccion_masas_cocidas_path(@dia.fecha, :format => 'pdf'), :class => 'btn btn-success btn-large'
+        = link_to 'Volver', ver_dia_path(@dia.fecha), :class => 'btn btn-danger btn-large'
+  .row
+    .span12
+      =render 'produccion_masas_cocidas', :produccionMasa => @dia.produccionMasa
+  .row
+    .span12
+      %p.no_print
+        = link_to 'Imprimir', informe_produccion_masas_cocidas_path(@dia.fecha, :format => 'pdf'), :class => 'btn btn-success btn-large'
+        = link_to 'Volver', ver_dia_path(@dia.fecha), :class => 'btn btn-danger btn-large'

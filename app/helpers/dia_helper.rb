@@ -13,4 +13,22 @@ module DiaHelper
 
   end
 
+  def tiene_recepcion(fecha)
+
+    dia = Dia.find_by_fecha(fecha)
+
+    return !dia.recepcion.nil?
+  end
+
+  def tiene_produccion_masas(fecha)
+    dia = Dia.find_by_fecha(fecha)
+
+    return !dia.produccionMasa.nil?
+  end
+
+  def tiene_insumos_diarios(fecha)
+    dia = Dia.find_by_fecha(fecha)
+
+    return !dia.insumoDiario.nil?
+  end
 end

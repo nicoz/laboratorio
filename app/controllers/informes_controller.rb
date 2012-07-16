@@ -66,4 +66,25 @@ class InformesController < ApplicationController
       redirect_to ver_dia_path(@dia.fecha)
     end
   end
+
+  def produccion_masas_cocidas
+    fecha = Date.parse(params[:fecha])
+    @dia = Dia.find_by_fecha(fecha)
+
+    @title = "Produccion Masas Cocidas #{l @dia.fecha}"
+  end
+
+  def recepcion
+    fecha = Date.parse(params[:fecha])
+    @dia = Dia.find_by_fecha(fecha)
+
+    @title = "Recepcion de crudo y balance #{l @dia.fecha}"
+  end
+
+  def insumos_diarios
+    fecha = Date.parse(params[:fecha])
+    @dia = Dia.find_by_fecha(fecha)
+
+    @title = "Insumos Diarios #{l @dia.fecha}"
+  end
 end
