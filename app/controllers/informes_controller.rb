@@ -72,6 +72,8 @@ class InformesController < ApplicationController
     @dia = Dia.find_by_fecha(fecha)
 
     @title = "Produccion Masas Cocidas #{l @dia.fecha}"
+
+    render :layout => 'informes'
   end
 
   def recepcion
@@ -79,6 +81,7 @@ class InformesController < ApplicationController
     @dia = Dia.find_by_fecha(fecha)
 
     @title = "Recepcion de crudo y balance #{l @dia.fecha}"
+    render :layout => 'informes'
   end
 
   def insumos_diarios
@@ -86,5 +89,22 @@ class InformesController < ApplicationController
     @dia = Dia.find_by_fecha(fecha)
 
     @title = "Insumos Diarios #{l @dia.fecha}"
+    render :layout => 'informes'
+  end
+
+  def insumos_por_turno
+    fecha = Date.parse(params[:fecha])
+    @dia = Dia.find_by_fecha(fecha)
+
+    @title = "Insumos por turno #{l @dia.fecha}"
+
+    @totales = { :crudoProcesado => 0, :tiraje => 0}
+
+    @dia.turnos.each do |turno|
+      @totales[:crudoProcesado] += turno.insumo.crudoProcesado
+      @totales[:tiraje] += turno.insumo.tiraje
+    end
+
+    render :layout => 'informes'
   end
 end

@@ -31,4 +31,15 @@ module DiaHelper
 
     return !dia.insumoDiario.nil?
   end
+
+  def tiene_insumos_por_turno(fecha)
+    dia = Dia.find_by_fecha(fecha)
+    resultado = false
+
+    dia.turnos.each do |turno|
+        resultado = true if !turno.insumo.nil?
+    end
+
+    return resultado
+  end
 end

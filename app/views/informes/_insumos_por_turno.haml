@@ -1,0 +1,20 @@
+%table.table
+  %thead
+    %tr
+      %th= '#'
+      - turnos.each do |turno|
+        %th= turno.turno.nombre
+      %th= 'Total'
+  %tbody
+    %tr
+      %td
+        Crudo Procesado Kg.
+      - turnos.each do |turno|
+        %td= turno.insumo.crudoProcesado
+      %td= total[:crudoProcesado]
+    %tr
+      %td
+        Tiraje
+      - turnos.each do |turno|
+        %td= turno.insumo.tiraje
+      %td= total[:tiraje]

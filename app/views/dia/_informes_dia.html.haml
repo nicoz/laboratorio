@@ -18,4 +18,7 @@
     %ul.nav.nav-pills
       -if tiene_insumos_diarios(@dia.fecha)
         %li
-          = link_to "Insumos Diarios", informe_insumos_diarios_path(@dia.fecha) 
+          = link_to "Insumos Diarios", informe_insumos_diarios_path(@dia.fecha)
+      -if tiene_insumos_por_turno(@dia.fecha)
+        %li
+          = link_to "Insumos Por Turno", informe_insumos_por_turno_path(@dia.fecha)
