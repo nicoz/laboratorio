@@ -22,3 +22,8 @@
       -if tiene_insumos_por_turno(@dia.fecha)
         %li
           = link_to "Insumos Por Turno", informe_insumos_por_turno_path(@dia.fecha)
+    %h3 Analisis
+    %ul.nav.nav-pills
+      -if tiene_analisis(@dia.fecha)
+        %li
+          = link_to "Promedio de Analisis", informe_analisis_promedio_path(@dia.fecha)

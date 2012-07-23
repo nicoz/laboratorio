@@ -42,4 +42,17 @@ module DiaHelper
 
     return resultado
   end
+
+  def tiene_analisis(fecha)
+
+    dia = Dia.find_by_fecha(fecha)
+    resultado = false
+
+    dia.turnos.each do |turno|
+        resultado = true if !turno.analisis.nil?
+    end
+
+    return resultado
+
+  end
 end

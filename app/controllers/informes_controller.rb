@@ -14,6 +14,8 @@ class InformesController < ApplicationController
     end
 
     if tieneDatos
+      @dia.turnos.sort! { |a,b| a.turno.orden <=> b.turno.orden }
+
       @totales = {:paquetesPapel => 0, :paquetesPolietileno => 0, :melaza => 0,
         :rubio => 0, :industriaBolsas => 0, :bolsasAzucarlito => 0, :bigBagAzucarlito => 0,
         :bigBagDnd => 0
@@ -100,10 +102,49 @@ class InformesController < ApplicationController
 
     @totales = { :crudoProcesado => 0, :tiraje => 0}
 
+    @dia.turnos.sort! { |a,b| a.turno.orden <=> b.turno.orden }
+
     @dia.turnos.each do |turno|
       @totales[:crudoProcesado] += turno.insumo.crudoProcesado
       @totales[:tiraje] += turno.insumo.tiraje
     end
+
+    render :layout => 'informes'
+  end
+
+  def analisis_promedio
+    @dia = Dia.find_by_fecha(Date.parse(params[:fecha]))
+    @dia.turnos.sort! { |a,b| a.turno.orden <=> b.turno.orden }
+
+    @title = "Promedio de Analisis #{l @dia.fecha}"
+
+    #arranco los resultados con el primer dia cargado
+    @promedio = @dia.turnos.first.analisis.attributes
+
+    #saco los elementos del hash que no me sirven
+    @promedio.delete("id")
+    @promedio.delete("updated_at")
+    @promedio.delete("created_at")
+    @promedio.delete("turnoDia_id")
+
+    @promedio.each do |key, value|
+      cantidadTurnos = 1
+      @dia.turnos.each do |turno|
+        analisis = turno.analisis
+        if !analisis.nil?
+          if analisis.id != @dia.turnos.first.analisis.id
+            value = analisis[key] if value.nil?
+            value += analisis[key] if !value.nil? and !analisis[key].nil?
+            cantidadTurnos += 1 if !analisis[key].nil?
+          end
+        end
+      end
+
+      @promedio[key] = value / cantidadTurnos if cantidadTurnos > 0 and !value.nil?
+    end
+
+    #@promedio.delete("id")
+
 
     render :layout => 'informes'
   end

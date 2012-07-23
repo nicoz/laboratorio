@@ -115,6 +115,7 @@ Laboratorio::Application.routes.draw do
   match '/informes/:fecha/recepcion', :to => 'informes#recepcion', :as => :informe_recepcion
   match '/informes/:fecha/insumos_diarios', :to => 'informes#insumos_diarios', :as => :informe_insumos_diarios
   match '/informes/:fecha/insumos_por_turno', :to => 'informes#insumos_por_turno', :as => :informe_insumos_por_turno
+  match '/informes/:fecha/analisis_promedio', :to => 'informes#analisis_promedio', :as => :informe_analisis_promedio
 
 
   # The priority is based upon order of creation:
