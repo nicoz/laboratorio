@@ -26,4 +26,7 @@
     %ul.nav.nav-pills
       -if tiene_analisis(@dia.fecha)
         %li
-          = link_to "Promedio de Analisis", informe_analisis_promedio_path(@dia.fecha)
+          = link_to "Promedio del Dia", informe_analisis_promedio_path(@dia.fecha)
+      - if !@zafra.nil?
+        %li
+          = link_to "Promedio de la Zafra", informe_analisis_promedio_zafra_path(@dia.fecha)
