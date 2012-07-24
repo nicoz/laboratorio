@@ -202,7 +202,12 @@ class InformesController < ApplicationController
     end
 
     if !@promedio.nil?
-      render :layout => 'informes'
+      respond_to do |format|
+        format.html {render :layout => 'informes'}
+        format.xls { render :layout => 'informes' }
+      end
+
+
     else
       flash[:warning] = 'No existen datos de analisis ingresados para toda la zafra'
       redirect_to ver_dia_path(@dia.fecha)
