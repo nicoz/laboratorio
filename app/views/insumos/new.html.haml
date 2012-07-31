@@ -1,5 +1,5 @@
 .row-fluid
 	.span12
-		%form{ :id => 'form-insumos', :class => 'form-horizontal', :action => insumos_path(@dia), :method => 'POST'}
+		%form{ :id => 'form-insumos', :class => 'form-horizontal', :action => insumos_path(@dia.fecha), :method => 'POST'}
 			= render 'fields'
 = render '/layouts/footer'
