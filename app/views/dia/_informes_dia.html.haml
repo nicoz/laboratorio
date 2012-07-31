@@ -1,6 +1,9 @@
 .row-fluid
   .span12
     %h2 Informes del d&iacute;a
+    %ul.nav.nav-pills
+      %li
+        = link_to "Informe Diario", informe_diario_path(@dia.fecha)
     %h3 Recepci&oacute;n
     %ul.nav.nav-pills
       -if tiene_recepcion(@dia.fecha)

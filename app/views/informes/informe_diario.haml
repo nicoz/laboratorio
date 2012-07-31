@@ -1,0 +1,24 @@
+.container
+  .well.span12
+    .row
+      .span3
+        %img{:src => '/assets/logo.jpg'}
+      .span9
+        %h1{:style => 'padding-top:50px;'}
+          = @title
+  .span12
+    .row
+      .span12
+        %p.no_print
+          = link_to 'Imprimir', informe_diario_path(@dia.fecha, :format => 'pdf'), :class => 'btn btn-success btn-large'
+          = link_to 'Excel', informe_diario_path(@dia.fecha, :format => 'xls'), :class => 'btn btn-warning btn-large'
+          = link_to 'Volver', ver_dia_path(@dia.fecha), :class => 'btn btn-danger btn-large'
+    .row
+      .span12
+        =render 'informe_diario_tabla'
+    .row
+      .span12
+        %p.no_print
+          = link_to 'Imprimir', informe_diario_path(@dia.fecha, :format => 'pdf'), :class => 'btn btn-success btn-large'
+          = link_to 'Excel', informe_diario_path(@dia.fecha, :format => 'xls'), :class => 'btn btn-warning btn-large'
+          = link_to 'Volver', ver_dia_path(@dia.fecha), :class => 'btn btn-danger btn-large'

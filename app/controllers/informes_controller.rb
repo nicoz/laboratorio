@@ -20,43 +20,52 @@ class InformesController < ApplicationController
         :rubio => 0, :industriaBolsas => 0, :bolsasAzucarlito => 0, :bigBagAzucarlito => 0,
         :bigBagDnd => 0
       }
+      @turnos = @dia.turnos.sort_by {|obj| obj.turno.orden}
 
       @clientes = []
       @granTotal = {:totales => 0}
+      turno1 = nil
 
-      turno1 = @dia.turnos.first
-      turno1.produccion.clientes.each do |cliente|
-        @totales[cliente.cliente.nombre] = 0
-        @clientes << cliente.cliente.nombre
-
+      @dia.turnos.each do |turno|
+        turno1 = turno if !turno.produccion.nil? and turno1.nil?
       end
-      @turnos = @dia.turnos.sort_by {|obj| obj.turno.orden}
+
+      if !turno1.produccion.nil?
+        turno1.produccion.clientes.each do |cliente|
+          @totales[cliente.cliente.nombre] = 0
+          @clientes << cliente.cliente.nombre
+
+        end
+      end
+
 
 
       @turnos.each do |turno|
         @granTotal[turno.turno.nombre] = 0
 
-        @totales[:paquetesPapel] += turno.produccion.paquetesPapel
-        @totales[:paquetesPolietileno] += turno.produccion.paquetesPolietileno
-        @totales[:melaza] += turno.produccion.melaza
-        @totales[:rubio] += turno.produccion.rubio
-        @totales[:industriaBolsas] += turno.produccion.industriaBolsas
-        @totales[:bolsasAzucarlito] += turno.produccion.bolsasAzucarlito
-        @totales[:bigBagAzucarlito] += turno.produccion.bigBagAzucarlito
-        @totales[:bigBagDnd] += turno.produccion.bigBagDnd
+        if !turno.produccion.nil?
+          @totales[:paquetesPapel] += turno.produccion.paquetesPapel
+          @totales[:paquetesPolietileno] += turno.produccion.paquetesPolietileno
+          @totales[:melaza] += turno.produccion.melaza
+          @totales[:rubio] += turno.produccion.rubio
+          @totales[:industriaBolsas] += turno.produccion.industriaBolsas
+          @totales[:bolsasAzucarlito] += turno.produccion.bolsasAzucarlito
+          @totales[:bigBagAzucarlito] += turno.produccion.bigBagAzucarlito
+          @totales[:bigBagDnd] += turno.produccion.bigBagDnd
 
-        @granTotal[turno.turno.nombre] = turno.produccion.paquetesPapel +
-          turno.produccion.paquetesPolietileno +
-          turno.produccion.industriaBolsas + turno.produccion.bolsasAzucarlito +
-          turno.produccion.bigBagAzucarlito + turno.produccion.bigBagDnd
+          @granTotal[turno.turno.nombre] = turno.produccion.paquetesPapel +
+            turno.produccion.paquetesPolietileno +
+            turno.produccion.industriaBolsas + turno.produccion.bolsasAzucarlito +
+            turno.produccion.bigBagAzucarlito + turno.produccion.bigBagDnd
 
-        turno.produccion.clientes.each do |cliente|
-          @totales[cliente.cliente.nombre] += cliente.azucar_big_bag
-          @granTotal[turno.turno.nombre] += cliente.azucar_big_bag
-          @granTotal[:totales] += cliente.azucar_big_bag
+          turno.produccion.clientes.each do |cliente|
+            @totales[cliente.cliente.nombre] = 0 if @totales[cliente.cliente.nombre].nil?
+            @totales[cliente.cliente.nombre] += cliente.azucar_big_bag
+            @granTotal[turno.turno.nombre] += cliente.azucar_big_bag
+            @granTotal[:totales] += cliente.azucar_big_bag
+          end
+
         end
-
-
       end
 
       @granTotal[:totales] += @totales[:paquetesPapel] + @totales[:paquetesPolietileno] +
@@ -161,7 +170,7 @@ class InformesController < ApplicationController
     @title = "Promedio de Analisis de la zafra #{l @zafra.dia_inicio}"
 
     analisis_id_inicial = 0
-    fin = @zafra.dia_fin
+    fin = @dia.fecha
     fin = Date.current if fin.nil?
 
     @dias = Dia.where('fecha >= ? and fecha <= ?', @zafra.dia_inicio, fin)
@@ -211,6 +220,152 @@ class InformesController < ApplicationController
     else
       flash[:warning] = 'No existen datos de analisis ingresados para toda la zafra'
       redirect_to ver_dia_path(@dia.fecha)
+    end
+  end
+
+  def informe_diario
+    @dia = Dia.find_by_fecha(params[:fecha])
+
+    @zafra = Zafra.where('dia_inicio <= ? and (dia_fin >= ? or dia_fin is null)', @dia.fecha, @dia.fecha).first
+
+    @title = "INFORME DIARIO #{l @zafra.dia_inicio}"
+
+    @recepcion = Recepcion.new
+    @recepcion_zafra = @recepcion.attributes
+
+    @recepcion = @dia.recepcion if !@dia.recepcion.nil?
+
+    @insumo = Insumo.new.attributes
+    @insumo_promedio = Insumo.new.attributes
+    @insumo_zafra = Insumo.new.attributes
+    @insumo_zafra_promedio = Insumo.new.attributes
+
+    @produccion = Produccion.new.attributes
+    @produccion_zafra = Produccion.new.attributes
+
+    @insumo_diario = InsumoDiario.new
+    @insumo_diario_zafra = InsumoDiario.new.attributes
+
+    @insumo_diario = @dia.insumoDiario if !@dia.insumoDiario.nil?
+
+    @total_azucar_blanco = 0
+    @total_azucar_blanco_zafra = 0
+
+    total_produccion_clientes = 0
+    total_produccion_clientes_zafra = 0
+
+    @insumo['crudoProcesado'] = 0
+
+    @clientes = []
+
+    #CALCULO LOS DATOS DEL DIA ACTUAL
+    cantidad = 0
+    @dia.turnos.each do |turno|
+      @insumo['crudoProcesado'] += turno.insumo.crudoProcesado if !turno.insumo.nil?
+      if !turno.produccion.nil?
+        @produccion['paquetesPapel'] += turno.produccion.paquetesPapel
+        @produccion['paquetesPolietileno'] += turno.produccion.paquetesPolietileno
+        @produccion['melaza'] += turno.produccion.melaza
+        @produccion['rubio'] += turno.produccion.rubio
+        @produccion['industriaBolsas'] += turno.produccion.industriaBolsas
+        @produccion['bolsasAzucarlito'] += turno.produccion.bolsasAzucarlito
+        @produccion['bigBagAzucarlito'] += turno.produccion.bigBagAzucarlito
+        @produccion['bigBagDnd'] += turno.produccion.bigBagDnd
+
+        if !turno.produccion.clientes.nil?
+          turno.produccion.clientes.each do |cliente|
+            @produccion[cliente.cliente.nombre] = 0 if @produccion[cliente.cliente.nombre].nil?
+            @clientes << cliente.cliente.nombre unless @clientes.include?(cliente.cliente.nombre)
+            @produccion[cliente.cliente.nombre] += cliente.azucar_big_bag
+            total_produccion_clientes += cliente.azucar_big_bag
+          end
+        end
+      end
+
+      cantidad += 1
+    end
+
+    @total_azucar_blanco = @produccion['paquetesPapel'] + @produccion['paquetesPolietileno'] +
+      @produccion['industriaBolsas'] + @produccion['bolsasAzucarlito'] + @produccion['bigBagAzucarlito'] +
+      @produccion['bigBagDnd'] + total_produccion_clientes
+
+    @insumo_promedio['crudoProcesado'] = @insumo['crudoProcesado'] / cantidad if !@insumo['crudoProcesado'].nil? and cantidad > 0
+
+    fin = @dia.fecha
+    fin = Date.current if fin.nil?
+
+    @dias = Dia.where('fecha >= ? and fecha <= ?', @zafra.dia_inicio, fin)
+
+    @dias.each do |d|
+      @recepcion_zafra['azucar_crudo'] = 0 if @recepcion_zafra['azucar_crudo'].nil?
+      @recepcion_zafra['azucar_crudo'] += d.recepcion.azucar_crudo if !d.recepcion.nil?
+
+      @insumo_diario_zafra['cal_viva'] = 0 if @insumo_diario_zafra['cal_viva'].nil?
+      @insumo_diario_zafra['cal_viva'] += d.insumoDiario.cal_viva if !d.insumoDiario.nil?
+      @insumo_diario_zafra['carbon_activado'] = 0 if @insumo_diario_zafra['carbon_activado'].nil?
+      @insumo_diario_zafra['carbon_activado'] += d.insumoDiario.carbon_activado if !d.insumoDiario.nil?
+      @insumo_diario_zafra['auxiliar_filtracion'] = 0 if @insumo_diario_zafra['auxiliar_filtracion'].nil?
+      @insumo_diario_zafra['auxiliar_filtracion'] += d.insumoDiario.auxiliar_filtracion if !d.insumoDiario.nil?
+      @insumo_diario_zafra['acido_clorhidrico'] = 0 if @insumo_diario_zafra['acido_clorhidrico'].nil?
+      @insumo_diario_zafra['acido_clorhidrico'] += d.insumoDiario.acido_clorhidrico if !d.insumoDiario.nil?
+      @insumo_diario_zafra['lenia_caldera'] = 0 if @insumo_diario_zafra['lenia_caldera'].nil?
+      @insumo_diario_zafra['lenia_caldera'] += d.insumoDiario.lenia_caldera if !d.insumoDiario.nil?
+      @insumo_diario_zafra['chip'] = 0 if @insumo_diario_zafra['chip'].nil?
+      @insumo_diario_zafra['chip'] += d.insumoDiario.chip if !d.insumoDiario.nil?
+      @insumo_diario_zafra['aserrin'] = 0 if @insumo_diario_zafra['aserrin'].nil?
+      @insumo_diario_zafra['aserrin'] += d.insumoDiario.aserrin if !d.insumoDiario.nil?
+      @insumo_diario_zafra['gasoil'] = 0 if @insumo_diario_zafra['gasoil'].nil?
+      @insumo_diario_zafra['gasoil'] += d.insumoDiario.gasoil if !d.insumoDiario.nil?
+
+      d.turnos.each do |turno|
+        @insumo_zafra['crudoProcesado'] += turno.insumo.crudoProcesado if !turno.insumo.nil?
+
+        if !turno.produccion.nil?
+          @produccion_zafra['paquetesPapel'] += turno.produccion.paquetesPapel
+          @produccion_zafra['paquetesPolietileno'] += turno.produccion.paquetesPolietileno
+          @produccion_zafra['melaza'] += turno.produccion.melaza
+          @produccion_zafra['rubio'] += turno.produccion.rubio
+          @produccion_zafra['industriaBolsas'] += turno.produccion.industriaBolsas
+          @produccion_zafra['bolsasAzucarlito'] += turno.produccion.bolsasAzucarlito
+          @produccion_zafra['bigBagAzucarlito'] += turno.produccion.bigBagAzucarlito
+          @produccion_zafra['bigBagDnd'] += turno.produccion.bigBagDnd
+
+          if !turno.produccion.clientes.nil?
+            turno.produccion.clientes.each do |cliente|
+              @produccion_zafra[cliente.cliente.nombre] = 0 if @produccion_zafra[cliente.cliente.nombre].nil?
+              @clientes << cliente.cliente.nombre unless @clientes.include?(cliente.cliente.nombre)
+              @produccion_zafra[cliente.cliente.nombre] += cliente.azucar_big_bag
+              total_produccion_clientes_zafra += cliente.azucar_big_bag
+            end
+          end
+
+          @total_azucar_blanco_zafra += @produccion_zafra['paquetesPapel'] + @produccion_zafra['paquetesPolietileno'] +
+            @produccion_zafra['industriaBolsas'] + @produccion_zafra['bolsasAzucarlito'] + @produccion_zafra['bigBagAzucarlito'] +
+            @produccion_zafra['bigBagDnd'] + total_produccion_clientes_zafra
+        end
+      end
+    end
+
+    @total_recepcion = @recepcion.azucar_crudo
+    @total_recepcion_zafra = @recepcion_zafra['azucar_crudo']
+
+    @insumo_zafra_promedio['crudoProcesado'] = @insumo_zafra['crudoProcesado'] / @dias.size
+    @stock_mat_prima = @total_recepcion_zafra - @insumo_zafra['crudoProcesado']
+
+    @azucar_circulante_actual = (@insumo['crudoProcesado'].to_f * @recepcion.polarizacion.to_f) /
+       100 - (@total_azucar_blanco.to_f - ((@recepcion.perdida_en_azucar.to_f + @recepcion.azucar_en_melaza.to_f)*4)/100)
+
+    @perdida_en_azucar = (@insumo['crudoProcesado'].to_f*4)/100
+
+    @rendimiento_estimado = 0
+
+    @rendimiento_estimado = ((@total_azucar_blanco_zafra.to_f + @azucar_circulante_actual.to_f)/100)/@insumo_zafra['crudoProcesado'].to_f if @insumo_zafra['crudoProcesado'] != 0
+
+
+
+    respond_to do |format|
+      format.html {render :layout => 'informes'}
+      format.xls { render :layout => 'informes' }
     end
   end
 end
