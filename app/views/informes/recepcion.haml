@@ -1,7 +1,11 @@
 .container
-  .well
-    %h1
-      = @title
+  .span12{:style => 'height:120px'}
+    .row
+      .span3
+        %img{:src => '/assets/logo.png'}
+      .span9
+        %h1{:style => 'padding-top:50px;'}
+          = @title
   .row
     .span12
       %p.no_print
