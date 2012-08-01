@@ -119,3 +119,8 @@ input.success {
 .mensajes {
 	color: #B94A48 !important;
 }
+
+.titulo-reporte {
+  height: 140px !important;
+  margin-bottom: 30px !important;
+}

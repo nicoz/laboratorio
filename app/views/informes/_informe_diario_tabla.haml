@@ -76,7 +76,7 @@
         = @produccion['paquetesPapel']
       %td
         = 0 if @insumo['crudoProcesado'] == 0
-        = (@produccion['paquetesPapel'] / @insumo['crudoProcesado'] ) * 100 if @insumo['crudoProcesado'] != 0
+        = "%01.2f" % ((@produccion['paquetesPapel'] / @insumo['crudoProcesado'] ) * 100).to_s if @insumo['crudoProcesado'] != 0
       %td
         = 0 if @total_azucar_blanco == 0
         = "%01.2f" % ((@produccion['paquetesPapel'] / @total_azucar_blanco ) * 100).to_s if @total_azucar_blanco != 0
@@ -95,7 +95,7 @@
         = @produccion['paquetesPolietileno']
       %td
         = 0 if @insumo['crudoProcesado'] == 0
-        = (@produccion['paquetesPolietileno'] / @insumo['crudoProcesado'] ) * 100 if @insumo['crudoProcesado'] != 0
+        = "%01.2f" % ((@produccion['paquetesPolietileno'] / @insumo['crudoProcesado'] ) * 100).to_s if @insumo['crudoProcesado'] != 0
       %td
         = 0 if @total_azucar_blanco == 0
         = "%01.2f" % ((@produccion['paquetesPolietileno'] / @total_azucar_blanco ) * 100).to_s if @total_azucar_blanco != 0
@@ -109,42 +109,12 @@
         = "%01.2f" % ((@produccion_zafra['paquetesPolietileno'] / @total_azucar_blanco_zafra ) * 100).to_s if @total_azucar_blanco_zafra != 0
     %tr
       %td
-        Melaza
-      %td
-        = @produccion['melaza']
-      %td
-        = 0 if @insumo['crudoProcesado'] == 0
-        = (@produccion['melaza'] / @insumo['crudoProcesado'] ) * 100 if @insumo['crudoProcesado'] != 0
-      %td
-      %td
-        = @produccion_zafra['melaza']
-      %td
-        = 0 if @insumo_zafra['crudoProcesado'] == 0
-        = "%01.2f" % ((@produccion_zafra['melaza'] / @insumo_zafra['crudoProcesado'] ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
-      %td
-    %tr
-      %td
-        Azucar Rubio
-      %td
-        = @produccion['rubio']
-      %td
-        = 0 if @insumo['crudoProcesado'] == 0
-        = (@produccion['rubio'] / @insumo['crudoProcesado'] ) * 100 if @insumo['crudoProcesado'] != 0
-      %td
-      %td
-        = @produccion_zafra['rubio']
-      %td
-        = 0 if @insumo_zafra['crudoProcesado'] == 0
-        = "%01.2f" % ((@produccion_zafra['rubio'] / @insumo_zafra['crudoProcesado'] ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
-      %td
-    %tr
-      %td
         Azucar Industria Bolsas
       %td
         = @produccion['industriaBolsas']
       %td
         = 0 if @insumo['crudoProcesado'] == 0
-        = (@produccion['industriaBolsas'] / @insumo['crudoProcesado'] ) * 100 if @insumo['crudoProcesado'] != 0
+        = "%01.2f" % ((@produccion['industriaBolsas'] / @insumo['crudoProcesado'] ) * 100).to_s if @insumo['crudoProcesado'] != 0
       %td
         = 0 if @total_azucar_blanco == 0
         = "%01.2f" % ((@produccion['industriaBolsas'] / @total_azucar_blanco ) * 100).to_s if @total_azucar_blanco != 0
@@ -163,7 +133,7 @@
         = @produccion['bolsasAzucarlito']
       %td
         = 0 if @insumo['crudoProcesado'] == 0
-        = (@produccion['bolsasAzucarlito'] / @insumo['crudoProcesado'] ) * 100 if @insumo['crudoProcesado'] != 0
+        = "%01.2f" % ((@produccion['bolsasAzucarlito'] / @insumo['crudoProcesado'] ) * 100).to_s if @insumo['crudoProcesado'] != 0
       %td
         = 0 if @total_azucar_blanco == 0
         = "%01.2f" % ((@produccion['bolsasAzucarlito'] / @total_azucar_blanco ) * 100).to_s if @total_azucar_blanco != 0
@@ -182,7 +152,7 @@
         = @produccion['bigBagAzucarlito']
       %td
         = 0 if @insumo['crudoProcesado'] == 0
-        = (@produccion['bigBagAzucarlito'] / @insumo['crudoProcesado'] ) * 100 if @insumo['crudoProcesado'] != 0
+        = "%01.2f" % ((@produccion['bigBagAzucarlito'] / @insumo['crudoProcesado'] ) * 100).to_s if @insumo['crudoProcesado'] != 0
       %td
         = 0 if @total_azucar_blanco == 0
         = "%01.2f" % ((@produccion['bigBagAzucarlito'] / @total_azucar_blanco ) * 100).to_s if @total_azucar_blanco != 0
@@ -201,7 +171,7 @@
         = @produccion['bigBagDnd']
       %td
         = 0 if @insumo['crudoProcesado'] == 0
-        = (@produccion['bigBagDnd'] / @insumo['crudoProcesado'] ) * 100 if @insumo['crudoProcesado'] != 0
+        = "%01.2f" % ((@produccion['bigBagDnd'] / @insumo['crudoProcesado'] ) * 100).to_s if @insumo['crudoProcesado'] != 0
       %td
         = 0 if @total_azucar_blanco == 0
         = "%01.2f" % ((@produccion['bigBagDnd'] / @total_azucar_blanco ) * 100).to_s if @total_azucar_blanco != 0
@@ -221,8 +191,9 @@
           = @produccion[cliente]
         %td
           = 0 if @insumo['crudoProcesado'] == 0
-          = (@produccion[cliente].to_f / @insumo['crudoProcesado'].to_f ) * 100 if @insumo['crudoProcesado'] != 0
+          = "%01.2f" % ((@produccion[cliente].to_f / @insumo['crudoProcesado'].to_f ) * 100).to_s if @insumo['crudoProcesado'] != 0
         %td
+          = 0 if @total_azucar_blanco == 0
           = "%01.2f" % ((@produccion[cliente].to_f / @total_azucar_blanco.to_f ) * 100).to_s if @total_azucar_blanco != 0
         %td
           = @produccion_zafra[cliente]
@@ -231,10 +202,32 @@
           = "%01.2f" % ((@produccion_zafra[cliente].to_f / @insumo_zafra['crudoProcesado'].to_f ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
         %td
           = 0 if @total_azucar_blanco == 0
-          = "%01.2f" % ((@produccion_zafra[cliente] / @total_azucar_blanco_zafra ) * 100).to_s if @total_azucar_blanco_zafra != 0
+          = "%01.2f" % ((@produccion_zafra[cliente].to_f / @total_azucar_blanco_zafra.to_f ) * 100).to_s if @total_azucar_blanco_zafra != 0
     %tr
       %td
-        Total Azucar Blanco
+        Total Bolsas
+      %td
+        = @total_bolsas
+      %td
+      %td
+      %td
+        = @total_bolsas_zafra
+      %td
+      %td
+    %tr
+      %td
+        Total Big Bag
+      %td
+        = @total_big_bag
+      %td
+      %td
+      %td
+        = @total_big_bag_zafra
+      %td
+      %td
+    %tr
+      %td
+        %strong Total Azucar Blanco
       %td
         = @total_azucar_blanco
       %td
@@ -243,7 +236,36 @@
         = @total_azucar_blanco_zafra
       %td
       %td
-
+    %tr
+      %td
+        Melaza
+      %td
+        = @produccion['melaza']
+      %td
+        = 0 if @insumo['crudoProcesado'] == 0
+        = "%01.2f" % ((@produccion['melaza'] / @insumo['crudoProcesado'] ) * 100).to_s if @insumo['crudoProcesado'] != 0
+      %td
+      %td
+        = @produccion_zafra['melaza']
+      %td
+        = 0 if @insumo_zafra['crudoProcesado'] == 0
+        = "%01.2f" % ((@produccion_zafra['melaza'] / @insumo_zafra['crudoProcesado'] ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
+      %td
+    %tr
+      %td
+        Azucar Rubio
+      %td
+        = @produccion['rubio']
+      %td
+        = 0 if @insumo['crudoProcesado'] == 0
+        = "%01.2f" % ((@produccion['rubio'] / @insumo['crudoProcesado'] ) * 100).to_s if @insumo['crudoProcesado'] != 0
+      %td
+      %td
+        = @produccion_zafra['rubio']
+      %td
+        = 0 if @insumo_zafra['crudoProcesado'] == 0
+        = "%01.2f" % ((@produccion_zafra['rubio'] / @insumo_zafra['crudoProcesado'] ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
+      %td
 %table#materia-prima.table.table-condensed.table-bordered
   %thead
     %th

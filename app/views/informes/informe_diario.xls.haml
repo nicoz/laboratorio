@@ -1,0 +1,445 @@
+%table
+  %tr
+    %td
+      = "1- MATERIA PRIMA"
+    %td
+      DIA cant
+    %td
+      ACUMULADO cant
+  %tr
+    %td
+      RECEPCION
+    %td
+    %td
+  %tr
+    %td
+      Azucar Crudo
+    %td
+      = @recepcion.azucar_crudo if !@recepcion.nil?
+    %td
+      = @recepcion_zafra['azucar_crudo'] if !@recepcion_zafra['azucar_crudo'].nil?
+  %tr
+    %td
+      TOTAL
+    %td
+      = @total_recepcion
+    %td
+      = @total_recepcion_zafra
+  %tr
+    %td
+      ELABORACION
+    %td
+    %td
+  %tr
+    %td
+      Mat. Prima Procesada(crudo Procesado)
+    %td
+      = @insumo['crudoProcesado']
+    %td
+      = @insumo_zafra['crudoProcesado']
+  %tr
+    %td
+      Mat. Prima Procesada Promedio
+    %td
+      = @insumo_promedio['crudoProcesado']
+    %td
+      = @insumo_zafra_promedio['crudoProcesado']
+  %tr
+    %td
+      Stock Mat Prima
+    %td
+    %td
+      = @stock_mat_prima
+  %tr
+    %td
+      = "2- PRODUCCION"
+    %td
+      DIA cant
+    %td
+      = "% CRUDO"
+    %th
+      = "% BLANCO"
+    %th
+      ACUMULADO cant
+    %th
+      = "AC % CRUDO"
+    %th
+      = "AC % BLANCO"
+  %tr
+    %td
+      Paquetes Papel
+    %td
+      = @produccion['paquetesPapel']
+    %td
+      = 0 if @insumo['crudoProcesado'] == 0
+      = "%01.2f" % ((@produccion['paquetesPapel'] / @insumo['crudoProcesado'] ) * 100).to_s if @insumo['crudoProcesado'] != 0
+    %td
+      = 0 if @total_azucar_blanco == 0
+      = "%01.2f" % ((@produccion['paquetesPapel'] / @total_azucar_blanco ) * 100).to_s if @total_azucar_blanco != 0
+    %td
+      = @produccion_zafra['paquetesPapel']
+    %td
+      = 0 if @insumo_zafra['crudoProcesado'] == 0
+      = "%01.2f" % ((@produccion_zafra['paquetesPapel'] / @insumo_zafra['crudoProcesado'] ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
+    %td
+      = 0 if @total_azucar_blanco == 0
+      = "%01.2f" % ((@produccion_zafra['paquetesPapel'] / @total_azucar_blanco_zafra ) * 100).to_s if @total_azucar_blanco_zafra != 0
+  %tr
+    %td
+      Paquetes Polietileno
+    %td
+      = @produccion['paquetesPolietileno']
+    %td
+      = 0 if @insumo['crudoProcesado'] == 0
+      = "%01.2f" % ((@produccion['paquetesPolietileno'] / @insumo['crudoProcesado'] ) * 100).to_s if @insumo['crudoProcesado'] != 0
+    %td
+      = 0 if @total_azucar_blanco == 0
+      = "%01.2f" % ((@produccion['paquetesPolietileno'] / @total_azucar_blanco ) * 100).to_s if @total_azucar_blanco != 0
+    %td
+      = @produccion_zafra['paquetesPolietileno']
+    %td
+      = 0 if @insumo_zafra['crudoProcesado'] == 0
+      = "%01.2f" % ((@produccion_zafra['paquetesPapel'] / @insumo_zafra['crudoProcesado'] ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
+    %td
+      = 0 if @total_azucar_blanco == 0
+      = "%01.2f" % ((@produccion_zafra['paquetesPolietileno'] / @total_azucar_blanco_zafra ) * 100).to_s if @total_azucar_blanco_zafra != 0
+  %tr
+    %td
+      Azucar Industria Bolsas
+    %td
+      = @produccion['industriaBolsas']
+    %td
+      = 0 if @insumo['crudoProcesado'] == 0
+      = "%01.2f" % ((@produccion['industriaBolsas'] / @insumo['crudoProcesado'] ) * 100).to_s if @insumo['crudoProcesado'] != 0
+    %td
+      = 0 if @total_azucar_blanco == 0
+      = "%01.2f" % ((@produccion['industriaBolsas'] / @total_azucar_blanco ) * 100).to_s if @total_azucar_blanco != 0
+    %td
+      = @produccion_zafra['industriaBolsas']
+    %td
+      = 0 if @insumo_zafra['crudoProcesado'] == 0
+      = "%01.2f" % ((@produccion_zafra['industriaBolsas'] / @insumo_zafra['crudoProcesado'] ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
+    %td
+      = 0 if @total_azucar_blanco == 0
+      = "%01.2f" % ((@produccion_zafra['industriaBolsas'] / @total_azucar_blanco_zafra ) * 100).to_s if @total_azucar_blanco_zafra != 0
+  %tr
+    %td
+      Azucar bolsas de Azucarlito
+    %td
+      = @produccion['bolsasAzucarlito']
+    %td
+      = 0 if @insumo['crudoProcesado'] == 0
+      = "%01.2f" % ((@produccion['bolsasAzucarlito'] / @insumo['crudoProcesado'] ) * 100).to_s if @insumo['crudoProcesado'] != 0
+    %td
+      = 0 if @total_azucar_blanco == 0
+      = "%01.2f" % ((@produccion['bolsasAzucarlito'] / @total_azucar_blanco ) * 100).to_s if @total_azucar_blanco != 0
+    %td
+      = @produccion_zafra['bolsasAzucarlito']
+    %td
+      = 0 if @insumo_zafra['crudoProcesado'] == 0
+      = "%01.2f" % ((@produccion_zafra['bolsasAzucarlito'] / @insumo_zafra['crudoProcesado'] ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
+    %td
+      = 0 if @total_azucar_blanco == 0
+      = "%01.2f" % ((@produccion_zafra['bolsasAzucarlito'] / @total_azucar_blanco_zafra ) * 100).to_s if @total_azucar_blanco_zafra != 0
+  %tr
+    %td
+      Azucar Big Bag Azucarlito
+    %td
+      = @produccion['bigBagAzucarlito']
+    %td
+      = 0 if @insumo['crudoProcesado'] == 0
+      = "%01.2f" % ((@produccion['bigBagAzucarlito'] / @insumo['crudoProcesado'] ) * 100).to_s if @insumo['crudoProcesado'] != 0
+    %td
+      = 0 if @total_azucar_blanco == 0
+      = "%01.2f" % ((@produccion['bigBagAzucarlito'] / @total_azucar_blanco ) * 100).to_s if @total_azucar_blanco != 0
+    %td
+      = @produccion_zafra['bigBagAzucarlito']
+    %td
+      = 0 if @insumo_zafra['crudoProcesado'] == 0
+      = "%01.2f" % ((@produccion_zafra['bigBagAzucarlito'] / @insumo_zafra['crudoProcesado'] ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
+    %td
+      = 0 if @total_azucar_blanco == 0
+      = "%01.2f" % ((@produccion_zafra['bigBagAzucarlito'] / @total_azucar_blanco_zafra ) * 100).to_s if @total_azucar_blanco_zafra != 0
+  %tr
+    %td
+      Azucar Big Bag Industria
+    %td
+      = @produccion['bigBagDnd']
+    %td
+      = 0 if @insumo['crudoProcesado'] == 0
+      = "%01.2f" % ((@produccion['bigBagDnd'] / @insumo['crudoProcesado'] ) * 100).to_s if @insumo['crudoProcesado'] != 0
+    %td
+      = 0 if @total_azucar_blanco == 0
+      = "%01.2f" % ((@produccion['bigBagDnd'] / @total_azucar_blanco ) * 100).to_s if @total_azucar_blanco != 0
+    %td
+      = @produccion_zafra['bigBagDnd']
+    %td
+      = 0 if @insumo_zafra['crudoProcesado'] == 0
+      = "%01.2f" % ((@produccion_zafra['bigBagDnd'] / @insumo_zafra['crudoProcesado'] ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
+    %td
+      = 0 if @total_azucar_blanco == 0
+      = "%01.2f" % ((@produccion_zafra['bigBagDnd'] / @total_azucar_blanco_zafra ) * 100).to_s if @total_azucar_blanco_zafra != 0
+  - @clientes.each do |cliente|
+    %tr
+      %td
+        = "Azucar Big Bag #{cliente}"
+      %td
+        = @produccion[cliente]
+      %td
+        = 0 if @insumo['crudoProcesado'] == 0
+        = "%01.2f" % ((@produccion[cliente].to_f / @insumo['crudoProcesado'].to_f ) * 100).to_s if @insumo['crudoProcesado'] != 0
+      %td
+        = 0 if @total_azucar_blanco == 0
+        = "%01.2f" % ((@produccion[cliente].to_f / @total_azucar_blanco.to_f ) * 100).to_s if @total_azucar_blanco != 0
+      %td
+        = @produccion_zafra[cliente]
+      %td
+        = 0 if @insumo_zafra['crudoProcesado'] == 0
+        = "%01.2f" % ((@produccion_zafra[cliente].to_f / @insumo_zafra['crudoProcesado'].to_f ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
+      %td
+        = 0 if @total_azucar_blanco == 0
+        = "%01.2f" % ((@produccion_zafra[cliente].to_f / @total_azucar_blanco_zafra.to_f ) * 100).to_s if @total_azucar_blanco_zafra != 0
+  %tr
+    %td
+      Total Bolsas
+    %td
+      = @total_bolsas
+    %td
+    %td
+    %td
+      = @total_bolsas_zafra
+    %td
+    %td
+  %tr
+    %td
+      Total Big Bag
+    %td
+      = @total_big_bag
+    %td
+    %td
+    %td
+      = @total_big_bag_zafra
+    %td
+    %td
+  %tr
+    %td
+      Total Azucar Blanco
+    %td
+      = @total_azucar_blanco
+    %td
+    %td
+    %td
+      = @total_azucar_blanco_zafra
+    %td
+    %td
+  %tr
+    %td
+      Melaza
+    %td
+      = @produccion['melaza']
+    %td
+      = 0 if @insumo['crudoProcesado'] == 0
+      = "%01.2f" % ((@produccion['melaza'] / @insumo['crudoProcesado'] ) * 100).to_s if @insumo['crudoProcesado'] != 0
+    %td
+    %td
+      = @produccion_zafra['melaza']
+    %td
+      = 0 if @insumo_zafra['crudoProcesado'] == 0
+      = "%01.2f" % ((@produccion_zafra['melaza'] / @insumo_zafra['crudoProcesado'] ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
+    %td
+  %tr
+    %td
+      Azucar Rubio
+    %td
+      = @produccion['rubio']
+    %td
+      = 0 if @insumo['crudoProcesado'] == 0
+      = "%01.2f" % ((@produccion['rubio'] / @insumo['crudoProcesado'] ) * 100).to_s if @insumo['crudoProcesado'] != 0
+    %td
+    %td
+      = @produccion_zafra['rubio']
+    %td
+      = 0 if @insumo_zafra['crudoProcesado'] == 0
+      = "%01.2f" % ((@produccion_zafra['rubio'] / @insumo_zafra['crudoProcesado'] ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
+    %td
+  %tr
+    %td
+      = "3- CONSUMOS"
+    %td
+      DIA cant
+    %td
+      = "% CRUDO"
+    %td
+      = "% BLANCO"
+    %td
+      ACUMULADO cant
+    %td
+      = "AC % CRUDO"
+    %td
+      = "AC % BLANCO"
+  %tr
+    %td
+      Cal viva
+    %td
+      = @insumo_diario.cal_viva
+    %td
+      = 0 if @insumo['crudoProcesado'] == 0
+      = "%01.2f" % ((@insumo_diario.cal_viva.to_f / @insumo['crudoProcesado'].to_f ) * 100).to_s if @insumo['crudoProcesado'] != 0
+    %td
+      = "%01.2f" % ((@insumo_diario.cal_viva.to_f / @total_azucar_blanco.to_f ) * 100).to_s if @total_azucar_blanco != 0
+    %td
+      = @insumo_diario_zafra['cal_viva']
+    %td
+      = 0 if @insumo_zafra['crudoProcesado'] == 0
+      = "%01.2f" % ((@insumo_diario_zafra['cal_viva'].to_f / @insumo_zafra['crudoProcesado'].to_f ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
+    %td
+      = 0 if @total_azucar_blanco == 0
+      = "%01.2f" % ((@insumo_diario_zafra['cal_viva'].to_f / @total_azucar_blanco_zafra.to_f ) * 100).to_s if @total_azucar_blanco_zafra != 0
+  %tr
+    %td
+      Carbon activado
+    %td
+      = @insumo_diario.carbon_activado
+    %td
+      = 0 if @insumo['crudoProcesado'] == 0
+      = "%01.2f" % ((@insumo_diario.carbon_activado.to_f / @insumo['crudoProcesado'].to_f ) * 100).to_s if @insumo['crudoProcesado'] != 0
+    %td
+      = "%01.2f" % ((@insumo_diario.carbon_activado.to_f / @total_azucar_blanco.to_f ) * 100).to_s if @total_azucar_blanco != 0
+    %td
+      = @insumo_diario_zafra['carbon_activado']
+    %td
+      = 0 if @insumo_zafra['crudoProcesado'] == 0
+      = "%01.2f" % ((@insumo_diario_zafra['carbon_activado'].to_f / @insumo_zafra['crudoProcesado'].to_f ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
+    %td
+      = 0 if @total_azucar_blanco == 0
+      = "%01.2f" % ((@insumo_diario_zafra['carbon_activado'].to_f / @total_azucar_blanco_zafra.to_f ) * 100).to_s if @total_azucar_blanco_zafra != 0
+  %tr
+    %td
+      Auxiliar Filtracion
+    %td
+      = @insumo_diario.auxiliar_filtracion
+    %td
+      = 0 if @insumo['crudoProcesado'] == 0
+      = "%01.2f" % ((@insumo_diario.auxiliar_filtracion.to_f / @insumo['crudoProcesado'].to_f ) * 100).to_s if @insumo['crudoProcesado'] != 0
+    %td
+      = "%01.2f" % ((@insumo_diario.auxiliar_filtracion.to_f / @total_azucar_blanco.to_f ) * 100).to_s if @total_azucar_blanco != 0
+    %td
+      = @insumo_diario_zafra['auxiliar_filtracion']
+    %td
+      = 0 if @insumo_zafra['crudoProcesado'] == 0
+      = "%01.2f" % ((@insumo_diario_zafra['auxiliar_filtracion'].to_f / @insumo_zafra['crudoProcesado'].to_f ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
+    %td
+      = 0 if @total_azucar_blanco == 0
+      = "%01.2f" % ((@insumo_diario_zafra['auxiliar_filtracion'].to_f / @total_azucar_blanco_zafra.to_f ) * 100).to_s if @total_azucar_blanco_zafra != 0
+  %tr
+    %td
+      Acido Clorhidrico
+    %td
+      = @insumo_diario.acido_clorhidrico
+    %td
+      = 0 if @insumo['crudoProcesado'] == 0
+      = "%01.2f" % ((@insumo_diario.acido_clorhidrico.to_f / @insumo['crudoProcesado'].to_f ) * 100).to_s if @insumo['crudoProcesado'] != 0
+    %td
+      = "%01.2f" % ((@insumo_diario.acido_clorhidrico.to_f / @total_azucar_blanco.to_f ) * 100).to_s if @total_azucar_blanco != 0
+    %td
+      = @insumo_diario_zafra['acido_clorhidrico']
+    %td
+      = 0 if @insumo_zafra['crudoProcesado'] == 0
+      = "%01.2f" % ((@insumo_diario_zafra['acido_clorhidrico'].to_f / @insumo_zafra['crudoProcesado'].to_f ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
+    %td
+      = 0 if @total_azucar_blanco == 0
+      = "%01.2f" % ((@insumo_diario_zafra['acido_clorhidrico'].to_f / @total_azucar_blanco_zafra.to_f ) * 100).to_s if @total_azucar_blanco_zafra != 0
+  %tr
+    %td
+      Leña caldera
+    %td
+      = @insumo_diario.lenia_caldera
+    %td
+      = 0 if @insumo['crudoProcesado'] == 0
+      = "%01.2f" % ((@insumo_diario.lenia_caldera.to_f / @insumo['crudoProcesado'].to_f ) * 100).to_s if @insumo['crudoProcesado'] != 0
+    %td
+      = "%01.2f" % ((@insumo_diario.lenia_caldera.to_f / @total_azucar_blanco.to_f ) * 100).to_s if @total_azucar_blanco != 0
+    %td
+      = @insumo_diario_zafra['lenia_caldera']
+    %td
+      = 0 if @insumo_zafra['crudoProcesado'] == 0
+      = "%01.2f" % ((@insumo_diario_zafra['lenia_caldera'].to_f / @insumo_zafra['crudoProcesado'].to_f ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
+    %td
+      = 0 if @total_azucar_blanco == 0
+      = "%01.2f" % ((@insumo_diario_zafra['lenia_caldera'].to_f / @total_azucar_blanco_zafra.to_f ) * 100).to_s if @total_azucar_blanco_zafra != 0
+  %tr
+    %td
+      Chip
+    %td
+      = @insumo_diario.chip
+    %td
+      = 0 if @insumo['crudoProcesado'] == 0
+      = "%01.2f" % ((@insumo_diario.chip.to_f / @insumo['crudoProcesado'].to_f ) * 100).to_s if @insumo['crudoProcesado'] != 0
+    %td
+      = "%01.2f" % ((@insumo_diario.chip.to_f / @total_azucar_blanco.to_f ) * 100).to_s if @total_azucar_blanco != 0
+    %td
+      = @insumo_diario_zafra['chip']
+    %td
+      = 0 if @insumo_zafra['crudoProcesado'] == 0
+      = "%01.2f" % ((@insumo_diario_zafra['chip'].to_f / @insumo_zafra['crudoProcesado'].to_f ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
+    %td
+      = 0 if @total_azucar_blanco == 0
+      = "%01.2f" % ((@insumo_diario_zafra['chip'].to_f / @total_azucar_blanco_zafra.to_f ) * 100).to_s if @total_azucar_blanco_zafra != 0
+  %tr
+    %td
+      Aserrin
+    %td
+      = @insumo_diario.aserrin
+    %td
+      = 0 if @insumo['crudoProcesado'] == 0
+      = "%01.2f" % ((@insumo_diario.aserrin.to_f / @insumo['crudoProcesado'].to_f ) * 100).to_s if @insumo['crudoProcesado'] != 0
+    %td
+      = "%01.2f" % ((@insumo_diario.aserrin.to_f / @total_azucar_blanco.to_f ) * 100).to_s if @total_azucar_blanco != 0
+    %td
+      = @insumo_diario_zafra['aserrin']
+    %td
+      = 0 if @insumo_zafra['crudoProcesado'] == 0
+      = "%01.2f" % ((@insumo_diario_zafra['aserrin'].to_f / @insumo_zafra['crudoProcesado'].to_f ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
+    %td
+      = 0 if @total_azucar_blanco == 0
+      = "%01.2f" % ((@insumo_diario_zafra['aserrin'].to_f / @total_azucar_blanco_zafra.to_f ) * 100).to_s if @total_azucar_blanco_zafra != 0
+  %tr
+    %td
+      Gasoil
+    %td
+      = @insumo_diario.gasoil
+    %td
+      = 0 if @insumo['crudoProcesado'] == 0
+      = "%01.2f" % ((@insumo_diario.gasoil.to_f / @insumo['crudoProcesado'].to_f ) * 100).to_s if @insumo['crudoProcesado'] != 0
+    %td
+      = "%01.2f" % ((@insumo_diario.gasoil.to_f / @total_azucar_blanco.to_f ) * 100).to_s if @total_azucar_blanco != 0
+    %td
+      = @insumo_diario_zafra['gasoil']
+    %td
+      = 0 if @insumo_zafra['crudoProcesado'] == 0
+      = "%01.2f" % ((@insumo_diario_zafra['gasoil'].to_f / @insumo_zafra['crudoProcesado'].to_f ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
+    %td
+      = 0 if @total_azucar_blanco == 0
+      = "%01.2f" % ((@insumo_diario_zafra['gasoil'].to_f / @total_azucar_blanco_zafra.to_f ) * 100).to_s if @total_azucar_blanco_zafra != 0
+  %tr
+    %td
+      = "4 - BALANCE ESTIMADO"
+    %td
+      Valor
+  %tr
+    %td
+      Azucar Circulante Actual
+    %td
+      = "%01.2f" % @azucar_circulante_actual.to_s
+  %tr
+    %td
+      Pol Entrada
+    %td= @recepcion.azucar_crudo
+  %tr
+    %td
+      Perdida en Azucar
+    %td= "%01.2f" % @perdida_en_azucar.to_s
+  %tr
+    %td
+      Rendimiento estimado
+    %td= "%01.4f" % @rendimiento_estimado.to_s

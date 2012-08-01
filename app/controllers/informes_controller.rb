@@ -228,7 +228,7 @@ class InformesController < ApplicationController
 
     @zafra = Zafra.where('dia_inicio <= ? and (dia_fin >= ? or dia_fin is null)', @dia.fecha, @dia.fecha).first
 
-    @title = "INFORME DIARIO #{l @zafra.dia_inicio}"
+    @title = "INFORME DIARIO #{l @dia.fecha} ZAFRA #{l @zafra.dia_inicio}"
 
     @recepcion = Recepcion.new
     @recepcion_zafra = @recepcion.attributes
@@ -250,6 +250,11 @@ class InformesController < ApplicationController
 
     @total_azucar_blanco = 0
     @total_azucar_blanco_zafra = 0
+
+    @total_bolsas = 0
+    @total_bolsas_zafra = 0
+    @total_big_bag = 0
+    @total_big_bag_zafra = 0
 
     total_produccion_clientes = 0
     total_produccion_clientes_zafra = 0
@@ -284,6 +289,9 @@ class InformesController < ApplicationController
 
       cantidad += 1
     end
+
+    @total_bolsas = @produccion['industriaBolsas'] + @produccion['bolsasAzucarlito']
+    @total_big_bag = @produccion['bigBagAzucarlito'] + @produccion['bigBagDnd'] + total_produccion_clientes
 
     @total_azucar_blanco = @produccion['paquetesPapel'] + @produccion['paquetesPolietileno'] +
       @produccion['industriaBolsas'] + @produccion['bolsasAzucarlito'] + @produccion['bigBagAzucarlito'] +
@@ -338,6 +346,10 @@ class InformesController < ApplicationController
               total_produccion_clientes_zafra += cliente.azucar_big_bag
             end
           end
+
+          @total_bolsas_zafra = @produccion_zafra['industriaBolsas'] + @produccion_zafra['bolsasAzucarlito']
+          @total_big_bag_zafra = @produccion_zafra['bigBagAzucarlito'] + @produccion_zafra['bigBagDnd'] +
+            total_produccion_clientes_zafra
 
           @total_azucar_blanco_zafra += @produccion_zafra['paquetesPapel'] + @produccion_zafra['paquetesPolietileno'] +
             @produccion_zafra['industriaBolsas'] + @produccion_zafra['bolsasAzucarlito'] + @produccion_zafra['bigBagAzucarlito'] +
