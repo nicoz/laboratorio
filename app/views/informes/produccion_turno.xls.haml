@@ -1,0 +1,67 @@
+%table
+  %tr
+    %td= '#'
+    - @turnos.each do |turno|
+      %td= turno.turno.nombre
+    %td= 'Total'
+  %tr
+    %td
+      Paquetes de Papel kg
+    - @turnos.each do |turno|
+      %td= turno.produccion.paquetesPapel
+    %td= @totales[:paquetesPapel]
+  %tr
+    %td
+      Azucar, Paquetes de Polietileno kg
+    - @turnos.each do |turno|
+      %td= turno.produccion.paquetesPolietileno
+    %td= @totales[:paquetesPolietileno]
+  %tr
+    %td
+      Melaza kg
+    - @turnos.each do |turno|
+      %td= turno.produccion.melaza
+    %td= @totales[:melaza]
+  %tr
+    %td
+      Azucar Rubio kg
+    - @turnos.each do |turno|
+      %td= turno.produccion.rubio
+    %td= @totales[:rubio]
+  %tr
+    %td
+      Azucar, Industria Bolsas kg
+    - @turnos.each do |turno|
+      %td= turno.produccion.industriaBolsas
+    %td= @totales[:industriaBolsas]
+  %tr
+    %td
+      Azucar, Bolsas de Azucarlito kg
+    - @turnos.each do |turno|
+      %td= turno.produccion.bolsasAzucarlito
+    %td= @totales[:bolsasAzucarlito]
+  %tr
+    %td
+      Azucar, Big Bag Azucarlito kg
+    - @turnos.each do |turno|
+      %td= turno.produccion.bigBagAzucarlito
+    %td= @totales[:bigBagAzucarlito]
+  %tr
+    %td
+      Azucar, Big Bag Industria kg
+    - @turnos.each do |turno|
+      %td= turno.produccion.bigBagDnd
+    %td= @totales[:bigBagDnd]
+  - @clientes.each do |cliente|
+    %tr
+      %td= "Azucar, Big Bag #{cliente} Kg"
+      - @turnos.each do |turno|
+        - turno.produccion.clientes.each do |unCliente|
+          -if unCliente.cliente.nombre == cliente
+            %td= unCliente.azucar_big_bag
+      %td= @totales[cliente]
+  %tr
+    %td Total Azucar Blanco Kg
+    - @turnos.each do |turno|
+      %td= @granTotal[turno.turno.nombre]
+    %td= @granTotal[:totales]

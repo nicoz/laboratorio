@@ -1,0 +1,30 @@
+%table
+  %tr
+    %th= '#'
+    - @dia.turnos.each do |turno|
+      %th= turno.turno.nombre
+    %th= 'Total'
+  %tr
+    %td
+      Crudo Procesado Kg.
+    - @dia.turnos.each do |turno|
+      %td= turno.insumo.crudoProcesado
+    %td= @totales[:crudoProcesado]
+  %tr
+    %td
+      Tiraje m3
+    - @dia.turnos.each do |turno|
+      %td= turno.insumo.tiraje
+    %td= @totales[:tiraje]
+  %tr
+    %td
+      Brix Promedio
+    - @dia.turnos.each do |turno|
+      %td= @brix[turno.turno.nombre]
+    %td
+  %tr
+    %td
+      kg caudalimetro
+    - @dia.turnos.each do |turno|
+      %td= @caudalimetro[turno.turno.nombre]
+    %td

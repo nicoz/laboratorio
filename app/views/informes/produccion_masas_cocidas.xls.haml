@@ -1,0 +1,42 @@
+%table
+  %tr
+    %td
+      Nombre
+    %td
+      Valor
+    %td
+      = "% Masas Dia"
+  %tr
+    %td
+      Numero Masas A
+    %td
+      = @dia.produccionMasa.numero_masas_a
+    %td
+      = @porcentaje_a
+  %tr
+    %td
+      Numero Masas B
+    %td
+      = @dia.produccionMasa.numero_masas_b
+    %td
+      = @porcentaje_b
+  %tr
+    %td
+      Numero Masas C
+    %td
+      = @dia.produccionMasa.numero_masas_c
+    %td
+      = @porcentaje_c
+  %tr
+    %td
+      Numero Masas D
+    %td
+      = @dia.produccionMasa.numero_masas_d
+    %td
+      = @porcentaje_d
+  %tr
+    %td
+      %strong Total
+    %td
+      = @total_masas_cocidas
+    %td

@@ -72,7 +72,10 @@ class InformesController < ApplicationController
         @totales[:industriaBolsas] + @totales[:bolsasAzucarlito] +
         @totales[:bigBagAzucarlito] + @totales[:bigBagDnd]
 
-      render :layout => 'informes'
+      respond_to do |format|
+        format.html {render :layout => 'informes'}
+        format.xls { render :layout => 'informes' }
+      end
     else
       redirect_to ver_dia_path(@dia.fecha)
     end
@@ -81,10 +84,26 @@ class InformesController < ApplicationController
   def produccion_masas_cocidas
     fecha = Date.parse(params[:fecha])
     @dia = Dia.find_by_fecha(fecha)
+    prod = ProduccionMasa.find_by_dia_id(@dia.id)
 
     @title = "Produccion Masas Cocidas #{l @dia.fecha}"
 
-    render :layout => 'informes'
+    @total_masas_cocidas = prod.numero_masas_a + prod.numero_masas_b + prod.numero_masas_c + prod.numero_masas_d
+
+    @total_masas_cocidas = 0 if @total_masas_cocidas.nil?
+
+    if @total_masas_cocidas != 0
+      @porcentaje_a = "%01.2f" % ((prod.numero_masas_a.to_f / @total_masas_cocidas) * 100).to_s
+      @porcentaje_b = "%01.2f" % ((prod.numero_masas_b.to_f / @total_masas_cocidas) * 100).to_s
+      @porcentaje_c = "%01.2f" % ((prod.numero_masas_c.to_f / @total_masas_cocidas) * 100).to_s
+      @porcentaje_d = "%01.2f" % ((prod.numero_masas_d.to_f / @total_masas_cocidas) * 100).to_s
+    end
+
+    respond_to do |format|
+      format.html {render :layout => 'informes'}
+      format.xls { render :layout => 'informes' }
+    end
+
   end
 
   def recepcion
@@ -109,14 +128,25 @@ class InformesController < ApplicationController
 
     @title = "Insumos por turno #{l @dia.fecha}"
 
-    @totales = { :crudoProcesado => 0, :tiraje => 0}
+    @totales = { :crudoProcesado => 0, :tiraje => 0, :promedio_brix => 0, :caudalimetro => 0}
+
+    @brix = {}
+    @caudalimetro = {}
 
     @dia.turnos.sort! { |a,b| a.turno.orden <=> b.turno.orden }
 
     @dia.turnos.each do |turno|
       @totales[:crudoProcesado] += turno.insumo.crudoProcesado
       @totales[:tiraje] += turno.insumo.tiraje
+
+      if !turno.analisis.nil?
+        @brix[turno.turno.nombre] = turno.analisis.refundicion_brix
+        densidad = (0.000018765 * (@brix[turno.turno.nombre] * @brix[turno.turno.nombre]))
+          + 0.0003629867 * @brix[turno.turno.nombre] + 1.0011648
+        @caudalimetro[turno.turno.nombre] = (turno.insumo.tiraje * densidad * @brix[turno.turno.nombre]) / 100
+      end
     end
+
 
     render :layout => 'informes'
   end

@@ -10,6 +10,7 @@
     .span12
       %p.no_print
         = link_to 'Imprimir', informe_insumos_por_turno_path(@dia.fecha, :format => 'pdf'), :class => 'btn btn-success btn-large'
+        = link_to 'Excel', informe_insumos_por_turno_path(@dia.fecha, :format => 'xls'), :class => 'btn btn-warning btn-large'
         = link_to 'Volver', ver_dia_path(@dia.fecha), :class => 'btn btn-danger btn-large'
   .row
     .span12
@@ -18,4 +19,5 @@
     .span12
       %p.no_print
         = link_to 'Imprimir', informe_insumos_por_turno_path(@dia.fecha, :format => 'pdf'), :class => 'btn btn-success btn-large'
+        = link_to 'Excel', informe_insumos_por_turno_path(@dia.fecha, :format => 'xls'), :class => 'btn btn-warning btn-large'
         = link_to 'Volver', ver_dia_path(@dia.fecha), :class => 'btn btn-danger btn-large'

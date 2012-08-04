@@ -14,7 +14,19 @@
       %td= total[:crudoProcesado]
     %tr
       %td
-        Tiraje
+        Tiraje m3
       - turnos.each do |turno|
         %td= turno.insumo.tiraje
       %td= total[:tiraje]
+    %tr
+      %td
+        Brix Promedio
+      - turnos.each do |turno|
+        %td= @brix[turno.turno.nombre]
+      %td
+    %tr
+      %td
+        kg caudalimetro
+      - turnos.each do |turno|
+        %td= @caudalimetro[turno.turno.nombre]
+      %td
