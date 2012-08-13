@@ -61,6 +61,9 @@ Laboratorio::Application.routes.draw do
 
   resources :cliente_produccions, :only => [:new, :create, :destroy]
 
+  match 'zafra/:id/cerrar', :to => 'zafras#cerrar', :as => :cerrar_zafra
+  match 'zafra/:id/abrir', :to => 'zafras#abrir', :as => :abrir_zafra
+
   match '/dia/:fecha/insumos/nuevo', :to => 'insumos#new', :as => :crear_insumo
 
   match '/dia/:fecha/insumos/validar', :to => 'insumos#validar', :as => :validar_insumo_turno
@@ -118,6 +121,7 @@ Laboratorio::Application.routes.draw do
   match '/informes/:fecha/analisis_promedio', :to => 'informes#analisis_promedio', :as => :informe_analisis_promedio
   match '/informes/:fecha/analisis_promedio_zafra', :to => 'informes#analisis_promedio_zafra', :as => :informe_analisis_promedio_zafra
   match '/informes/:fecha/informe_diario', :to => 'informes#informe_diario', :as => :informe_diario
+  match '/informes/:fecha/:turno/analisis', :to => 'informes#analisis', :as => :informe_analisis
 
 
   # The priority is based upon order of creation:

@@ -1,6 +1,8 @@
 class InsumoDiariosController < ApplicationController
 	before_filter :autenticar, 		:only => [:create, :new,:edit, :update, :show]
 	before_filter :validar_turno_dia,	:only => [:new, :edit]
+	before_filter :solo_reportes
+        before_filter :zafra_abierta, :only => [:new, :edit, :create, :update, :destroy]
 	add_breadcrumb 'Escritorio', '/escritorio'
 
 	def show

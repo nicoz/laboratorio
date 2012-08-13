@@ -4,7 +4,17 @@
 - else
   %td= "#{l zafra.dia_fin}"
 %td
+  - if zafra.abierta
+    Abierta
+  - else
+    Cerrada
+%td
   = link_to edit_zafra_path(zafra) do
     %i.icon.icon-pencil
-  = link_to zafra, :method => :delete, :confirm => "Seguro que desea borrarla?", :title => "Borrar Zafra: #{zafra.dia_inicio}" do
+  = link_to zafra, :method => :delete, :confirm => "Seguro que desea borrar la Zafra?", :title => "Borrar Zafra: #{zafra.dia_inicio}" do
     %i.icon.icon-trash
+  - if usuario_actual.admin
+    = link_to abrir_zafra_path(zafra), :confirm => "Seguro que desea abrir la Zafra?", :title => "Abrir Zafra: #{zafra.dia_inicio}" do
+      %i.icon.icon-ok
+    = link_to cerrar_zafra_path(zafra), :confirm => "Seguro que desea cerrar la Zafra?", :title => "Cerrar Zafra: #{zafra.dia_inicio}" do
+      %i.icon.icon-remove

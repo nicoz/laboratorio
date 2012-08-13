@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120614192748) do
+ActiveRecord::Schema.define(:version => 20120807202233) do
 
   create_table "actividads", :force => true do |t|
     t.string   "controlador"
@@ -260,6 +260,7 @@ ActiveRecord::Schema.define(:version => 20120614192748) do
     t.boolean  "habilitado",         :default => true
     t.integer  "updated_by"
     t.integer  "created_by"
+    t.boolean  "solo_reportes"
   end
 
   add_index "usuarios", ["email"], :name => "index_usuarios_on_email", :unique => true
@@ -267,8 +268,9 @@ ActiveRecord::Schema.define(:version => 20120614192748) do
   create_table "zafras", :force => true do |t|
     t.date     "dia_inicio"
     t.date     "dia_fin"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.boolean  "abierta",    :default => true
   end
 
 end

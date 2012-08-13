@@ -192,6 +192,16 @@ class InformesController < ApplicationController
     render :layout => 'informes'
   end
 
+  def analisis
+    @dia = Dia.find_by_fecha(Date.parse(params[:fecha]))
+    @promedio = Analisis.find_by_turnoDia_id(params[:turno])
+
+    @title = "Analisis #{l @dia.fecha} Turno #{@promedio.turnoDia.turno.nombre}"
+
+
+    render :layout => 'informes'
+  end
+
   def analisis_promedio_zafra
     @dia = Dia.find_by_fecha(Date.parse(params[:fecha]))
 

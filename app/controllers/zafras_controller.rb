@@ -1,5 +1,6 @@
 class ZafrasController < ApplicationController
   before_filter :autenticar
+  before_filter :solo_reportes
 
   add_breadcrumb 'Escritorio', '/escritorio'
 
@@ -61,6 +62,28 @@ class ZafrasController < ApplicationController
       flash[:success] = "Zafra destruida."
     else
       flash[:error] = "No se pudo eliminar la Zafra"
+    end
+    redirect_to zafras_path
+  end
+
+  def cerrar
+    zafra = Zafra.find(params[:id])
+    zafra.abierta = false
+    if zafra.save
+      flash[:success] = "Zafra cerrada."
+    else
+      flash[:error] = "No se pudo cerrar la Zafra"
+    end
+    redirect_to zafras_path
+  end
+
+  def abrir
+    zafra = Zafra.find(params[:id])
+    zafra.abierta = true
+    if zafra.save
+      flash[:success] = "Zafra abierta."
+    else
+      flash[:error] = "No se pudo abrir la Zafra"
     end
     redirect_to zafras_path
   end

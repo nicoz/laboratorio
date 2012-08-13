@@ -55,4 +55,10 @@ module DiaHelper
     return resultado
 
   end
+
+  def tiene_analisis_turno(id)
+    analisis = Analisis.find_by_turnoDia_id(id)
+
+    return !analisis.nil?
+  end
 end

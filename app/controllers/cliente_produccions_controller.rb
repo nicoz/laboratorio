@@ -1,4 +1,6 @@
 class ClienteProduccionsController < ApplicationController
+  before_filter :solo_reportes
+  before_filter :zafra_abierta, :only => [:new, :edit, :create, :update, :destroy]
 
   def validar
     cliente_produccion = ClienteProduccion.new

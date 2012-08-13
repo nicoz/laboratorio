@@ -11,7 +11,7 @@ class DiaController < ApplicationController
     else
       fecha = Date.parse(params[:fecha])
       @dia = Dia.find_or_create_by_fecha(fecha)
-
+      @dia.turnos.sort! { |a,b| a.turno.orden <=> b.turno.orden }
       @zafra = Zafra.where('dia_inicio <= ? and (dia_fin >= ? or dia_fin is null)', @dia.fecha, @dia.fecha).first
       @turnos = Turno.find(:all, :conditions => {:habilitado => true}, :order => 'orden')
       @turnos_dia = []
@@ -101,61 +101,67 @@ class DiaController < ApplicationController
         texto = '#888888' if dia > Time.now.to_date
         borde = fondo
         borde = texto if dia > Time.now.to_date
-        insumosDiarios = {:id => segundos, :title => 'Insumos Diarios',
-            :url => crear_insumo_diario_path(dia),
+        if !usuario_actual.solo_reportes
+          insumosDiarios = {:id => segundos, :title => 'Insumos Diarios',
+              :url => crear_insumo_diario_path(dia),
+              :start => (dia.to_time + segundos.seconds),
+              :className => 'evento-activo',
+              :backgroundColor => fondo,
+              :borderColor => borde,
+              :textColor => texto
+              }
+          segundos = segundos + 1
+          produccionMasa = {:id => segundos, :title => 'Produccion Masa',
+              :url => crear_produccion_masa_path(dia),
+              :start => (dia.to_time + segundos.seconds),
+              :className => 'evento-activo',
+              :backgroundColor => fondo,
+              :borderColor => borde,
+              :textColor => texto
+              }
+          segundos = segundos + 1
+          insumos = {:id => segundos, :title => 'Insumos por turno',
+              :url => crear_insumo_path(dia),
+              :start => (dia.to_time + segundos.seconds),
+              :className => 'evento-activo',
+              :backgroundColor => fondo,
+              :borderColor => borde,
+              :textColor => texto
+              }
+          segundos = segundos + 1
+          producciones = {:id => segundos, :title => 'Produccion por turno',
+            :url => crear_produccion_path(dia),
             :start => (dia.to_time + segundos.seconds),
             :className => 'evento-activo',
             :backgroundColor => fondo,
             :borderColor => borde,
             :textColor => texto
             }
-        segundos = segundos + 1
-        produccionMasa = {:id => segundos, :title => 'Produccion Masa',
-            :url => crear_produccion_masa_path(dia),
+          segundos = segundos + 1
+          recepcion = {:id => segundos, :title => 'Recepcion',
+            :url => crear_recepcion_path(dia),
             :start => (dia.to_time + segundos.seconds),
             :className => 'evento-activo',
             :backgroundColor => fondo,
             :borderColor => borde,
             :textColor => texto
             }
-        segundos = segundos + 1
-        insumos = {:id => segundos, :title => 'Insumos por turno',
-            :url => crear_insumo_path(dia),
+            #ver_analisis_turno
+          segundos = segundos + 1
+          analisis = {:id => segundos, :title => 'Analisis por turno',
+            :url => ver_analisis_turno_path(dia),
             :start => (dia.to_time + segundos.seconds),
             :className => 'evento-activo',
             :backgroundColor => fondo,
             :borderColor => borde,
             :textColor => texto
             }
-        segundos = segundos + 1
-        producciones = {:id => segundos, :title => 'Produccion por turno',
-          :url => crear_produccion_path(dia),
-          :start => (dia.to_time + segundos.seconds),
-          :className => 'evento-activo',
-          :backgroundColor => fondo,
-          :borderColor => borde,
-          :textColor => texto
-          }
-        segundos = segundos + 1
-        recepcion = {:id => segundos, :title => 'Recepcion',
-          :url => crear_recepcion_path(dia),
-          :start => (dia.to_time + segundos.seconds),
-          :className => 'evento-activo',
-          :backgroundColor => fondo,
-          :borderColor => borde,
-          :textColor => texto
-          }
-          #ver_analisis_turno
-        segundos = segundos + 1
-        analisis = {:id => segundos, :title => 'Analisis por turno',
-          :url => ver_analisis_turno_path(dia),
-          :start => (dia.to_time + segundos.seconds),
-          :className => 'evento-activo',
-          :backgroundColor => fondo,
-          :borderColor => borde,
-          :textColor => texto
-          }
-        segundos = segundos + 1
+          segundos = segundos + 1
+
+          respuesta << insumosDiarios
+          respuesta << producciones
+          respuesta << analisis
+        end
         dias = {:id => segundos, :title => 'Ver dia',
           :url => ver_dia_path(dia),
           :start => (dia.to_time + segundos.seconds),
@@ -164,12 +170,6 @@ class DiaController < ApplicationController
           :borderColor => borde,
           :textColor => texto
           }
-        respuesta << insumosDiarios
-        #respuesta << produccionMasa
-        #respuesta << insumos
-        respuesta << producciones
-        #respuesta << recepcion
-        respuesta << analisis
         respuesta << dias
       end
 

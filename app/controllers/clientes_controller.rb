@@ -1,8 +1,9 @@
 class ClientesController < ApplicationController
 	before_filter :autenticar,	:only => [:index, :edit, :update, :destroy, :create, :new, :show]
 	before_filter :usuario_admin,	:only => [:index, :edit, :update, :destroy, :create, :new, :show]
+	before_filter :solo_reportes
 	add_breadcrumb 'Escritorio', '/escritorio'
-	
+
 	def index
 		add_breadcrumb 'Clientes', clientes_path
 		@title = "Turnos"
@@ -10,21 +11,21 @@ class ClientesController < ApplicationController
 		@clientes = @search.paginate(:page => params[:page], :per_page => 10, :order => 'orden')
 		@busqueda = params[:search]
 	end
-	
+
 	def show
 		@cliente = Cliente.find(params[:id])
 		@title = @cliente.nombre
 		add_breadcrumb 'Clientes', clientes_path
 		add_breadcrumb @cliente.nombre, @cliente
 	end
-	
+
 	def new
 		add_breadcrumb 'Clientes', turnos_path
 		add_breadcrumb 'Crear Cliente', turnos_path
 		@title = "Crear Cliente"
 		@cliente = Cliente.new
 	end
-	
+
 	def create
 		@cliente = Cliente.new(params[:cliente])
 		if @cliente.save
@@ -35,14 +36,14 @@ class ClientesController < ApplicationController
 			render 'new'
 		end
 	end
-	
+
 	def edit
 		@cliente = Cliente.find(params[:id])
 		@title = "Editar Cliente"
 		add_breadcrumb 'Clientes', turnos_path
 		add_breadcrumb @cliente.nombre, edit_cliente_path(@cliente)
 	end
-	
+
 	def update
 		@cliente = Cliente.find(params[:id])
 		if @cliente.update_attributes(params[:cliente])
@@ -53,7 +54,7 @@ class ClientesController < ApplicationController
 			render 'edit'
 		end
 	end
-	
+
 	def destroy
 		cliente = Cliente.find(params[:id])
 		producciones = 1

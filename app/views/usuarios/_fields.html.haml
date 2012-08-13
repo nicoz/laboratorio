@@ -1,31 +1,35 @@
 %fieldset
-	%legend=@title
-	=f.hidden_field :cambiando, :value => 1
-	.control-group.primero
-		= f.label :nombre, :class => 'control-label'
-		.input
-			= f.text_field :nombre
-	.control-group
-		= f.label :email, :class => 'control-label'
-		.input
-			= f.text_field :email
-	.control-group
-		= f.label :password, :class => 'control-label'
-		.input
-			= f.password_field :password
-	.control-group
-		= f.label :password_confirmation, :class => 'control-label'
-		.input
-			= f.password_field :password_confirmation
-	- if usuario_actual.admin? and usuario_actual != @usuario
-		.control-group
-			=f.label :admin, "Admistrador?", :class => 'control-label'
-			.input
-				= f.check_box :admin
-		.control-group
-			=f.label :habilitado, "Habilitado", :class => 'control-label'
-			.input
-				= f.check_box :habilitado
-	.form-actions
-		= f.submit boton, :class => "btn btn-large btn-primary"
-		= link_to 'Cancelar', usuarios_path, :class => "btn btn-large btn-danger"
+  %legend=@title
+  =f.hidden_field :cambiando, :value => 1
+  .control-group.primero
+    = f.label :nombre, :class => 'control-label'
+    .input
+      = f.text_field :nombre
+  .control-group
+    = f.label :email, :class => 'control-label'
+    .input
+      = f.text_field :email
+  .control-group
+    = f.label :password, :class => 'control-label'
+    .input
+      = f.password_field :password
+  .control-group
+    = f.label :password_confirmation, :class => 'control-label'
+    .input
+      = f.password_field :password_confirmation
+  - if usuario_actual.admin? and usuario_actual != @usuario
+    .control-group
+      =f.label :admin, "Admistrador?", :class => 'control-label'
+      .input
+        = f.check_box :admin
+    .control-group
+      =f.label :solo_reportes, "Solo ve reportes", :class => 'control-label'
+      .input
+        = f.check_box :solo_reportes
+    .control-group
+      =f.label :habilitado, "Habilitado", :class => 'control-label'
+      .input
+        = f.check_box :habilitado
+  .form-actions
+    = f.submit boton, :class => "btn btn-large btn-primary"
+    = link_to 'Cancelar', usuarios_path, :class => "btn btn-large btn-danger"

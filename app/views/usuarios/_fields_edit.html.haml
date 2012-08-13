@@ -1,24 +1,28 @@
 %fieldset
-	%legend=@title
-	=f.hidden_field :cambiando, :value => 2
-	.control-group.primero
-		= f.label :nombre, :class => 'control-label'
-		.input
-			= f.text_field :nombre
-	.control-group
-		= f.label :email, :class => 'control-label'
-		.input
-			= f.text_field :email
-	- if usuario_actual.admin? and usuario_actual != @usuario
-		.control-group
-			=f.label :admin, "Admistrador?", :class => 'control-label'
-			.input
-				= f.check_box :admin
-		.control-group
-			=f.label :habilitado, "Habilitado", :class => 'control-label'
-			.input
-				= f.check_box :habilitado
-	.form-actions
-		= f.submit boton, :class => "btn btn-large btn-primary"
-		= link_to 'Cancelar', usuarios_path, :class => "btn btn-large btn-danger"
-		= link_to 'Modificar Clave', modificarclave_path(@usuario), :class => "btn btn-large" if usuario_actual?(@usuario)
+  %legend=@title
+  =f.hidden_field :cambiando, :value => 2
+  .control-group.primero
+    = f.label :nombre, :class => 'control-label'
+    .input
+      = f.text_field :nombre
+  .control-group
+    = f.label :email, :class => 'control-label'
+    .input
+      = f.text_field :email
+  - if usuario_actual.admin? and usuario_actual != @usuario
+    .control-group
+      =f.label :admin, "Admistrador?", :class => 'control-label'
+      .input
+        = f.check_box :admin
+    .control-group
+      =f.label :solo_reportes, "Solo ve reportes", :class => 'control-label'
+      .input
+        = f.check_box :solo_reportes
+    .control-group
+      =f.label :habilitado, "Habilitado", :class => 'control-label'
+      .input
+        = f.check_box :habilitado
+  .form-actions
+    = f.submit boton, :class => "btn btn-large btn-primary"
+    = link_to 'Cancelar', usuarios_path, :class => "btn btn-large btn-danger"
+    = link_to 'Modificar Clave', modificarclave_path(@usuario), :class => "btn btn-large" if usuario_actual?(@usuario)
