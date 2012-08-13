@@ -1,6 +1,7 @@
 class DiaController < ApplicationController
   before_filter :autenticar,     :only => [:show, :dias]
   before_filter :validar_turno_dia,	:only => [:show]
+  before_filter :zafra_abierta, :only => [:edit]
 
   add_breadcrumb 'Escritorio', '/escritorio'
 

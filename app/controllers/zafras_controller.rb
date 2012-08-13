@@ -107,6 +107,8 @@ class ZafrasController < ApplicationController
 
     zafra = Zafra.find_by_dia_inicio(params[:fecha_fin])
     zafra.dia_fin = dia.fecha
+    zafra.abierta = false
+
     mensaje = 'OK'
     if !zafra.save()
       mensaje = zafra.errors[:dia_fin]
