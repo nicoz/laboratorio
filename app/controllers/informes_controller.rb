@@ -299,8 +299,6 @@ class InformesController < ApplicationController
     total_produccion_clientes = 0
     total_produccion_clientes_zafra = 0
 
-    @recepcion.perdida_en_azucar = 0 if !@recepcion.perdida_en_azucar.nil?
-
     @insumo['crudoProcesado'] = 0
 
     @clientes = []
