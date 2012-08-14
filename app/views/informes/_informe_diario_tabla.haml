@@ -42,7 +42,6 @@
       %td
         Mat. Prima Procesada Promedio
       %td
-        = @insumo_promedio['crudoProcesado']
       %td
         = @insumo_zafra_promedio['crudoProcesado']
     %tr
@@ -444,7 +443,7 @@
       %td
         Pol Entrada
       %td
-        = @recepcion.azucar_crudo
+        = "%01.2f" % @pol_entrada.to_s
     %tr
       %td
         Perdida en Azucar

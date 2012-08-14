@@ -404,14 +404,14 @@ class InformesController < ApplicationController
     @insumo_zafra_promedio['crudoProcesado'] = @insumo_zafra['crudoProcesado'] / @dias.size
     @stock_mat_prima = @total_recepcion_zafra - @insumo_zafra['crudoProcesado']
 
-    @azucar_circulante_actual = (@insumo['crudoProcesado'].to_f * @recepcion.polarizacion.to_f) /
-       100 - (@total_azucar_blanco.to_f - ((@recepcion.perdida_en_azucar.to_f + @recepcion.azucar_en_melaza.to_f)*4)/100)
+    @pol_entrada = (@insumo['crudoProcesado'].to_f * @recepcion.polarizacion.to_f) / 100
+    @azucar_circulante_actual = (@insumo['crudoProcesado'].to_f * @recepcion.polarizacion.to_f) / 100 - (@total_azucar_blanco.to_f - ((@recepcion.perdida_en_azucar.to_f + @recepcion.azucar_en_melaza.to_f)*4)/100)
 
     @perdida_en_azucar = (@insumo['crudoProcesado'].to_f*4)/100
 
     @rendimiento_estimado = 0
 
-    @rendimiento_estimado = ((@total_azucar_blanco_zafra.to_f + @azucar_circulante_actual.to_f)/100)/@insumo_zafra['crudoProcesado'].to_f if @insumo_zafra['crudoProcesado'] != 0
+    @rendimiento_estimado = ((@total_azucar_blanco_zafra.to_f + @azucar_circulante_actual.to_f)/@insumo_zafra['crudoProcesado'].to_f)*100 if @insumo_zafra['crudoProcesado'] != 0
 
 
 
