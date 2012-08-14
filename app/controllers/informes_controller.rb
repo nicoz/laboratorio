@@ -299,6 +299,8 @@ class InformesController < ApplicationController
     total_produccion_clientes = 0
     total_produccion_clientes_zafra = 0
 
+    @recepcion.perdida_en_azucar = 0 if !@recepcion.perdida_en_azucar.nil?
+
     @insumo['crudoProcesado'] = 0
 
     @clientes = []
@@ -406,9 +408,9 @@ class InformesController < ApplicationController
 
     @pol_entrada = (@insumo['crudoProcesado'].to_f * @recepcion.polarizacion.to_f) / 100
 
-    @azucar_circulante_actual = ((@insumo['crudoProcesado'].to_f * @recepcion.polarizacion.to_f) / 100) - @total_azucar_blanco.to_f - ((@recepcion.perdida_en_azucar.to_f + @recepcion.azucar_en_melaza.to_f)*4)/100
+    @azucar_circulante_actual = ((@insumo['crudoProcesado'].to_f * @recepcion.polarizacion.to_f) / 100) - @total_azucar_blanco.to_f - ((@recepcion.perdida_en_azucar.to_f + @recepcion.azucar_en_melaza.to_f)*@insumo['crudoProcesado'].to_f)/100
 
-    @perdida_en_azucar = (@insumo['crudoProcesado'].to_f*4)/100
+    @perdida_en_azucar = (@insumo['crudoProcesado'].to_f * @recepcion.perdida_en_azucar.to_f)/100
 
     @rendimiento_estimado = 0
 
