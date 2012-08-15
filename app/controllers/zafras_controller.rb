@@ -1,6 +1,6 @@
 class ZafrasController < ApplicationController
   before_filter :autenticar
-  before_filter :solo_reportes
+  before_filter :solo_reportes, :except => [:index]
 
   add_breadcrumb 'Escritorio', '/escritorio'
 

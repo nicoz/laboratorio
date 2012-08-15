@@ -6,9 +6,8 @@
       %ul.nav.nav-pills.nav-stacked
         %li
           = link_to "Ir a Dia Actual", ver_dia_path(Date.today)
-        - if !usuario_actual.solo_reportes
-          %li
-            = link_to 'Zafras', zafras_path()
+        %li
+          = link_to 'Zafras', zafras_path()
   .span10
     .row-fluid
       .span9
