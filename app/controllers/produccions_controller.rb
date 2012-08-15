@@ -2,7 +2,7 @@ class ProduccionsController < ApplicationController
 	before_filter :autenticar, 		:only => [:index, :edit, :update, :destroy, :create, :new, :show]
 	before_filter :validar_turno_dia,	:only => [:new, :edit]
 	before_filter :solo_reportes
-	before_filter :zafra_abierta, :only => [:new, :edit, :create, :update, :destroy]
+	before_filter :zafra_abierta, :only => [:new, :edit]
 	add_breadcrumb 'Escritorio', '/escritorio'
 
 	def index
