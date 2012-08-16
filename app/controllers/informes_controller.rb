@@ -407,6 +407,8 @@ class InformesController < ApplicationController
 
     @perdida_en_azucar = (@insumo['crudoProcesado'].to_f * @recepcion.perdida_en_azucar.to_f)/100
 
+    @perdida_en_melaza = (@insumo['crudoProcesado'].to_f * @recepcion.azucar_en_melaza.to_f)/100
+
     @rendimiento_estimado = 0
 
     @rendimiento_estimado = ((@total_azucar_blanco_zafra.to_f + @azucar_circulante_actual.to_f)/@insumo_zafra['crudoProcesado'].to_f)*100 if @insumo_zafra['crudoProcesado'] != 0

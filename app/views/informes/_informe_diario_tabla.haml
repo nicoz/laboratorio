@@ -426,24 +426,39 @@
       = "4 - BALANCE ESTIMADO"
     %th
       Valor
+    %th
+      Valor Ingresado
   %tbody
     %tr
       %td
-        Azucar Circulante Actual
+        Azucar Circulante Actual Kg
       %td
         = "%01.2f" % @azucar_circulante_actual.to_s
+      %td
     %tr
       %td
-        Pol Entrada
+        Pol Entrada Kg
       %td
         = "%01.2f" % @pol_entrada.to_s
+      %td
+        = "%01.2f" % @recepcion.polarizacion.to_s if !@recepcion.polarizacion.nil?
     %tr
       %td
-        Perdida en Azucar
+        Perdida en Azucar Kg
       %td
         = "%01.2f" % @perdida_en_azucar.to_s
+      %td
+        = "%01.2f" % @recepcion.perdida_en_azucar.to_s if !@recepcion.perdida_en_azucar.nil?
     %tr
       %td
-        Rendimiento estimado
+        Azucar en melaza Kg
+      %td
+        = "%01.2f" % @perdida_en_melaza.to_s
+      %td
+        = "%01.2f" % @recepcion.azucar_en_melaza.to_s if !@recepcion.azucar_en_melaza.nil?
+    %tr
+      %td
+        Rendimiento estimado %
       %td
         = "%01.4f" % @rendimiento_estimado.to_s
+      %td
