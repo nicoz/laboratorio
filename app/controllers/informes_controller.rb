@@ -382,17 +382,17 @@ class InformesController < ApplicationController
             turno.produccion.clientes.each do |cliente|
               @produccion_zafra[cliente.cliente.nombre] = 0 if @produccion_zafra[cliente.cliente.nombre].nil?
               @clientes << cliente.cliente.nombre unless @clientes.include?(cliente.cliente.nombre)
-              @produccion_zafra[cliente.cliente.nombre] += cliente.azucar_big_bag unless @clientes.include?(cliente.cliente.nombre)
-              total_produccion_clientes_zafra += cliente.azucar_big_bag unless @clientes.include?(cliente.cliente.nombre)
+              @produccion_zafra[cliente.cliente.nombre] += cliente.azucar_big_bag
+              total_produccion_clientes_zafra += cliente.azucar_big_bag
             end
           end
-
-          @total_bolsas_zafra = @produccion_zafra['industriaBolsas'] + @produccion_zafra['bolsasAzucarlito']
-          @total_big_bag_zafra = @produccion_zafra['bigBagAzucarlito'] + @produccion_zafra['bigBagDnd'] + total_produccion_clientes_zafra
-
-          @total_azucar_blanco_zafra += @produccion_zafra['paquetesPapel'] + @produccion_zafra['paquetesPolietileno'] + @produccion_zafra['industriaBolsas'] + @produccion_zafra['bolsasAzucarlito'] + @produccion_zafra['bigBagAzucarlito'] + @produccion_zafra['bigBagDnd'] + total_produccion_clientes_zafra
         end
       end
+
+      @total_bolsas_zafra = @produccion_zafra['industriaBolsas'] + @produccion_zafra['bolsasAzucarlito']
+      @total_big_bag_zafra = @produccion_zafra['bigBagAzucarlito'] + @produccion_zafra['bigBagDnd'] + total_produccion_clientes_zafra
+
+      @total_azucar_blanco_zafra += @produccion_zafra['paquetesPapel'] + @produccion_zafra['paquetesPolietileno'] + @produccion_zafra['industriaBolsas'] + @produccion_zafra['bolsasAzucarlito'] + @produccion_zafra['bigBagAzucarlito'] + @produccion_zafra['bigBagDnd'] + total_produccion_clientes_zafra
     end
 
     @total_recepcion = @recepcion.azucar_crudo
