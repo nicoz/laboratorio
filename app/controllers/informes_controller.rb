@@ -382,8 +382,8 @@ class InformesController < ApplicationController
             turno.produccion.clientes.each do |cliente|
               @produccion_zafra[cliente.cliente.nombre] = 0 if @produccion_zafra[cliente.cliente.nombre].nil?
               @clientes << cliente.cliente.nombre unless @clientes.include?(cliente.cliente.nombre)
-              @produccion_zafra[cliente.cliente.nombre] += cliente.azucar_big_bag
-              total_produccion_clientes_zafra += cliente.azucar_big_bag
+              @produccion_zafra[cliente.cliente.nombre] += cliente.azucar_big_bag unless @clientes.include?(cliente.cliente.nombre)
+              total_produccion_clientes_zafra += cliente.azucar_big_bag unless @clientes.include?(cliente.cliente.nombre)
             end
           end
 
