@@ -403,7 +403,7 @@ class InformesController < ApplicationController
 
     @pol_entrada = (@insumo_zafra['crudoProcesado'].to_f * @recepcion.polarizacion.to_f) / 100
 
-    @azucar_circulante_actual = ((@insumo['crudoProcesado'].to_f * @recepcion.polarizacion.to_f) / 100) - @total_azucar_blanco.to_f - ((@recepcion.perdida_en_azucar.to_f + @recepcion.azucar_en_melaza.to_f)*@insumo['crudoProcesado'].to_f)/100
+    @azucar_circulante_actual = ((@insumo_zafra['crudoProcesado'].to_f * @recepcion.polarizacion.to_f) / 100) - @total_azucar_blanco.to_f - ((@recepcion.perdida_en_azucar.to_f + @recepcion.azucar_en_melaza.to_f)*@insumo['crudoProcesado'].to_f)/100
 
     @perdida_en_azucar = (@insumo['crudoProcesado'].to_f * @recepcion.perdida_en_azucar.to_f)/100
 
