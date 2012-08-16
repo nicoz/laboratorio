@@ -388,12 +388,9 @@ class InformesController < ApplicationController
           end
 
           @total_bolsas_zafra = @produccion_zafra['industriaBolsas'] + @produccion_zafra['bolsasAzucarlito']
-          @total_big_bag_zafra = @produccion_zafra['bigBagAzucarlito'] + @produccion_zafra['bigBagDnd'] +
-            total_produccion_clientes_zafra
+          @total_big_bag_zafra = @produccion_zafra['bigBagAzucarlito'] + @produccion_zafra['bigBagDnd'] + total_produccion_clientes_zafra
 
-          @total_azucar_blanco_zafra += @produccion_zafra['paquetesPapel'] + @produccion_zafra['paquetesPolietileno'] +
-            @produccion_zafra['industriaBolsas'] + @produccion_zafra['bolsasAzucarlito'] + @produccion_zafra['bigBagAzucarlito'] +
-            @produccion_zafra['bigBagDnd'] + total_produccion_clientes_zafra
+          @total_azucar_blanco_zafra += @produccion_zafra['paquetesPapel'] + @produccion_zafra['paquetesPolietileno'] + @produccion_zafra['industriaBolsas'] + @produccion_zafra['bolsasAzucarlito'] + @produccion_zafra['bigBagAzucarlito'] + @produccion_zafra['bigBagDnd'] + total_produccion_clientes_zafra
         end
       end
     end
