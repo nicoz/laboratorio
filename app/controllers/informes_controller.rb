@@ -403,7 +403,37 @@ class InformesController < ApplicationController
 
     @pol_entrada = (@insumo_zafra['crudoProcesado'].to_f * @recepcion.polarizacion.to_f) / 100
 
-    @azucar_circulante_actual = ((@insumo_zafra['crudoProcesado'].to_f * @recepcion.polarizacion.to_f) / 100) - @total_azucar_blanco.to_f - ((@recepcion.perdida_en_azucar.to_f + @recepcion.azucar_en_melaza.to_f)*@insumo['crudoProcesado'].to_f)/100
+    @azucar_circulante_actual = 0
+    @dias.each do |d|
+      crudo_dia = 0
+      pol_entrada = 0
+      perdida_azucar = 0
+      perdida_melaza = 0
+      azucar_blanco = 0
+      azucar_blanco_clientes = 0
+      pol_entrada = d.recepcion.polarizacion if !d.recepcion.nil?
+      perdida_azucar = d.recepcion.perdida_en_azucar if !d.recepcion.nil?
+      perdida_melaza = d.recepcion.azucar_en_melaza if !d.recepcion.nil?
+
+      d.turnos.each do |turno|
+        crudo_dia += turno.insumo.crudoProcesado if !turno.insumo.nil?
+
+        if !turno.produccion.nil?
+          azucar_blanco += turno.produccion.paquetesPapel + turno.produccion.paquetesPolietileno + turno.produccion.industriaBolsas + turno.produccion.bolsasAzucarlito + turno.produccion.bigBagAzucarlito + turno.produccion.bigBagDnd
+          if !turno.produccion.clientes.nil?
+            turno.produccion.clientes.each do |cliente|
+              azucar_blanco_clientes += cliente.azucar_big_bag
+            end
+          end
+        end
+      end
+
+      azucar_blanco_total_dia = azucar_blanco + azucar_blanco_clientes
+
+      @azucar_circulante_actual += ((crudo_dia.to_f * pol_entrada.to_f) / 100) - azucar_blanco_total_dia.to_f - ((perdida_azucar.to_f + perdida_melaza.to_f)*crudo_dia.to_f)/100
+
+      #@azucar_circulante_actual += ((@insumo_zafra['crudoProcesado'].to_f * @recepcion.polarizacion.to_f) / 100) - @total_azucar_blanco.to_f - ((@recepcion.perdida_en_azucar.to_f + @recepcion.azucar_en_melaza.to_f)*@insumo['crudoProcesado'].to_f)/100
+    end
 
     @perdida_en_azucar = (@insumo['crudoProcesado'].to_f * @recepcion.perdida_en_azucar.to_f)/100
 
