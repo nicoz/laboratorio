@@ -20,13 +20,6 @@
       = @recepcion_zafra['azucar_crudo'] if !@recepcion_zafra['azucar_crudo'].nil?
   %tr
     %td
-      TOTAL
-    %td
-      = @total_recepcion
-    %td
-      = @total_recepcion_zafra
-  %tr
-    %td
       ELABORACION
     %td
     %td
@@ -426,20 +419,35 @@
       = "4 - BALANCE ESTIMADO"
     %td
       Valor
+    %td
+      Valor Ingresado
   %tr
     %td
-      Azucar Circulante Actual
+      Azucar Circulante Actual Kg
     %td
       = "%01.2f" % @azucar_circulante_actual.to_s
+    %td
   %tr
     %td
-      Pol Entrada
+      Pol Entrada Kg
     %td= @recepcion.azucar_crudo
+    %td
+      = "%01.2f" % @recepcion.polarizacion.to_s if !@recepcion.polarizacion.nil?
   %tr
     %td
-      Perdida en Azucar
+      Perdida en Azucar Kg
     %td= "%01.2f" % @perdida_en_azucar.to_s
+    %td
+      = "%01.2f" % @recepcion.perdida_en_azucar.to_s if !@recepcion.perdida_en_azucar.nil?
   %tr
     %td
-      Rendimiento estimado
+      Perdida en melaza Kg
+    %td
+      = "%01.2f" % @perdida_en_melaza.to_s
+    %td
+      = "%01.2f" % @recepcion.azucar_en_melaza.to_s if !@recepcion.azucar_en_melaza.nil?
+  %tr
+    %td
+      Rendimiento estimado %
+    %td
     %td= "%01.4f" % @rendimiento_estimado.to_s
