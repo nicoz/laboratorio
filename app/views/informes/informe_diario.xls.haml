@@ -430,7 +430,7 @@
   %tr
     %td
       Pol Entrada Kg
-    %td= @recepcion.azucar_crudo
+    %td= "%01.2f" % @pol_entrada.to_s
     %td
       = "%01.2f" % @recepcion.polarizacion.to_s if !@recepcion.polarizacion.nil?
   %tr
