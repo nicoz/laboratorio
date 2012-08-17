@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120807202233) do
+ActiveRecord::Schema.define(:version => 20120817184253) do
 
   create_table "actividads", :force => true do |t|
     t.string   "controlador"
@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(:version => 20120807202233) do
     t.decimal  "refundicion_pza",          :precision => 10, :scale => 2
     t.decimal  "refundicion_ph",           :precision => 10, :scale => 1
     t.integer  "refundicion_color"
-    t.decimal  "encalado_be",              :precision => 10, :scale => 2
     t.decimal  "encalado_ph",              :precision => 10, :scale => 1
     t.decimal  "encalado_alcal",           :precision => 10, :scale => 1
     t.decimal  "jugo_carbonatado_ph",      :precision => 10, :scale => 1

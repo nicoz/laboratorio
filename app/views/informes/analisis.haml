@@ -14,7 +14,7 @@
           = link_to 'Excel', informe_analisis_path(@dia.fecha, @promedio.turnoDia_id, :format => 'xls'), :class => 'btn btn-warning btn-large'
           = link_to 'Volver', ver_dia_path(@dia.fecha), :class => 'btn btn-danger btn-large'
     .row
-      .span12
+      .span12.tabla-analisis
         =render 'analisis', :promedio => @promedio
     .row
       .span12

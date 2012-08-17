@@ -196,10 +196,6 @@ segunda_validacion = (campo) ->
     if (valor > 12 or valor < 10) and valor != ''
       mensaje = 'Deberia estar entre 10 y 12'
 
-  if nombre == 'encalado_be'
-    if (valor > 25 or valor < 10) and valor != ''
-      mensaje = 'Deberia estar entre 10 y 25'
-
   if nombre == 'agua_madre_pol' or nombre == 'melaza_pol'
     if (valor > 65 or valor < 40) and valor != ''
       mensaje = 'Deberia estar entre 40 y 65'

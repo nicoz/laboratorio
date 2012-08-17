@@ -3,8 +3,6 @@
     %th
       Campo
     %th
-      BE
-    %th
       BRIX
     %th
       POL
@@ -24,7 +22,6 @@
   %tr
     %td
       AZUCAR CRUDO
-    %td
     %td
       ="%05.2f" % promedio["azucar_crudo_brix"] if !promedio["azucar_crudo_brix"].nil?
     %td
@@ -46,7 +43,6 @@
     %td
       MIEL DE AFINACION
     %td
-    %td
       ="%05.2f" % promedio["miel_de_afinacion_brix"]  if !promedio["miel_de_afinacion_brix"].nil?
     %td
       ="%05.2f" % promedio["miel_de_afinacion_pol"]  if !promedio["miel_de_afinacion_pol"].nil?
@@ -64,7 +60,6 @@
   %tr
     %td
       AZUCAR AFINADA
-    %td
     %td
       = "%05.2f" % promedio["azucar_afinada_brix"] if !promedio["azucar_afinada_brix"].nil?
     %td
@@ -86,7 +81,6 @@
     %td
       REFUNDICION(JCr)
     %td
-    %td
       = "%05.2f" %  promedio["refundicion_brix"] if !promedio["refundicion_brix"].nil?
     %td
       = "%05.2f" %  promedio["refundicion_pol"] if !promedio["refundicion_pol"].nil?
@@ -103,8 +97,6 @@
   %tr
     %td
       ENCALADO
-    %td
-      = "%05.2f" % promedio["encalado_be"] if !promedio["encalado_be"].nil?
     %td
     %td
     %td
@@ -123,7 +115,6 @@
     %td
     %td
     %td
-    %td
       = "%02.1f" %  promedio["jugo_carbonatado_ph"] if !promedio["jugo_carbonatado_ph"].nil?
     %td
     %td
@@ -133,7 +124,6 @@
   %tr
     %td
       1a. FILTRACION
-    %td
     %td
       = "%05.2f" % promedio["primera_filtracion_brix"] if !promedio["primera_filtracion_brix"].nil?
     %td
@@ -152,7 +142,6 @@
     %td
       JARABE
     %td
-    %td
       = "%05.2f" % promedio["jarabe_brix"] if !promedio["jarabe_brix"].nil?
     %td
       = "%05.2f" % promedio["jarabe_pol"] if !promedio["jarabe_pol"].nil?
@@ -170,7 +159,6 @@
     %td
       MASA COCIDA A
     %td
-    %td
       = "%05.2f" % promedio["masa_cocida_a_brix"] if !promedio["masa_cocida_a_brix"].nil?
     %td
       = "%05.2f" % promedio["masa_cocida_a_pol"] if !promedio["masa_cocida_a_pol"].nil?
@@ -186,7 +174,6 @@
   %tr
     %td
       MASA COCIDA B
-    %td
     %td
       = "%05.2f" % promedio["masa_cocida_b_brix"] if !promedio["masa_cocida_b_brix"].nil?
     %td
@@ -204,7 +191,6 @@
     %td
       MASA COCIDA C
     %td
-    %td
       = "%05.2f" % promedio["masa_cocida_c_brix"] if !promedio["masa_cocida_c_brix"].nil?
     %td
       = "%05.2f" % promedio["masa_cocida_c_pol"] if !promedio["masa_cocida_c_pol"].nil?
@@ -220,7 +206,6 @@
   %tr
     %td
       MASA COCIDA D
-    %td
     %td
       = "%05.2f" % promedio["masa_cocida_d_brix"] if !promedio["masa_cocida_d_brix"].nil?
     %td
@@ -238,7 +223,6 @@
     %td
       MASA COCIDA E
     %td
-    %td
       = "%05.2f" % promedio["masa_cocida_e_brix"] if !promedio["masa_cocida_e_brix"].nil?
     %td
       = "%05.2f" % promedio["masa_cocida_e_pol"] if !promedio["masa_cocida_e_pol"].nil?
@@ -254,7 +238,6 @@
   %tr
     %td
       MASA AFINADA 1
-    %td
     %td
       = "%05.2f" % promedio["masa_afinada_1_brix"] if !promedio["masa_afinada_1_brix"].nil?
     %td
@@ -272,7 +255,6 @@
     %td
       MASA AFINADA 2
     %td
-    %td
       = "%05.2f" % promedio["masa_afinada_2_brix"] if !promedio["masa_afinada_2_brix"].nil?
     %td
       = "%05.2f" % promedio["masa_afinada_2_pol"] if !promedio["masa_afinada_2_pol"].nil?
@@ -288,7 +270,6 @@
   %tr
     %td
       MIEL A
-    %td
     %td
       = "%05.2f" % promedio["miel_a_brix"] if !promedio["miel_a_brix"].nil?
     %td
@@ -307,7 +288,6 @@
     %td
       MIEL B
     %td
-    %td
       = "%05.2f" % promedio["miel_b_brix"] if !promedio["miel_b_brix"].nil?
     %td
       = "%05.2f" % promedio["miel_b_pol"] if !promedio["miel_b_pol"].nil?
@@ -323,7 +303,6 @@
   %tr
     %td
       MIEL C
-    %td
     %td
       = "%05.2f" % promedio["miel_c_brix"] if !promedio["miel_c_brix"].nil?
     %td
@@ -341,7 +320,6 @@
     %td
       MIEL D
     %td
-    %td
       = "%05.2f" % promedio["miel_d_brix"] if !promedio["miel_d_brix"].nil?
     %td
       = "%05.2f" % promedio["miel_d_pol"] if !promedio["miel_d_pol"].nil?
@@ -357,7 +335,6 @@
   %tr
     %td
       MIEL E
-    %td
     %td
       = "%05.2f" % promedio["miel_e_brix"] if !promedio["miel_e_brix"].nil?
     %td
@@ -375,7 +352,6 @@
     %td
       MIEL AFINADA 1
     %td
-    %td
       = "%05.2f" % promedio["miel_afinada_1_brix"] if !promedio["miel_afinada_1_brix"].nil?
     %td
       = "%05.2f" % promedio["miel_afinada_1_pol"] if !promedio["miel_afinada_1_pol"].nil?
@@ -391,7 +367,6 @@
   %tr
     %td
       MIEL AFINADA 2
-    %td
     %td
       = "%05.2f" % promedio["miel_afinada_2_brix"] if !promedio["miel_afinada_2_brix"].nil?
     %td
@@ -409,7 +384,6 @@
     %td
       AGUA MADRE
     %td
-    %td
       = "%05.2f" % promedio["agua_madre_brix"] if !promedio["agua_madre_brix"].nil?
     %td
       = "%05.2f" % promedio["agua_madre_pol"] if !promedio["agua_madre_pol"].nil?
@@ -425,7 +399,6 @@
   %tr
     %td
       MELAZA
-    %td
     %td
       = "%05.2f" % promedio["melaza_brix"] if !promedio["melaza_brix"].nil?
     %td
@@ -449,7 +422,6 @@
     %td
     %td
     %td
-    %td
       = promedio["azucar_a_color"].to_i if !promedio["azucar_a_color"].nil?
     %td
     %td
@@ -459,7 +431,6 @@
   %tr
     %td
       AZUCAR B
-    %td
     %td
     %td
     %td
@@ -479,7 +450,6 @@
     %td
     %td
     %td
-    %td
       = promedio["azucar_c_color"].to_i if !promedio["azucar_c_color"].nil?
     %td
     %td
@@ -489,7 +459,6 @@
   %tr
     %td
       AZUCAR D
-    %td
     %td
     %td
     %td
