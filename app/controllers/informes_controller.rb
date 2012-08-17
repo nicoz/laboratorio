@@ -401,7 +401,7 @@ class InformesController < ApplicationController
     @insumo_zafra_promedio['crudoProcesado'] = @insumo_zafra['crudoProcesado'] / @dias.size
     @stock_mat_prima = @total_recepcion_zafra - @insumo_zafra['crudoProcesado']
 
-    @pol_entrada = (@insumo_zafra['crudoProcesado'].to_f * @recepcion.polarizacion.to_f) / 100
+    @pol_entrada = (@insumo['crudoProcesado'].to_f * @recepcion.polarizacion.to_f) / 100
 
     @azucar_circulante_actual = 0
     @dias.each do |d|
@@ -432,7 +432,6 @@ class InformesController < ApplicationController
 
       @azucar_circulante_actual += ((crudo_dia.to_f * pol_entrada.to_f) / 100) - azucar_blanco_total_dia.to_f - ((perdida_azucar.to_f + perdida_melaza.to_f)*crudo_dia.to_f)/100
 
-      #@azucar_circulante_actual += ((@insumo_zafra['crudoProcesado'].to_f * @recepcion.polarizacion.to_f) / 100) - @total_azucar_blanco.to_f - ((@recepcion.perdida_en_azucar.to_f + @recepcion.azucar_en_melaza.to_f)*@insumo['crudoProcesado'].to_f)/100
     end
 
     @perdida_en_azucar = (@insumo['crudoProcesado'].to_f * @recepcion.perdida_en_azucar.to_f)/100
