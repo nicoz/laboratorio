@@ -1,6 +1,6 @@
 class ClientesController < ApplicationController
 	before_filter :autenticar,	:only => [:index, :edit, :update, :destroy, :create, :new, :show]
-	before_filter :usuario_admin,	:only => [:index, :edit, :update, :destroy, :create, :new, :show]
+	before_filter :usuario_admin,	:only => [:destroy]
 	before_filter :solo_reportes
 	add_breadcrumb 'Escritorio', '/escritorio'
 

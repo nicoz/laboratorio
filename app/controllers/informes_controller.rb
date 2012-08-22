@@ -333,9 +333,13 @@ class InformesController < ApplicationController
     @total_bolsas = @produccion['industriaBolsas'] + @produccion['bolsasAzucarlito']
     @total_big_bag = @produccion['bigBagAzucarlito'] + @produccion['bigBagDnd'] + total_produccion_clientes
 
+    @total_azucar_blanco = 0
     @total_azucar_blanco = @produccion['paquetesPapel'] + @produccion['paquetesPolietileno'] +
       @produccion['industriaBolsas'] + @produccion['bolsasAzucarlito'] + @produccion['bigBagAzucarlito'] +
       @produccion['bigBagDnd'] + total_produccion_clientes
+
+    @porcentual_azucar_blanco = 0
+    @porcentual_azucar_blanco = @total_azucar_blanco.to_f / @insumo['crudoProcesado'].to_f if !@insumo['crudoProcesado'].nil? and @total_azucar_blanco > 0
 
     @insumo_promedio['crudoProcesado'] = @insumo['crudoProcesado'] / cantidad if !@insumo['crudoProcesado'].nil? and cantidad > 0
 
@@ -344,6 +348,7 @@ class InformesController < ApplicationController
 
     @dias = Dia.where('fecha >= ? and fecha <= ?', @zafra.dia_inicio, fin)
 
+    @total_azucar_blanco = 0
     @dias.each do |d|
       @recepcion_zafra['azucar_crudo'] = 0 if @recepcion_zafra['azucar_crudo'].nil?
       @recepcion_zafra['azucar_crudo'] += d.recepcion.azucar_crudo if !d.recepcion.nil?
@@ -393,7 +398,11 @@ class InformesController < ApplicationController
     @total_bolsas_zafra = @produccion_zafra['industriaBolsas'] + @produccion_zafra['bolsasAzucarlito']
     @total_big_bag_zafra = @produccion_zafra['bigBagAzucarlito'] + @produccion_zafra['bigBagDnd'] + total_produccion_clientes_zafra
 
+
     @total_azucar_blanco_zafra += @produccion_zafra['paquetesPapel'] + @produccion_zafra['paquetesPolietileno'] + @produccion_zafra['industriaBolsas'] + @produccion_zafra['bolsasAzucarlito'] + @produccion_zafra['bigBagAzucarlito'] + @produccion_zafra['bigBagDnd'] + total_produccion_clientes_zafra
+
+    @porcentual_azucar_blanco_zafra = 0
+    @porcentual_azucar_blanco_zafra = @total_azucar_blanco_zafra / @insumo_zafra['crudoProcesado'] if !@insumo_zafra['crudoProcesado'].nil? and @total_azucar_blanco_zafra > 0
 
     @total_recepcion = @recepcion.azucar_crudo
     @total_recepcion_zafra = @recepcion_zafra['azucar_crudo']

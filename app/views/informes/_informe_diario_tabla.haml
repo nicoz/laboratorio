@@ -95,7 +95,7 @@
         = @produccion_zafra['paquetesPolietileno']
       %td
         = 0 if @insumo_zafra['crudoProcesado'] == 0
-        = "%01.2f" % ((@produccion_zafra['paquetesPapel'] / @insumo_zafra['crudoProcesado'] ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
+        = "%01.2f" % ((@produccion_zafra['paquetesPolietileno'] / @insumo_zafra['crudoProcesado'] ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
       %td
         = 0 if @total_azucar_blanco == 0
         = "%01.2f" % ((@produccion_zafra['paquetesPolietileno'] / @total_azucar_blanco_zafra ) * 100).to_s if @total_azucar_blanco_zafra != 0
@@ -223,10 +223,12 @@
       %td
         = @total_azucar_blanco
       %td
+        = "%01.2f" % @porcentual_azucar_blanco.to_f if !@porcentual_azucar_blanco.nil?
       %td
       %td
         = @total_azucar_blanco_zafra
       %td
+        = "%01.2f" % @porcentual_azucar_blanco_zafra.to_f if !@porcentual_azucar_blanco_zafra.nil?
       %td
     %tr
       %td

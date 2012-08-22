@@ -220,10 +220,12 @@
     %td
       = @total_azucar_blanco
     %td
+      = "%01.2f" % @porcentual_azucar_blanco.to_f if !@porcentual_azucar_blanco.nil?
     %td
     %td
       = @total_azucar_blanco_zafra
     %td
+      = "%01.2f" % @porcentual_azucar_blanco_zafra.to_f if !@porcentual_azucar_blanco_zafra.nil?
     %td
   %tr
     %td
