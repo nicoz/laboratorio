@@ -348,7 +348,7 @@ class InformesController < ApplicationController
 
     @dias = Dia.where('fecha >= ? and fecha <= ?', @zafra.dia_inicio, fin)
 
-    @total_azucar_blanco = 0
+    @total_azucar_blanco_zafra = 0
     @dias.each do |d|
       @recepcion_zafra['azucar_crudo'] = 0 if @recepcion_zafra['azucar_crudo'].nil?
       @recepcion_zafra['azucar_crudo'] += d.recepcion.azucar_crudo if !d.recepcion.nil?
