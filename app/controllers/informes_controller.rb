@@ -143,7 +143,7 @@ class InformesController < ApplicationController
         @brix[turno.turno.nombre] = turno.analisis.refundicion_brix
         densidad = (0.000018765 * (@brix[turno.turno.nombre] * @brix[turno.turno.nombre]))
           + 0.0003629867 * @brix[turno.turno.nombre] + 1.0011648
-        @caudalimetro[turno.turno.nombre] = (turno.insumo.tiraje * densidad * @brix[turno.turno.nombre]) / 100
+        @caudalimetro[turno.turno.nombre] = ((turno.insumo.tiraje * densidad * @brix[turno.turno.nombre]) / 100)*1000
       end
     end
 
@@ -156,13 +156,9 @@ class InformesController < ApplicationController
     @dia.turnos.sort! { |a,b| a.turno.orden <=> b.turno.orden }
 
     @title = "Promedio de Analisis #{l @dia.fecha}"
-    analisis_id_inicial = 0
 
-    #arranco los resultados con el primer dia cargado
-    @dia.turnos.each do |turno|
-      analisis_id_inicial = turno.analisis.id if @promedio.nil? and !turno.analisis.nil?
-      @promedio = turno.analisis.attributes if @promedio.nil? and !turno.analisis.nil?
-    end
+
+    @promedio = Analisis.new.attributes
 
 
     #saco los elementos del hash que no me sirven
@@ -173,17 +169,20 @@ class InformesController < ApplicationController
       @promedio.delete("turnoDia_id")
 
       @promedio.each do |key, value|
-        cantidadTurnos = 1
+        cantidadTurnos = 0
         @dia.turnos.each do |turno|
           analisis = turno.analisis
           if !analisis.nil?
-            if analisis.id != analisis_id_inicial
-              value = analisis[key] if value.nil?
-              value += analisis[key] if !value.nil? and !analisis[key].nil?
-              cantidadTurnos += 1 if !analisis[key].nil?
+            if value.nil?
+              value = analisis[key]
+            else
+              value += analisis[key] unless analisis[key].nil?
             end
+            cantidadTurnos += 1 unless analisis[key].nil?
+            #puts "analisis[key] #{analisis[key]}" unless analisis[key].nil?
           end
         end
+        #puts "cantidadTurnos #{cantidadTurnos}" if cantidadTurnos > 1
 
         @promedio[key] = value / cantidadTurnos if cantidadTurnos > 0 and !value.nil?
       end

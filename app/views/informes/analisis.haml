@@ -10,7 +10,7 @@
     .row
       .span12
         %p.no_print
-          = link_to 'Imprimir', informe_analisis_promedio_path(@dia.fecha, :format => 'pdf'), :class => 'btn btn-success btn-large'
+          = link_to 'Imprimir', informe_analisis_path(@dia.fecha, @promedio.turnoDia_id, :format => 'pdf'), :class => 'btn btn-success btn-large'
           = link_to 'Excel', informe_analisis_path(@dia.fecha, @promedio.turnoDia_id, :format => 'xls'), :class => 'btn btn-warning btn-large'
           = link_to 'Volver', ver_dia_path(@dia.fecha), :class => 'btn btn-danger btn-large'
     .row
@@ -19,6 +19,6 @@
     .row
       .span12
         %p.no_print
-          = link_to 'Imprimir', informe_analisis_promedio_path(@dia.fecha, :format => 'pdf'), :class => 'btn btn-success btn-large'
+          = link_to 'Imprimir', informe_analisis_path(@dia.fecha, @promedio.turnoDia_id, :format => 'pdf'), :class => 'btn btn-success btn-large'
           = link_to 'Excel', informe_analisis_path(@dia.fecha, @promedio.turnoDia_id, :format => 'xls'), :class => 'btn btn-warning btn-large'
           = link_to 'Volver', ver_dia_path(@dia.fecha), :class => 'btn btn-danger btn-large'
