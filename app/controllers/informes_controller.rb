@@ -142,7 +142,7 @@ class InformesController < ApplicationController
       if !turno.analisis.nil?
         @brix[turno.turno.nombre] = turno.analisis.refundicion_brix
         unless @brix[turno.turno.nombre].nil?
-          densidad = (0.000018765 * (@brix[turno.turno.nombre].to_f * @brix[turno.turno.nombre].to_f)) + 0.0003629867 * @brix[turno.turno.nombre].to_f + 1.0011648
+          densidad = (0.000018764852 * (@brix[turno.turno.nombre].to_f * @brix[turno.turno.nombre].to_f)) + 0.0003629867 * @brix[turno.turno.nombre].to_f + 1.0011648
           @caudalimetro[turno.turno.nombre] = "%01.4f" % (((turno.insumo.tiraje * densidad * @brix[turno.turno.nombre]) / 100)*1000).to_s
         end
       end
