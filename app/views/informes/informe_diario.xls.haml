@@ -34,7 +34,6 @@
     %td
       Mat. Prima Procesada Promedio
     %td
-      = @insumo_promedio['crudoProcesado']
     %td
       = @insumo_zafra_promedio['crudoProcesado']
   %tr
@@ -452,4 +451,5 @@
     %td
       Rendimiento estimado %
     %td
-    %td= "%01.4f" % @rendimiento_estimado.to_s
+      = "%01.4f" % @rendimiento_estimado.to_s
+    %td
