@@ -3,9 +3,9 @@
     %td
       = "1- MATERIA PRIMA"
     %td
-      DIA cant
+      DIA
     %td
-      ACUMULADO cant
+      ACUMULADO
   %tr
     %td
       RECEPCION
@@ -13,7 +13,7 @@
     %td
   %tr
     %td
-      Azucar Crudo
+      Azucar Crudo (kg)
     %td
       = @recepcion.azucar_crudo if !@recepcion.nil?
     %td
@@ -25,20 +25,20 @@
     %td
   %tr
     %td
-      Mat. Prima Procesada(crudo Procesado)
+      Mat. Prima Procesada(crudo Procesado) (kg)
     %td
       = @insumo['crudoProcesado']
     %td
       = @insumo_zafra['crudoProcesado']
   %tr
     %td
-      Mat. Prima Procesada Promedio
+      Mat. Prima Procesada Promedio (kg)
     %td
     %td
       = @insumo_zafra_promedio['crudoProcesado']
   %tr
     %td
-      Stock Mat Prima
+      Stock Mat Prima (kg)
     %td
     %td
       = @stock_mat_prima
@@ -46,20 +46,20 @@
     %td
       = "2- PRODUCCION"
     %td
-      DIA cant
+      DIA
     %td
       = "% CRUDO"
     %th
       = "% BLANCO"
     %th
-      ACUMULADO cant
+      ACUMULADO
     %th
       = "AC % CRUDO"
     %th
       = "AC % BLANCO"
   %tr
     %td
-      Paquetes Papel
+      Paquetes Papel (kg)
     %td
       = @produccion['paquetesPapel']
     %td
@@ -78,7 +78,7 @@
       = "%01.2f" % ((@produccion_zafra['paquetesPapel'] / @total_azucar_blanco_zafra ) * 100).to_s if @total_azucar_blanco_zafra != 0
   %tr
     %td
-      Paquetes Polietileno
+      Paquetes Polietileno (kg)
     %td
       = @produccion['paquetesPolietileno']
     %td
@@ -97,7 +97,7 @@
       = "%01.2f" % ((@produccion_zafra['paquetesPolietileno'] / @total_azucar_blanco_zafra ) * 100).to_s if @total_azucar_blanco_zafra != 0
   %tr
     %td
-      Azucar Industria Bolsas
+      Azucar Industria Bolsas (kg)
     %td
       = @produccion['industriaBolsas']
     %td
@@ -116,7 +116,7 @@
       = "%01.2f" % ((@produccion_zafra['industriaBolsas'] / @total_azucar_blanco_zafra ) * 100).to_s if @total_azucar_blanco_zafra != 0
   %tr
     %td
-      Azucar bolsas de Azucarlito
+      Azucar bolsas de Azucarlito (kg)
     %td
       = @produccion['bolsasAzucarlito']
     %td
@@ -135,7 +135,7 @@
       = "%01.2f" % ((@produccion_zafra['bolsasAzucarlito'] / @total_azucar_blanco_zafra ) * 100).to_s if @total_azucar_blanco_zafra != 0
   %tr
     %td
-      Azucar Big Bag Azucarlito
+      Azucar Big Bag Azucarlito (kg)
     %td
       = @produccion['bigBagAzucarlito']
     %td
@@ -154,7 +154,7 @@
       = "%01.2f" % ((@produccion_zafra['bigBagAzucarlito'] / @total_azucar_blanco_zafra ) * 100).to_s if @total_azucar_blanco_zafra != 0
   %tr
     %td
-      Azucar Big Bag Industria
+      Azucar Big Bag Industria (kg)
     %td
       = @produccion['bigBagDnd']
     %td
@@ -174,7 +174,7 @@
   - @clientes.each do |cliente|
     %tr
       %td
-        = "Azucar Big Bag #{cliente}"
+        = "Azucar Big Bag #{cliente} (kg)"
       %td
         = @produccion[cliente]
       %td
@@ -193,7 +193,7 @@
         = "%01.2f" % ((@produccion_zafra[cliente].to_f / @total_azucar_blanco_zafra.to_f ) * 100).to_s if @total_azucar_blanco_zafra != 0
   %tr
     %td
-      Total Bolsas
+      Total Bolsas (kg)
     %td
       = @total_bolsas
     %td
@@ -204,7 +204,7 @@
     %td
   %tr
     %td
-      Total Big Bag
+      Total Big Bag (kg)
     %td
       = @total_big_bag
     %td
@@ -215,7 +215,7 @@
     %td
   %tr
     %td
-      Total Azucar Blanco
+      Total Azucar Blanco (kg)
     %td
       = @total_azucar_blanco
     %td
@@ -228,7 +228,7 @@
     %td
   %tr
     %td
-      Melaza
+      Melaza (kg)
     %td
       = @produccion['melaza']
     %td
@@ -243,7 +243,7 @@
     %td
   %tr
     %td
-      Azucar Rubio
+      Azucar Rubio (kg)
     %td
       = @produccion['rubio']
     %td
@@ -260,20 +260,20 @@
     %td
       = "3- CONSUMOS"
     %td
-      DIA cant
+      DIA
     %td
       = "% CRUDO"
     %td
       = "% BLANCO"
     %td
-      ACUMULADO cant
+      ACUMULADO
     %td
       = "AC % CRUDO"
     %td
       = "AC % BLANCO"
   %tr
     %td
-      Cal viva
+      Cal viva (kg)
     %td
       = @insumo_diario.cal_viva
     %td
@@ -291,7 +291,7 @@
       = "%01.2f" % ((@insumo_diario_zafra['cal_viva'].to_f / @total_azucar_blanco_zafra.to_f ) * 100).to_s if @total_azucar_blanco_zafra != 0
   %tr
     %td
-      Carbon activado
+      Carbon activado (kg)
     %td
       = @insumo_diario.carbon_activado
     %td
@@ -309,7 +309,7 @@
       = "%01.2f" % ((@insumo_diario_zafra['carbon_activado'].to_f / @total_azucar_blanco_zafra.to_f ) * 100).to_s if @total_azucar_blanco_zafra != 0
   %tr
     %td
-      Auxiliar Filtracion
+      Auxiliar Filtracion (kg)
     %td
       = @insumo_diario.auxiliar_filtracion
     %td
@@ -327,7 +327,7 @@
       = "%01.2f" % ((@insumo_diario_zafra['auxiliar_filtracion'].to_f / @total_azucar_blanco_zafra.to_f ) * 100).to_s if @total_azucar_blanco_zafra != 0
   %tr
     %td
-      Acido Clorhidrico
+      Acido Clorhidrico (lt)
     %td
       = @insumo_diario.acido_clorhidrico
     %td
@@ -345,7 +345,7 @@
       = "%01.2f" % ((@insumo_diario_zafra['acido_clorhidrico'].to_f / @total_azucar_blanco_zafra.to_f ) * 100).to_s if @total_azucar_blanco_zafra != 0
   %tr
     %td
-      Leña caldera
+      Leña caldera (kg)
     %td
       = @insumo_diario.lenia_caldera
     %td
@@ -363,7 +363,7 @@
       = "%01.2f" % ((@insumo_diario_zafra['lenia_caldera'].to_f / @total_azucar_blanco_zafra.to_f ) * 100).to_s if @total_azucar_blanco_zafra != 0
   %tr
     %td
-      Chip
+      Chip (kg)
     %td
       = @insumo_diario.chip
     %td
@@ -381,7 +381,7 @@
       = "%01.2f" % ((@insumo_diario_zafra['chip'].to_f / @total_azucar_blanco_zafra.to_f ) * 100).to_s if @total_azucar_blanco_zafra != 0
   %tr
     %td
-      Aserrin
+      Aserrin (kg)
     %td
       = @insumo_diario.aserrin
     %td
@@ -399,7 +399,7 @@
       = "%01.2f" % ((@insumo_diario_zafra['aserrin'].to_f / @total_azucar_blanco_zafra.to_f ) * 100).to_s if @total_azucar_blanco_zafra != 0
   %tr
     %td
-      Gasoil
+      Gasoil (lt)
     %td
       = @insumo_diario.gasoil
     %td
@@ -424,34 +424,34 @@
       Valor Ingresado
   %tr
     %td
-      Azucar Circulante Actual Kg
+      Azucar Circulante Actual (kg)
     %td
-      = "%01.2f" % @azucar_circulante_actual.to_s
+      = @azucar_circulante_actual.ceil
     %td
   %tr
     %td
-      Pol Entrada Kg
-    %td= "%01.2f" % @pol_entrada.to_s
+      Pol Entrada (kg)
+    %td= @pol_entrada.ceil
     %td
       = "%01.2f" % @recepcion.polarizacion.to_s if !@recepcion.polarizacion.nil?
   %tr
     %td
-      Perdida en Azucar Kg
-    %td= "%01.2f" % @perdida_en_azucar.to_s
+      Perdida en Azucar (kg)
+    %td= @perdida_en_azucar.ceil
     %td
       = "%01.2f" % @recepcion.perdida_en_azucar.to_s if !@recepcion.perdida_en_azucar.nil?
   %tr
     %td
-      Perdida en melaza Kg
+      Perdida en melaza (kg)
     %td
-      = "%01.2f" % @perdida_en_melaza.to_s
+      = @perdida_en_melaza.ceil
     %td
       = "%01.2f" % @recepcion.azucar_en_melaza.to_s if !@recepcion.azucar_en_melaza.nil?
   %tr
     %td
       Rendimiento estimado %
     %td
-      = "%01.4f" % @rendimiento_estimado.to_s
+      = "%01.1f" % @rendimiento_estimado.to_s
     %td
   %tr
     %td

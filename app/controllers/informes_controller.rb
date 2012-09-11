@@ -270,7 +270,7 @@ class InformesController < ApplicationController
 
     @zafra = Zafra.where('dia_inicio <= ? and (dia_fin >= ? or dia_fin is null)', @dia.fecha, @dia.fecha).first
 
-    @title = "INFORME DIARIO #{l @dia.fecha} ZAFRA #{l @zafra.dia_inicio}"
+    @title = "INFORME DIARIO #{l @dia.fecha} - ZAFRA #{l @zafra.dia_inicio}"
 
     @recepcion = Recepcion.new
     @recepcion_zafra = @recepcion.attributes
@@ -453,6 +453,9 @@ class InformesController < ApplicationController
 
     @rendimiento_estimado = ((@total_azucar_blanco_zafra.to_f + @azucar_circulante_actual.to_f)/@insumo_zafra['crudoProcesado'].to_f)*100 if @insumo_zafra['crudoProcesado'] != 0
 
+    @dias_restantes = 0
+    @dias_restantes = (@stock_mat_prima / @insumo_zafra_promedio['crudoProcesado']).ceil unless  @insumo_zafra_promedio['crudoProcesado'] == 0
+    @dias_restantes = 0 if @dias_restantes < 0
 
 
     respond_to do |format|
