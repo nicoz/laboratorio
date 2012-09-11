@@ -7,7 +7,7 @@
         %h1{:style => 'padding-top:10px;'}
           = @title
         %h2
-          = "Dia Zafra Nro: #{time_diff(@zafra.dia_inicio, @dia.fecha)[2] + 1} - Dias Restantes: #{@dias_restantes}" if !@zafra.dia_inicio.nil? and !@dia.fecha.nil?
+          = "Dia Zafra Nro: #{time_diff(@zafra.dia_inicio, @dia.fecha)[2] + 1} - Dias Restantes aprox.: #{@dias_restantes}" if !@zafra.dia_inicio.nil? and !@dia.fecha.nil?
   .span12
     .row
       .span12
