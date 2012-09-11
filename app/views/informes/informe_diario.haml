@@ -4,7 +4,7 @@
       .span2
         %img{:src => '/assets/logo.png'}
       .span9
-        %h1{:style => 'padding-top:20px;'}
+        %h1{:style => 'padding-top:10px;'}
           = @title
         %h2
           = "Dia Zafra Nro: #{time_diff(@zafra.dia_inicio, @dia.fecha)[2] + 1} - Dias Restantes: #{@dias_restantes}" if !@zafra.dia_inicio.nil? and !@dia.fecha.nil?
