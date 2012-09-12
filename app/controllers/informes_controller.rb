@@ -454,7 +454,7 @@ class InformesController < ApplicationController
     @rendimiento_estimado = ((@total_azucar_blanco_zafra.to_f + @azucar_circulante_actual.to_f)/@insumo_zafra['crudoProcesado'].to_f)*100 if @insumo_zafra['crudoProcesado'] != 0
 
     @dias_restantes = 0
-    @dias_restantes = (@stock_mat_prima / @insumo_zafra_promedio['crudoProcesado']).ceil unless  @insumo_zafra_promedio['crudoProcesado'] == 0
+    @dias_restantes = (@stock_mat_prima.to_f / @insumo_zafra_promedio['crudoProcesado'].to_f).ceil unless  @insumo_zafra_promedio['crudoProcesado'] == 0
     @dias_restantes = 0 if @dias_restantes < 0
 
 
