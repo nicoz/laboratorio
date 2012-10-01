@@ -209,13 +209,22 @@ class InformesController < ApplicationController
 
     @zafra = Zafra.where('dia_inicio <= ? and (dia_fin >= ? or dia_fin is null)', @dia.fecha, @dia.fecha).first
 
-    @title = "Promedio de Analisis de la zafra #{l @zafra.dia_inicio}"
+
 
     analisis_id_inicial = 0
     fin = @dia.fecha
     fin = Date.current if fin.nil?
 
     @dias = Dia.where('fecha >= ? and fecha <= ?', @zafra.dia_inicio, fin)
+    @cantidad_dias = @dias.count
+
+    @promedio_zafra = Analisis.new.attributes
+    @promedio_zafra.delete("id")
+    @promedio_zafra.delete("updated_at")
+    @promedio_zafra.delete("created_at")
+    @promedio_zafra.delete("turnoDia_id")
+
+    @title = "Promedio de Analisis de la zafra #{l @zafra.dia_inicio}"
 
     #recorro cada dia de la zafra
     @dias.each do |d|
@@ -226,6 +235,7 @@ class InformesController < ApplicationController
         analisis_id_inicial = turno.analisis.id if @promedio.nil? and !turno.analisis.nil?
         @promedio = turno.analisis.attributes if @promedio.nil? and !turno.analisis.nil?
       end
+
 
       if !@promedio.nil?
         #saco los elementos del hash que no me sirven
@@ -247,8 +257,23 @@ class InformesController < ApplicationController
             end
           end
 
+          @promedio[key] = 0 if @promedio[key].nil?
           @promedio[key] = value / cantidadTurnos if cantidadTurnos > 0 and !value.nil?
         end
+
+        if !@promedio_zafra.nil?
+          @promedio_zafra.each do |key, value|
+            @promedio_zafra[key] = 0 if @promedio_zafra[key].nil?
+            @promedio_zafra[key] += @promedio[key]
+          end
+        end
+      end
+    end
+
+    #calculo el promedio total
+    if !@promedio_zafra.nil?
+      @promedio_zafra.each do |key, value|
+        @promedio_zafra[key] = value / @cantidad_dias
       end
     end
 
