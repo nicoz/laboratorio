@@ -274,6 +274,7 @@ class InformesController < ApplicationController
     if !@promedio_zafra.nil?
       @promedio_zafra.each do |key, value|
         @promedio_zafra[key] = value / @cantidad_dias
+        @promedio_zafra[key] = nil if @promedio_zafra[key] == 0
       end
     end
 
