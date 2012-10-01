@@ -209,14 +209,18 @@ class InformesController < ApplicationController
 
     @zafra = Zafra.where('dia_inicio <= ? and (dia_fin >= ? or dia_fin is null)', @dia.fecha, @dia.fecha).first
 
-
-
     analisis_id_inicial = 0
     fin = @dia.fecha
     fin = Date.current if fin.nil?
 
     @dias = Dia.where('fecha >= ? and fecha <= ?', @zafra.dia_inicio, fin)
     @cantidad_dias = @dias.count
+
+    dia_sin_dato = Analisis.new.attributes
+    dia_sin_dato.delete("id")
+    dia_sin_dato.delete("updated_at")
+    dia_sin_dato.delete("created_at")
+    dia_sin_dato.delete("turnoDia_id")
 
     @promedio_zafra = Analisis.new.attributes
     @promedio_zafra.delete("id")
@@ -264,7 +268,9 @@ class InformesController < ApplicationController
         if !@promedio_zafra.nil?
           @promedio_zafra.each do |key, value|
             @promedio_zafra[key] = 0 if @promedio_zafra[key].nil?
-            @promedio_zafra[key] += @promedio[key]
+            @promedio_zafra[key] += @promedio[key] if @promedio[key] > 0
+            dia_sin_dato[key] = 0 if dia_sin_dato[key].nil?
+            dia_sin_dato[key] += 1 if @promedio[key] == 0
           end
         end
       end
@@ -273,7 +279,7 @@ class InformesController < ApplicationController
     #calculo el promedio total
     if !@promedio_zafra.nil?
       @promedio_zafra.each do |key, value|
-        @promedio_zafra[key] = value / @cantidad_dias
+        @promedio_zafra[key] = value / (@cantidad_dias - dia_sin_dato[key]) if @cantidad_dias > dia_sin_dato[key]
         @promedio_zafra[key] = nil if @promedio_zafra[key] == 0
       end
     end
