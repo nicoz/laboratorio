@@ -233,7 +233,7 @@ class InformesController < ApplicationController
     #recorro cada dia de la zafra
     @dias.each do |d|
       d.turnos.sort! { |a,b| a.turno.orden <=> b.turno.orden }
-      cantidadTurnos = 1
+
       #busco el primer valor cargado de analisis
       @promedio = Analisis.new.attributes
       @promedio.delete("id")
@@ -246,12 +246,13 @@ class InformesController < ApplicationController
         #saco los elementos del hash que no me sirven
 
         @promedio.each do |key, value|
+          value = 0
+          cantidadTurnos = 0
           d.turnos.each do |turno|
             analisis = turno.analisis
             if !analisis.nil?
-              value = analisis[key] if value.nil?
-              value += analisis[key] if !value.nil? and !analisis[key].nil?
-              cantidadTurnos += 1 if !analisis[key].nil?
+              value += analisis[key] if !analisis[key].nil?
+              cantidadTurnos += 1 unless analisis[key].nil?
             end
           end
 
