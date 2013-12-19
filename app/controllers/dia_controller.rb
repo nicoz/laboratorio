@@ -73,7 +73,35 @@ class DiaController < ApplicationController
 
     add_breadcrumb "#{l @dia.fecha}", @dia
   end
-
+  
+  def finalizar_dia
+    if params[:fecha].nil?
+      flash[:error] = "Debe ingresar una fecha correcta"
+      redirect_to escritorio_path
+    else
+      fecha = Date.parse(params[:fecha])
+      @dia = Dia.find_or_create_by_fecha(fecha)
+      @dia.dia_finalizado = true
+      @dia.save()
+      flash[:success] = "Dia finalizado"
+      redirect_to ver_dia_path(@dia.fecha)
+    end
+  end
+  
+  def abrir_dia
+    if params[:fecha].nil?
+      flash[:error] = "Debe ingresar una fecha correcta"
+      redirect_to escritorio_path
+    else
+      fecha = Date.parse(params[:fecha])
+      @dia = Dia.find_or_create_by_fecha(fecha)
+      @dia.dia_finalizado = false
+      @dia.save()
+      flash[:success] = "Dia abierto"
+      redirect_to ver_dia_path(@dia.fecha)
+    end
+  end
+  
   def dias
     if !params[:fecha].nil?
       fecha = Date.parse(params[:fecha])

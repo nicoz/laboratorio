@@ -1,6 +1,7 @@
 class InformesController < ApplicationController
   before_filter :autenticar
-
+  before_filter :dia_finalizado, :only => [:informe_diario]
+  
   def produccion_turno
 
     fecha = Date.parse(params[:fecha])
@@ -126,7 +127,9 @@ class InformesController < ApplicationController
     fecha = Date.parse(params[:fecha])
     @dia = Dia.find_by_fecha(fecha)
 
-    @title = "Insumos por turno #{l @dia.fecha}"
+   #@title = "Insumos por turno #{l @dia.fecha}"
+   
+   @title = "Informacion gral del proceso #{l @dia.fecha}"
 
     @totales = { :crudoProcesado => 0, :tiraje => 0, :promedio_brix => 0, :caudalimetro => 0}
 
@@ -296,7 +299,9 @@ class InformesController < ApplicationController
     @dia = Dia.find_by_fecha(params[:fecha])
 
     @zafra = Zafra.where('dia_inicio <= ? and (dia_fin >= ? or dia_fin is null)', @dia.fecha, @dia.fecha).first
-
+    
+    @pedido_produccion = Dia.find_by_fecha(@zafra.dia_inicio).pedido_produccion
+    
     @title = "INFORME DIARIO #{l @dia.fecha} - ZAFRA #{l @zafra.dia_inicio}"
 
     @recepcion = Recepcion.new
@@ -331,7 +336,15 @@ class InformesController < ApplicationController
     @insumo['crudoProcesado'] = 0
 
     @clientes = []
-
+    @pedido_produccion_clientes = {}
+    
+    if @pedido_produccion
+      @pedido_produccion.clientes.each do |cliente|
+        Rails.logger.info cliente.cliente.nombre
+        @pedido_produccion_clientes[cliente.cliente.nombre] = cliente.azucar_big_bag
+      end
+    end
+    
     #CALCULO LOS DATOS DEL DIA ACTUAL
     cantidad = 0
     @dia.turnos.each do |turno|
@@ -484,10 +497,21 @@ class InformesController < ApplicationController
     @dias_restantes = (@stock_mat_prima.to_f / @insumo_zafra_promedio['crudoProcesado'].to_f).round unless  @insumo_zafra_promedio['crudoProcesado'] == 0
     @dias_restantes = 0 if @dias_restantes < 0
 
+    
 
     respond_to do |format|
       format.html {render :layout => 'informes'}
       format.xls { render :layout => 'informes' }
+    end
+  end
+  
+  def dia_finalizado
+    fecha = Date.parse(params[:fecha])
+    @dia = Dia.find_by_fecha(fecha)
+    
+    if !@dia.dia_finalizado and usuario_actual.solo_reportes
+      flash[:error] = "Aun se estan ingresando datos para este dia"
+      redirect_to ver_dia_path(@dia.fecha)
     end
   end
 end

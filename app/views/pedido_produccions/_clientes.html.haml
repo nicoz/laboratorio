@@ -1,0 +1,6 @@
+.control-group
+  %input{:type => "hidden", :value => "#{cliente.cliente.id}", :name => "[cliente][id]"}
+  %label.control-label.span1{ :for => "[pedido_produccion][cliente][#{cliente.cliente.id}][azucar_big_bag]"} 
+    = "Azucar, Big Bag #{cliente.cliente.nombre} (kg)"
+  .controls
+    %input.span2{ :type => "text", :value => "#{cliente.azucar_big_bag}", :name => "[pedido_produccion][cliente][#{cliente.cliente.id}][azucar_big_bag]", "data-name" => "azucar_big_bag"}

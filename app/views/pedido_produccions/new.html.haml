@@ -1,0 +1,6 @@
+.row-fluid
+  .span12
+    %form{ :id => 'form-pedido-produccion', :class => 'form-horizontal',:action => pedido_produccions_path, :method => 'POST'}
+      #pedido-produccion
+        = render 'fields'
+= render '/layouts/footer'

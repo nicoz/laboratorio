@@ -1,0 +1,10 @@
+%fieldset
+	%legend=@title
+	.primero
+		%input{ :type => "hidden", :value => "#{@dia.fecha}", :name => "[dia][fecha]"}
+		%input{ :type => "hidden", :value => "#{@dia_origen.fecha}", :name => "[dia_origen][fecha]"}
+		%input{ :type => "hidden", :value => "#{form_authenticity_token}", :name => "authenticity_token"}
+		=render 'turnos', :dia => @dia
+.form-actions
+	%input{ :type => 'submit', :class => "btn btn-large btn-primary", :value => 'Confirmar'}
+	= link_to 'Cancelar', ver_dia_path(@dia_origen.fecha), :class => "btn btn-large btn-danger"

@@ -8,6 +8,7 @@ class Dia < ActiveRecord::Base
 	has_one :insumoDiario
 	has_one :produccionMasa
 	has_one :recepcion
+	has_one :pedido_produccion
 
 	validates :fecha, :presence => true,
 			  :uniqueness => true

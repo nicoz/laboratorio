@@ -60,6 +60,8 @@
       = "AC % CRUDO"
     %th
       = "AC % BLANCO"
+    %th
+      = "% CUMP"
   %tbody
     %tr
       %td
@@ -80,6 +82,9 @@
       %td
         = 0 if @total_azucar_blanco_zafra == 0
         = "%01.2f" % ((@produccion_zafra['paquetesPapel'] / @total_azucar_blanco_zafra ) * 100).to_s if @total_azucar_blanco_zafra != 0
+      %td
+        = "%01.2f" % 0.to_s if @pedido_produccion.nil? or @pedido_produccion.paquetesPapel == 0 or @produccion_zafra['paquetesPapel'] == 0
+        = "%01.2f" % ((@produccion_zafra['paquetesPapel'].to_f / @pedido_produccion.paquetesPapel.to_f ) * 100).to_s if @produccion_zafra['paquetesPapel'] != 0
     %tr
       %td
         Paquetes Polietileno (kg)
@@ -99,6 +104,9 @@
       %td
         = 0 if @total_azucar_blanco_zafra == 0
         = "%01.2f" % ((@produccion_zafra['paquetesPolietileno'] / @total_azucar_blanco_zafra ) * 100).to_s if @total_azucar_blanco_zafra != 0
+      %td
+        = "%01.2f" % 0.to_s if @pedido_produccion.nil? or @pedido_produccion.paquetesPolietileno == 0 or @produccion_zafra['paquetesPolietileno'] == 0
+        = "%01.2f" % ((@produccion_zafra['paquetesPolietileno'].to_f / @pedido_produccion.paquetesPolietileno.to_f ) * 100).to_s if @produccion_zafra['paquetesPolietileno'] != 0
     %tr
       %td
         Azucar Industria Bolsas (kg)
@@ -118,9 +126,12 @@
       %td
         = 0 if @total_azucar_blanco_zafra == 0
         = "%01.2f" % ((@produccion_zafra['industriaBolsas'] / @total_azucar_blanco_zafra ) * 100).to_s if @total_azucar_blanco_zafra != 0
+      %td
+        = "%01.2f" % 0.to_s if @pedido_produccion.nil? or @pedido_produccion.industriaBolsas == 0 or @produccion_zafra['industriaBolsas'] == 0
+        = "%01.2f" % ((@produccion_zafra['industriaBolsas'].to_f / @pedido_produccion.industriaBolsas.to_f ) * 100).to_s if @produccion_zafra['industriaBolsas'] != 0
     %tr
       %td
-        Azucar bolsas de Azucarlito (kg)
+        Azucar bolsas Azucarlito (kg)
       %td
         = @produccion['bolsasAzucarlito'].ceil
       %td
@@ -137,6 +148,9 @@
       %td
         = 0 if @total_azucar_blanco_zafra == 0
         = "%01.2f" % ((@produccion_zafra['bolsasAzucarlito'] / @total_azucar_blanco_zafra ) * 100).to_s if @total_azucar_blanco_zafra != 0
+      %td
+        = "%01.2f" % 0.to_s if @pedido_produccion.nil? or @pedido_produccion.bolsasAzucarlito == 0 or @produccion_zafra['bolsasAzucarlito'] == 0
+        = "%01.2f" % ((@produccion_zafra['bolsasAzucarlito'].to_f / @pedido_produccion.bolsasAzucarlito.to_f ) * 100).to_s if @produccion_zafra['bolsasAzucarlito'] != 0
     %tr
       %td
         Azucar Big Bag Azucarlito (kg)
@@ -156,6 +170,9 @@
       %td
         = 0 if @total_azucar_blanco_zafra == 0
         = "%01.2f" % ((@produccion_zafra['bigBagAzucarlito'] / @total_azucar_blanco_zafra ) * 100).to_s if @total_azucar_blanco_zafra != 0
+      %td
+        = "%01.2f" % 0.to_s if @pedido_produccion.nil? or @pedido_produccion.bigBagAzucarlito == 0 or @produccion_zafra['bigBagAzucarlito'] == 0
+        = "%01.2f" % ((@produccion_zafra['bigBagAzucarlito'].to_f / @pedido_produccion.bigBagAzucarlito.to_f ) * 100).to_s if @produccion_zafra['bigBagAzucarlito'] != 0
     %tr
       %td
         Azucar Big Bag Industria (kg)
@@ -175,6 +192,9 @@
       %td
         = 0 if @total_azucar_blanco_zafra == 0
         = "%01.2f" % ((@produccion_zafra['bigBagDnd'] / @total_azucar_blanco_zafra ) * 100).to_s if @total_azucar_blanco_zafra != 0
+      %td
+        = "%01.2f" % 0.to_s if @pedido_produccion.nil? or @pedido_produccion.bigBagDnd == 0 or @produccion_zafra['bigBagDnd'] == 0
+        = "%01.2f" % ((@produccion_zafra['bigBagDnd'].to_f / @pedido_produccion.bigBagDnd.to_f ) * 100).to_s if @produccion_zafra['bigBagDnd'] != 0
     - @clientes.each do |cliente|
       %tr
         %td
@@ -196,6 +216,9 @@
         %td
           = 0 if @total_azucar_blanco_zafra == 0
           = "%01.2f" % ((@produccion_zafra[cliente].to_f / @total_azucar_blanco_zafra.to_f ) * 100).to_s if @total_azucar_blanco_zafra != 0
+        %td
+          = "%01.2f" % 0.to_s if @pedido_produccion_clientes[cliente] == 0
+          = "%01.2f" % ((@produccion_zafra[cliente].to_f / @pedido_produccion_clientes[cliente].to_f ) * 100).to_s if @pedido_produccion_clientes[cliente] != 0
     %tr
       %td
         %strong Total Bolsas (kg)
@@ -207,6 +230,9 @@
         = @total_bolsas_zafra.ceil
       %td
       %td
+      %td
+        = "%01.2f" % 0.to_s if @pedido_produccion.nil? or @pedido_produccion.total_bolsas == 0
+        = "%01.2f" % ((@total_bolsas_zafra.to_f / @pedido_produccion.total_bolsas.to_f ) * 100).to_s if @pedido_produccion.total_bolsas != 0
     %tr
       %td
         %strong Total Big Bag (kg)
@@ -218,6 +244,11 @@
         = @total_big_bag_zafra.ceil
       %td
       %td
+      %td
+        = "%01.2f" % 0.to_s if @pedido_produccion.nil? or @pedido_produccion.total_big_bag == 0
+        - # Rails.logger.info '============= TOTAL BIG BAG ================'
+        - # Rails.logger.info @pedido_produccion.total_big_bag.to_f
+        = "%01.2f" % ((@total_big_bag_zafra.to_f / @pedido_produccion.total_big_bag.to_f ) * 100).to_s if @pedido_produccion.total_big_bag != 0
     %tr
       %td
         %strong Total Azucar Blanco (kg)
@@ -231,6 +262,11 @@
       %td
         = "%01.2f" % @porcentual_azucar_blanco_zafra.to_f if !@porcentual_azucar_blanco_zafra.nil?
       %td
+      %td
+        = "%01.2f" % 0.to_s if @pedido_produccion.nil? or @pedido_produccion.total_big_bag == 0
+        - # Rails.logger.info '============= TOTAL AZUCAR BLANCO ================'
+        - # Rails.logger.info @pedido_produccion.total_azucar_blanco.to_f
+        = "%01.2f" % ((@total_azucar_blanco_zafra.to_f / @pedido_produccion.total_azucar_blanco.to_f ) * 100).to_s if @pedido_produccion.total_azucar_blanco != 0
     %tr
       %td
         Melaza (kg)
@@ -246,6 +282,7 @@
         = 0 if @insumo_zafra['crudoProcesado'] == 0
         = "%01.2f" % ((@produccion_zafra['melaza'] / @insumo_zafra['crudoProcesado'] ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
       %td
+      %td
     %tr
       %td
         Azucar Rubio (kg)
@@ -260,6 +297,7 @@
       %td
         = 0 if @insumo_zafra['crudoProcesado'] == 0
         = "%01.2f" % ((@produccion_zafra['rubio'] / @insumo_zafra['crudoProcesado'] ) * 100).to_s if @insumo_zafra['crudoProcesado'] != 0
+      %td
       %td
 %table#materia-prima.table.table-condensed.table-bordered
   %thead
@@ -461,7 +499,7 @@
         = "%01.2f" % @recepcion.azucar_en_melaza.to_s if !@recepcion.azucar_en_melaza.nil?
     %tr
       %td
-        Rendimiento estimado %
+        = "Rendimiento estimado (%)"
       %td
         = "%01.1f" % @rendimiento_estimado.to_s
       %td

@@ -6,19 +6,19 @@
     %th= 'Total'
   %tr
     %td
-      Crudo Procesado Kg.
+      Crudo Procesado (kg)
     - @dia.turnos.each do |turno|
       %td= turno.insumo.crudoProcesado
     %td= @totales[:crudoProcesado]
   %tr
     %td
-      Tiraje m3
+      Tiraje (m3)
     - @dia.turnos.each do |turno|
       %td= turno.insumo.tiraje
     %td= @totales[:tiraje]
   %tr
     %td
-      Brix Promedio
+      Brix Promedio (Bx)
     - @dia.turnos.each do |turno|
       %td= @brix[turno.turno.nombre]
     %td

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120828214120) do
+ActiveRecord::Schema.define(:version => 20131219125123) do
 
   create_table "actividads", :force => true do |t|
     t.string   "controlador"
@@ -143,6 +143,14 @@ ActiveRecord::Schema.define(:version => 20120828214120) do
     t.integer  "turnoDia_id"
   end
 
+  create_table "cliente_pedido_produccions", :force => true do |t|
+    t.integer  "cliente_id"
+    t.integer  "pedido_produccion_id"
+    t.float    "azucar_big_bag"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
   create_table "cliente_produccions", :force => true do |t|
     t.integer  "produccion_id"
     t.integer  "cliente_id"
@@ -162,11 +170,12 @@ ActiveRecord::Schema.define(:version => 20120828214120) do
   create_table "dia", :force => true do |t|
     t.date     "fecha"
     t.boolean  "activo"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
     t.integer  "updated_by"
     t.integer  "created_by"
-    t.text     "observaciones", :limit => 255
+    t.text     "observaciones",  :limit => 255
+    t.boolean  "dia_finalizado",                :default => false
   end
 
   create_table "insumo_diarios", :force => true do |t|
@@ -191,6 +200,18 @@ ActiveRecord::Schema.define(:version => 20120828214120) do
     t.integer  "updated_by"
     t.integer  "created_by"
     t.integer  "tiraje"
+  end
+
+  create_table "pedido_produccions", :force => true do |t|
+    t.integer  "dia_id"
+    t.float    "paquetesPapel"
+    t.float    "paquetesPolietileno"
+    t.float    "industriaBolsas"
+    t.float    "bolsasAzucarlito"
+    t.float    "bigBagAzucarlito"
+    t.string   "bigBagDnd"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "produccion_masas", :force => true do |t|

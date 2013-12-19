@@ -1,0 +1,42 @@
+.span4
+  %input{:type => "hidden", :value => "#{dia.id}", :name => "[dia][#{dia.id}]", :id => 'dia'}
+  %input{:type => "hidden", :value => "#{dia.pedido_produccion.id}", :id => 'id', :name => "[pedido_produccion][id]"}
+
+  .control-group
+    %label.control-label.span1{ :for => "[dia][#{dia.id}][paquetesPapel]"} 
+      Paquetes de Papel kg
+    .controls
+      %input.span2.campo{ :type => "text", :value => "#{dia.pedido_produccion.paquetesPapel}", :name => "[pedido_produccion][paquetesPapel]", "data-name" => 'paquetesPapel'}
+
+  .control-group
+    %label.control-label.span1{ :for => "[dia][#{dia.id}][paquetesPolietileno]"} 
+      Azucar, Paquetes de Polietileno kg
+    .controls
+      %input.span2.campo{ :type => "text", :value => "#{dia.pedido_produccion.paquetesPolietileno}", :name => "[pedido_produccion][paquetesPolietileno]", "data-name" => 'paquetesPolietileno'}
+
+  .control-group
+    %label.control-label.span1{ :for => "[dia][#{dia.id}][industriaBolsas]"} 
+      Azucar, Industria Bolsas kg
+    .controls
+      %input.span2.campo{ :type => "text", :value => "#{dia.pedido_produccion.industriaBolsas}", :name => "[pedido_produccion][industriaBolsas]", "data-name" => 'industriaBolsas'}
+
+  .control-group
+    %label.control-label.span1{ :for => "[dia][#{dia.id}][bolsasAzucarlito]"} 
+      Azucar, Bolsas de Azucarlito kg
+    .controls
+      %input.span2.campo{ :type => "text", :value => "#{dia.pedido_produccion.bolsasAzucarlito}", :name => "[pedido_produccion][bolsasAzucarlito]", "data-name" => 'bolsasAzucarlito'}
+
+  .control-group
+    %label.control-label.span1{ :for => "[dia][#{dia.id}][bigBagAzucarlito]"} 
+      Azucar, Big Bag Azucarlito kg
+    .controls
+      %input.span2.campo{ :type => "text", :value => "#{dia.pedido_produccion.bigBagAzucarlito}", :name => "[pedido_produccion][bigBagAzucarlito]", "data-name" => 'bigBagAzucarlito'}
+
+  .control-group
+    %label.control-label.span1{ :for => "[dia][#{dia.id}][bigBagDnd]"} 
+      Azucar, Big Bag Industria kg
+    .controls
+      %input.span2.campo{ :type => "text", :value => "#{dia.pedido_produccion.bigBagDnd}", :name => "[pedido_produccion][bigBagDnd]", "data-name" => 'bigBagDnd'}
+
+  - dia.pedido_produccion.clientes.each do |cliente|
+    = render 'clientes', :cliente => cliente, :pedido_produccion => dia.pedido_produccion

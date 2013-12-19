@@ -8,62 +8,62 @@
   %tbody
     %tr
       %td
-        Paquetes de Papel kg
+        Paquetes de Papel (kg)
       - turnos.each do |turno|
         %td= turno.produccion.paquetesPapel
       %td= total[:paquetesPapel]
     %tr
       %td
-        Azucar, Paquetes de Polietileno kg
+        Azucar, Paquetes de Polietileno (kg)
       - turnos.each do |turno|
         %td= turno.produccion.paquetesPolietileno
       %td= total[:paquetesPolietileno]
     %tr
       %td
-        Melaza kg
+        Melaza (kg)
       - turnos.each do |turno|
         %td= turno.produccion.melaza
       %td= total[:melaza]
     %tr
       %td
-        Azucar Rubio kg
+        Azucar Rubio (kg)
       - turnos.each do |turno|
         %td= turno.produccion.rubio
       %td= total[:rubio]
     %tr
       %td
-        Azucar, Industria Bolsas kg
+        Azucar, Industria Bolsas (kg)
       - turnos.each do |turno|
         %td= turno.produccion.industriaBolsas
       %td= total[:industriaBolsas]
     %tr
       %td
-        Azucar, Bolsas de Azucarlito kg
+        Azucar, Bolsas de Azucarlito (kg)
       - turnos.each do |turno|
         %td= turno.produccion.bolsasAzucarlito
       %td= total[:bolsasAzucarlito]
     %tr
       %td
-        Azucar, Big Bag Azucarlito kg
+        Azucar, Big Bag Azucarlito (kg)
       - turnos.each do |turno|
         %td= turno.produccion.bigBagAzucarlito
       %td= total[:bigBagAzucarlito]
     %tr
       %td
-        Azucar, Big Bag Industria kg
+        Azucar, Big Bag Industria (kg)
       - turnos.each do |turno|
         %td= turno.produccion.bigBagDnd
       %td= total[:bigBagDnd]
     - clientes.each do |cliente|
       %tr
-        %td= "Azucar, Big Bag #{cliente} Kg"
+        %td= "Azucar, Big Bag #{cliente} (kg)"
         - turnos.each do |turno|
           - turno.produccion.clientes.each do |unCliente|
             -if unCliente.cliente.nombre == cliente
               %td= unCliente.azucar_big_bag
         %td= total[cliente]
     %tr
-      %td Total Azucar Blanco Kg
+      %td Total Azucar Blanco (kg)
       - turnos.each do |turno|
         %td= @granTotal[turno.turno.nombre]
       %td= @granTotal[:totales]

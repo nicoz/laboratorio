@@ -8,19 +8,19 @@
   %tbody
     %tr
       %td
-        Crudo Procesado Kg.
+        Crudo Procesado (kg)
       - turnos.each do |turno|
         %td= turno.insumo.crudoProcesado
       %td= total[:crudoProcesado]
     %tr
       %td
-        Tiraje m3
+        Tiraje (m3)
       - turnos.each do |turno|
         %td= turno.insumo.tiraje
       %td= total[:tiraje]
     %tr
       %td
-        Brix Promedio
+        Brix Promedio (Bx)
       - turnos.each do |turno|
         %td= @brix[turno.turno.nombre]
       %td

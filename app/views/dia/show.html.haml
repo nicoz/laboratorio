@@ -6,6 +6,8 @@
           %li.nav-header
             Acciones para el dia
           %li
+            = link_to "Pedido de Produccion", crear_pedido_produccion_path(@dia.fecha)
+          %li
             = link_to "Insumos Diarios", crear_insumo_diario_path(@dia.fecha)
           %li
             = link_to "Produccion Masas Cocidas", crear_produccion_masa_path(@dia.fecha)
@@ -32,7 +34,22 @@
             - else
               %p=raw @dia.observaciones
               %p= link_to "Editar observaciones", editar_dia_path(@dia.fecha), :class => 'btn btn-info'
+          .row-fluid
+            - if !@dia.dia_finalizado
+              %h1= "Informe Diario Deshabilitado"
+              = link_to "Habilitar Informe Diario", finalizar_dia_path(@dia.fecha), :class => 'btn btn-success'
+            - else
+              %h1= "Informe Diario Habilitado"
+              = link_to "Deshabilitar Informe Diario", abrir_dia_path(@dia.fecha), :class => 'btn btn-warning'
+          
           .row-fluid.primero
+            .span7
+              %h2 Pedido de Produccion
+              %ul.nav.nav-pills
+                %li
+                  = link_to "Pedido Produccion", crear_pedido_produccion_path(@dia.fecha)
+          
+          .row-fluid
             .span7
               %h2 Recepcion
               %ul.nav.nav-pills

@@ -36,5 +36,6 @@
 //= require turnos
 //= require usuarios
 //= require produccion_masas
+//= require pedido_produccion
 //= require zafras
 //= require tinymce

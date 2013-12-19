@@ -4,19 +4,19 @@
     = f.hidden_field :id, :id => 'id'
     = f.hidden_field :dia_id, :value => @dia.id
     .control-group.primero
-      = f.label :azucar_crudo, :class => 'control-label'
+      = f.label 'Azucar Crudo (Kg)', :class => 'control-label'
       .input
         = f.text_field :azucar_crudo, "data-name" => 'azucar_crudo', :class => 'campo'
     .control-group
-      = f.label :polarizacion, :class => 'control-label'
+      = f.label "Polarizacion (%)", :class => 'control-label'
       .input
         = f.text_field :polarizacion, "data-name" => 'polarizacion', :class => 'campo'
     .control-group
-      = f.label :perdida_en_azucar, :class => 'control-label'
+      = f.label "Perdida en Azucar (%)", :class => 'control-label'
       .input
         = f.text_field :perdida_en_azucar, "data-name" => 'perdida_en_azucar', :class => 'campo'
     .control-group
-      = f.label :azucar_en_melaza, :class => 'control-label'
+      = f.label "Azucar en Melaza (Kg)", :class => 'control-label'
       .input
         = f.text_field :azucar_en_melaza, "data-name" => 'azucar_en_melaza', :class => 'campo'
 .form-actions

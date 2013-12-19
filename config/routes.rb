@@ -20,6 +20,9 @@ Laboratorio::Application.routes.draw do
 
   match '/dia/:fecha', :to => 'dia#show', :as => :ver_dia
 
+  match '/dia/:fecha/finalizar', :to => 'dia#finalizar_dia', :as => :finalizar_dia
+  match '/dia/:fecha/abrir', :to => 'dia#abrir_dia', :as => :abrir_dia
+  
   match '/analisisporturno/:fecha', :to => 'dia#analisis_turno', :as => :ver_analisis_turno
 
   match '/dia/turno/:id/cerrar', :to => 'turno_dia#cerrar', :as => :cerrar_turno
@@ -37,6 +40,11 @@ Laboratorio::Application.routes.draw do
   match '/dia/:fecha/recepcion/ver', :to => 'recepcions#show', :as => :ver_recepcion
   match '/dia/:fecha/recepcion/nuevo', :to => 'recepcions#new', :as => :crear_recepcion
   match '/dia/:fecha/recepcion/editar', :to => 'recepcions#edit', :as => :editar_recepcion
+  
+  match '/dia/:fecha/pedido_produccion/ver', :to => 'pedido_produccions#show', :as => :ver_pedido_produccion
+  match '/dia/:fecha/pedido_produccion/nuevo', :to => 'pedido_produccions#new', :as => :crear_pedido_produccion
+  match '/dia/:fecha/pedido_produccion/editar', :to => 'pedido_produccions#edit', :as => :editar_pedido_produccion
+
 
   match '/dia/:fecha/analisis/:id', :to => 'analises#new', :as => :crear_analisis
 
@@ -56,6 +64,9 @@ Laboratorio::Application.routes.draw do
   resources :produccion_masas, :only => [:create, :destroy, :update, :show]
 
   resources :recepcions, :only => [:create, :destroy, :update, :show]
+  
+  resources :pedido_produccions, :only => [:create, :destroy, :update, :show]
+  #post 'pedido_produccion', :to =>
 
   resources :analises, :only => [:create, :destroy, :update, :show]
 
@@ -67,6 +78,8 @@ Laboratorio::Application.routes.draw do
   match '/dia/:fecha/insumos/nuevo', :to => 'insumos#new', :as => :crear_insumo
 
   match '/dia/:fecha/insumos/validar', :to => 'insumos#validar', :as => :validar_insumo_turno
+  
+  match '/dia/:fecha/pedido_produccion/validar', :to => 'pedido_produccions#validar', :as => :validar_pedido_produccion
 
   match '/validar-zafras', :to => 'zafras#validar', :as => :validar_zafra
 
@@ -83,6 +96,9 @@ Laboratorio::Application.routes.draw do
   match '/dia/:fecha/producciones/validar', :to => 'produccions#validar', :as => :validar_produccion_turno
 
   match '/validarcliente', :to => 'cliente_produccions#validar', :as => :validar_produccion_turno
+  
+  match '/validarclientePedidoProduccion', :to => 'cliente_pedido_produccions#validar', :as => :validar_cliente_pedido_produccion
+
 
   match '/dia/:fecha/clientes', :to => 'cliente_produccions#index', :as => :cliente_produccion
 
